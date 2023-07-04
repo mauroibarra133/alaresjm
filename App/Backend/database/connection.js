@@ -12,14 +12,14 @@ const dbSettings = {
 
 }
 
-async function getConnection(){
+export async function getConnection(){ // la exporto para que otros archivos la usen
     try {
         const pool = await sql.connect(dbSettings); //Se conecta en base a los parametros pasados
-        return pool // para que otros archivos usen el pool para hacer la consulta
+        return pool // para que otros archivos usen el pool para hacer la consulta,
     } catch (error) {
         console.log(error);
     }
 
 }
 
-getConnection();
+export {sql}
