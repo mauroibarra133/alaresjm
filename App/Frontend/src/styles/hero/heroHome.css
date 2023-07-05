@@ -1,0 +1,87 @@
+@import '../fonts.css';
+@import '../variables.css';
+
+/* Contenedor */
+.heroHome-container{
+    position: relative;
+    display: flex;
+    width: 100%;
+    height: calc(100vh - 3rem);
+    flex-direction: column;
+    align-items: center;
+    background-image: url('../../assets/images/hero-home-background.jpg');
+    background-position: 50% 50%;
+    background-size: cover;
+    padding: 1rem;
+    box-sizing: border-box;
+}
+/* Overlay */
+.heroHome-container::after{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    content: '';
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: var(--overlay-z);
+}
+/* Contenedor del texto */
+.heroHome-text-container{
+    display: flex;
+    width: fit-content;
+    flex-direction: column;
+    align-items: start;
+    margin-top: 8rem;
+    z-index: var(--normal-z);
+    gap: 2rem;
+}
+
+/* Titulos */
+.heroHome-title1{
+    color: #FFF;
+    margin: 0;
+    height: fit-content;
+    font-size: 2.2rem;
+    font-family: 'Post No Bills Colombo';
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    text-transform: uppercase;
+}
+
+.heroHome-title2{
+    color: var(--orange-1);
+    margin: 0;
+    font-size: 3.625rem;
+    font-family: 'Pirata One';
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    text-transform: uppercase;
+}
+
+.heroHome-button{
+    display: flex;
+    width: fit-content;
+    height: 2rem;
+    padding: 0.5rem 1rem;
+    justify-content: center;
+    align-items: center;
+    border-radius: 2rem;
+    background: var(--black-1);
+    color: var(--text-white);
+    text-align: center;
+    font-size: 0.8125rem;
+    font-family: 'Amiri';
+    font-weight: 400;
+    line-height: 1.5rem;
+    letter-spacing: 0.00163rem;
+    text-transform: uppercase;
+}
+
+.heroHome-button:hover{
+    background-color: var(--gray-1);
+    cursor: pointer;
+    transform: scale(1.1);
+}

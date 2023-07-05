@@ -1,0 +1,13 @@
+@font-face {
+    font-family: 'Pirata One';
+    src: url('../fonts/PirataOne/PirataOne-Regular.ttf') format('truetype');
+  }
+
+  @font-face {
+    font-family: 'Amiri';
+    src: url('../fonts/Amiri/Amiri-Regular.ttf') format('truetype');
+  }
+  @font-face {
+    font-family: 'Post No Bills Colombo';
+    src: url('../fonts/PostNoBillsColombo/postnobillscolombo-semibold.ttf') format('truetype');
+  }

@@ -1,0 +1,94 @@
+@import '../fonts.css';
+@import '../variables.css';
+
+/* Hero Background */
+.heroQuienesSomos-overlay{
+    position: relative;
+    width: 100%;
+    height: calc(100vh - 3rem);
+    background-image: url('../../assets/images/hero-quienesSomos-background.jpg');
+    background-position: 50% 50%;
+    background-size: cover;
+}
+
+.heroQuienesSomos-overlay::after{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    content: '';
+    background-color: rgba(0, 0, 0, 0.3);
+    z-index: var(--overlay-z);
+}
+/* Hero */
+.hero{
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    padding-bottom: 0;
+    margin-bottom: 0;
+
+}
+/* Titulo */
+.hero-title{
+    display: flex;
+    justify-content: start;
+    z-index: var(--normal-z);
+
+}
+.hero-title h2{
+    color: var(--orange-1, #FFC692);
+    font-size: 2rem;
+    font-family: 'Pirata One';
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    text-transform: uppercase;
+    text-align: left;
+    margin-bottom: 0;
+
+}
+
+.hero-text{
+    display: flex;
+    justify-content: center;
+}
+.hero-text p{
+    color: var(--text-white, #FFF);
+    font-size: .8rem;
+    font-family: 'Lato';
+    font-style: normal;
+    font-weight: 700;
+    line-height: 1.5;
+    z-index: var(--normal-z);
+}
+
+/* Iconos */
+.hero-icons{
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, 60px); /* Define 2 columnas de igual tamaño */
+    grid-template-rows: repeat(2, 1fr); /* Define 2 filas de igual tamaño */
+    padding: 1rem;
+    row-gap: 1rem;
+    column-gap: 3rem;
+    justify-content: center;
+    z-index: var(--normal-z);
+    padding-bottom: 0;
+}
+
+.icon{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.icon p{
+    color: var(--orange-1, #FFC692);
+    font-size: 1.1rem;
+    font-family: Post No Bills Colombo;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}

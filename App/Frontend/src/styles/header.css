@@ -1,0 +1,46 @@
+@import 'variables.css';
+
+/* Container del header */
+.header-container{
+    height: 3rem;
+    display: flex;
+    padding: 0rem 1rem;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.6rem;
+    background-color: var(--black-1,#000);
+    position: sticky;
+    top: 0;
+    z-index: var(--header-z);
+}
+/* Iconos */
+.header-icon{
+    color: var(--orange-1,#FFC692);
+    width: 1.25rem;
+    height: 1.25rem;
+    flex-shrink: 0;
+}
+.header-icon:hover{
+    cursor: pointer;
+    filter: brightness(.8);
+}
+
+.header-burger{
+    width: 1.2rem;
+    height: 1.2rem;
+}
+.header-user{
+    width: 1.2rem;
+    height: 1.2rem;
+}
+
+.header-logo{
+    display: flex;
+    width: 8rem;
+    height: 3rem;
+    padding: 0.625rem;
+    justify-content: center;
+    align-items: center;
+    gap: 0.625rem;
+    flex-shrink: 0;
+}
