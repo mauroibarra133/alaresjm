@@ -9,14 +9,21 @@ Content-Type: application/json
 {
     "nombre": "lechuga",
     "descripcion": "aaaa",
-    "precio":3000,
     "id_categoria": 1
     }
 
 ###
-GET {{api}}/83
+GET {{api}}/56
 
 ###
-DELETE {{api}}/100
+DELETE {{api}}/56
 
 ###
+PUT {{api}}/55
+Content-Type: application/json
+
+{
+    "nombre": "laptop hp",
+    "descripcion": "gaming",
+    "id_categoria": 2
+    }

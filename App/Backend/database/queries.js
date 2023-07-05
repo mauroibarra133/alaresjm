@@ -1,7 +1,7 @@
 export const  queries ={
     getAllProducts: 'SELECT * FROM productos',
-    addProduct: 'INSERT INTO productos (nombre, descripcion, precio, id_categoria) VALUES (@nombre, @descripcion, @precio, @id_categoria)', 
+    addProduct: 'INSERT INTO productos (nombre, descripcion, id_categoria) VALUES (@nombre, @descripcion, @id_categoria)', 
     getProductById: 'SELECT * FROM productos WHERE id = @id',
     deleteProduct: 'DELETE FROM productos WHERE id = @id ',
-    getTotalProducts: 'SELECT COUNT(*) FROM productos'
+    updateProductById: 'UPDATE productos SET nombre = @nombre, descripcion = @descripcion, id_categoria = @id_categoria WHERE id = @id '
 }

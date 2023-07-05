@@ -13,10 +13,10 @@ export async function getProducts(req,res){
 }
 
 export async function addProduct(req,res){
-    let {nombre, descripcion, precio, id_categoria} = req.body
+    let {nombre, descripcion, id_categoria} = req.body
 
     if (descripcion == null) descripcion= ''
-    if (nombre == null || descripcion == null || precio== null || id_categoria == null){
+    if (nombre == null || descripcion == null || id_categoria == null){
         return res.status(400).json({msg: 'Bad Request. Please fill all fields'})
     }
 
@@ -26,11 +26,10 @@ export async function addProduct(req,res){
 
         .input('nombre',sql.VarChar,nombre)
         .input('descripcion',sql.Text,descripcion)
-        .input('precio',sql.Int,precio)
         .input('id_categoria',sql.Int,id_categoria)
         .query(queries.addProduct)
 
-        res.json({nombre,descripcion,precio,id_categoria}); // Porque el pool request solo retorna las filas afectadas
+        res.json({nombre,descripcion,id_categoria}); // Porque el pool request solo retorna las filas afectadas
         
     } catch (error) {
         res.status(500)
@@ -64,17 +63,21 @@ export async function deleteProductById(req,res){
     }
 
 }
+export async function updateProductById (req,res){
+    let {nombre, descripcion, id_categoria} = req.body
+    const { id } = req.params;
 
-export async function getTotalProducts(req,res){
-    try {
-        const pool = await getConnection() //Es una promesa, es el cliente para realizar consultas
-        const result = await pool.request()
-            .query(queries.getTotalProducts) //Hacemos la consulta
-        res.json(result.recordset)
-            res.sendStatus(204)
-    } catch (error) {
-        res.status(500)
-        res.send(error.message)
+    if (nombre == null || descripcion == null || id_categoria == null){
+        return res.status(400).json({msg: 'Bad Request. Please fill all fields'})
     }
 
+    const pool = await getConnection() //Es una promesa, es el cliente para realizar consultas
+    const result = await pool.request()
+        .input('nombre',sql.VarChar,nombre)
+        .input('descripcion',sql.Text,descripcion)
+        .input('id_categoria',sql.Int,id_categoria)
+        .input('id',sql.Int,id)
+        .query(queries.updateProductById) //Hacemos la consulta
+        res.json({id,nombre,descripcion,id_categoria})
+        res.sendStatus(204)
 }
