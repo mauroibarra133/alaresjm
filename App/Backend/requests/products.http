@@ -27,3 +27,6 @@ Content-Type: application/json
     "descripcion": "gaming",
     "id_categoria": 2
     }
+
+###
+GET {{api}}/?categoria=2
