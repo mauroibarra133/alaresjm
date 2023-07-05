@@ -58,7 +58,7 @@ CREATE TABLE reservas (
 	ON DELETE NO ACTION
 	ON UPDATE CASCADE
 )
-*/
+
 
 CREATE TABLE desc_pedidos (
 	id INT PRIMARY KEY IDENTITY(1,1),
@@ -89,3 +89,9 @@ CREATE TABLE pedidos (
 	FOREIGN KEY (id_descrip_pedido) REFERENCES tipos_entrega(id),
 )
 
+CREATE TABLE tamaños_productos (
+	id INT IDENTITY(1,1) PRIMARY KEY,
+	nombre VARCHAR(20) NOT NULL
+)
+
+*/
