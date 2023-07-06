@@ -2,7 +2,7 @@
 @import '../variables.css';
 
 /* Hero Background */
-.heroQuienesSomos-overlay{
+.hero-quienessomos__overlay{
     position: relative;
     width: 100%;
     height: calc(100vh);
@@ -11,7 +11,7 @@
     background-size: cover;
 }
 
-.heroQuienesSomos-overlay::after{
+.hero-quienessomos__overlay::after{
     position: absolute;
     width: 100%;
     height: 100%;
@@ -22,24 +22,25 @@
     z-index: var(--overlay-z);
 }
 /* Hero */
-.hero{
+.hero-quienessomos{
     display: flex;
     flex-direction: column;
     padding: 1rem;
     padding-bottom: 0;
     margin-bottom: 0;
     max-width: 1200px;
+    margin-top: 4rem;
 
 }
 
 /* Titulo */
-.hero-title{
+.hero-quienessomos__title{
     display: flex;
     justify-content: start;
     z-index: var(--normal-z);
 
 }
-.hero-title h2{
+.hero-quienessomos__title h2{
     color: var(--orange-1, #FFC692);
     font-size: 2rem;
     font-family: 'Pirata One';
@@ -52,11 +53,11 @@
 
 }
 
-.hero-text{
+.hero-quienessomos__text{
     display: flex;
     justify-content: center;
 }
-.hero-text p{
+.hero-quienessomos__text p{
     color: var(--text-white, #FFF);
     font-size: .8rem;
     font-family: 'Lato';
@@ -67,7 +68,7 @@
 }
 
 /* Iconos */
-.hero-icons{
+.hero-quienessomos__icons{
     width: 100%;
     display: grid;
     grid-template-columns: repeat(2, 60px); /* Define 2 columnas de igual tamaño */
@@ -80,13 +81,13 @@
     padding-bottom: 0;
 }
 
-.icon{
+.hero-quienessomos__icon{
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
-.icon p{
+.hero-quienessomos__icon p{
     color: var(--orange-1, #FFC692);
     font-size: 1.1rem;
     font-family: Post No Bills Colombo;
@@ -94,3 +95,4 @@
     font-weight: 700;
     line-height: normal;
 }
+

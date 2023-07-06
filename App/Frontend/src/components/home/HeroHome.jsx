@@ -2,11 +2,11 @@ import '../../styles/hero/heroHome.css'
 
 function HeroHome() {
     return ( 
-        <div className="heroHome-container">
-            <div className="heroHome-text-container">
-                <h2 className="heroHome-title1">Conoce nuestras</h2>
-                <h2 className="heroHome-title2">Burgers</h2>
-                <button className="heroHome-button">
+        <div className="hero-home__container">
+            <div className="hero-home__text-container">
+                <h2 className="hero-home__title1">Conoce nuestras</h2>
+                <h2 className="hero-home__title2">Burgers</h2>
+                <button className="hero-home__button">
                     Ver Carta
                 </button>
             </div>

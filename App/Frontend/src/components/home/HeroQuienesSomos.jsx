@@ -7,10 +7,10 @@ import '../../styles/hero/heroQuienesSomos.css'
 function HeroQuienesSomos() {
     return ( 
 
-        <div className="heroQuienesSomos-overlay">
-            <div className="hero">
-                <div className="hero-title"><h2>Nuestras <br /> Especialidades</h2></div>
-                <div className="hero-text"><p>
+        <div className="hero-quienessomos__overlay">
+            <div className="hero-quienessomos">
+                <div className="hero-quienessomos__title"><h2>Nuestras <br /> Especialidades</h2></div>
+                <div className="hero-quienessomos__text"><p>
                 ¡Bienvenido al paraíso de las comidas rápidas!
                 Déjate seducir por nuestro irresistible bar,
                 donde los sabores audaces y los ingredientes
@@ -19,23 +19,23 @@ function HeroQuienesSomos() {
                 una experiencia única llena de sabor, rapidez 
                 y satisfacción en cada bocado!
                     </p></div>
-                <div className="hero-icons">
-                        <div className="icon">
+                <div className="hero-quienessomos__icons">
+                        <div className="hero-quienessomos__icon">
                             <img src={iconPasta} alt="Icono de Pasta" />
-                            <p className='icon-text'>PASTA</p>
+                            <p className='hero-quienessomos__icon-text'>PASTA</p>
                         </div>
 
-                        <div className="icon">
+                        <div className="hero-quienessomos__icon">
                             <img src={iconTragos} alt="Icono de Trago" />
-                            <p className='icon-text'>TRAGOS</p>
+                            <p className='hero-quienessomos__icon-text'>TRAGOS</p>
                         </div>
-                        <div className="icon">
+                        <div className="hero-quienessomos__icon">
                             <img src={iconBurger} alt="Icono de Hamburguesa" />
-                            <p className='icon-text'>BURGER</p>
+                            <p className='hero-quienessomos__icon-text'>BURGER</p>
                         </div>
-                        <div className="icon">
+                        <div className="hero-quienessomos__icon">
                             <img src={iconPizza} alt="Icono de Pizza" />
-                            <p className='icon-text'>PIZZA</p>
+                            <p className='hero-quienessomos__icon-text'>PIZZA</p>
                         </div>
                 </div>
             </div>

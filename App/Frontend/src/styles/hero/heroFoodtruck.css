@@ -1,7 +1,8 @@
 @import '../variables.css';
 @import '../fonts.css';
 
-.heroFoodtruck-container{
+/* Container */
+.hero-foodtruck__container{
     width: 100%;
     height: 100vh;
     display: flex;
@@ -12,19 +13,20 @@
     gap: 2rem;
 }
 
-.hero-foodtruck-title{
+/* Titulos */
+.hero-foodtruck__title{
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
     gap: 0.625rem;
 }
-.hero-foodtruck-title{
+.hero-foodtruck__title{
     width: 100%;
     display: flex;
     justify-content: start;
 }
-.hero-foodtruck-title h1{
+.hero-foodtruck__title h1{
     color: var(--black-1);
     font-family: 'Pirata One';
     font-size: 1.5rem;
@@ -32,14 +34,8 @@
     text-transform: uppercase;
 }
 
-.hero-foodtruck-carrusel{
-    width: 80%;
-    height: 250px;
-    background-color: rgb(46, 9, 9);
-
-}
-
-.hero-foodtruck-button{
+/* Boton */
+.hero-foodtruck__button{
     display: flex;
     padding: 0.7rem;
     justify-content: center;
@@ -49,7 +45,7 @@
     background: var(--black-1, #000);
 }
 
-.hero-foodtruck-button p{
+.hero-foodtruck__button p{
     color: var(--text-white);
     text-align: center;
     font-family: 'Amiri';
@@ -57,5 +53,11 @@
     font-weight: 700;
     text-transform: uppercase;
     margin: 0;
-    
 }
+
+.hero-foodtruck__button:hover{
+    background-color: var(--orange-2);
+}
+
+
+

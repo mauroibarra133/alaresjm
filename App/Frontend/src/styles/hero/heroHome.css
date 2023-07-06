@@ -2,7 +2,7 @@
 @import '../variables.css';
 
 /* Contenedor */
-.heroHome-container{
+.hero-home__container{
     position: relative;
     display: flex;
     width: 100%;
@@ -16,7 +16,7 @@
     box-sizing: border-box;
 }
 /* Overlay */
-.heroHome-container::after{
+.hero-home__container::after{
     position: absolute;
     width: 100%;
     height: 100%;
@@ -27,7 +27,7 @@
     z-index: var(--overlay-z);
 }
 /* Contenedor del texto */
-.heroHome-text-container{
+.hero-home__text-container{
     display: flex;
     width: fit-content;
     flex-direction: column;
@@ -38,7 +38,7 @@
 }
 
 /* Titulos */
-.heroHome-title1{
+.hero-home__title1{
     color: #FFF;
     margin: 0;
     height: fit-content;
@@ -50,7 +50,7 @@
     text-transform: uppercase;
 }
 
-.heroHome-title2{
+.hero-home__title2{
     color: var(--orange-1);
     margin: 0;
     font-size: 3.625rem;
@@ -61,7 +61,7 @@
     text-transform: uppercase;
 }
 
-.heroHome-button{
+.hero-home__button{
     display: flex;
     width: fit-content;
     height: 2rem;
@@ -80,7 +80,7 @@
     text-transform: uppercase;
 }
 
-.heroHome-button:hover{
+.hero-home__button:hover{
     background-color: var(--gray-1);
     cursor: pointer;
     transform: scale(1.1);

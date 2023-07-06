@@ -5,12 +5,12 @@ import  '../styles/header.css';
 
 function Header() {
     return (  
-            <div className="header-container">
-                <img src={burgerIcon} className='header-icon burger' alt="Menu Icon" />
-                <div className='header-logo'>
+            <div className="header__container">
+                <img src={burgerIcon} className='header__icon header__icon-burger' alt="Menu Icon" />
+                <div className='header__logo'>
                     <img src={alaresLogo} alt="Alares Logo" />
                 </div>
-                <img src={userIcon} className='header-icon' alt="Menu Icon" />
+                <img src={userIcon} className='header__icon' alt="Menu Icon" />
             </div>
     );
 }

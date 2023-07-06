@@ -5,30 +5,30 @@ import '../../styles/hero/heroHorarios.css'
 
 function HeroHorarios() {
     return ( 
-        <div className="heroHorarios-container">
+        <div className="hero-horarios__container">
             <div className="hero-horarios">
-                <div className="hero-horarios-sections">
-                    <div className="hero-horarios-section">
-                        <h3 className="hero-horarios-title">Nuestros Horarios</h3>
-                        <div className="horarios-section-container">
-                            <img className="horarios-section-icon" src={clockIcon} alt="Icono de Horario" />
-                            <div className="horarios-section-text">
+                <div className="hero-horarios__sections">
+                    <div className="hero-horarios__section">
+                        <h3 className="hero-horarios__title">Nuestros Horarios</h3>
+                        <div className="hero-horarios__section-container">
+                            <img className="hero-horarios-section__icon" src={clockIcon} alt="Icono de Horario" />
+                            <div className="hero-horarios-section__text">
                                 <p>DE 12:00 pm A 15:00 pm</p>
                                 <p>DE 19:00 pm A 03:00 am</p>
                             </div>
 
                         </div>
                     </div>
-                    <div className="hero-horarios-section">
-                        <h3 className="hero-horarios-title">DONDE ESTAMOS</h3>
-                        <div className="horarios-section-container">
-                            <img className="horarios-hero-icon" src={locationIcon} alt="Icono de Ubicacion" />
+                    <div className="hero-horarios__section">
+                        <h3 className="hero-horarios__title">DONDE ESTAMOS</h3>
+                        <div className="hero-horarios__section-container">
+                            <img className="hero-horarios-hero__icon" src={locationIcon} alt="Icono de Ubicacion" />
                             <p>DE 19:00 pm A 03:00 am</p>
                         </div>
                     </div>
                 </div>
                 
-                <button className='hero-horarios-button'>
+                <button className='hero-horarios__button'>
                     <p>Tenemos Delivery</p>
                     <img src={repartidorIcon} alt="Icono de Repartidor" />
                 </button>  

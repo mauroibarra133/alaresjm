@@ -1,0 +1,65 @@
+@import "node_modules/@glidejs/glide/dist/css/glide.core.min.css";
+@import '../../variables.css';
+
+/* SLider */
+.glide__track{
+    border: 3px solid var(--orange-1);
+    box-shadow: 2px -1px 21px -5px rgba(222,121,62,0.75);
+    -webkit-box-shadow: 2px -1px 21px -5px rgba(222,121,62,0.75);
+    -moz-box-shadow: 2px -1px 21px -5px rgba(222,121,62,0.75);
+    border-radius: 6px;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+/* Slider Invidual */
+.glide__slide.slider{
+    min-height: 200px;
+    height: 200px;
+    max-height: 500px;
+}
+.glide__slide.slider img{
+    object-fit: cover;
+    height: 100%;
+}
+
+/* Flechas */
+.glide__arrows{
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+.glide__arrow{
+    border-radius: 10px;
+    border: none;
+    padding: .3rem .6rem;
+    background-color: var(--gray-4);
+}
+
+.glide__arrow:hover{
+    background-color: var(--gray-2);
+    cursor: pointer;
+    color: white;
+}
+
+/* Puntos */
+.glide__bullets{
+    display: flex;
+    justify-content: center;
+    gap: .3rem;
+    margin-top: .8rem;
+}
+
+.glide__bullet{
+    border-radius: 50%;
+    background-color: var(--orange-1);
+    border: none;
+    padding: .4rem;
+    transition: all .2s ease;
+}
+
+.glide__bullet--active{
+    background-color: var(--gray-4);
+    transition: all .2s ease;
+}

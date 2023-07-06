@@ -7,7 +7,7 @@ import HeroFoodTruck from '../home/HeroFoodTruck'
 import '../../styles/home.css'
 function Home() {
     return ( 
-        <div className="home-container">
+        <div className="home__container">
             <Header/>
             <HeroHome/>      
             <HeroQuienesSomos/>      

@@ -1,5 +1,5 @@
 /* Hero Container */
-.heroHorarios-container{
+.hero-horarios__container{
     width: 100%;
     position: relative;
     height: 100vh;
@@ -16,19 +16,19 @@
     padding: 1rem;
 }
 /* Sectiones */
-.hero-horarios-sections{
+.hero-horarios__sections{
     display: flex;
     flex-direction: column;
     gap: 2rem;
 }
 
 
-.hero-horarios-section img,.hero-horarios-button img{
+.hero-horarios__section img,.hero-horarios__button img{
     width: 30px;
     height: 30px;
 }
 
-.hero-horarios-section{
+.hero-horarios__section{
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -36,7 +36,7 @@
     gap: 0.625rem;
 }
 
-.hero-horarios-title{
+.hero-horarios__title{
     color: var(--black-1);
     font-family:'Pirata One';
     font-size: 1.3rem;
@@ -44,7 +44,7 @@
     text-transform: uppercase;
 }
 /* Section Container */
-.horarios-section-container{
+.hero-horarios__section-container{
     display: flex;
     width: 100%;
     padding: 0.4rem;
@@ -55,7 +55,7 @@
     background: var(--orange-1);
 }
 
-.horarios-section-container p{
+.hero-horarios-section__container p{
     color: var(--black-1);
     font-family: 'Amiri Bold';
     font-size: 1rem;
@@ -66,13 +66,13 @@
 
 }
 
-.horarios-section-text{
+.hero-horarios-section__text{
     height: fit-content;
     display: flex;
     flex-direction: column;
 }
 /* Button */
-.hero-horarios-button{
+.hero-horarios__button{
     display: flex;
     padding: .4rem;
     justify-content: center;
@@ -82,7 +82,7 @@
     background: var(--black-1, #000);
 }
 
-.hero-horarios-button p{
+.hero-horarios__button p{
     color: #FFF;
     text-align: center;
     font-family: 'Amiri';
@@ -91,7 +91,7 @@
     font-weight: 700;
 }
 
-.hero-horarios-button:hover{
+.hero-horarios__button:hover{
     background-color: var(--gray-1);
     cursor: pointer;
 }
