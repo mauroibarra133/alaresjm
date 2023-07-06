@@ -1,0 +1,97 @@
+/* Hero Container */
+.heroHorarios-container{
+    width: 100%;
+    position: relative;
+    height: 100vh;
+    background-image: url('../../assets/images/hero-horarios-burger-pattern.jpg');
+
+    
+}   
+.hero-horarios{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    padding: 1rem;
+}
+/* Sectiones */
+.hero-horarios-sections{
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+
+.hero-horarios-section img,.hero-horarios-button img{
+    width: 30px;
+    height: 30px;
+}
+
+.hero-horarios-section{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 0.625rem;
+}
+
+.hero-horarios-title{
+    color: var(--black-1);
+    font-family:'Pirata One';
+    font-size: 1.3rem;
+    font-weight: 400;
+    text-transform: uppercase;
+}
+/* Section Container */
+.horarios-section-container{
+    display: flex;
+    width: 100%;
+    padding: 0.4rem;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 1.6875rem;
+    background: var(--orange-1);
+}
+
+.horarios-section-container p{
+    color: var(--black-1);
+    font-family: 'Amiri Bold';
+    font-size: 1rem;
+    font-weight: 900;
+    line-height: 1.5rem;
+    letter-spacing: 0.002;
+    margin: .6rem;
+
+}
+
+.horarios-section-text{
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+}
+/* Button */
+.hero-horarios-button{
+    display: flex;
+    padding: .4rem;
+    justify-content: center;
+    align-items: center;
+    gap: 1.25rem;
+    border-radius: 1.25rem;
+    background: var(--black-1, #000);
+}
+
+.hero-horarios-button p{
+    color: #FFF;
+    text-align: center;
+    font-family: 'Amiri';
+    text-transform: uppercase;
+    font-size: 1rem;
+    font-weight: 700;
+}
+
+.hero-horarios-button:hover{
+    background-color: var(--gray-1);
+    cursor: pointer;
+}

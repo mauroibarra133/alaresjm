@@ -1,13 +1,19 @@
 @font-face {
     font-family: 'Pirata One';
-    src: url('../fonts/PirataOne/PirataOne-Regular.ttf') format('truetype');
+    src: url('../assets/fonts/PirataOne/PirataOne-Regular.ttf') format('truetype');
   }
 
   @font-face {
     font-family: 'Amiri';
-    src: url('../fonts/Amiri/Amiri-Regular.ttf') format('truetype');
+    src: url('../assets/fonts/Amiri/Amiri-Regular.ttf') format('truetype');
+  }
+
+  
+  @font-face {
+    font-family: 'Amiri Bold';
+    src: url('../assets/fonts/Amiri/Amiri-Bold.ttf') format('truetype');
   }
   @font-face {
     font-family: 'Post No Bills Colombo';
-    src: url('../fonts/PostNoBillsColombo/postnobillscolombo-semibold.ttf') format('truetype');
+    src: url('../assets/fonts/PostNoBillsColombo/postnobillscolombo-semibold.ttf') format('truetype');
   }
