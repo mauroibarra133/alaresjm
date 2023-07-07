@@ -1,5 +1,4 @@
 import '../../../styles/hero/heroContactanos.css'
-
 function HeroContactanos() {
     return ( 
         <div className="hero-contactanos__container" name='#contacto'>

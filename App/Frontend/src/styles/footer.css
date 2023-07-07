@@ -87,6 +87,9 @@
     font-weight: 400;
     line-height: normal;
 }
+.footer-info__text p:hover{
+    color: var(--gray-2);
+}
 .footer-info__text img{
     width: 15px;
     height: 15px;
