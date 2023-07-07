@@ -6,7 +6,7 @@
     position: relative;
     display: flex;
     width: 100%;
-    height: calc(100vh - 3rem) ;
+    height: calc(100vh) ;
     flex-direction: column;
     align-items: center;
     background-image: url('../../assets/images/hero-home-background.jpg');

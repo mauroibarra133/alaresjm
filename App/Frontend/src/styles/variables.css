@@ -11,5 +11,6 @@
     --gray-6: #D1D1D1;
     --overlay-z: 1;
     --header-z: 1000;
+    --nav-z: 100;
     --normal-z: 10;
 }

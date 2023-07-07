@@ -1,9 +1,10 @@
-import '../../styles/hero/heroFoodtruck.css'
-import Carrusel from './carrusel/carrusel';
+import '../../../styles/hero/carrusel/carrusel.css'
+import '../../../styles/hero/heroFoodtruck.css'
+import Carrusel from '../Carrusel'
 
 function HeroFoodTruck() {
     return ( 
-        <div className="hero-foodtruck__container">
+        <div className="hero-foodtruck__container" name='#foodtruck'>
             <div className="hero-foodtruck__title">
                 <h1>Nuestro Foodtruck</h1>
             </div>

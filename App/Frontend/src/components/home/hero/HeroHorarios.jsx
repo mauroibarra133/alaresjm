@@ -1,11 +1,11 @@
-import clockIcon from '../../assets/images/clock-icon.svg'
-import locationIcon from '../../assets/images/location-icon.svg'
-import repartidorIcon from '../../assets/images/repartidor-icon.png'
-import '../../styles/hero/heroHorarios.css'
+import clockIcon from '../../../assets/images/clock-icon.svg'
+import locationIcon from '../../../assets/images/location-icon.svg'
+import repartidorIcon from '../../../assets/images/repartidor-icon.png'
+import '../../../styles/hero/heroHorarios.css'
 
 function HeroHorarios() {
     return ( 
-        <div className="hero-horarios__container">
+        <div className="hero-horarios__container" name='#horarios'>
             <div className="hero-horarios">
                 <div className="hero-horarios__sections">
                     <div className="hero-horarios__section">

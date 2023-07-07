@@ -1,9 +1,9 @@
 import Header from './Header';
-import HeroHome from './home/HeroHome';
-import HeroQuienesSomos from './home/HeroQuienesSomos';
-import HeroHorarios from './home/HeroHorarios';
-import HeroFoodTruck from './home/HeroFoodTruck';
-import HeroContactanos from './home/HeroContactanos';
+import HeroHome from './home/hero/HeroHome';
+import HeroQuienesSomos from './home/hero/HeroQuienesSomos';
+import HeroHorarios from './home/hero/HeroHorarios';
+import HeroFoodTruck from './home/hero/HeroFoodTruck';
+import HeroContactanos from './home/hero/HeroContactanos';
 import Footer from './Footer';
 import '../styles/home.css';
 

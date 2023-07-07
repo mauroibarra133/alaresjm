@@ -1,8 +1,8 @@
-import '../../styles/hero/heroContactanos.css'
+import '../../../styles/hero/heroContactanos.css'
 
 function HeroContactanos() {
     return ( 
-        <div className="hero-contactanos__container">
+        <div className="hero-contactanos__container" name='#contacto'>
             <div className="hero-contactanos__title">
                 <h2>Contactanos</h2>
                 <p>Contrata nuestro servicio de Foodtrack o haznos tus preguntas!</p>

@@ -1,13 +1,13 @@
-import iconPasta from '../../assets/images/quienesSomos-icon-pasta.png'
-import iconBurger from '../../assets/images/quienesSomos-icon-burger.png'
-import iconPizza from '../../assets/images/quienesSomos-icon-pizza.png'
-import iconTragos from '../../assets/images/quienesSomos-icon-tragos.png'
-import '../../styles/hero/heroQuienesSomos.css'
+import iconPasta from '../../../assets/images/quienesSomos-icon-pasta.png'
+import iconBurger from '../../../assets/images/quienesSomos-icon-burger.png'
+import iconPizza from '../../../assets/images/quienesSomos-icon-pizza.png'
+import iconTragos from '../../../assets/images/quienesSomos-icon-tragos.png'
+import '../../../styles/hero/heroQuienesSomos.css'
 
 function HeroQuienesSomos() {
     return ( 
 
-        <div className="hero-quienessomos__overlay">
+        <div className="hero-quienessomos__overlay" name='#quienes-somos'>
             <div className="hero-quienessomos">
                 <div className="hero-quienessomos__title"><h2>Nuestras <br /> Especialidades</h2></div>
                 <div className="hero-quienessomos__text"><p>

@@ -1,10 +1,10 @@
 import  { useEffect } from "react";
-import '../../../styles/hero/carrusel/carrusel.css';
+import '../../styles/hero/carrusel/carrusel.css';
 import Glide from "@glidejs/glide";
-import imgCarrusel1 from '../../../assets/images/foodtruck-1.jpg';
-import imgCarrusel2 from '../../../assets/images/foodtruck-2.jpg';
-import imgCarrusel3 from '../../../assets/images/foodtruck-3.jpg';
-import imgCarrusel4 from '../../../assets/images/foodtruck-4.jpg';
+import imgCarrusel1 from '../../assets/images/foodtruck-1.jpg';
+import imgCarrusel2 from '../../assets/images/foodtruck-2.jpg';
+import imgCarrusel3 from '../../assets/images/foodtruck-3.jpg';
+import imgCarrusel4 from '../../assets/images/foodtruck-4.jpg';
 
 const sliderConfiguration= {
   gap: 20,
