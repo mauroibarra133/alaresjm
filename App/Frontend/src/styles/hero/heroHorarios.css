@@ -4,7 +4,7 @@
     position: relative;
     height: 100vh;
     background-image: url('../../assets/images/hero-horarios-burger-pattern.jpg');
-
+    border-bottom: 1px solid black;
     
 }   
 .hero-horarios{
@@ -14,6 +14,8 @@
     flex-direction: column;
     justify-content: space-evenly;
     padding: 1rem;
+    max-width: 900px;
+    margin: 0 auto;
 }
 /* Sectiones */
 .hero-horarios__sections{
@@ -55,7 +57,7 @@
     background: var(--orange-1);
 }
 
-.hero-horarios-section__container p{
+.hero-horarios-section__text p{
     color: var(--black-1);
     font-family: 'Amiri Bold';
     font-size: 1rem;
@@ -77,9 +79,11 @@
     padding: .4rem;
     justify-content: center;
     align-items: center;
-    gap: 1.25rem;
+    gap: 1rem;
     border-radius: 1.25rem;
     background: var(--black-1, #000);
+    max-width: 500px;
+    margin: 0 auto;
 }
 
 .hero-horarios__button p{
@@ -87,11 +91,13 @@
     text-align: center;
     font-family: 'Amiri';
     text-transform: uppercase;
-    font-size: 1rem;
+    font-size: .8rem;
     font-weight: 700;
 }
 
 .hero-horarios__button:hover{
     background-color: var(--gray-1);
     cursor: pointer;
+    border: 1px solid black;
+
 }

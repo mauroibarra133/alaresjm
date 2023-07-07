@@ -23,7 +23,9 @@ function HeroHorarios() {
                         <h3 className="hero-horarios__title">DONDE ESTAMOS</h3>
                         <div className="hero-horarios__section-container">
                             <img className="hero-horarios-hero__icon" src={locationIcon} alt="Icono de Ubicacion" />
-                            <p>DE 19:00 pm A 03:00 am</p>
+                            <div className="hero-horarios-section__text">
+                                <p>DE 19:00 pm A 03:00 am</p>
+                            </div>
                         </div>
                     </div>
                 </div>

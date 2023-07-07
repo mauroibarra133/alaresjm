@@ -28,7 +28,8 @@
     padding: 1rem;
     padding-bottom: 0;
     margin-bottom: 0;
-    max-width: 1200px;
+    max-width: 900px;
+    margin: 0 auto;
     margin-top: 4rem;
 
 }

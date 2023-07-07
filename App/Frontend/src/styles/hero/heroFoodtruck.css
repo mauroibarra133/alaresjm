@@ -25,6 +25,7 @@
     width: 100%;
     display: flex;
     justify-content: start;
+    max-width: 900px;
 }
 .hero-foodtruck__title h1{
     color: var(--black-1);
@@ -49,14 +50,16 @@
     color: var(--text-white);
     text-align: center;
     font-family: 'Amiri';
-    font-size: 0.9375rem;
+    font-size: 0.8rem;
     font-weight: 700;
     text-transform: uppercase;
     margin: 0;
 }
 
 .hero-foodtruck__button:hover{
-    background-color: var(--orange-2);
+    border: 1px solid black;
+    background-color: var(--gray-1);
+    cursor: pointer;
 }
 
 
