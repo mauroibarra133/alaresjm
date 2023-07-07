@@ -1,18 +1,21 @@
 import { useState } from 'react';
 import '../../../styles/hero/heroContactanos.css'
 import {useForm} from 'react-hook-form';
-
+import {AgregarDuda} from '../../../services/dudas.services'
 
 function HeroContactanos() {
 
-    const { register, handleSubmit, formState: { errors } } = useForm();
+    const { register, handleSubmit, formState: { errors }, reset } = useForm();
     const [clicked,setClicked] = useState(false);
 
     function handleClick(){
         if(Object.keys(errors).length == 0) setClicked(!clicked)
     }
 
-    const onSubmit = data => console.log(data);
+    function onSubmit(data){
+        AgregarDuda(data);
+        reset();
+    }
     return ( 
         <div className={`hero-contactanos__container ${clicked ? "active" : ""}`} name='#contacto' >
             <div className="hero-contactanos__title">
@@ -24,39 +27,39 @@ function HeroContactanos() {
                     <div className="hero-contactanos__input">
                         <div>
                             <label htmlFor="nombre">Nombre</label>
-                            <input type="text" placeholder='Ej: Juan' {...register('contactName', { pattern: /^[A-Za-z]+$/i, required:true,maxLength:50,minLength:2 })} />
+                            <input type="text" placeholder='Ej: Juan' {...register('nombre', { pattern: /^[A-Za-z]+$/i, required:true,maxLength:50,minLength:2 })} />
                         </div>
-                        {errors.contactName?.type === 'required' && <p role="alert">Nombre es requerido</p>}
+                        {errors.nombre?.type === 'required' && <p role="alert">Nombre es requerido</p>}
                     </div>
                     <div className="hero-contactanos__input">
                         <div>
                             <label htmlFor="apellido">Apellido</label>
-                            <input type="text" placeholder='Ej: Gonzales'{...register('contactSurname',{ pattern: /^[A-Za-z]+$/i, required:true,maxLength:50,minLength:2})}/>
+                            <input type="text" placeholder='Ej: Gonzales'{...register('apellido',{ pattern: /^[A-Za-z]+$/i, required:true,maxLength:50,minLength:2})}/>
                         </div>
-                        {errors.contactSurname?.type === 'required' && <p role="alert">El apellido es requerido</p>}
+                        {errors.apellido?.type === 'required' && <p role="alert">El apellido es requerido</p>}
         
                     </div>
                     <div className="hero-contactanos__input">
                         <div>
                             <label htmlFor="telefono" >Telefono</label>
-                            <input type="tel" placeholder='Ej: 3525-6491324'{...register('contactCel',{ pattern: /^[0-9]+$/ , required:true,minLength:6})} />
+                            <input type="tel" placeholder='Ej: 3525-6491324'{...register('telefono',{ pattern: /^[0-9]+$/ , required:true,minLength:6})} />
                         </div>
-                        {errors.contactCel?.type === 'required' && <p role="alert">El numero es requerido</p>}
+                        {errors.telefono?.type === 'required' && <p role="alert">El numero es requerido</p>}
                     </div>
                     <div className="hero-contactanos__input">
                         <div>
                             <label htmlFor="mail">Mail</label>
-                            <input type="email" placeholder='Ej: alares@gmail.com'{...register('contactMail',{required:true,minLength:8})}/>
+                            <input type="email" placeholder='Ej: alares@gmail.com'{...register('mail',{required:true,minLength:8})}/>
                         </div>
-                            {errors.contactMail?.type === 'required' && <p role="alert">El mail es requerido</p>}
+                            {errors.mail?.type === 'required' && <p role="alert">El mail es requerido</p>}
                     </div>
                     <div className="hero-contactanos__input">
                         <div>
                             <label htmlFor="duda">Tu duda</label>
                             <textarea name="duda" id="duda" cols="30" rows="10" 
-                                placeholder='Ej: Como contrato el servicio de foodtruck?' {...register('contactQuestion', {required:true, minLength:10})}></textarea>
+                                placeholder='Ej: Como contrato el servicio de foodtruck?' {...register('descripcion', {required:true, minLength:10})}></textarea>
                         </div>
-                        {errors.contactQuestion?.type === 'required' && <p role="alert">La duda es requerida</p>}
+                        {errors.descripcion?.type === 'required' && <p role="alert">La duda es requerida</p>}
                     </div>
 
 

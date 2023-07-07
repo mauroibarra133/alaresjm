@@ -13,7 +13,7 @@ function Nav({clicked, handleClick}) {
             <Link to='#quienes-somos' spy={true} smooth={true} duration={500} className='nav__item-container' onClick={handleClick}>
                 <div className='nav__item'><p>QUIENES SOMOS</p></div>
             </Link>
-            <Link to='#foodtruck' spy={true} smooth={true} duration={500} className='nav__item-container' onClick={handleClick}>
+            <Link to='#foodtruck' spy={true} smooth={true} duration={500} offset={-30} className='nav__item-container' onClick={handleClick}>
                 <div className='nav__item'><p>FOODTRUCK</p></div>
             </Link>
             <Link to='/reservas' spy={true} smooth={true} duration={500} className='nav__item-container'>

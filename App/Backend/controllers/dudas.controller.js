@@ -37,6 +37,7 @@ export async function addDuda(req,res){
         .input('telefono',sql.VarChar,telefono.toString())
         .input('mail',sql.Text,mail)
         .input('descripcion',sql.Text,descripcion)
+        .input('id_estado',sql.Int,1)
         .query(queries.Dudas.addDuda)
 
         res.json({nombre,apellido,telefono,mail,descripcion}); // Porque el pool request solo retorna las filas afectadas

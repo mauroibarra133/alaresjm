@@ -7,6 +7,8 @@ import cors from 'cors'
 
 const app = express()
 
+app.use(cors());
+
 //settings
 let port;
 port = config.port

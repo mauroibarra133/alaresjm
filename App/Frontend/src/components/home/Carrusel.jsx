@@ -1,4 +1,4 @@
-import  { useEffect } from "react";
+import  { useEffect, useState } from "react";
 import '../../styles/hero/carrusel/carrusel.css';
 import Glide from "@glidejs/glide";
 import imgCarrusel1 from '../../assets/images/foodtruck-1.jpg';
@@ -11,17 +11,31 @@ const sliderConfiguration= {
   perView: 1,
   startAt: 0,
   type: "slider",
-  breakpoints:{
-    1000:{
-      perView:1
-    },
-    2000:{
-      perView:2
-    }
-  }
 };
 
 function Carrusel(){
+
+  const [windowSize, setWindowSize] = useState({
+    width: window.innerWidth,
+    height: window.innerHeight
+  });
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowSize({
+        width: window.innerWidth,
+        height: window.innerHeight
+      });
+      console.log(windowSize);
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, [windowSize]);
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
     const slider = new Glide('.glide', sliderConfiguration);
   useEffect(() => {
@@ -47,7 +61,9 @@ function Carrusel(){
             <li className='glide__slide slider'>
                 <img src={imgCarrusel4} alt="" />
             </li>
-
+            <li className={`glide__slide slider`}>
+                <img src={imgCarrusel4} alt="" />
+            </li>
           </ul>
         </div>
         <div className="glide__bullets" data-glide-el="controls[nav]">

@@ -10,7 +10,7 @@ export const  queries ={
     Dudas:{
         getAllDudas: 'SELECT * FROM dudas',
         getDudasByStatus: 'SELECT * FROM dudas WHERE id_estado = @id_estado',
-        addDuda: 'INSERT INTO dudas (nombre,apellido,telefono,mail,descripcion,id_estado) VALUES (@nombre, @apellido, @telefono,@mail,@descripcion,1)', 
+        addDuda: 'INSERT INTO dudas (nombre,apellido,telefono,mail,descripcion,id_estado) VALUES (@nombre, @apellido, @telefono,@mail,@descripcion,@id_estado)', 
         getDudaById: 'SELECT * FROM dudas WHERE id = @id',
         deleteDuda: 'DELETE FROM dudas WHERE id = @id ',
         updateDudaById: 'UPDATE dudas SET nombre = @nombre, apellido = @apellido, telefono = @telefono,mail= @mail,descripcion = @descripcion, id_estado = @id_estado WHERE id = @id '
