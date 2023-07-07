@@ -1,17 +1,17 @@
 import {getConnection, sql, queries} from '../database/' //Traigo la conexion de la BD y las queries
 
-export async function getProducts(req,res){
+export async function getDudas(req,res){
     try {
         const pool = await getConnection() //Es una promesa, es el cliente para realizar consultas
-        const filtro = req.query.categoria;
+        const filtro = req.query.estado;
 
         if(!filtro){
-            const result = await pool.request().query(queries.Products.getAllProducts) //Hacemos la consulta
+            const result = await pool.request().query(queries.Dudas.getAllDudas) //Hacemos la consulta
             res.json(result.recordset)
         }else{
             const result = await pool.request()
-            .input('id_categoria',sql.Int,filtro)
-            .query(queries.Products.getProductsByCategory) //Hacemos la consulta
+            .input('id_estado',sql.Int,filtro)
+            .query(queries.Dudas.getDudasByStatus) //Hacemos la consulta
             res.json(result.recordset)
 
         }
@@ -25,24 +25,21 @@ export async function getProducts(req,res){
 
 }
 
-export async function addProduct(req,res){
-    let {nombre, descripcion, id_categoria} = req.body
-
-    if (descripcion == null) descripcion= ''
-    if (nombre == null || descripcion == null || id_categoria == null){
-        return res.status(400).json({msg: 'Bad Request. Please fill all fields'})
-    }
+export async function addDuda(req,res){
+    let {nombre, apellido, telefono,mail,descripcion} = req.body
 
     try {
         const pool = await getConnection()
         await pool.request()
 
         .input('nombre',sql.VarChar,nombre)
+        .input('apellido',sql.Text,apellido)
+        .input('telefono',sql.VarChar,telefono.toString())
+        .input('mail',sql.Text,mail)
         .input('descripcion',sql.Text,descripcion)
-        .input('id_categoria',sql.Int,id_categoria)
-        .query(queries.Products.addProduct)
+        .query(queries.Dudas.addDuda)
 
-        res.json({nombre,descripcion,id_categoria}); // Porque el pool request solo retorna las filas afectadas
+        res.json({nombre,apellido,telefono,mail,descripcion}); // Porque el pool request solo retorna las filas afectadas
         
     } catch (error) {
         res.status(500)
@@ -51,23 +48,24 @@ export async function addProduct(req,res){
     
 }   
 
-export async function getProductById(req,res){
+export async function getDudaById(req,res){
     const { id } = req.params;
     const pool = await getConnection() //Es una promesa, es el cliente para realizar consultas
     const result = await pool.request()
         .input('id',id)
-        .query(queries.Products.getProductById) //Hacemos la consulta
+        .query(queries.Dudas.getDudaById) //Hacemos la consulta
     
     res.send(result.recordset[0])
 }
 
-export async function deleteProductById(req,res){
+
+export async function deleteDudaById(req,res){
     try {
         const { id } = req.params;
         const pool = await getConnection() //Es una promesa, es el cliente para realizar consultas
         const result = await pool.request()
             .input('id',id)
-            .query(queries.Products.deleteProduct) //Hacemos la consulta
+            .query(queries.Dudas.deleteDuda) //Hacemos la consulta
     
         res.sendStatus(204)
     } catch (error) {
@@ -76,21 +74,24 @@ export async function deleteProductById(req,res){
     }
 
 }
-export async function updateProductById (req,res){
-    let {nombre, descripcion, id_categoria} = req.body
+export async function updateDudaById (req,res){
+    let {nombre, apellido,telefono,mail,descripcion, id_estado} = req.body
     const { id } = req.params;
 
-    if (nombre == null || descripcion == null || id_categoria == null){
-        return res.status(400).json({msg: 'Bad Request. Please fill all fields'})
+    if(!id_estado || id_estado ==''){
+        id_estado = 1
     }
 
     const pool = await getConnection() //Es una promesa, es el cliente para realizar consultas
     const result = await pool.request()
         .input('nombre',sql.VarChar,nombre)
+        .input('apellido',sql.VarChar,apellido)
+        .input('telefono',sql.VarChar,telefono.toString())
+        .input('mail',sql.VarChar,mail)
         .input('descripcion',sql.Text,descripcion)
-        .input('id_categoria',sql.Int,id_categoria)
+        .input('id_estado',sql.Int,id_estado)
         .input('id',sql.Int,id)
-        .query(queries.Products.updateProductById) //Hacemos la consulta
-        res.json({id,nombre,descripcion,id_categoria})
+        .query(queries.Dudas.updateDudaById) //Hacemos la consulta
+        res.json({id,nombre,apellido,telefono,mail,descripcion,id_estado})
         res.sendStatus(204)
 }

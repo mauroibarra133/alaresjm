@@ -1,3 +1,5 @@
+@import '../variables.css';
+
 /* Container */
 .hero-contactanos__container{
     position: relative;
@@ -14,7 +16,9 @@
     padding-top: 2rem;
     gap: 3rem;
 }
-
+.hero-contactanos__container.active{
+    height: auto;
+}
 .hero-contactanos__container::after{
     position: absolute;
     height: 100%;
@@ -78,10 +82,24 @@
 .hero-contactanos__input{
     width: 100%;
     display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+.hero-contactanos__input div{
+    width: 100%;
+    display: flex;
     justify-content: space-between;
     gap: 1rem;
     align-items: center;
     gap: 1rem;
+}
+/* Error */
+.hero-contactanos__inputs p{
+    text-align: end;
+    color: var(--red-error);
+    font-family: 'Amiri Bold';
+    font-size: .8rem;
+    z-index: var(--normal-z);
 
 }
 
@@ -112,13 +130,6 @@
     align-items: center;
     border-radius: 2rem;
     background: var(--black-1, #000);
-}
-.hero-contactanos__button:hover{
-    background-color: var(--gray-1);
-    cursor: pointer;
-    border: 1px solid black;
-}
-.hero-contactanos__button p {
     color: var(--text-white, #FFF);
     text-align: center;
     font-family: 'Amiri';
@@ -129,6 +140,12 @@
     letter-spacing: 0.00163rem;
     text-transform: uppercase;
 }
+.hero-contactanos__button:hover{
+    background-color: var(--gray-1);
+    cursor: pointer;
+    border: 1px solid black;
+}
+
 /* Placeholder */
 *::placeholder{
     font-size: 12px;
@@ -136,4 +153,8 @@
     font-family: 'Lato';
 }
 
-/* Button */
+@media only screen and (min-height:750px){
+    .hero-contactanos__container.active{
+        height: 100vh;
+    }
+}

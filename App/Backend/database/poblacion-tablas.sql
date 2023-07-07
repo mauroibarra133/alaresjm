@@ -153,6 +153,11 @@ INSERT INTO precios (id_producto, id_tamaño, precio) VALUES
 (53, 1, 1500),
 (53, 3, 1700)
 
+INSERT INTO dudas (nombre,apellido,telefono,mail,descripcion,id_estado)VALUES
+('Mauro','Ibarra','3525649133','mauroibarra133@gmail.com','Como trabajo para ustedes porfa',1)
+
+INSERT INTO estados_duda (nombre) VALUES
+ ('No Leido'),('Leido'),('Respondido')
 */
 
 

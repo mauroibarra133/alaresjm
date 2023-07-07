@@ -1,0 +1,37 @@
+@api = http://localhost:4000/dudas
+
+GET {{api}}
+
+### 
+POST {{api}}
+Content-Type: application/json
+
+{
+    "nombre": "Alejandro",
+    "apellido": "Ibarra",
+    "telefono": "3525649133",
+    "mail": "ale@gmail.com",
+    "descripcion": "El otro dia el lomito que me dieron estaba re mil crudo"
+    }
+
+###
+GET {{api}}/5
+
+###
+DELETE {{api}}/5
+
+###
+PUT {{api}}/6
+Content-Type: application/json
+
+{
+    "nombre": "Alejandro",
+    "apellido": "Lerner",
+    "telefono": "3525649133",
+    "mail": "alelerner@gmail.com",
+    "descripcion": "Puedo ir a cantar un ratito?",
+    "id_estado": 1
+    }
+
+###
+GET {{api}}/?estado=1

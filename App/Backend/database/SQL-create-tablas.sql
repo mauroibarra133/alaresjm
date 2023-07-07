@@ -94,4 +94,18 @@ CREATE TABLE tamaños_productos (
 	nombre VARCHAR(20) NOT NULL
 )
 
+CREATE TABLE dudas (
+	id INT PRIMARY KEY IDENTITY(1,1),
+	nombre VARCHAR(50) NOT NULL,
+	apellido VARCHAR(50) NOT NULL,
+	telefono VARCHAR(20) NOT NULL,
+	mail TEXT NOT NULL,
+	descripcion TEXT NOT NULL,
+	id_estado INT FOREIGN KEY (id_estado) REFERENCES estados_duda(id)
+)
+CREATE TABLE estados_duda (
+	id INT PRIMARY KEY IDENTITY(1,1),
+	nombre VARCHAR(30)
+
+)
 */
