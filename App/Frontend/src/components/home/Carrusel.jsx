@@ -12,11 +12,11 @@ const sliderConfiguration= {
   startAt: 0,
   type: "slider",
   breakpoints:{
-    700: {
-      perView: 1
+    1000:{
+      perView:1
     },
-    800:{
-        perView:3
+    2000:{
+      perView:2
     }
   }
 };
@@ -43,11 +43,11 @@ function Carrusel(){
             </li>
             <li className='glide__slide slider'>
                 <img src={imgCarrusel3} alt="" />
-
             </li>
             <li className='glide__slide slider'>
                 <img src={imgCarrusel4} alt="" />
             </li>
+
           </ul>
         </div>
         <div className="glide__bullets" data-glide-el="controls[nav]">

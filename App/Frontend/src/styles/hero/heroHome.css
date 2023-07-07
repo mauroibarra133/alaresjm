@@ -85,3 +85,15 @@
     cursor: pointer;
     transform: scale(1.1);
 }
+
+
+/* MediaQueries */
+
+@media only screen and (min-width:768px){
+    .hero-home__title1{
+        font-size: 3rem;
+    }
+    .hero-home__title2{
+        font-size: 4.5rem;
+    }
+}

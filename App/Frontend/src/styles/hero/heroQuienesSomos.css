@@ -31,6 +31,7 @@
     max-width: 900px;
     margin: 0 auto;
     margin-top: 4rem;
+    gap: 1.5rem;
 
 }
 
@@ -97,3 +98,28 @@
     line-height: normal;
 }
 
+@media only screen and (min-width: 768px){
+    .hero-quienessomos{
+        gap: 2rem;
+    }
+    .hero-quienessomos__title h2{
+        font-size: 2.2rem;
+    }
+    .hero-quienessomos__text p{
+        font-size: .9rem;
+    }
+    
+}
+
+@media only screen and (min-width:1024px){
+.hero-quienessomos__title h2{
+    font-size: 2.4rem;
+}
+    .hero-quienessomos__text p{
+        font-size: 1rem;
+    }
+    .hero-quienessomos__icons{
+        grid-template-columns: repeat(4, 80px); /* Define 2 columnas de igual tamaño */
+    
+    }
+}

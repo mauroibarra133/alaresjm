@@ -44,18 +44,20 @@
 .footer__info{
     width: 100%;
     padding: 0 1rem;
-    display: grid;
-    grid-column: repeat(1fr,3);
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
     justify-content: start;
-    gap: 2rem;
+    gap: 4rem;
 }
 
 .footer-info__wrapper{
     display: flex;
     flex-direction: column;
     align-items: start;
-    justify-content: center;
+    justify-content: start;
     gap: .7rem;
+    padding: 0 6rem 0 0 ;
 
 }
 
@@ -105,3 +107,20 @@
     font-family: 'Lato';
     font-size: .7rem;
 }
+
+@media only screen and (min-width:550px){
+    .footer{
+        height: auto;
+    }
+    .footer__info{
+        justify-content: space-between;
+        padding: 0 2rem;
+    }
+}
+
+@media only screen and (min-width:900px){
+    .footer__info{
+        justify-content: space-between;
+        padding-bottom: 2rem;
+    }
+    }

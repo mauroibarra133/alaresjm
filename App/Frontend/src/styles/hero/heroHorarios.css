@@ -13,15 +13,20 @@
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
+    align-items: center;
     padding: 1rem;
     max-width: 900px;
     margin: 0 auto;
+    gap: 2rem;
 }
 /* Sectiones */
 .hero-horarios__sections{
+    width: 100%;
     display: flex;
     flex-direction: column;
+    justify-content: center;
     gap: 2rem;
+    max-width: 700px;
 }
 
 
@@ -34,7 +39,7 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: flex-start;
+    align-items: center;
     gap: 0.625rem;
 }
 
@@ -44,6 +49,13 @@
     font-size: 1.3rem;
     font-weight: 400;
     text-transform: uppercase;
+    background: rgba(70, 69, 69, 0.1);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(3.7px);
+    -webkit-backdrop-filter: blur(9.7px);
+    border: 1px solid var(--gray-1);
+    padding: .5rem;
 }
 /* Section Container */
 .hero-horarios__section-container{
@@ -55,8 +67,14 @@
     align-items: center;
     border-radius: 1.6875rem;
     background: var(--orange-1);
+    max-width: 500px;
 }
 
+.hero-horarios__title-container{
+    width: 100%;
+    display: flex;
+    justify-content: start;
+}
 .hero-horarios-section__text p{
     color: var(--black-1);
     font-family: 'Amiri Bold';
@@ -100,4 +118,13 @@
     cursor: pointer;
     border: 1px solid black;
 
+}
+
+@media only screen and (min-width:768px){
+    .hero-horarios__title{
+        font-size: 1.5rem;
+            /* From https://css.glass */
+
+    }
+    
 }
