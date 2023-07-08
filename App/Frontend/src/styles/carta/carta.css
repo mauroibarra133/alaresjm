@@ -1,0 +1,186 @@
+@import '../variables.css';
+@import '../fonts.css';
+
+/* Container */
+.carta__container{
+    width: 100%;
+    min-height: calc(100vh - 3rem);
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+    padding: 1rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+/* Path */
+.carta-path__container{
+    display: flex;
+    justify-content: start;
+    width: 100%;
+}
+.carta__path{
+    color: #000;
+    font-family: 'Amiri';
+    font-size: 0.9375rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.5rem;
+    letter-spacing: 0.00188rem;
+}
+/* Tags */
+.carta__tags-container{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    overflow-x: hidden;
+}
+.carta__tags{
+    display: flex;
+    width: fit-content;
+    justify-content: start;
+    gap: .5rem;
+    padding: .6rem .3rem;
+    overflow-x: scroll;
+}
+
+.carta__tag{
+    display: flex;
+    max-width: 100px;
+    width: 100px;
+    padding: .2rem  .3rem;
+    justify-content: center;
+    align-items: center;
+    gap: 0.625rem;
+    flex: 1 0 0;
+    border-radius: 0.375rem;
+    border: 1px solid rgba(0, 0, 0, 0.40);
+    background: var(--black-2);
+}
+.carta__tag:hover{
+    background-color: var(--gray-1);
+    cursor: pointer;
+}
+.carta__tag.active{
+    background: #FFC692;
+
+}
+.carta__tag p{
+    color: #FFF;
+    text-align: center;
+    font-family: 'Lato';
+    font-size: 0.7rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 1.5rem;
+    letter-spacing: 0.00113rem;
+}
+
+/* Carta */
+.carta__carta{
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr;
+    justify-items: center;
+    gap: .4rem;
+    margin: 0 auto;
+}
+.carta__item{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 300px;
+}
+
+.carta__item-r1{
+    display: flex;
+    justify-content: space-between;
+}
+.carta__item-r2{
+    display: flex;
+}
+
+.carta__item-name{
+    color: #000;
+    text-align: center;
+    font-family: 'Lato Bold';
+    font-size: 0.875rem;
+}
+
+.carta__item-price{
+    color: #000;
+    font-family: 'Lato Black';
+    font-size: 0.875rem;
+    font-style: normal;
+    line-height: normal;
+}
+.carta__item-desc{
+    color: #000;
+    font-family: 'Lato';
+    font-size: 0.625rem;
+    font-style: normal;
+    font-weight: 300;
+    line-height: 1.5rem;
+    letter-spacing: 0.00125rem;
+}
+
+/* Buttons */
+.carta__buttons{
+    display: flex;
+    justify-content: center;
+    align-items: center;    
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+.carta__button{
+    display: flex;
+    padding: 0.2rem 1rem;
+    width: 100px;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    border-radius: 1rem;
+}
+.carta__button-vermas{
+    background: #FFC692;
+}
+.carta__button-vermas:hover{
+    background-color: var(--orange-2);
+    cursor: pointer;
+}
+.carta__button-carrito{
+    background: var(--black-2, #32353E);
+    display: flex;
+    gap: .4rem;
+}
+.carta__button-carrito:hover{
+    background-color: var(--gray-1);
+    cursor: pointer;
+}
+.carta__button p{
+    text-align: center;
+    font-family: 'Lato Black';
+    font-size: 0.5625rem;
+    line-height: 1.5rem;
+    letter-spacing: 0.00113rem;
+}
+.carta__button-vermas p{
+    color: #000;
+}    
+
+.carta__button-carrito p {
+    color: var(--white-1, #FFF);
+}
+.carta__button-carrito img{
+    height: 15px;
+    width: 15px;
+}
+@media only screen and (min-width:768px){
+.carta__carta{
+    padding-top: 2rem;
+    grid-template-columns: 1fr 1fr;
+    margin: 0;
+}
+
+}

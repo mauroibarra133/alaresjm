@@ -1,35 +1,45 @@
 import '../styles/nav.css'
 import {Link} from 'react-scroll';
+import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 
 // eslint-disable-next-line react/prop-types
 function Nav({clicked, handleClick}) {
-    return ( 
+    const location =useLocation()
+    const navigate =useNavigate()
+
+    function handleLocation(){
+        if(location.pathname != '/'){
+            navigate('/')
+        }
+        handleClick()
+    }
+ return ( 
 
         <div className={`nav ${clicked ? 'active' : ''}`}>
         <div className="nav__container" >
-            <Link to='#home' spy={true} smooth={true} duration={500} className='nav__item-container' onClick={handleClick}>
-                <div className='nav__item' onClick={handleClick} ><p>HOME</p></div>
+            <Link to='#home' spy smooth className='nav__item-container' >
+                <div className='nav__item' onClick={handleLocation} ><p>HOME</p></div>
             </Link>
-            <Link to='#quienes-somos' spy={true} smooth={true} duration={500} className='nav__item-container' onClick={handleClick}>
-                <div className='nav__item'><p>QUIENES SOMOS</p></div>
+            <Link to='#quienes-somos' spy smooth duration={500} className='nav__item-container'>
+                <div className='nav__item'  onClick={handleLocation} ><p>QUIENES SOMOS</p></div>
             </Link>
-            <Link to='#foodtruck' spy={true} smooth={true} duration={500} offset={-30} className='nav__item-container' onClick={handleClick}>
-                <div className='nav__item'><p>FOODTRUCK</p></div>
+            <Link to='#foodtruck'  spy smooth duration={500} offset={-30} className='nav__item-container'>
+                <div className='nav__item' onClick={handleLocation}><p>FOODTRUCK</p></div>
             </Link>
-            <Link to='/reservas' spy={true} smooth={true} duration={500} className='nav__item-container'>
-                <div className='nav__item'><p>RESERVAS</p></div>
-            </Link>
-            <Link to='/carta' spy={true} smooth={true} duration={500} className='nav__item-container'>
-                <div className='nav__item'><p>NUESTRA CARTA</p></div>
-            </Link>
-            <Link to='/clientes' spy={true} smooth={true} duration={500} className='nav__item-container'>
-                <div className='nav__item'><p>MEJORES CLIENTES</p></div>
-            </Link>
-            <Link to='/delivery' spy={true} smooth={true} duration={500} className='nav__item-container'>
-                <div className='nav__item'><p>DELIVERY</p></div>
-            </Link>
-            <Link to='#contacto' spy={true} smooth={true} duration={500} offset={-30} className='nav__item-container' onClick={handleClick}>
-                <div className='nav__item'><p>CONTACTO</p></div>
+            <NavLink to='/reservas' className='nav__item-container' >
+                <div className='nav__item' onClick={handleLocation}><p>RESERVAS</p></div>
+            </NavLink>
+            <NavLink to='/carta'  className='nav__item-container' >
+                <div className='nav__item' onClick={handleLocation}><p>NUESTRA CARTA</p></div>
+            </NavLink>
+            <NavLink to='/clientes'  className='nav__item-container' >
+                <div className='nav__item' onClick={handleLocation}><p>MEJORES CLIENTES</p></div>
+            </NavLink>
+            <NavLink to='/delivery'  className='nav__item-container' >
+                <div className='nav__item' onClick={handleLocation}><p>DELIVERY</p></div>
+            </NavLink>
+            <Link to='#contacto'  spy smooth duration={500} offset={-30} className='nav__item-container' >
+                <div className='nav__item' onClick={handleLocation}><p>CONTACTO</p></div>
             </Link>
         </div>
     </div>

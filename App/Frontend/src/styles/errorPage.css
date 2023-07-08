@@ -1,0 +1,79 @@
+@import './variables.css';
+@import './fonts.css';
+
+.error-page{
+    width: 100%;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+    
+}
+.error-page__container{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.error-page__numbers{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    height: fit-content;
+}
+
+.error-numbers{
+    color: var(--orange-1);
+    font-size: 8rem;
+    font-family: 'Post No Bills Colombo';
+    transform: translateY(5%);
+}
+
+.error-img{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+    gap: .2rem;
+}
+
+/* TExto */
+.error-page__title{
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    line-height: 3rem;
+    font-size: 2.8rem;
+    font-weight: 100;
+    letter-spacing: .0001rem;
+    color: var(--gray-1);
+}
+
+.error-page__msg{
+    padding-top: 2rem;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    color: var(--gray-2);
+
+}
+@media only screen and (min-width:1000px){
+
+    .error-page{
+        align-items: start;
+    }
+    .error-img{
+        height: 120px;
+    }
+    .error-numbers{
+        font-size: 10rem;
+    }
+    .error-page__title{
+        font-size: 3rem;
+    }
+    .error-page__msg{
+        font-size: 1.2rem;
+    }
+}

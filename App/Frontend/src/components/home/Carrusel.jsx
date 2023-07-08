@@ -36,12 +36,13 @@ function Carrusel(){
     };
   }, [windowSize]);
 
+    let sliderExist = Array.from(document.querySelectorAll(".glide"));
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    const slider = new Glide('.glide', sliderConfiguration);
-  useEffect(() => {
-    return () => slider.mount()
-  }, [slider])
-
+    sliderExist.forEach((item)=>{
+      const slider = new Glide(item, sliderConfiguration);
+      slider.mount()
+    })
+  
   return (
     <>
       {" "}
