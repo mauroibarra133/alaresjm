@@ -1,8 +1,25 @@
 import Footer from '../Footer'
 import '../../styles/carta/carta.css'
 import carritoImg from '../../assets/images/carrito.svg';
+import {getCategories} from '../../services/categorias.services.js'
+import { useEffect, useState} from 'react';
+import Tag from './Tag'
 
 function Carta() {
+
+    const [categorias,setCategorias] = useState([]);
+
+    useEffect(()=>{
+        async function buscarCategorias(){
+            getCategories().then(data => setCategorias(data));
+        }
+        buscarCategorias();
+        console.log(categorias);
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    },[]);
+    
+
     return ( 
         <>
             <div className='carta__container'>
@@ -10,24 +27,9 @@ function Carta() {
                
                 <div className='carta__tags-container'>
                     <div className="carta__tags">
-                        <div className="carta__tag active">
-                            <p>PIZZAS</p>
-                        </div>
-                        <div className="carta__tag">
-                            <p>BURGERS</p>
-                        </div>
-                        <div className="carta__tag">
-                            <p>PAPAS</p>
-                        </div>
-                        <div className="carta__tag">
-                            <p>TRAGOS</p>
-                        </div>
-                        <div className="carta__tag">
-                            <p>PASTA</p>
-                        </div>
-                        <div className="carta__tag">
-                            <p>PASTA</p>
-                        </div>
+                        {categorias && categorias.map((categ)=> (
+                            <Tag key={categ.id} nombre={categ.nombre}/>
+                        ))}
                     </div>
 
                 </div>

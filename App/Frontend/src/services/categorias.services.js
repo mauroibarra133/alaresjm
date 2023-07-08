@@ -1,9 +1,9 @@
 import axios from "axios";
 
-const url = 'http://localhost/categorias'
+const urlSource = 'http://localhost:4000/categorias'
 
-export default async function getCategories(){
-    const resp = await axios.get(url);
+export async function getCategories(){
+    const resp = await axios.get(urlSource);
     return resp.data
         
 }

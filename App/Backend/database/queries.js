@@ -16,6 +16,6 @@ export const  queries ={
         updateDudaById: 'UPDATE dudas SET nombre = @nombre, apellido = @apellido, telefono = @telefono,mail= @mail,descripcion = @descripcion, id_estado = @id_estado WHERE id = @id '
     },
     Categorias:{
-        getAllCategories: 'SELECT nombre FROM categorias_producto'
+        getAllCategories: 'SELECT * FROM categorias_producto'
     }
 }
