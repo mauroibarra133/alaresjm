@@ -14,6 +14,8 @@ export const  queries ={
         getDudaById: 'SELECT * FROM dudas WHERE id = @id',
         deleteDuda: 'DELETE FROM dudas WHERE id = @id ',
         updateDudaById: 'UPDATE dudas SET nombre = @nombre, apellido = @apellido, telefono = @telefono,mail= @mail,descripcion = @descripcion, id_estado = @id_estado WHERE id = @id '
+    },
+    Categorias:{
+        getAllCategories: 'SELECT nombre FROM categorias_producto'
     }
-
 }

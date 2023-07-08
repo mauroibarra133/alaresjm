@@ -3,7 +3,7 @@ import config from "./config";
 import productosRouter from './routes/productos'
 import dudasRouter from './routes/dudas'
 import cors from 'cors'
-
+import categoriasRouter from './routes/categorias'
 
 const app = express()
 
@@ -20,5 +20,6 @@ app.use(express.urlencoded({extended: false}))  // Para que pueda aceptar datos 
 
 app.use(productosRouter) //Uso la ruta de productos
 app.use(dudasRouter) //Uso la ruta de dudas
+app.use(categoriasRouter) //Uso la ruta de dudas
 
 export default app
