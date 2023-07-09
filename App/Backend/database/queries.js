@@ -1,7 +1,12 @@
 export const  queries ={
     Products: {
-        getAllProducts: 'SELECT * FROM productos',
-        getProductsByCategory: 'SELECT * FROM productos WHERE id_categoria = @id_categoria',
+        getAllProducts: 'SELECT p.id,p.nombre,p.descripcion,pre.precio FROM productos p JOIN precios pre ON pre.id_producto=p.id',
+        getProductsByCategory: `SELECT p.id,p.nombre,p.descripcion,
+                                (SELECT precio from precios WHERE id_producto=p.id AND id_tamaño=1) as precioChico,
+                                (SELECT precio from precios WHERE id_producto=p.id AND id_tamaño=3) as precioGrande
+                                FROM productos p
+                                WHERE p.id_categoria = @id_categoria
+                                `,
         addProduct: 'INSERT INTO productos (nombre, descripcion, id_categoria) VALUES (@nombre, @descripcion, @id_categoria)', 
         getProductById: 'SELECT * FROM productos WHERE id = @id',
         deleteProduct: 'DELETE FROM productos WHERE id = @id ',

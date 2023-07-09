@@ -1,11 +1,8 @@
 /* eslint-disable react/prop-types */
-// import  from '../../services/categorias.services'
 
-function Tag({nombre, isActive, onClick}) {
-
+function Tag({nombre, isActive, onClick }) {
     function handleClick(){
         onClick();
-
     }
 
     return ( 

@@ -2,19 +2,28 @@ import Footer from '../Footer'
 import '../../styles/carta/carta.css'
 import carritoImg from '../../assets/images/carrito.svg';
 import {getCategories} from '../../services/categorias.services.js'
+import {getProducts} from '../../services/productos.services.js'
 import { useEffect, useState} from 'react';
 import Tag from './Tag'
 
 function Carta() {
 
     const [categorias,setCategorias] = useState([]);
+    const [products,setProducts] = useState([]);
     const [activeTag, setActiveTag] = useState(null);
 
+    function generateUniqueKey() {
+        return Math.random().toString(36).substr(2, 9);
+      }
+
+      
     function handleTagClick(tagId){
         if(activeTag === tagId){
             return;
         }
       setActiveTag(tagId);
+      getProducts(tagId).then(data => setProducts(data))
+      console.log(products);
     }
     
     useEffect(()=>{
@@ -22,6 +31,11 @@ function Carta() {
             getCategories().then(data => setCategorias(data));
         }
         buscarCategorias();
+
+        async function buscarProductos(){
+            getProducts().then(data => setProducts(data));
+        }
+        buscarProductos();
     // eslint-disable-next-line react-hooks/exhaustive-deps
     },[]);
     return ( 
@@ -32,84 +46,33 @@ function Carta() {
                 <div className='carta__tags-container'>
                     <div className="carta__tags">
                         {categorias && categorias.map((categ)=> (
-                            <Tag key={categ.id} nombre={categ.nombre} isActive={activeTag===categ.id} onClick={() => handleTagClick(categ.id)}/>
+                            <Tag key={generateUniqueKey()} nombre={categ.nombre} isActive={activeTag===categ.id} onClick={() => handleTagClick(categ.id)}/>
                         ))}
                     </div>
 
                 </div>
+                <div className='carta__titulos-tamaños'>
+                        <p>Chicas / Grandes</p>
+                    </div>
+                    
                 <div className="carta__carta">
-                    <div className="carta__item">
-                        <div className="carta__item-r1">
-                            <p className="carta__item-name">MUZZA</p>
-                            <p className="carta__item-price">$2200</p>
+                    {activeTag != null && products.map(product => (
+                        <div className="carta__item" key={generateUniqueKey()}>
+                            <div className="carta__item-r1">
+                                <p className="carta__item-name">{product.nombre.toString().toUpperCase()}</p>
+                                <div className="carta__item-price">
+                                    <p>{product.precioChico ? "$"+product.precioChico : ''} </p>
+                                    <p>{`${product.precioGrande ? "$"+product.precioGrande : ''}`}</p>
+                                </div>
+                            </div>
+                            <div className="carta__item-r2">
+                                <p className="carta__item-desc">{product.descripcion.toString().toUpperCase()}</p>
+                            </div>
                         </div>
-                        <div className="carta__item-r2">
-                            <p className="carta__item-desc">QUESO MUZZARELLA</p>
-                        </div>
-                    </div>
-                    <div className="carta__item">
-                        <div className="carta__item-r1">
-                            <p className="carta__item-name">MUZZA</p>
-                            <p className="carta__item-price">$2200</p>
-                        </div>
-                        <div className="carta__item-r2">
-                            <p className="carta__item-desc">QUESO MUZZARELLA</p>
-                        </div>
-                    </div>
-                    <div className="carta__item">
-                        <div className="carta__item-r1">
-                            <p className="carta__item-name">MUZZA</p>
-                            <p className="carta__item-price">$2200</p>
-                        </div>
-                        <div className="carta__item-r2">
-                            <p className="carta__item-desc">QUESO MUZZARELLA</p>
-                        </div>
-                    </div>
-                    <div className="carta__item">
-                        <div className="carta__item-r1">
-                            <p className="carta__item-name">MUZZA</p>
-                            <p className="carta__item-price">$2200</p>
-                        </div>
-                        <div className="carta__item-r2">
-                            <p className="carta__item-desc">QUESO MUZZARELLA</p>
-                        </div>
-                    </div>
-                    <div className="carta__item">
-                        <div className="carta__item-r1">
-                            <p className="carta__item-name">MUZZA</p>
-                            <p className="carta__item-price">$2200</p>
-                        </div>
-                        <div className="carta__item-r2">
-                            <p className="carta__item-desc">QUESO MUZZARELLA</p>
-                        </div>
-                    </div>
-                    <div className="carta__item">
-                        <div className="carta__item-r1">
-                            <p className="carta__item-name">MUZZA</p>
-                            <p className="carta__item-price">$2200</p>
-                        </div>
-                        <div className="carta__item-r2">
-                            <p className="carta__item-desc">QUESO MUZZARELLA</p>
-                        </div>
-                    </div>
-                    <div className="carta__item">
-                        <div className="carta__item-r1">
-                            <p className="carta__item-name">MUZZA</p>
-                            <p className="carta__item-price">$2200</p>
-                        </div>
-                        <div className="carta__item-r2">
-                            <p className="carta__item-desc">QUESO MUZZARELLA</p>
-                        </div>
-                    </div>
-                    <div className="carta__item">
-                        <div className="carta__item-r1">
-                            <p className="carta__item-name">MUZZA</p>
-                            <p className="carta__item-price">$2200</p>
-                        </div>
-                        <div className="carta__item-r2">
-                            <p className="carta__item-desc">QUESO MUZZARELLA</p>
-                        </div>
-                    </div>
+                    ))}
+
+
+
                 </div>
                 <div className="carta__buttons">
                     <button className="carta__button-vermas carta__button"><p>VER MAS</p></button>
