@@ -4,6 +4,9 @@
     --orange-2: #fcb06d;
     --orange-1: #FFC692;
     --red-error:#621e1e;
+    --green-ok:#7EC173;
+    --green-1:#4e7848;
+    --green-2:#1c760e;
     --text-white: #fff;
     --gray-1: rgba(50, 53, 62,.48);
     --gray-2: #404040;
@@ -11,7 +14,10 @@
     --gray-4: #DDDDDD;
     --gray-5: #C6C7C9;
     --gray-6: #D1D1D1;
+    --overlay-1: rgba(0, 0, 0, 0.5);
+    --overlay-2:rgba(0, 0, 0, 0.3);
     --overlay-z: 1;
+    --modal-z: 10000;
     --header-z: 1000;
     --nav-z: 100;
     --normal-z: 10;

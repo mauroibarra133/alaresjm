@@ -2,11 +2,13 @@ import { useState } from 'react';
 import '../../../styles/hero/heroContactanos.css'
 import {useForm} from 'react-hook-form';
 import {AgregarDuda} from '../../../services/dudas.services'
+import Modal from '../../Modal';
 
 function HeroContactanos() {
 
     const { register, handleSubmit, formState: { errors }, reset } = useForm();
     const [clicked,setClicked] = useState(false);
+    const [submited,setSubmited] = useState(false);
 
     function handleClick(){
         if(Object.keys(errors).length == 0) setClicked(!clicked)
@@ -15,6 +17,10 @@ function HeroContactanos() {
     function onSubmit(data){
         AgregarDuda(data);
         reset();
+        setSubmited(true);
+        setTimeout(() => {
+            setSubmited(false)
+        }, 3000);
     }
     return ( 
         <div className={`hero-contactanos__container ${clicked ? "active" : ""}`} name='#contacto' >
@@ -66,6 +72,7 @@ function HeroContactanos() {
                 </div>
                 <input className={`hero-contactanos__button`} type='submit' value={'Enviar'} onClick={handleClick} />
             </form>
+            <Modal isSubmitted={submited} handleSubmit={setSubmited}/>
         </div>
      );
 }

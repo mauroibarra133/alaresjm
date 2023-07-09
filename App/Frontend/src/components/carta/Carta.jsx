@@ -4,6 +4,7 @@ import carritoImg from '../../assets/images/carrito.svg';
 import {getCategories} from '../../services/categorias.services.js'
 import {getProducts} from '../../services/productos.services.js'
 import { useEffect, useState} from 'react';
+import {NavLink} from 'react-router-dom'
 import Tag from './Tag'
 
 function Carta() {
@@ -41,7 +42,7 @@ function Carta() {
     return ( 
         <>
             <div className='carta__container'>
-                <div className="carta-path__container"> <p className='carta__path'>Home/ Carta</p></div>
+                <div className="carta-path__container"><NavLink to={'/'}><p className='carta__path'>Home </p></NavLink><span className='carta__path-span'>/Carta</span></div>
                
                 <div className='carta__tags-container'>
                     <div className="carta__tags">
@@ -61,8 +62,8 @@ function Carta() {
                             <div className="carta__item-r1">
                                 <p className="carta__item-name">{product.nombre.toString().toUpperCase()}</p>
                                 <div className="carta__item-price">
-                                    <p>{product.precioChico ? "$"+product.precioChico : ''} </p>
-                                    <p>{`${product.precioGrande ? "$"+product.precioGrande : ''}`}</p>
+                                    <p className={`${!product.precioChico ? 'inactive' : ''}`}>{product.precioChico ? "$"+product.precioChico : ''} </p>
+                                    <p className={`${!product.precioGrande ? 'inactive' : ''}`}>{`${product.precioGrande ? "$"+product.precioGrande : ''}`}</p>
                                 </div>
                             </div>
                             <div className="carta__item-r2">

@@ -29,6 +29,29 @@
     line-height: 1.5rem;
     letter-spacing: 0.00188rem;
 }
+.carta__path {
+    color: var(--orange-2);
+    font-size: 1rem;
+    font-family: 'Amiri';
+    font-size: 0.9375rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.5rem;
+    letter-spacing: 0.00188rem;
+}
+.carta__path:hover{
+    filter: brightness(.7);
+}
+.carta__path-span{
+    color: var(--gray-2);
+    font-size: 1rem;
+    font-family: 'Amiri';
+    font-size: 0.9375rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.5rem;
+    letter-spacing: 0.00188rem;
+}
 /* Tags */
 .carta__tags-container{
     width: 100%;
@@ -127,12 +150,19 @@
     max-width: 100px;
 }
 .carta__item-price p{
+    width: 100%;
     color: #000;
     font-family: 'Lato Black';
     font-size: 0.875rem;
     font-style: normal;
     line-height: normal;
     text-align: left;
+}
+.carta__item-price p:first-child{
+    color: var(--gray-2);
+}
+.carta__item-price p.inactive{
+    display: none;
 }
 .carta__item-desc{
     color: #000;
