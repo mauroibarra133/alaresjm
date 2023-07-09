@@ -8,18 +8,22 @@ import Tag from './Tag'
 function Carta() {
 
     const [categorias,setCategorias] = useState([]);
+    const [activeTag, setActiveTag] = useState(null);
 
+    function handleTagClick(tagId){
+        if(activeTag === tagId){
+            return;
+        }
+      setActiveTag(tagId);
+    }
+    
     useEffect(()=>{
         async function buscarCategorias(){
             getCategories().then(data => setCategorias(data));
         }
         buscarCategorias();
-        console.log(categorias);
-
     // eslint-disable-next-line react-hooks/exhaustive-deps
     },[]);
-    
-
     return ( 
         <>
             <div className='carta__container'>
@@ -28,7 +32,7 @@ function Carta() {
                 <div className='carta__tags-container'>
                     <div className="carta__tags">
                         {categorias && categorias.map((categ)=> (
-                            <Tag key={categ.id} nombre={categ.nombre}/>
+                            <Tag key={categ.id} nombre={categ.nombre} isActive={activeTag===categ.id} onClick={() => handleTagClick(categ.id)}/>
                         ))}
                     </div>
 

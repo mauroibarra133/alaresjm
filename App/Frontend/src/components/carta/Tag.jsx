@@ -1,17 +1,16 @@
 /* eslint-disable react/prop-types */
-import { useState} from 'react';
+// import  from '../../services/categorias.services'
 
-
-function Tag(props) {
-    const [categoryClicked,setCategoryClicked] = useState(false);
+function Tag({nombre, isActive, onClick}) {
 
     function handleClick(){
-        setCategoryClicked(!categoryClicked)
+        onClick();
+
     }
 
     return ( 
-        <div className={`carta__tag ${categoryClicked ? 'active' : ''}`}  onClick={handleClick}>
-            <p>{props.nombre}</p>
+        <div className={`carta__tag ${isActive ? 'active' : ''} `}  onClick={handleClick}>
+            <p>{nombre}</p>
         </div>
      );
 }
