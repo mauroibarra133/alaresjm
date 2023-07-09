@@ -3,7 +3,6 @@ import HeroQuienesSomos from './home/hero/HeroQuienesSomos';
 import HeroHorarios from './home/hero/HeroHorarios';
 import HeroFoodTruck from './home/hero/HeroFoodTruck';
 import HeroContactanos from './home/hero/HeroContactanos';
-import Footer from './Footer';
 import '../styles/home.css';
 
 function Home() {
@@ -14,7 +13,6 @@ function Home() {
             <HeroHorarios/>     
             <HeroFoodTruck/>      
             <HeroContactanos/> 
-            <Footer/>
         </div>
      );
 }

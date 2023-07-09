@@ -14,6 +14,11 @@
     max-width: 1200px;
     margin: 0 auto;
 }
+.carta__container a{
+    width: 100%;    
+    display: flex;
+    justify-content: start;
+}
 /* Path */
 .carta-path__container{
     display: flex;

@@ -1,11 +1,11 @@
-import Footer from '../Footer'
 import '../../styles/carta/carta.css'
 import carritoImg from '../../assets/images/carrito.svg';
 import {getCategories} from '../../services/categorias.services.js'
 import {getProducts} from '../../services/productos.services.js'
 import { useEffect, useState} from 'react';
-import {NavLink} from 'react-router-dom'
+import Path from '../Path';
 import Tag from './Tag'
+import { NavLink } from 'react-router-dom';
 
 function Carta() {
 
@@ -24,7 +24,6 @@ function Carta() {
         }
       setActiveTag(tagId);
       getProducts(tagId).then(data => setProducts(data))
-      console.log(products);
     }
     
     useEffect(()=>{
@@ -42,8 +41,7 @@ function Carta() {
     return ( 
         <>
             <div className='carta__container'>
-                <div className="carta-path__container"><NavLink to={'/'}><p className='carta__path'>Home </p></NavLink><span className='carta__path-span'>/Carta</span></div>
-               
+             <NavLink to={'/'}><Path pathPrev={'Home'} pathActual={'Carta'}/></NavLink>
                 <div className='carta__tags-container'>
                     <div className="carta__tags">
                         {categorias && categorias.map((categ)=> (
@@ -83,7 +81,6 @@ function Carta() {
                         </button>
                 </div>
             </div>
-            <Footer/>
             
         </>
 
