@@ -62,22 +62,9 @@
 }
 
 .hero-home__button{
-    display: flex;
-    width: fit-content;
-    height: 2rem;
-    padding: 0.5rem 1rem;
-    justify-content: center;
-    align-items: center;
-    border-radius: 2rem;
     background: var(--black-1);
     color: var(--text-white);
-    text-align: center;
-    font-size: 0.8125rem;
-    font-family: 'Amiri';
-    font-weight: 400;
-    line-height: 1.5rem;
-    letter-spacing: 0.00163rem;
-    text-transform: uppercase;
+
 }
 
 .hero-home__button:hover{

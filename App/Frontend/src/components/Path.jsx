@@ -1,9 +1,10 @@
-import '../styles/carta/carta.css'
+import '../styles/path.css'
+
 // eslint-disable-next-line react/prop-types
 function Path({pathPrev,pathActual}) {
     return ( 
 
-        <div className="carta-path__container"><p className='carta__path'>{pathPrev}</p><span className='carta__path-span'>{`/${pathActual}`}</span></div>
+        <div className="path__container"><p className='path'>{pathPrev}</p><span className='path-span'>{`/${pathActual}`}</span></div>
 
      );
 }

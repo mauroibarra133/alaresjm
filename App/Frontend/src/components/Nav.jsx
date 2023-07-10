@@ -23,6 +23,9 @@ function Nav({clicked, handleClick}) {
             <Link to='#quienes-somos' spy smooth duration={500} className='nav__item-container'>
                 <div className='nav__item'  onClick={handleLocation} ><p>QUIENES SOMOS</p></div>
             </Link>
+            <Link to='#horarios' spy smooth duration={500} className='nav__item-container'>
+                <div className='nav__item'  onClick={handleLocation} ><p>HORARIOS</p></div>
+            </Link>
             <Link to='#foodtruck'  spy smooth duration={500} offset={-30} className='nav__item-container'>
                 <div className='nav__item' onClick={handleLocation}><p>FOODTRUCK</p></div>
             </Link>

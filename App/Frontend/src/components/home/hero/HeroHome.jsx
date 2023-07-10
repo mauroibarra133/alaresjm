@@ -6,7 +6,7 @@ function HeroHome() {
             <div className="hero-home__text-container">
                 <h2 className="hero-home__title1">Conoce nuestras</h2>
                 <h2 className="hero-home__title2">Burgers</h2>
-                <button className="hero-home__button">
+                <button className="hero-home__button button">
                     Ver Carta
                 </button>
             </div>
