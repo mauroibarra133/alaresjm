@@ -1,10 +1,10 @@
 /* eslint-disable react/prop-types */
 import Path from '../Path';
 import '../../styles/delivery/delivery.css'
-// import plusIcon from '../../assets/images/plus.svg'
-// import minusIcon from '../../assets/images/minus.svg'
-import {useId} from 'react'
+import {useId, useEffect, useState} from 'react'
 import { useCart } from '../../hooks/useCart';
+import CartItem from './CartItem';
+
 function Delivery() {
  
 const clientNameId = useId();
@@ -13,54 +13,40 @@ const typePayId = useId();
 const amountEftvoId = useId();
 const ticketId = useId();
 
-const {cart,clearCart} = useCart();
+const { cart, clearCart } = useCart();
+const [total, setTotal] = useState(0);
+useEffect(() => {
+    const calculateTotal = () => {
+      const totalPrice = cart.reduce(
+        (accumulator, product) =>
+          accumulator + product.priceSelected * product.quantity,
+        0
+      );
+      setTotal(totalPrice);
+    };
+
+    calculateTotal();
+  }, [cart]);
 console.log(cart);
 
-// function generateUniqueKey() {
-//     return Math.random().toString(36).substr(2, 9);
-//   }
+function generateUniqueKey() {
+    return Math.random().toString(36).substr(2, 9);
+  }
 
-// const CartItem = ({nombre,precioChico,precioGrande,descripcion,quantity,addToCart})=>{
-
-//     const [priceSelected, setPriceSelected] = useState(true);
-//     const handlePriceSelected = (value) =>{
-//         setPriceSelected(value)
-//     }
-
-//     return (
-//         <div className="pedido__item">
-//         <div className="pedido__item-r1">
-//             <p className="pedido__name">{nombre.toUpperCase()}</p>
-//             <select name="" id="" className='pedido__item-selectsize'>
-//                 <option value="Grande" onClick={handlePriceSelected(true)}>Grande</option>
-//                 <option value="Chico" onClick={handlePriceSelected(false)}>Chico</option>
-//             </select>
-//             <p className="pedido__price">{priceSelected ? precioGrande : precioChico}</p>
-//         </div>
-//         <div className="pedido__item-r2">
-//         <p className="pedido__desc">{descripcion.toUpperCase()}</p>
-//             <div className="pedido__buttons">
-//                 <img src={plusIcon} alt=""  onClick={addToCart} />
-//                 <p>{quantity}</p>
-//                 <img src={minusIcon} alt="" />
-//             </div>
-//         </div>
-//     </div>
-
-//     )
-// }
     return ( 
         <div className="delivery__container">
             <Path pathPrev={'Home'} pathActual={Delivery.name}/>
             <div className="pedido__container">
                 <div className="pedido__items">
-                    {/* {cart.map(product => (
-                        <CartItem key={generateUniqueKey()} addToCart={()=> addToCart(product)} {...product}/>
-                    ))} */}
+                    {cart.map(product => (
+
+                        <CartItem key={generateUniqueKey()} {...product} />
+
+                    ))}
                 </div>
                 <div className="pedido__total">
                     <p className="pedido__total-name">TOTAL</p>
-                    <p className="pedido__total-price">$453465</p>
+                    <p className="pedido__total-price">{`$${total}`}</p>
                 </div>
                 <div className="pedido__button">
                 <button className='button' onClick={clearCart}>

@@ -16,8 +16,14 @@ export function CartProvider({children}){
         }
         //Si no está en el carrito
         setCart(prevState => (
-            [...prevState,{...product,quantity:1}]
+            [...prevState,{...product,quantity:1,priceSelected: product.precioGrande}]
         ))
+    }
+    const setPriceSelected = (id,newPriceSelected)=>{
+        const productInCartIndex = cart.findIndex(item => item.id === id)
+        const newCart = structuredClone(cart)
+            newCart[productInCartIndex].priceSelected = newPriceSelected
+            setCart(newCart)
     }
 
     const clearCart = ()=>{
@@ -37,7 +43,8 @@ export function CartProvider({children}){
             addToCart,
             clearCart,
             checkProductInCart,
-            removeProductFromCart
+            removeProductFromCart,
+            setPriceSelected
         }
         }>
         {children}
