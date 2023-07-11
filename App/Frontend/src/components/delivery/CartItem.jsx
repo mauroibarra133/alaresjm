@@ -20,7 +20,7 @@ function CartItem({id,nombre,precioGrande,precioChico,descripcion,quantity, pric
                 <option value="Grande" >Grande</option>
                 <option value="Chico">Chico</option>
             </select>
-            <p className="pedido__price">{priceSelected*quantity}</p>
+            <p className="pedido__price">{`$${priceSelected*quantity}`}</p>
         </div>
         <div className="pedido__item-r2">
         <p className="pedido__desc">{descripcion.toUpperCase()}</p>

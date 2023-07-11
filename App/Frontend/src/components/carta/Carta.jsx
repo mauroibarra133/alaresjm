@@ -7,14 +7,15 @@ import Path from '../Path';
 import Tag from './Tag'
 import { NavLink } from 'react-router-dom';
 import { useCart } from '../../hooks/useCart';
+import CartaInitial from './CartaInitial';
 
 function Carta() {
 
     const [categorias,setCategorias] = useState([]);
     const [products,setProducts] = useState([]);
     const [activeTag, setActiveTag] = useState(null);
-    const {cart,addToCart, checkProductInCart, removeProductFromCart} = useCart();
-    console.log(cart);
+    const {addToCart, checkProductInCart, removeProductFromCart} = useCart();
+
     function generateUniqueKey() {
         return Math.random().toString(36).substr(2, 9);
       }
@@ -58,8 +59,17 @@ function Carta() {
                     </div>
                  
                  {/* Podria mejorarlo haciendo un Componente y mejorar el filtrado */}
-                <div className="carta__carta">
-                    {activeTag != null && products.map(product => {
+                <div className={`carta__carta ${activeTag == null ? 'carta__carta--initial' : ''}`}>
+                    {activeTag == null ? 
+                    <CartaInitial products={products} 
+                    checkProductInCart={checkProductInCart} 
+                    removeProductFromCart={removeProductFromCart} 
+                    addToCart={addToCart} 
+                    generateUniqueKey={generateUniqueKey} 
+                    carritoImg={carritoImg}
+                    categorias={categorias}/> : 
+
+                    products.map(product => {
                         const isProductInCart = checkProductInCart(product);
                         return (
                         <div className="carta__item" key={generateUniqueKey()}>
@@ -82,16 +92,12 @@ function Carta() {
                             </div>
                         </div>
                         )})}
-
-
-
                 </div>
                 <div className="carta__buttons">
-                    <button className="carta__button-vermas carta__button button"><p>VER MAS</p></button>
-                    <button className="carta__button-carrito carta__button button" >
+                    <NavLink to={'/delivery'}><button className="carta__button-carrito carta__button button" >
                         <p>CARRITO</p>
                         <img src={carritoImg} alt="" />
-                        </button>
+                        </button></NavLink>
                 </div>
             </div>
             

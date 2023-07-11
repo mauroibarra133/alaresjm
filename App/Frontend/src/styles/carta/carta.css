@@ -78,6 +78,7 @@
     gap: 1rem;
     margin: 0 auto;
 }
+
 .carta__titulos-tamaños{
     width: 100%;
     display: flex;
@@ -218,6 +219,39 @@
     height: 15px;
     width: 15px;
 }
+
+
+/* Carta INICIAL */
+.carta__carta--initial{
+    gap: 2rem;
+}
+.carta-item__wrapper{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin: 0 auto;
+    height: fit-content;
+}
+.carta-items__wrapper{
+    display: flex;
+    flex-direction: column;
+    gap: .6rem;
+
+}
+.carta-item__title{
+    display: flex;
+    justify-content: start;
+    width: 100%;
+    gap: .2rem;
+    margin: 0 auto;
+    max-width: 300px;
+}
+.carta-item__title h2 {
+    color: var(--orange-1);
+    text-transform: uppercase;
+    font-family: 'Amiri Bold';
+}
+
 @media only screen and (min-width:500px){
     .carta__item{
         max-width: 400px;
@@ -232,14 +266,25 @@
         max-width: none;
         line-height:1rem;
     }
+    .carta-item__title{
+        max-width: 400px;
+    }
+
 }
 
 /* Medias */
 @media only screen and (min-width:768px){
 .carta__carta{
     padding-top: 2rem;
-    grid-template-columns: 1fr 1fr;
-    margin: 0;
+}
+.carta-item__title{
+    max-width: none;
+    width: 100%;
+    max-width: 1000px;
+}
+.carta-items__wrapper{
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
 }
 .carta__titulos-tamaños{
     display: grid;

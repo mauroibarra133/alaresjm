@@ -4,6 +4,7 @@ import '../../styles/delivery/delivery.css'
 import {useId, useEffect, useState} from 'react'
 import { useCart } from '../../hooks/useCart';
 import CartItem from './CartItem';
+import CartVacio from './cartVacio';
 
 function Delivery() {
  
@@ -38,7 +39,7 @@ function generateUniqueKey() {
             <Path pathPrev={'Home'} pathActual={Delivery.name}/>
             <div className="pedido__container">
                 <div className="pedido__items">
-                    {cart.map(product => (
+                    {cart.length === 0 ? <CartVacio/> : cart.map(product => (
 
                         <CartItem key={generateUniqueKey()} {...product} addToCart={()=>addToCart(product)} removeProductFromCart={()=>removeProductFromCart(product)}/>
 
