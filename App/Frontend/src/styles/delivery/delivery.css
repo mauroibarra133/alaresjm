@@ -118,7 +118,27 @@ select option{
     color: var(--orange-2);
 
 }
+/* NOta */
 
+.pedido__note-container{
+    width: 100%;
+    max-width: 500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    gap: 1rem;
+}
+
+.pedido__note-container label{
+    font-family: 'Lato';
+    text-transform: uppercase;
+    font-size: .8rem;
+}
+.pedido__note-container textarea{
+    border-radius: 10px;
+    padding: .4rem;
+}
 /* Pago Datos */
 .pedido__form{
     width: 100%;

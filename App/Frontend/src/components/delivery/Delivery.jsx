@@ -13,6 +13,9 @@ const clientDirectionId = useId();
 const typePayId = useId();
 const amountEftvoId = useId();
 const ticketId = useId();
+const notaId = useId();
+const deliveryTypeId = useId();
+
 
 const { cart, clearCart, addToCart, removeProductFromCart } = useCart();
 const [total, setTotal] = useState(0);
@@ -28,7 +31,6 @@ useEffect(() => {
 
     calculateTotal();
   }, [cart]);
-console.log(cart);
 
 function generateUniqueKey() {
     return Math.random().toString(36).substr(2, 9);
@@ -55,14 +57,22 @@ function generateUniqueKey() {
                 </button>
                 </div>
             </div>
+            <div className="pedido__note-container">
+                <label htmlFor={notaId}>Nota de pedido</label>
+                <textarea name={notaId} id={notaId} cols="30" rows="5" placeholder='Por ej: quiero la hamburguesa sin lechuga y las papas sin panceta'></textarea>
+            </div>
             <div className="pedido__form">
                 <div className="form__row">
                     <label htmlFor={clientNameId}>A nombre de</label>
-                    <input type="text" id={clientNameId} />
+                    <input type="text" id={clientNameId} required/>
+                </div>
+                <div className="form__row">
+                    <label htmlFor={deliveryTypeId}>Tipo Entrega</label>
+                    <input type="text" id={deliveryTypeId} required/>
                 </div>
                 <div className="form__row">
                     <label htmlFor={clientDirectionId}>Direccion</label>
-                    <input type="text" id={clientDirectionId}/>
+                    <input type="text" id={clientDirectionId} />
                 </div>
                 <div className="form__row">
                     <label htmlFor={typePayId}>Tipo Pago</label>

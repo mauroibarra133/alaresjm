@@ -276,6 +276,12 @@
 @media only screen and (min-width:768px){
 .carta__carta{
     padding-top: 2rem;
+    grid-template-columns: repeat(2,1fr);
+}
+.carta__carta--initial{
+    padding-top: 2rem;
+    display: flex;
+    flex-direction: column;
 }
 .carta-item__title{
     max-width: none;
