@@ -13,11 +13,13 @@ export function CartProvider({children}){
             const newCart = structuredClone(cart)
             newCart[productInCartIndex].quantity += 1
             setCart(newCart)
-        }
-        //Si no está en el carrito
-        setCart(prevState => (
+        }else{
+            //Si no está en el carrito
+            setCart(prevState => (
             [...prevState,{...product,quantity:1,priceSelected: product.precioGrande}]
         ))
+        }
+
     }
     const setPriceSelected = (id,newPriceSelected)=>{
         const productInCartIndex = cart.findIndex(item => item.id === id)

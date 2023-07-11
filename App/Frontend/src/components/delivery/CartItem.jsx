@@ -3,13 +3,13 @@ import plusIcon from '../../assets/images/plus.svg'
 import minusIcon from '../../assets/images/minus.svg'
 import { useCart } from '../../hooks/useCart';
 
-function CartItem({id,nombre,precioGrande,precioChico,descripcion,quantity, priceSelected}){
+function CartItem({id,nombre,precioGrande,precioChico,descripcion,quantity, priceSelected, addToCart}){
 
     const {setPriceSelected} = useCart();
     let selectedValue;
     const handleSelectChange = (event) => {
          selectedValue = event.target.value;
-        setPriceSelected(id,selectedValue === 'Grande' ? precioGrande*quantity : precioChico*quantity);
+        setPriceSelected(id,selectedValue === 'Grande' ? precioGrande : precioChico);
       };
 
     return (
@@ -20,12 +20,12 @@ function CartItem({id,nombre,precioGrande,precioChico,descripcion,quantity, pric
                 <option value="Grande" >Grande</option>
                 <option value="Chico">Chico</option>
             </select>
-            <p className="pedido__price">{priceSelected}</p>
+            <p className="pedido__price">{priceSelected*quantity}</p>
         </div>
         <div className="pedido__item-r2">
         <p className="pedido__desc">{descripcion.toUpperCase()}</p>
             <div className="pedido__buttons">
-                <img src={plusIcon} alt=""/>
+                <img src={plusIcon} alt="" onClick={addToCart}/>
                 <p>{quantity}</p>
                 <img src={minusIcon} alt="" />
             </div>
