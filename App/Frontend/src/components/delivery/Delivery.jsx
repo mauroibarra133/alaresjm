@@ -13,7 +13,7 @@ const typePayId = useId();
 const amountEftvoId = useId();
 const ticketId = useId();
 
-const { cart, clearCart, addToCart } = useCart();
+const { cart, clearCart, addToCart, removeProductFromCart } = useCart();
 const [total, setTotal] = useState(0);
 useEffect(() => {
     const calculateTotal = () => {
@@ -40,7 +40,7 @@ function generateUniqueKey() {
                 <div className="pedido__items">
                     {cart.map(product => (
 
-                        <CartItem key={generateUniqueKey()} {...product} addToCart={()=>addToCart(product)}/>
+                        <CartItem key={generateUniqueKey()} {...product} addToCart={()=>addToCart(product)} removeProductFromCart={()=>removeProductFromCart(product)}/>
 
                     ))}
                 </div>

@@ -3,7 +3,7 @@ import plusIcon from '../../assets/images/plus.svg'
 import minusIcon from '../../assets/images/minus.svg'
 import { useCart } from '../../hooks/useCart';
 
-function CartItem({id,nombre,precioGrande,precioChico,descripcion,quantity, priceSelected, addToCart}){
+function CartItem({id,nombre,precioGrande,precioChico,descripcion,quantity, priceSelected, addToCart, removeProductFromCart}){
 
     const {setPriceSelected} = useCart();
     let selectedValue;
@@ -27,7 +27,7 @@ function CartItem({id,nombre,precioGrande,precioChico,descripcion,quantity, pric
             <div className="pedido__buttons">
                 <img src={plusIcon} alt="" onClick={addToCart}/>
                 <p>{quantity}</p>
-                <img src={minusIcon} alt="" />
+                <img src={minusIcon} alt=""  onClick={removeProductFromCart}/>
             </div>
         </div>
     </div>

@@ -35,10 +35,18 @@ export function CartProvider({children}){
     const checkProductInCart = product =>{
         return cart.some(item => item.id === product.id)
     }
-
+    
     const removeProductFromCart = product =>{
-        return setCart(prevState => prevState.filter(item => item.id !== product.id))
+        if(product.quantity>1){
+        const productInCartIndex = cart.findIndex(item => item.id === product.id)
+            const newCart = structuredClone(cart)
+            newCart[productInCartIndex].quantity -= 1
+            setCart(newCart)
+        }else{
+            setCart(prevState => prevState.filter(item => item.id !== product.id))
+        }
     }
+    
     return(
         <CartContext.Provider value={
             {cart,
