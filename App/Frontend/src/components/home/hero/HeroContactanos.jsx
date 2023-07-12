@@ -11,7 +11,11 @@ function HeroContactanos() {
     const phoneId = useId();
     const mailId = useId();
     const dudaId = useId();
-    const { register, handleSubmit, formState: { errors }, reset } = useForm();
+    const { register, handleSubmit, formState, reset } = useForm({
+        mode: 'onBlur',
+        
+    });
+    const {errors, isValid, isDirty} = formState;
     const [clicked,setClicked] = useState(false);
     const [submited,setSubmited] = useState(false);
 
@@ -71,11 +75,12 @@ function HeroContactanos() {
                                 placeholder='Ej: Como contrato el servicio de foodtruck?' {...register('descripcion', {required:true, minLength:10})}></textarea>
                         </div>
                         {errors.descripcion?.type === 'required' && <p role="alert">La duda es requerida</p>}
+                        {errors.descripcion?.type === 'minLength' && <p role="alert">Debe ser mayor a 10 caracteres</p>}
                     </div>
 
 
                 </div>
-                <button className={`hero-contactanos__button button`} type='submit'  onClick={handleClick}>Enviar</button>
+                <button className={`hero-contactanos__button button`} type='submit'  onClick={handleClick} disabled={!isDirty || !isValid}>Enviar</button>
             </form>
             <Modal isSubmitted={submited} handleSubmit={setSubmited}/>
         </div>

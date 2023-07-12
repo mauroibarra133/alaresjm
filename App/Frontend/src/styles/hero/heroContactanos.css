@@ -132,6 +132,11 @@
     cursor: pointer;
     border: 1px solid black;
 }
+.button:disabled {
+    /* Estilos aplicados cuando el botón está deshabilitado */
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
 
 /* Placeholder */
 *::placeholder{
