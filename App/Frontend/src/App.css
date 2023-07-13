@@ -21,3 +21,31 @@
     cursor: pointer;
     transform: scale(1.1);
 }
+
+.button:disabled {
+    /* Estilos aplicados cuando el botón está deshabilitado */
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+input:disabled{
+    opacity: 0.2;
+    background-color: var(--gray-1);
+    cursor: not-allowed;
+}
+input:disabled{
+    opacity: 0.2;
+    background-color: var(--gray-1);
+    cursor: not-allowed;
+}
+div.disabled{
+    opacity: 0.4;
+    border: 2px dashed black;
+    cursor: not-allowed;
+}
+label.disabled{
+        opacity: 0.6;
+        color: black;
+        cursor: not-allowed;
+    
+}

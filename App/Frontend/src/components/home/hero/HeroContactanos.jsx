@@ -42,16 +42,19 @@ function HeroContactanos() {
                     <div className="hero-contactanos__input">
                         <div>
                             <label htmlFor={nameId}>Nombre</label>
-                            <input id={nameId} type="text" placeholder='Ej: Juan' {...register('nombre', { pattern: /^[A-Za-z]+$/i, required:true,maxLength:50,minLength:2 })} />
+                            <input id={nameId} type="text" placeholder='Ej: Juan' {...register('nombre', { pattern: /^[A-Za-z\s]+$/, required:true,maxLength:50,minLength:2 })} />
                         </div>
                         {errors.nombre?.type === 'required' && <p role="alert">Nombre es requerido</p>}
+                        {errors.nombre?.type === 'pattern' && <p role="alert">Solo deben incluir letras</p>}
                     </div>
                     <div className="hero-contactanos__input">
                         <div>
                             <label htmlFor={surnameId}>Apellido</label>
-                            <input id={surnameId} type="text" placeholder='Ej: Gonzales'{...register('apellido',{ pattern: /^[A-Za-z]+$/i, required:true,maxLength:50,minLength:2})}/>
+                            <input id={surnameId} type="text" placeholder='Ej: Gonzales'{...register('apellido',{ pattern: /^[A-Za-z\s]+$/, required:true,maxLength:50,minLength:2})}/>
                         </div>
                         {errors.apellido?.type === 'required' && <p role="alert">El apellido es requerido</p>}
+                        {errors.apellido?.type === 'pattern' && <p role="alert">Solo deben incluir letras</p>}
+
         
                     </div>
                     <div className="hero-contactanos__input">
@@ -60,6 +63,7 @@ function HeroContactanos() {
                             <input id={phoneId} type="tel" placeholder='Ej: 3525-6491324'{...register('telefono',{ pattern: /^[0-9]+$/ , required:true,minLength:6})} />
                         </div>
                         {errors.telefono?.type === 'required' && <p role="alert">El numero es requerido</p>}
+                        {errors.telefono?.type === 'pattern' && <p role="alert">Solo debe incluir numeros</p>}
                     </div>
                     <div className="hero-contactanos__input">
                         <div>
@@ -77,8 +81,6 @@ function HeroContactanos() {
                         {errors.descripcion?.type === 'required' && <p role="alert">La duda es requerida</p>}
                         {errors.descripcion?.type === 'minLength' && <p role="alert">Debe ser mayor a 10 caracteres</p>}
                     </div>
-
-
                 </div>
                 <button className={`hero-contactanos__button button`} type='submit'  onClick={handleClick} disabled={!isDirty || !isValid}>Enviar</button>
             </form>

@@ -35,7 +35,6 @@ export function CartProvider({children}){
     const checkProductInCart = product =>{
         return cart.some(item => item.id === product.id)
     }
-    
     const removeProductFromCart = product =>{
         if(product.quantity>1){
         const productInCartIndex = cart.findIndex(item => item.id === product.id)

@@ -171,7 +171,22 @@ select option{
     padding: .3rem 0;
     padding-left: .4rem;
 }
-
+.input-error{
+    text-align: end;
+    color: var(--red-error-2);
+    font-family: 'Amiri Bold';
+    font-size: .8rem;
+    z-index: var(--normal-z);
+    line-height: .7rem;
+    padding: .2rem 0;
+    max-width: 170px;
+}
+.input-error-file{
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+    margin: 0 auto;
+}
 /* Pago */
 
 .pedido__pago{
@@ -201,10 +216,12 @@ select option{
     flex-direction: column;
     color: var(--gray-1);
 }
+/* Boton */
 .pedido__button{
     width: 100%;
     display: flex;
     justify-content: center;
+    padding-bottom: 2rem;
 }
 .pedido__button button{
     background: var(--black-1);
