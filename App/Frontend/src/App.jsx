@@ -7,12 +7,13 @@ import {BrowserRouter, Route, Routes} from 'react-router-dom'
 import Delivery from './components/delivery/Delivery'
 import Footer from './components/Footer'
 import {CartProvider} from './context/cart';
-
+import ScrollToTop from './components/helpers/ScrollToTop'
 function App() {
 
   return (
     <BrowserRouter>
     <CartProvider>
+      <ScrollToTop />
       <Header/>
       <Routes>
         <Route path='/' element={<Home/>}></Route>
