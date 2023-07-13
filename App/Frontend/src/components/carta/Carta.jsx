@@ -1,5 +1,4 @@
 import '../../styles/carta/carta.css'
-import carritoImg from '../../assets/images/carrito.png';
 import {getCategories} from '../../services/categorias.services.js'
 import {getProducts} from '../../services/productos.services.js'
 import { useEffect, useState} from 'react';
@@ -9,6 +8,8 @@ import { NavLink } from 'react-router-dom';
 import { useCart } from '../../hooks/useCart';
 import CartaInitial from './CartaInitial';
 import { generateUniqueKey } from '../../utils/keys';
+import carritoImg from '../../assets/images/carrito.png'
+import CartaItem from './CartaItem';
 
 function Carta() {
 
@@ -62,32 +63,16 @@ function Carta() {
                     checkProductInCart={checkProductInCart} 
                     removeProductFromCart={removeProductFromCart} 
                     addToCart={addToCart} 
-                    generateUniqueKey={generateUniqueKey} 
-                    carritoImg={carritoImg}
-                    categorias={categorias}/> : 
+                    categorias={categorias}/> 
+                    
+                    : 
 
                     products.map(product => {
                         const isProductInCart = checkProductInCart(product);
                         return (
-                        <div className="carta__item" key={generateUniqueKey()}>
-                            <div className="carta__item-r1">
-                                <div className='carta__name-price'><p className="carta__item-name">{product.nombre.toString().toUpperCase()}</p></div>
-                                <div className="carta__prices">
-                                    <div className='carta__img' 
-                                        style={{backgroundColor: isProductInCart ? '#fb9999' : '#E8E8E8'}}
-                                        onClick={()=> isProductInCart ? removeProductFromCart(product) :addToCart(product)}>
-                                        <img src={carritoImg} className={'carta__icono-carrito'} alt="" /></div>
-                                    <div className="carta__item-price">
-                                        <p className={`${!product.precioChico ? 'inactive' : ''}`}>{product.precioChico ? "$"+product.precioChico : ''} </p>
-                                        <p className={`${!product.precioGrande ? 'inactive' : ''}`}>{`${product.precioGrande ? "$"+product.precioGrande : ''}`}</p>
-                                    </div>
-                                </div>
-
-                            </div>
-                            <div className="carta__item-r2">
-                                <p className="carta__item-desc">{product.descripcion.toString().toUpperCase()}</p>
-                            </div>
-                        </div>
+                            <CartaItem key={generateUniqueKey()} isProductInCart={isProductInCart} 
+                            removeProductFromCart={removeProductFromCart} addToCart={addToCart}
+                            product={product}/>
                         )})}
                 </div>
                 <div className="carta__buttons">
