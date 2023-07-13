@@ -8,6 +8,7 @@ import Tag from './Tag'
 import { NavLink } from 'react-router-dom';
 import { useCart } from '../../hooks/useCart';
 import CartaInitial from './CartaInitial';
+import { generateUniqueKey } from '../../utils/keys';
 
 function Carta() {
 
@@ -15,10 +16,6 @@ function Carta() {
     const [products,setProducts] = useState([]);
     const [activeTag, setActiveTag] = useState(null);
     const {addToCart, checkProductInCart, removeProductFromCart} = useCart();
-
-    function generateUniqueKey() {
-        return Math.random().toString(36).substr(2, 9);
-      }
 
     function handleTagClick(tagId){
         if(activeTag === tagId){

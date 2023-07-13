@@ -2,7 +2,7 @@
 @import '../fonts.css';
 
 /* Container */
-.delivery__container{
+.delivery__container, .form-container{
     width: 100%;
     min-height: 100vh;
     height: auto;
