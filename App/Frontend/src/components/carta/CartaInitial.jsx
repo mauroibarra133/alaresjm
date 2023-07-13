@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import '../../styles/carta/carta.css'
 import CartaItem from './CartaItem';
-import { generateUniqueKey } from '../../utils/keys';
+import { generateUniqueKey } from '../../utils/functions';
 
 function CartaInitial({products,checkProductInCart, removeProductFromCart,addToCart, categorias}) {
     

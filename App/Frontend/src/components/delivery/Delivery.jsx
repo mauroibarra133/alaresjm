@@ -6,7 +6,7 @@ import { useCart } from '../../hooks/useCart';
 import CartItem from './CartItem';
 import CartVacio from './cartVacio';
 import FormDelivery from './FormDelivery';
-import { generateUniqueKey } from '../../utils/keys';
+import { generateUniqueKey } from '../../utils/functions';
 
 function Delivery() {
 

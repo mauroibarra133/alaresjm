@@ -7,7 +7,7 @@ import Tag from './Tag'
 import { NavLink } from 'react-router-dom';
 import { useCart } from '../../hooks/useCart';
 import CartaInitial from './CartaInitial';
-import { generateUniqueKey } from '../../utils/keys';
+import { generateUniqueKey } from '../../utils/functions';
 import carritoImg from '../../assets/images/carrito.png'
 import CartaItem from './CartaItem';
 
