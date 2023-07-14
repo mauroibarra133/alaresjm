@@ -1,7 +1,7 @@
 import '../styles/modal.css'
 
 // eslint-disable-next-line react/prop-types
-function Modal({isSubmitted, handleSubmit}) {
+function Modal({isSubmitted, handleSubmit, msg}) {
     return ( 
         <>
         {isSubmitted &&
@@ -12,7 +12,7 @@ function Modal({isSubmitted, handleSubmit}) {
             </div>
             <div className="modal__body">
                 <div className="modal__msg">
-                    <p>Tu duda y/o inquietud se ha enviado correctamente!</p>
+                    <p>{msg}</p>
                 </div>
                 <button className="modal__button" onClick={()=>handleSubmit(!isSubmitted)}>Aceptar</button>
             </div>

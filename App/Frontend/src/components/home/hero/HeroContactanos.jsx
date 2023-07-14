@@ -84,7 +84,7 @@ function HeroContactanos() {
                 </div>
                 <button className={`hero-contactanos__button button`} type='submit'  onClick={handleClick} disabled={!isDirty || !isValid}>Enviar</button>
             </form>
-            <Modal isSubmitted={submited} handleSubmit={setSubmited}/>
+            <Modal isSubmitted={submited} handleSubmit={setSubmited} msg={"Tu duda y/o inquietud se ha enviado correctamente!"}/>
         </div>
      );
 }

@@ -8,38 +8,48 @@ import CartVacio from './cartVacio';
 import FormDelivery from './FormDelivery';
 import { generateUniqueKey } from '../../utils/functions';
 import { initMercadoPago } from '@mercadopago/sdk-react'
+import Modal from '../Modal';
 import axios from 'axios';
-
-  
 
 function Delivery() {
 
 initMercadoPago("TEST-803ddd42-4075-4c56-934e-c037302ed0d6");
-const { cart, clearCart, addToCart, removeProductFromCart } = useCart();
+
+const { cart, clearCart, addToCart, removeProductFromCart, modifyCart } = useCart();
 const [total, setTotal] = useState(0);
 const [preferenceId, setPreferenceId] = useState(null);
+const [isOrderedEft, setIsOrderedEft] = useState(false)
 
-const createPreference = async (nombreCliente,direccionCliente) => {
-    try {
-      const response = await axios.post("http://localhost:4000/create_preference", {
-        title: 'Pedido',
-        price: total,
-        quantity: 1,
-        name: nombreCliente,
-        address: direccionCliente
-      });
-      console.log(response);
-      const { id} = response.data;
-      return {id: id};
-    } catch (error) {
-      console.log(error);
-    }
-  };
+const createPreference = async ({nombreCliente, direccionCliente, tipoPago, tipoEntrega, notaPedido}) => {
+  try {
+    const response = await axios.post("http://localhost:4000/create_preference", {
+      items: modifyCart(cart),
+      name: nombreCliente,
+      address: direccionCliente,
+      extra: {
+        tipoPago: tipoPago,
+        tipoEntrega: tipoEntrega,
+        notaPedido: notaPedido
+      }
+    });
+    console.log(response.data.response);
+    return response.data.response;
+  } catch (error) {
+    console.log(error);
+  }
+};
 
-  const handleBuy = async (nombreCliente,direccionCliente ) => {
-    const {id} = await createPreference(nombreCliente,direccionCliente);
-    if (id) {
-      setPreferenceId(id);
+const handleOrder = async (pedido) => {
+    //Creo la preferencia de MP
+    if(pedido.tipoPago === "transferencia"){
+          const {id} = await createPreference(pedido);
+      if (id) {
+        setPreferenceId(id);
+      }
+    }else{
+      //SI es efectivo limpio el carrito y muestro un modal
+      setIsOrderedEft(true)
+      clearCart();
     }
   };
 useEffect(() => {
@@ -55,15 +65,22 @@ useEffect(() => {
     calculateTotal();
   }, [cart]);
 
+  useEffect(() => {
+    const searchParams = new URLSearchParams(window.location.search);
+    const status = searchParams.get('collection_status');
+    if(status) clearCart()
+    // Hacer algo con los parámetros obtenidos
+  }, []);
+  
+
 const onSubmit = (data)=>{
-    // setDataForm(data);
     const pedido = {
         ...data,
         carritoItems: cart,
         total: total,
     }
     console.log(pedido);
-    handleBuy(pedido.nombreCliente, pedido.direccionCliente);
+    handleOrder(pedido);
 }
 
 
@@ -89,7 +106,8 @@ const onSubmit = (data)=>{
                 </button>
                 </div>
             </div>
-            <FormDelivery onSubmit={onSubmit} total={total} preferenceId={preferenceId}/>
+            <FormDelivery onSubmit={onSubmit} total={total} preferenceId={preferenceId} isOrderedEft={isOrderedEft}/>
+            <Modal isSubmitted={isOrderedEft} handleSubmit={setIsOrderedEft} msg={"Tu pedido ha sido realizado correctamente!"}/>
         </div>
         </>
      );

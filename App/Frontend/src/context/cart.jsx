@@ -52,7 +52,24 @@ export function CartProvider({children}){
             setCart(newCart)
         }
     }
-    
+
+    function modifyCart(cart){
+        let arrayItems = [];
+        
+        for (let i = 0; i < cart.length; i++) {
+          let item = {
+            title: cart[i].nombre,
+            description: cart[i].descripcion,
+            quantity: cart[i].quantity,
+            unit_price: cart[i].priceSelected,
+            currency_id: "ARS"
+          }  
+           arrayItems.push(item)
+        }
+        return arrayItems
+        
+        }
+
     return(
         <CartContext.Provider value={
             {cart,
@@ -60,7 +77,8 @@ export function CartProvider({children}){
             clearCart,
             checkProductInCart,
             removeProductFromCart,
-            setPriceSelected
+            setPriceSelected,
+            modifyCart
         }
         }>
         {children}

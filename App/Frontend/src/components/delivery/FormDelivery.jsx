@@ -1,26 +1,28 @@
 /* eslint-disable react/prop-types */
 import { useForm } from "react-hook-form";
-import { useId } from "react";
+import { useEffect, useId } from "react";
 import { Wallet } from '@mercadopago/sdk-react'
 import '../../styles/delivery/delivery.css'
 
 
-function FormDelivery({onSubmit,total, preferenceId}) {
+function FormDelivery({onSubmit,total, preferenceId, isOrderedEft}) {
     const direccionPattern = /^[a-zA-Z0-9\s.,#-]+$/;
 
     const clientNameId = useId();
     const clientDirectionId = useId();
     const typePayId = useId();
     const amountEftvoId = useId();
-    const ticketId = useId();
     const deliveryTypeId = useId();
     const notaId = useId();
 
-    const {register, watch, formState, handleSubmit} = useForm({
+    const {register, watch, formState, handleSubmit, reset} = useForm({
         mode: 'onTouched'
     });
     const {errors} = formState;
 
+    useEffect(()=>{
+        isOrderedEft ? reset() : null
+    },[isOrderedEft,reset])
 
     return ( 
         <form className='form-container' onSubmit={handleSubmit(onSubmit)}>
@@ -91,21 +93,11 @@ function FormDelivery({onSubmit,total, preferenceId}) {
 
             </div>
         </div>
-        <div className={`pedido__pago ${watch("tipo-pago") !== "transferencia" ? "disabled" : ""}`} >
-            <label htmlFor={ticketId} className={`${watch("tipoPago") !== "transferencia" ? "disabled" : ""}`}>Subir Comprobante Transferencia</label>
-            <div className='pedido__pago-input-container' >
-                <input type="file" name={ticketId} id={ticketId} 
-                {...register('comprobanteTransferencia',{required: "Debes incluir tu comprobante de transferencia.",
-                disabled: watch("tipoPago") !== "transferencia"})}
-                />
-            </div>
-        </div>
-        {errors.comprobanteTransferencia?.type === 'required' && <p role="alert" className='input-error input-error-file'>{errors.comprobanteTransferencia.message}</p>}
         <div className="pedido__button">
             <button type='submit' className='pedido__confirmar button' disabled={total == 0}>
                 Confirmar Pedido
             </button>
-            {preferenceId && <Wallet initialization={{ preferenceId,redirectMode: 'modal' }} className='button mp_button'/>}
+            {(preferenceId && watch("tipoPago") === "transferencia") && <Wallet initialization={{ preferenceId,redirectMode: 'modal' }} className='button mp_button'/>}
         </div>
        
 
