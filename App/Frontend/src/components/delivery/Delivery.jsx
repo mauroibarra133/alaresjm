@@ -32,16 +32,15 @@ const createPreference = async ({nombreCliente, direccionCliente, tipoPago, tipo
         notaPedido: notaPedido
       }
     });
-    console.log(response.data.response);
     return response.data.response;
   } catch (error) {
     console.log(error);
   }
 };
-
+console.log(cart);
 const handleOrder = async (pedido) => {
     //Creo la preferencia de MP
-    if(pedido.tipoPago === "transferencia"){
+    if(pedido.tipoPago === "2"){
           const {id} = await createPreference(pedido);
       if (id) {
         setPreferenceId(id);
@@ -65,7 +64,7 @@ useEffect(() => {
     calculateTotal();
   }, [cart]);
 
-  useEffect(() => {
+useEffect(() => {
     const searchParams = new URLSearchParams(window.location.search);
     const status = searchParams.get('collection_status');
     if(status) clearCart()
@@ -79,10 +78,8 @@ const onSubmit = (data)=>{
         carritoItems: cart,
         total: total,
     }
-    console.log(pedido);
     handleOrder(pedido);
 }
-
 
     return ( 
         <>

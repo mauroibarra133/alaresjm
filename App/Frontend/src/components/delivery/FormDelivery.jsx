@@ -52,8 +52,8 @@ function FormDelivery({onSubmit,total, preferenceId, isOrderedEft}) {
                 <label htmlFor={deliveryTypeId}>Tipo Entrega</label>
                 <select name={deliveryTypeId} id={deliveryTypeId}
                 {...register('tipoEntrega',{required: "Debes incluir como sera entregado"})}>
-                    <option value="delivery">Delivery</option>
-                    <option value="take-away">Retirar en el local</option>
+                    <option value="1">Delivery</option>
+                    <option value="2">Retirar en el local</option>
                 </select>
             </div>
             <div className="form__row">
@@ -61,7 +61,7 @@ function FormDelivery({onSubmit,total, preferenceId, isOrderedEft}) {
                 <div>
                     <input type="text" id={clientDirectionId}  
                     {...register('direccionCliente',{required: "Debes incluir la direccion",
-                    disabled: watch("tipoEntrega") !== "delivery", pattern:direccionPattern})}/>
+                    disabled: watch("tipoEntrega") !== "1", pattern:direccionPattern})}/>
                     {errors.direccionCliente?.type === 'pattern' && <p role="alert" className='input-error'>Algunos caracteres no estan permitidos</p>}
                     {errors.direccionCliente?.type === 'required' && <p role="alert" className='input-error'>{errors.direccionCliente.message}</p>}
                 </div>
@@ -70,8 +70,8 @@ function FormDelivery({onSubmit,total, preferenceId, isOrderedEft}) {
             <div className="form__row">
                 <label htmlFor={typePayId}>Tipo Pago</label>
                 <select name={typePayId} id={typePayId} {...register('tipoPago',{required: "Debes incluir como pagar tu pedido"})}>
-                    <option value="efectivo">Efectivo</option>
-                    <option value="transferencia">Transferencia</option>
+                    <option value="1">Efectivo</option>
+                    <option value="2">Transferencia</option>
                 </select>
             </div>
             <div className="form__row">
@@ -79,7 +79,7 @@ function FormDelivery({onSubmit,total, preferenceId, isOrderedEft}) {
                 <div>
                     <input type="text" id={amountEftvoId} 
                     {...register('montoEft',{required: "Debes incluir con cuanto efectivo nos pagas.",
-                    disabled: watch("tipoPago") === "transferencia",
+                    disabled: watch("tipoPago") === "2",
                     pattern: {
                         value: /^[0-9]+$/,                            
                         message: 'Solo se permiten numeros'
@@ -97,7 +97,7 @@ function FormDelivery({onSubmit,total, preferenceId, isOrderedEft}) {
             <button type='submit' className='pedido__confirmar button' disabled={total == 0}>
                 Confirmar Pedido
             </button>
-            {(preferenceId && watch("tipoPago") === "transferencia") && <Wallet initialization={{ preferenceId,redirectMode: 'modal' }} className='button mp_button'/>}
+            {(preferenceId && watch("tipoPago") === "2") && <Wallet initialization={{ preferenceId,redirectMode: 'modal' }} className='button mp_button'/>}
         </div>
        
 

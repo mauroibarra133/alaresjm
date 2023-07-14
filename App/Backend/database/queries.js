@@ -25,5 +25,8 @@ export const  queries ={
     },
     Categorias:{
         getAllCategories: 'SELECT * FROM categorias_producto'
+    },
+    Pedidos:{
+        addOrder: ''
     }
 }

@@ -9,7 +9,7 @@ function CartItem({id,nombre,precioGrande,precioChico,descripcion,quantity, pric
     let selectedValue;
     const handleSelectChange = (event) => {
          selectedValue = event.target.value;
-        setPriceSelected(id,selectedValue === 'Grande' ? precioGrande : precioChico);
+        setPriceSelected(id,selectedValue === 'Grande' ? precioGrande : precioChico,selectedValue === "Grande"? 3 : 1);
       };
 
     return (

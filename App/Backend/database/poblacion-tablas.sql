@@ -6,7 +6,7 @@ INSERT INTO tipos_entrega (nombre) VALUES
 ('Delivery'), ('Retirar en local')
 
 INSERT INTO estados_pedido (nombre) VALUES
-('Pendiente Confirmacion'), ('En preparacion'), ('Enviando'), ('Entregado')
+('Pendiente Confirmacion'),('Confirmado'),('En Preparacion'),('Listo') ,('En reparto'), ('Enviando'), ('Entregado'), ('Cancelado')
 
 INSERT INTO categorias_producto (nombre) VALUES
 ('Pizzas'),('Bebidas'),('Hamburguesas'),('Sandwiches'),('Papas'),('Pastas')

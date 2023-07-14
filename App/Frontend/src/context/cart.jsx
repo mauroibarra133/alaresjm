@@ -17,16 +17,17 @@ export function CartProvider({children}){
             updateLocalStorage(newCart)
         }else{
             //Si no está en el carrito
-            const newCart = [...cart,{...product,quantity:1,priceSelected: product.precioGrande}]
+            const newCart = [...cart,{...product,quantity:1,priceSelected: product.precioGrande, id_tamaño: 3}]
             updateLocalStorage(newCart)
             setCart(newCart)
         }
 
     }
-    const setPriceSelected = (id,newPriceSelected)=>{
+    const setPriceSelected = (id,newPriceSelected, id_tamaño)=>{
         const productInCartIndex = cart.findIndex(item => item.id === id)
         const newCart = structuredClone(cart)
             newCart[productInCartIndex].priceSelected = newPriceSelected
+            newCart[productInCartIndex].id_tamaño = id_tamaño
             updateLocalStorage(newCart)
             setCart(newCart)
     }
@@ -58,6 +59,8 @@ export function CartProvider({children}){
         
         for (let i = 0; i < cart.length; i++) {
           let item = {
+            id: cart[i].id,
+            category_id: (cart[i].id_tamaño).toString(),
             title: cart[i].nombre,
             description: cart[i].descripcion,
             quantity: cart[i].quantity,
