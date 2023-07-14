@@ -37,13 +37,13 @@ const createPreference = async ({nombreCliente, direccionCliente, tipoPago, tipo
     console.log(error);
   }
 };
-console.log(cart);
 const handleOrder = async (pedido) => {
     //Creo la preferencia de MP
     if(pedido.tipoPago === "2"){
           const {id} = await createPreference(pedido);
       if (id) {
         setPreferenceId(id);
+        console.log(id);
       }
     }else{
       //SI es efectivo limpio el carrito y muestro un modal

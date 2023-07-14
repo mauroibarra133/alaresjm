@@ -27,6 +27,14 @@ export const  queries ={
         getAllCategories: 'SELECT * FROM categorias_producto'
     },
     Pedidos:{
-        addOrder: ''
+        addOrder: `
+        INSERT INTO pedidos (fecha, id_usuario, direccion, nota, total, id_tipo_pago, id_tipo_entrega, id_estado, puntos_parciales, id_pago)
+VALUES (@fecha, @id_usuario, @direccion, @nota, @total, @id_tipo_pago, @id_tipo_entrega, @id_estado, ROUND(@total/10, 0), @id_pago);
+        `,
+        searchIdOrder: `SELECT id FROM pedidos WHERE id_pago = @id_pago`
+    },
+    DescPedidos:{
+        addDescOrder: ` INSERT INTO desc_pedidos (id_producto,cantidad,subtotal,id_pedido) VALUES 
+        (@id_producto,@cantidad,@subtotal,@id_pedido)`
     }
 }

@@ -15,7 +15,6 @@ export async function getProducts(req,res){
             res.json(result.recordset)
 
         }
-
            
     } catch (error) {
         res.status(500)

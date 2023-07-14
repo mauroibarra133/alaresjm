@@ -65,7 +65,9 @@ CREATE TABLE desc_pedidos (
 	id_producto INT NOT NULL,
 	cantidad INT NOT NULL,
 	subtotal INT NOT NULL,
-	FOREIGN KEY (id_producto) REFERENCES productos(id)
+	id_pedido INT NOT NULL,
+	FOREIGN KEY (id_producto) REFERENCES productos(id),
+	FOREIGN KEY (id_pedido) REFERENCES pedidos(id)
 )
 
 CREATE TABLE pedidos (
@@ -78,7 +80,6 @@ CREATE TABLE pedidos (
 	id_tipo_pago INT NOT NULL,
 	id_estado INT NOT NULL,
 	id_tipo_entrega INT NOT NULL,
-	id_descrip_pedido INT NOT NULL,
 	puntos_parciales INT
 	FOREIGN KEY (id_usuario) REFERENCES usuarios(id)
 	ON DELETE NO ACTION
@@ -86,7 +87,6 @@ CREATE TABLE pedidos (
 	FOREIGN KEY (id_tipo_pago) REFERENCES tipos_pagos(id),
 	FOREIGN KEY (id_estado) REFERENCES estados_pedido(id),
 	FOREIGN KEY (id_tipo_entrega) REFERENCES tipos_entrega(id),
-	FOREIGN KEY (id_descrip_pedido) REFERENCES tipos_entrega(id),
 )
 
 CREATE TABLE tamaños_productos (
