@@ -1,13 +1,11 @@
 /* eslint-disable react/prop-types */
 import { useForm } from "react-hook-form";
 import { useId } from "react";
+import { Wallet } from '@mercadopago/sdk-react'
+import '../../styles/delivery/delivery.css'
 
 
-
-
-
-
-function FormDelivery({onSubmit,total}) {
+function FormDelivery({onSubmit,total, preferenceId}) {
     const direccionPattern = /^[a-zA-Z0-9\s.,#-]+$/;
 
     const clientNameId = useId();
@@ -19,9 +17,6 @@ function FormDelivery({onSubmit,total}) {
     const notaId = useId();
 
     const {register, watch, formState, handleSubmit} = useForm({
-        defaultValues:{
-            carritoItems: []
-        },
         mode: 'onTouched'
     });
     const {errors} = formState;
@@ -110,7 +105,10 @@ function FormDelivery({onSubmit,total}) {
             <button type='submit' className='pedido__confirmar button' disabled={total == 0}>
                 Confirmar Pedido
             </button>
+            {preferenceId && <Wallet initialization={{ preferenceId,redirectMode: 'modal' }} className='button mp_button'/>}
         </div>
+       
+
     </form>
         
      );

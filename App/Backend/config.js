@@ -9,5 +9,7 @@ export default {
     dbUser: process.env.DB_USER || '',
     dbPassword: process.env.DB_PASSWORD || '',
     dbServer: process.env.DB_SERVER || '',
-    dbDataBase: process.env.DB_DATABASE || ''
+    dbDataBase: process.env.DB_DATABASE || '',
+    mp_public_token: process.env.PUBLIC_TOKEN_MP || '',
+    mp_access_token: process.env.ACCESS_TOKEN_MP || ''
 }

@@ -7,13 +7,41 @@ import CartItem from './CartItem';
 import CartVacio from './cartVacio';
 import FormDelivery from './FormDelivery';
 import { generateUniqueKey } from '../../utils/functions';
+import { initMercadoPago } from '@mercadopago/sdk-react'
+import axios from 'axios';
+
+  
 
 function Delivery() {
 
+initMercadoPago("TEST-803ddd42-4075-4c56-934e-c037302ed0d6");
 const { cart, clearCart, addToCart, removeProductFromCart } = useCart();
 const [total, setTotal] = useState(0);
-// const [dataForm, setDataForm] = useState('');
+const [preferenceId, setPreferenceId] = useState(null);
 
+const createPreference = async (nombreCliente,direccionCliente) => {
+    try {
+      const response = await axios.post("http://localhost:4000/create_preference", {
+        title: 'Pedido',
+        price: total,
+        quantity: 1,
+        name: nombreCliente,
+        address: direccionCliente
+      });
+      console.log(response);
+      const { id} = response.data;
+      return {id: id};
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleBuy = async (nombreCliente,direccionCliente ) => {
+    const {id} = await createPreference(nombreCliente,direccionCliente);
+    if (id) {
+      setPreferenceId(id);
+    }
+  };
 useEffect(() => {
     const calculateTotal = () => {
       const totalPrice = cart.reduce(
@@ -35,6 +63,7 @@ const onSubmit = (data)=>{
         total: total,
     }
     console.log(pedido);
+    handleBuy(pedido.nombreCliente, pedido.direccionCliente);
 }
 
 
@@ -60,7 +89,7 @@ const onSubmit = (data)=>{
                 </button>
                 </div>
             </div>
-            <FormDelivery onSubmit={onSubmit} total={total}/>
+            <FormDelivery onSubmit={onSubmit} total={total} preferenceId={preferenceId}/>
         </div>
         </>
      );

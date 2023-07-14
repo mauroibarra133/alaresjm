@@ -1,6 +1,6 @@
 import {Router} from 'express'
-import {getProducts, addProduct, getProductById, deleteProductById, updateProductById} from '../controllers/products.controller'
 const router = Router() //Creo el router
+import {getProducts, addProduct, getProductById, deleteProductById, updateProductById} from '../controllers/products.controller'
 
 
 router.get('/productos',getProducts); //Creo las funciones en un archivo controlador

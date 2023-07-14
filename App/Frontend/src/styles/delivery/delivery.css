@@ -220,10 +220,15 @@ select option{
 .pedido__button{
     width: 100%;
     display: flex;
+    flex-direction: column;
     justify-content: center;
+    align-items: center;
     padding-bottom: 2rem;
 }
 .pedido__button button{
     background: var(--black-1);
     color: var(--text-white);
+}
+.mp_button{
+    max-width: none;
 }

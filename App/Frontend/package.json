@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@glidejs/glide": "^3.6.0",
+    "@mercadopago/sdk-react": "^0.0.12",
     "axios": "^1.4.0",
     "glidejs": "^2.1.0",
     "react": "^18.2.0",
