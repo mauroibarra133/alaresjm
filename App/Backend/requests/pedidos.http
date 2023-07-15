@@ -1,0 +1,20 @@
+@api = http://localhost:4000/pedidos
+
+GET {{api}}
+
+### 
+POST {{api}}
+Content-Type: application/json
+
+{
+    "fecha": "2022-09-14T12:00:00.000Z", // Fecha en formato ISO
+    "id_usuario": 1,
+    "direccion": "Calle Principal 123",
+    "nota": "Entregar en la puerta trasera",
+    "total": 100,
+    "id_tipo_pago": 2, // Supongamos que 2 representa el tipo de pago "Transferencia"
+    "id_estado": 28,
+    "id_tipo_entrega": 1, // Supongamos que 1 representa el tipo de entrega "Entrega a domicilio"
+    "monto_cambio": 200, // Monto del cambio en efectivo
+    "puntos_parciales": 10
+    }

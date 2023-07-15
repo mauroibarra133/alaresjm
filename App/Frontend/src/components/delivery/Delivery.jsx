@@ -18,7 +18,10 @@ initMercadoPago("TEST-803ddd42-4075-4c56-934e-c037302ed0d6");
 const { cart, clearCart, addToCart, removeProductFromCart, modifyCart } = useCart();
 const [total, setTotal] = useState(0);
 const [preferenceId, setPreferenceId] = useState(null);
-const [isOrderedEft, setIsOrderedEft] = useState(false)
+const [isOrderedEft, setIsOrderedEft] = useState({
+  isSubmitted : false,
+  goodStatus: null
+})
 
 const createPreference = async ({nombreCliente, direccionCliente, tipoPago, tipoEntrega, notaPedido}) => {
   try {
@@ -43,14 +46,42 @@ const handleOrder = async (pedido) => {
           const {id} = await createPreference(pedido);
       if (id) {
         setPreferenceId(id);
-        console.log(id);
       }
     }else{
       //SI es efectivo limpio el carrito y muestro un modal
-      setIsOrderedEft(true)
-      clearCart();
+      try {
+        const fecha_hoy = new Date()
+        const fecha_ISO = fecha_hoy.toISOString();
+
+        const response = await axios.post("http://localhost:4000/pedidos",{
+          fecha: fecha_ISO,
+          id_usuario: 1,
+          direccion: pedido.direccionCliente,
+          nota: pedido.notaPedido,
+          total: parseInt(pedido.total),
+          id_tipo_pago: parseInt(pedido.tipoPago),
+          id_estado: 28,
+          id_tipo_entrega: parseInt(pedido.tipoEntrega),
+          monto_cambio: parseInt(pedido.montoEft),
+          items: modifyCart(cart)
+        })
+        if(response.status >=200 && response.status < 300){
+          setIsOrderedEft({
+            isSubmitted : true,
+            goodStatus: true
+          })
+          clearCart();
+        }
+      } catch (error) {
+        setIsOrderedEft({
+          isSubmitted : true,
+          goodStatus: false
+        })
+        console.log(error);
+      }
     }
   };
+
 useEffect(() => {
     const calculateTotal = () => {
       const totalPrice = cart.reduce(
@@ -104,7 +135,10 @@ const onSubmit = (data)=>{
                 </div>
             </div>
             <FormDelivery onSubmit={onSubmit} total={total} preferenceId={preferenceId} isOrderedEft={isOrderedEft}/>
-            <Modal isSubmitted={isOrderedEft} handleSubmit={setIsOrderedEft} msg={"Tu pedido ha sido realizado correctamente!"}/>
+            <Modal isSubmitted={isOrderedEft.isSubmitted} 
+            handleSubmit={setIsOrderedEft}
+            isGoodStatus={isOrderedEft.goodStatus}
+             msg={ isOrderedEft.goodStatus ?"Tu pedido ha sido realizado correctamente!": "Tu pedido no pudo ser procesado, intente nuevamente!"}/>
         </div>
         </>
      );

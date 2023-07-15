@@ -21,8 +21,8 @@ function FormDelivery({onSubmit,total, preferenceId, isOrderedEft}) {
     const {errors} = formState;
 
     useEffect(()=>{
-        isOrderedEft ? reset() : null
-    },[isOrderedEft,reset])
+        isOrderedEft.isSubmitted ? reset() : null
+    },[isOrderedEft.isSubmitted,reset])
 
     return ( 
         <form className='form-container' onSubmit={handleSubmit(onSubmit)}>

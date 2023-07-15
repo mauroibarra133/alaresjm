@@ -1,4 +1,6 @@
 import { queries, getConnection,sql } from "../database"
+import generatePaymentID from '../utils/functions';
+import { addDescOrderTransf } from "./desc_pedidos";
 
 export async function addOrder(fecha,id_pago,id_usuario,direccion,nota,total,id_tipo_pago,id_tipo_entrega){
     
@@ -35,3 +37,36 @@ export async function searchIdPedido(id_pago){
     }
 
 }
+
+export async function addOrderEft(req,res){
+    let {fecha,id_usuario,direccion,nota,total,id_tipo_pago,id_tipo_entrega,id_estado, items} = req.body
+
+    try {
+        const paymentID = generatePaymentID();
+        console.log("Payment ID", paymentID);
+        const pool = await getConnection()
+        await pool.request()
+        
+        
+        .input('fecha',sql.DateTime,fecha)
+        .input('id_usuario',sql.Int,id_usuario)
+        .input('direccion',sql.Text,direccion)
+        .input('nota',sql.Text,nota)
+        .input('total',sql.Int,total)
+        .input('id_tipo_pago',sql.Int,id_tipo_pago)
+        .input('id_tipo_entrega',sql.Int,id_tipo_entrega)
+        .input('id_estado',sql.Int,id_estado)
+        .input('id_pago',sql.Int,paymentID)
+        .query(queries.Pedidos.addOrder)
+
+
+        const id_pedido = await searchIdPedido(paymentID)
+        await addDescOrderTransf(items,id_pedido)
+
+        res.sendStatus(504)
+    } catch (error) {
+        res.status(500)
+        res.send(error.message)
+    }
+    
+}   

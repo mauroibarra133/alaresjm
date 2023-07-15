@@ -80,13 +80,17 @@ CREATE TABLE pedidos (
 	id_tipo_pago INT NOT NULL,
 	id_estado INT NOT NULL,
 	id_tipo_entrega INT NOT NULL,
-	puntos_parciales INT
+	id_descrip_pedido INT NOT NULL,
+	puntos_parciales INT,
+	id_pago INT,
+	monto_cambio INT,
 	FOREIGN KEY (id_usuario) REFERENCES usuarios(id)
 	ON DELETE NO ACTION
 	ON UPDATE CASCADE,
 	FOREIGN KEY (id_tipo_pago) REFERENCES tipos_pagos(id),
 	FOREIGN KEY (id_estado) REFERENCES estados_pedido(id),
 	FOREIGN KEY (id_tipo_entrega) REFERENCES tipos_entrega(id),
+	FOREIGN KEY (id_descrip_pedido) REFERENCES tipos_entrega(id),
 )
 
 CREATE TABLE tamaños_productos (

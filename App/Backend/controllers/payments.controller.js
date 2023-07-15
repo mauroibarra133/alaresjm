@@ -51,7 +51,7 @@ export const create_preference =(req, res) => {
         failure: "http://localhost:5173",
         pending: "",
       },
-      notification_url:"https://ca7a-190-122-76-4.ngrok.io/webhook",
+      notification_url:"https://73a1-190-122-76-4.ngrok.io/webhook",
       auto_return: "approved"};
     
   

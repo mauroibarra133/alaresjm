@@ -35,7 +35,12 @@
     border-top-right-radius: 10px;
     padding: 1rem;
 }
-
+.modal__top.good{
+    background-color: var(--green-ok);
+}
+.modal__top.bad{
+    background-color: var(--red-error-2);
+}
 .modal__body{
     display: flex;
     flex-direction: column;
@@ -63,8 +68,21 @@
     color: white;
     font-family: 'Amiri Bold    ';
 }
-
+.modal__button.good{
+    background-color: var(--green-ok);
+}
+.modal__button.bad{
+    background-color: var(--red-error-2);
+}
 .modal__button:hover{
     background-color: var(--green-1);
+    cursor: pointer;
+}
+.modal__button.good:hover{
+    background-color: var(--green-ok);
+    cursor: pointer;
+}
+.modal__button.bad:hover{
+    background-color: var(--red-error);
     cursor: pointer;
 }

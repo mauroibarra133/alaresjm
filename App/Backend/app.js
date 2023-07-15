@@ -4,6 +4,7 @@ import cors from 'cors'
 import productosRouter from './routes/productos'
 import dudasRouter from './routes/dudas'
 import categoriasRouter from './routes/categorias'
+import pedidosRouter from './routes/pedidos'
 import mercadopagoRouter from './routes/mercadoPago'
 
 const app = express()
@@ -23,5 +24,6 @@ app.use(productosRouter)
 app.use(dudasRouter) 
 app.use(categoriasRouter)
 app.use(mercadopagoRouter)
+app.use(pedidosRouter)
 
 export default app
