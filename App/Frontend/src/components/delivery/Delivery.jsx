@@ -35,7 +35,7 @@ const createPreference = async ({nombreCliente, direccionCliente, tipoPago, tipo
         notaPedido: notaPedido
       }
     });
-    return response.data.response;
+    return response;
   } catch (error) {
     console.log(error);
   }
@@ -43,10 +43,13 @@ const createPreference = async ({nombreCliente, direccionCliente, tipoPago, tipo
 const handleOrder = async (pedido) => {
     //Creo la preferencia de MP
     if(pedido.tipoPago === "2"){
-          const {id} = await createPreference(pedido);
-      if (id) {
-        setPreferenceId(id);
-      }
+          const {data} = await createPreference(pedido);
+          const id = data.response.id
+        
+        if (id) {
+          setPreferenceId(id);
+        }
+
     }else{
       //SI es efectivo limpio el carrito y muestro un modal
       try {
@@ -65,7 +68,7 @@ const handleOrder = async (pedido) => {
           monto_cambio: parseInt(pedido.montoEft),
           items: modifyCart(cart)
         })
-        if(response.status >=200 && response.status < 300){
+        if(response.status <200 && response.status > 300){
           setIsOrderedEft({
             isSubmitted : true,
             goodStatus: true

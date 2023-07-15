@@ -10,9 +10,8 @@ export  async function Buscar(estado) {
   }
 
 export  async function AgregarDuda(duda){
-    console.log(duda);
     if (!duda.id) {
-        await axios.post(urlResource, duda);
+        return await axios.post(urlResource, duda);
       } else {
         await axios.put(urlResource + "/" + duda.id, duda);
       }
