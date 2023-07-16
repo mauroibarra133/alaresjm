@@ -36,5 +36,9 @@ VALUES (@fecha, @id_usuario, @direccion, @nota, @total, @id_tipo_pago, @id_tipo_
     DescPedidos:{
         addDescOrder: ` INSERT INTO desc_pedidos (id_producto,cantidad,subtotal,id_pedido) VALUES 
         (@id_producto,@cantidad,@subtotal,@id_pedido)`
+    },
+    Login: {
+        getUserData: 'SELECT * FROM usuarios WHERE CAST(email AS varchar(max)) = CAST(@email AS varchar(max))'
+
     }
 }

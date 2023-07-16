@@ -17,6 +17,12 @@
     font-family: 'Post No Bills Colombo';
     src: url('../assets/fonts/PostNoBillsColombo/postnobillscolombo-semibold.ttf') format('truetype');
   }
+
+  @font-face {
+    font-family: 'Post No Bills Colombo Bold';
+    src: url('../assets/fonts/PostNoBillsColombo/postnobillscolombo-bold.ttf') format('truetype');
+  }
+
   @font-face {
     font-family: 'Lato';
     src: url('../assets/fonts/Lato/Lato-Regular.ttf') format('truetype');

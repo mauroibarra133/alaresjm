@@ -11,5 +11,6 @@ export default {
     dbServer: process.env.DB_SERVER || '',
     dbDataBase: process.env.DB_DATABASE || '',
     mp_public_token: process.env.PUBLIC_TOKEN_MP || '',
-    mp_access_token: process.env.ACCESS_TOKEN_MP || ''
+    mp_access_token: process.env.ACCESS_TOKEN_MP || '',
+    secret_token: process.env.ACCESS_TOKEN || ''
 }
