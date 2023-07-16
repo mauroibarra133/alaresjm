@@ -18,7 +18,7 @@ router.post('/token/',(req,res)=>{
 
     jwt.verify(token,config.secret_token, (err,data)=>{
         if (err){
-            res.status(403).json({msg: "No autorizado"})
+            res.status(403).json({msg: "No autorizado", data: data})
         }else{
             res.status(200).json({msg: "Exito", data})
         }

@@ -7,6 +7,7 @@ import {BrowserRouter, Route, Routes} from 'react-router-dom'
 import Delivery from './components/delivery/Delivery'
 import Footer from './components/Footer'
 import {CartProvider} from './context/cart';
+import {AuthProvider} from './context/auth';
 import ScrollToTop from './components/helpers/ScrollToTop'
 import Login from './components/login/Login'
 import RequireAuth from './components/login/RequireAuth'
@@ -15,6 +16,7 @@ function App() {
 
   return (
     <BrowserRouter>
+    <AuthProvider>
     <CartProvider>
       <ScrollToTop />
       <Header/>
@@ -31,7 +33,7 @@ function App() {
       </Routes>
       <Footer/>
     </CartProvider>
-
+    </AuthProvider>
     </BrowserRouter>
   )
 }

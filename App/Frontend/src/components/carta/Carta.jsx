@@ -6,15 +6,15 @@ import Path from '../Path';
 import Tag from './Tag'
 import { NavLink } from 'react-router-dom';
 import { useCart } from '../../hooks/useCart';
+import { useAuth } from '../../hooks/useAuth';
 import CartaInitial from './CartaInitial';
-import { generateUniqueKey } from '../../services/utils/functions';
+import { generateUniqueKey } from '../../utils/functions';
 import carritoImg from '../../assets/images/carrito.png'
 import CartaItem from './CartaItem';
 import Modal from '../Modal';
 import { isAuth } from '../../services/auth.services';
 
 function Carta() {
-
     const [categorias,setCategorias] = useState([]);
     const [products,setProducts] = useState([]);
     const [activeTag, setActiveTag] = useState(null);
@@ -23,6 +23,7 @@ function Carta() {
         isLog: false
     });
     const {addToCart, checkProductInCart, removeProductFromCart} = useCart();
+    const {auth} = useAuth() 
 
     function handleTagClick(tagId){
         if(activeTag === tagId){
@@ -30,6 +31,7 @@ function Carta() {
         }
       setActiveTag(tagId);
       getProducts(tagId).then(data => setProducts(data))
+      console.log(auth);
     }
     
     useEffect(()=>{

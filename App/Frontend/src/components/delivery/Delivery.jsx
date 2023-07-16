@@ -6,7 +6,7 @@ import { useCart } from '../../hooks/useCart';
 import CartItem from './CartItem';
 import CartVacio from './cartVacio';
 import FormDelivery from './FormDelivery';
-import { generateUniqueKey } from '../../services/utils/functions';
+import { generateUniqueKey } from '../../utils/functions';
 import { initMercadoPago } from '@mercadopago/sdk-react'
 import Modal from '../Modal';
 import axios from 'axios';

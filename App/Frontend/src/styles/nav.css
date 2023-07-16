@@ -12,6 +12,9 @@
     transform: translateY(-100%);
     z-index: var(--nav-z);
 }
+.nav.user{
+    right: 0;
+}
 .nav.active{
     transform: translateY(0%);
     transition: all .5s ease;
@@ -64,12 +67,17 @@
         max-width: none;
         transition: all .5s ease;
     }
-
+    .nav.user{
+        max-width: 450px;
+    }
     .nav__container{    
         flex-direction: row;
         width: 100%;    
         height: fit-content;
         padding: 1rem 0;
+    }
+    .nav__container.user{
+        flex-direction: column;
     }
     .nav__item-container{
         width: 100%;

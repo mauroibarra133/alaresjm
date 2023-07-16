@@ -4,11 +4,13 @@ import logoImg from '../../assets/images/alares-logo.png'
 import {useForm} from 'react-hook-form';
 import { useId } from 'react';
 import axios from 'axios'
+import { useNavigate } from 'react-router-dom';
+
 function Login() {
     const {register, handleSubmit} = useForm();
     const userId = useId();
     const passwordId = useId();
-
+    const navigate = useNavigate();
 
      async function onSubmit(data){
         try {
@@ -16,6 +18,7 @@ function Login() {
             if (response){
                 document.cookie = `token=${response.data.token}; max-age=${60 * 60}; path=/; samesite=strict`
                 console.log(response.data.msg);
+                navigate('/')
             }
         } catch (error) {
             console.log(error.response.data.msg);
