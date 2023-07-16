@@ -40,9 +40,4 @@ async function getMail(email){
     .query(queries.Login.getUserData)
     
     return result
-    // if(result){
-    //     if(password === result.contraseña){
-
-    //     }
-    // }
 }

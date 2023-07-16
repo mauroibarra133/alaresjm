@@ -1,12 +1,12 @@
 import '../styles/modal.css'
 
 // eslint-disable-next-line react/prop-types
-function Modal({isSubmitted, handleSubmit, msg, isGoodStatus}) {
+function Modal({isSubmitted, handleSubmit, msg, isGoodStatus, position}) {
     return ( 
         <>
         {isSubmitted &&
         
-        <div className='modal__container'>
+        <div className={`modal__container ${position == "top" ? "top" : ""}`}>
         <div className="modal">
             <div className={`modal__top ${isGoodStatus ? "good" : "bad"}`}>
             </div>

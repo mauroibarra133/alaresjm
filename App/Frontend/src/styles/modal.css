@@ -14,6 +14,9 @@
     
 }
 
+.modal__container.top{
+    top: 0;
+}
 .modal{
     background-color: white;
     display: flex;

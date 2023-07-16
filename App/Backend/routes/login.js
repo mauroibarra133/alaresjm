@@ -7,7 +7,7 @@ import config from '../config';
 
 router.post('/api/login/',login);
 
-router.post('/prueba/',(req,res)=>{
+router.post('/token/',(req,res)=>{
     const authorizationHeader = req.headers.authorization;
 
     if (!authorizationHeader || !authorizationHeader.startsWith("Bearer ")) {

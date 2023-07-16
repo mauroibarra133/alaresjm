@@ -16,6 +16,8 @@
     transform: translateY(0%);
     transition: all .5s ease;
 }
+
+
 .nav__container{
     height: 31.625rem;
     padding: 0.625rem 1.125rem;
@@ -24,6 +26,9 @@
     flex-direction: column;
     justify-content: space-between;
     border-bottom-right-radius: 10px;
+}
+.nav__container.user{
+    height: auto;
 }
 /* Item */
 .nav__item{

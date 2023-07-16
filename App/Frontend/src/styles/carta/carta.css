@@ -1,6 +1,9 @@
 @import '../variables.css';
 @import '../fonts.css';
 
+.modal_top{
+    opacity: 0.5;
+}
 /* Container */
 .carta__container{
     width: 100%;

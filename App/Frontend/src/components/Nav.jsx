@@ -3,7 +3,7 @@ import {Link} from 'react-scroll';
 import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 
 // eslint-disable-next-line react/prop-types
-function Nav({clicked, handleClick}) {
+function Nav({clicked, handleBurgerClick}) {
     const location =useLocation()
     const navigate =useNavigate()
 
@@ -11,7 +11,7 @@ function Nav({clicked, handleClick}) {
         if(location.pathname != '/'){
             navigate('/')
         }
-        handleClick()
+        handleBurgerClick()
     }
  return ( 
 

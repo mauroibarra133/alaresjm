@@ -4,7 +4,7 @@ import logoImg from '../../assets/images/alares-logo.png'
 import {useForm} from 'react-hook-form';
 import { useId } from 'react';
 import axios from 'axios'
-
+import {isAuth} from '../../services/auth.services'
 function Login() {
     const {register, handleSubmit} = useForm();
     const userId = useId();
@@ -25,15 +25,8 @@ function Login() {
     }
 
     async function probarDatos(){
-        const token = document.cookie.replace('token=','')
-        const response  = await axios.post("http://localhost:4000/prueba",{},{
-            headers: {
-                Authorization: `Bearer ${token}`
-            }
-            
-        });
-        console.log(response.data.msg);
-
+    const response = await isAuth();
+        console.log(response);
     }
 
     return ( 
