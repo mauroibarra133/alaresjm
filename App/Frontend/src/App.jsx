@@ -9,6 +9,7 @@ import Footer from './components/Footer'
 import {CartProvider} from './context/cart';
 import ScrollToTop from './components/helpers/ScrollToTop'
 import Login from './components/login/Login'
+import RequireAuth from './components/login/RequireAuth'
 
 function App() {
 
@@ -21,7 +22,10 @@ function App() {
         <Route path='/' element={<Home/>}></Route>
         <Route path='/carta' element={<Carta/>}> </Route>
         <Route path='/reservas' element={<div>Reservas</div>}></Route>
-        <Route path='/delivery' element={<Delivery/>}> </Route>  
+        <Route path='/delivery' element={
+          <RequireAuth>
+              <Delivery/>
+          </RequireAuth>}/>
         <Route path='/api/login' element={<Login/>}> </Route>  
         <Route path='*' element={<ErrorPage/>}> </Route>
       </Routes>

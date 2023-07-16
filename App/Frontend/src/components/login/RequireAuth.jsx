@@ -1,19 +1,34 @@
 /* eslint-disable react/prop-types */
-import AuthService from '../../services/auth.services'
-import {Navigate} from 'react-router-dom'
+import { isAuth } from '../../services/auth.services';
+import { Navigate } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 
 function RequireAuth({ children }) {
-    let usuarioLogueado = AuthService.getUsuarioLogueado();
-  console.log("Usuario logueado",usuarioLogueado);
-  
-    // verificar la autenticacion
-    if (!usuarioLogueado) {
-      return <Navigate to={"/login/" + children.type.name} />;
-    }
-    // un nivel mas de seguridad seria verificar la autorizacion...
-    return children;
+  const [authenticated, setAuthenticated] = useState(true);
+
+  useEffect(() => {
+    const checkAuth = async () => {
+      try {
+        const response = await isAuth();
+        if (response.status === 200) {
+          setAuthenticated(true);
+        } else {
+          setAuthenticated(false);
+        }
+        console.log(response.data.msg);
+      } catch (error) {
+        setAuthenticated(false);
+      }
+    };
+
+    checkAuth();
+  }, []);
+
+  if (!authenticated) {
+    return <Navigate to={"/api/login/"} />;
   }
-  
-  
-  export  {RequireAuth};
-  
+
+  return children;
+}
+
+export default RequireAuth;

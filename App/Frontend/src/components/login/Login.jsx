@@ -4,7 +4,6 @@ import logoImg from '../../assets/images/alares-logo.png'
 import {useForm} from 'react-hook-form';
 import { useId } from 'react';
 import axios from 'axios'
-import {isAuth} from '../../services/auth.services'
 function Login() {
     const {register, handleSubmit} = useForm();
     const userId = useId();
@@ -24,10 +23,6 @@ function Login() {
 
     }
 
-    async function probarDatos(){
-    const response = await isAuth();
-        console.log(response);
-    }
 
     return ( 
         <div className="login__container">
@@ -54,9 +49,6 @@ function Login() {
                                 </div>
 
                             </form>
-                            <div className="login__button">
-                                    <button  className='button' onClick={probarDatos}>PROBAR DATOS</button>
-                                </div>
                         </div>
                     </div>
                 <div className="login__msgs">
