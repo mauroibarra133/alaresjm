@@ -12,18 +12,18 @@ export function AuthProvider({children}){
             data: {}
         }
     );
+async function isLogued(){
+        const response = await isAuth()
+        console.log(response);
+        if(response.status == 200){
+            setAuth({
+                isLogin: true ,
+                data: response.data.data
+            })
+        }
+    }
 
     useEffect(()=>{
-        async function isLogued(){
-            const response = await isAuth()
-            console.log(response);
-            if(response.status == 200){
-                setAuth({
-                    isLogin: true ,
-                    data: response.data.data
-                })
-            }
-        }
         isLogued()
     },[])
 
@@ -33,7 +33,7 @@ console.log(auth);
     return(
         <AuthContext.Provider value={
             {auth,
-            setAuth
+            isLogued
         }
         }>
         {children}

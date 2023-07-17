@@ -15,8 +15,8 @@ function Modal({isSubmitted, handleSubmit, msg, isGoodStatus, position}) {
                     <p>{msg}</p>
                 </div>
                 <button className={`modal__button ${isGoodStatus ? "good" : "bad"}`} onClick={()=>handleSubmit({
-                    isSubmitted: false,
-                    goodStatus: false
+                    [isSubmitted]: false,
+                    [isGoodStatus]: false
                 })}>Aceptar</button>
             </div>
             </div>

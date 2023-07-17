@@ -2,26 +2,44 @@ import Path from '../Path'
 import '../../styles/login/login.css'
 import logoImg from '../../assets/images/alares-logo.png'
 import {useForm} from 'react-hook-form';
-import { useId } from 'react';
+import { useId, useState } from 'react';
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../../hooks/useAuth';
+import Modal from '../Modal'
 
 function Login() {
     const {register, handleSubmit} = useForm();
     const userId = useId();
     const passwordId = useId();
     const navigate = useNavigate();
-
+    const {isLogued} = useAuth();
+    const [errorStatus, setErrorStatus] = useState({
+        isSubmitted: false,
+        existError: false,
+        msg: ''
+})
      async function onSubmit(data){
         try {
             const response = await axios.post('http://localhost:4000/api/login',data)
             if (response){
                 document.cookie = `token=${response.data.token}; max-age=${60 * 60}; path=/; samesite=strict`
-                console.log(response.data.msg);
+                console.log(response.data);
                 navigate('/')
+                isLogued()
+                setErrorStatus({
+                    isSubmitted: true,
+                    existError: false,
+                    msg: response.data.msg
+                })
             }
         } catch (error) {
             console.log(error.response.data.msg);
+            setErrorStatus({
+                isSubmitted: true,
+                existError: true,
+                msg: error.response.data.msg
+            })
         }
 
     }
@@ -59,6 +77,9 @@ function Login() {
                     <p className='login__msg'>No tienes una cuenta? Registrate</p>
                 </div>
             </div>
+            <Modal isSubmitted={errorStatus.isSubmitted} isGoodStatus={!errorStatus.existError} msg={errorStatus.msg}
+            handleSubmit={setErrorStatus}
+            ></Modal>
         </div>
 
      );
