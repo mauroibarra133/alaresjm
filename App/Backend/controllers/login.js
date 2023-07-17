@@ -22,7 +22,8 @@ export async function login (req,res){
                 const token = jwt.sign({    
                     email: userData.email,
                     user: userData.usuario,
-                    user_id: userData.id
+                    user_id: userData.id,
+                    rol: userData.rol
                 },config.secret_token, {expiresIn: "60m"})
                 res.status(200).json({msg: 'Login excelent',token: token})
             }else{

@@ -3,7 +3,6 @@ import '../../styles/login/login.css'
 import logoImg from '../../assets/images/alares-logo.png'
 import { NavLink } from 'react-router-dom';
 import {useForm} from 'react-hook-form';
-import Modal from '../Modal'
 import foodImg from '../../assets/images/food-bg.png'
 import { useId } from 'react';
 

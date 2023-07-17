@@ -6,6 +6,8 @@
 	nombre VARCHAR(20) NOT NULL,
 	apellido VARCHAR(30) NOT NULL,
 	puntos INT,
+	email TEXT,
+	rol VARCHAR(10)
 	CONSTRAINT check_puntos CHECK(puntos>=0)
 )
 
