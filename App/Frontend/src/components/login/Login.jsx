@@ -4,9 +4,10 @@ import logoImg from '../../assets/images/alares-logo.png'
 import {useForm} from 'react-hook-form';
 import { useId, useState } from 'react';
 import axios from 'axios'
-import { useNavigate } from 'react-router-dom';
+import { useNavigate,NavLink } from 'react-router-dom';
 import { useAuth } from '../../hooks/useAuth';
 import Modal from '../Modal'
+import foodImg from '../../assets/images/food-bg.png'
 
 function Login() {
     const {register, handleSubmit} = useForm();
@@ -57,24 +58,25 @@ function Login() {
                                 <p className="login__title">SIGNUP</p>
                             </div>
                             <form className="login__form" onSubmit={handleSubmit(onSubmit)}>
-                                <div className="login__user">
+                                <div className="login__email login__input-wrapper">
                                     <label htmlFor={userId}>Email</label>
-                                    <input type="text" id={userId} {...register('email')}/>
+                                    <input type="text" id={userId} {...register('email')} placeholder='email'/>
                                 </div>
-                                <div className="login__password">
+                                <div className="login__password login__input-wrapper">
                                     <label htmlFor={passwordId}>Password</label>
-                                    <input type="password" id={passwordId} {...register('password')}/>
+                                    <input type="password" id={passwordId} {...register('password')} placeholder='password'/>
                                 </div>
                                 <div className="login__button">
                                     <button type='submit' className='button'>INICIAR SESION</button>
                                 </div>
-
                             </form>
+                            <img src={foodImg} alt="Foto de comida" className='login__decoration'/>
                         </div>
                     </div>
                 <div className="login__msgs">
-                    <p className='login__msg'>Olvidaste tu contraseña?</p>
-                    <p className='login__msg'>No tienes una cuenta? Registrate</p>
+                    <NavLink to='/signup'>
+                    <p className='login__msg'>No tienes una cuenta? <span>Registrate</span></p>
+                    </NavLink>
                 </div>
             </div>
             <Modal isSubmitted={errorStatus.isSubmitted} isGoodStatus={!errorStatus.existError} msg={errorStatus.msg}

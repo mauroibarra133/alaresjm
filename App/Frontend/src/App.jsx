@@ -11,6 +11,7 @@ import {AuthProvider} from './context/auth';
 import ScrollToTop from './components/helpers/ScrollToTop'
 import Login from './components/login/Login'
 import RequireAuth from './components/login/RequireAuth'
+import SignUp from './components/login/SignUp'
 
 function App() {
 
@@ -29,6 +30,7 @@ function App() {
               <Delivery/>
           </RequireAuth>}/>
         <Route path='/api/login' element={<Login/>}> </Route>  
+        <Route path='/signup' element={<SignUp/>}> </Route>  
         <Route path='*' element={<ErrorPage/>}> </Route>
       </Routes>
       <Footer/>
