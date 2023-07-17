@@ -20,9 +20,14 @@ const [total, setTotal] = useState(0);
 const [preferenceId, setPreferenceId] = useState(null);
 const [isOrderedEft, setIsOrderedEft] = useState({
   isSubmitted : false,
-  goodStatus: null
+  goodStatus: false
 })
-
+function handleCloseModal(){
+    setIsOrderedEft({
+      isSubmitted: false,
+      goodStatus: false
+    })
+}
 const createPreference = async ({nombreCliente, direccionCliente, tipoPago, tipoEntrega, notaPedido}) => {
   try {
     const response = await axios.post("http://localhost:4000/create_preference", {
@@ -55,7 +60,6 @@ const handleOrder = async (pedido) => {
       try {
         const fecha_hoy = new Date()
         const fecha_ISO = fecha_hoy.toISOString();
-
         const response = await axios.post("http://localhost:4000/pedidos",{
           fecha: fecha_ISO,
           id_usuario: 1,
@@ -68,7 +72,9 @@ const handleOrder = async (pedido) => {
           monto_cambio: parseInt(pedido.montoEft),
           items: modifyCart(cart)
         })
-        if(response.status <200 && response.status > 300){
+        console.log(response);
+        if(response.status >= 200 && response.status < 300){
+          console.log("salio bien wn");
           setIsOrderedEft({
             isSubmitted : true,
             goodStatus: true
@@ -79,7 +85,7 @@ const handleOrder = async (pedido) => {
         setIsOrderedEft({
           isSubmitted : true,
           goodStatus: false
-        })
+        });
         console.log(error);
       }
     }
@@ -139,8 +145,9 @@ const onSubmit = (data)=>{
             </div>
             <FormDelivery onSubmit={onSubmit} total={total} preferenceId={preferenceId} isOrderedEft={isOrderedEft}/>
             <Modal isSubmitted={isOrderedEft.isSubmitted} 
-            handleSubmit={setIsOrderedEft}
+            handleSubmit={handleCloseModal}
             isGoodStatus={isOrderedEft.goodStatus}
+            position={"top"}
              msg={ isOrderedEft.goodStatus ?"Tu pedido ha sido realizado correctamente!": "Tu pedido no pudo ser procesado, intente nuevamente!"}/>
         </div>
         </>

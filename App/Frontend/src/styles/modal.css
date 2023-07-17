@@ -9,14 +9,10 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 1rem;
     z-index: var(--modal-z);
     
 }
 
-.modal__container.top{
-    top: 0;
-}
 .modal{
     background-color: white;
     display: flex;

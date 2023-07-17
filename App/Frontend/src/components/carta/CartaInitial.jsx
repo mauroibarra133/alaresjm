@@ -3,7 +3,7 @@ import '../../styles/carta/carta.css'
 import CartaItem from './CartaItem';
 import { generateUniqueKey } from '../../utils/functions';
 
-function CartaInitial({products,checkProductInCart, removeProductFromCart,addToCart, categorias, setIsLogin, isLogin}) {
+function CartaInitial({products,checkProductInCart, removeProductFromCart,addToCart, categorias, setCartClick}) {
     
     const mostrarPorCategoria = (products,i)=>{
        const productosFiltrados = products.filter(product => product.id_categoria == i);
@@ -13,7 +13,7 @@ function CartaInitial({products,checkProductInCart, removeProductFromCart,addToC
             return (
            <CartaItem key={generateUniqueKey()} isProductInCart={isProductInCart} 
            removeProductFromCart={removeProductFromCart} addToCart={addToCart}
-           product={product} setIsLogin={setIsLogin} isLogin={isLogin}/>
+           product={product} setCartClick={setCartClick} />
             )})
      ); 
     }

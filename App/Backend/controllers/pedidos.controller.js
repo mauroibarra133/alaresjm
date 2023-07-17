@@ -39,7 +39,7 @@ export async function searchIdPedido(id_pago){
 }
 
 export async function addOrderEft(req,res){
-    let {fecha,id_usuario,direccion,nota,total,id_tipo_pago,id_tipo_entrega,id_estado, items} = req.body
+    let {fecha,id_usuario,direccion,nota,total,id_tipo_pago,id_tipo_entrega,id_estado, items, monto_cambio} = req.body
 
     try {
         const paymentID = generatePaymentID();
@@ -57,13 +57,14 @@ export async function addOrderEft(req,res){
         .input('id_tipo_entrega',sql.Int,id_tipo_entrega)
         .input('id_estado',sql.Int,id_estado)
         .input('id_pago',sql.Int,paymentID)
+        .input('monto_cambio',sql.Int,monto_cambio)
         .query(queries.Pedidos.addOrder)
 
 
         const id_pedido = await searchIdPedido(paymentID)
         await addDescOrderTransf(items,id_pedido)
 
-        res.sendStatus(504)
+        res.sendStatus(200)
     } catch (error) {
         res.status(500)
         res.send(error.message)

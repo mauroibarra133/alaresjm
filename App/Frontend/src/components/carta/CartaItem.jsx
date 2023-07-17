@@ -1,22 +1,19 @@
 /* eslint-disable react/prop-types */
 import carritoImg from '../../assets/images/carrito.png';
+import { useAuth } from '../../hooks/useAuth';
 
 
+function CartaItem({isProductInCart,removeProductFromCart,addToCart,product, setCartClick}) {
 
-function CartaItem({isProductInCart,removeProductFromCart,addToCart,product, setIsLogin, isLogin}) {
+    const {auth} = useAuth()
+
     async function handleCartClick(){
-        if(isLogin.isLog){
-            setIsLogin({
-                isCartClick: true ,
-                isLog: true
-            })
+        if(auth.isLogin){
+            setCartClick(false)
             return isProductInCart ? removeProductFromCart(product) :addToCart(product)
         }else{
-            setIsLogin({
-                    isCartClick: true ,
-                    isLog: false
-                })
-            
+        setCartClick(true)
+
         }
     }
 

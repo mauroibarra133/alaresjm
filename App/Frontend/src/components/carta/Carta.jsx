@@ -12,16 +12,13 @@ import { generateUniqueKey } from '../../utils/functions';
 import carritoImg from '../../assets/images/carrito.png'
 import CartaItem from './CartaItem';
 import Modal from '../Modal';
-import { isAuth } from '../../services/auth.services';
 
 function Carta() {
     const [categorias,setCategorias] = useState([]);
     const [products,setProducts] = useState([]);
     const [activeTag, setActiveTag] = useState(null);
-    const [isLogin, setIsLogin] = useState({
-        isCartClick: false ,
-        isLog: false
-    });
+    const [isCartClick, setCartClick] = useState(false);
+
     const {addToCart, checkProductInCart, removeProductFromCart} = useCart();
     const {auth} = useAuth() 
 
@@ -31,9 +28,8 @@ function Carta() {
         }
       setActiveTag(tagId);
       getProducts(tagId).then(data => setProducts(data))
-      console.log(auth);
     }
-    
+
     useEffect(()=>{
         async function buscarCategorias(){
             getCategories().then(data => setCategorias(data));
@@ -44,18 +40,6 @@ function Carta() {
             getProducts().then(data => setProducts(data));
         }
         buscarProductos();
-
-        async function isLogued(){
-            const response = await isAuth()
-            if(response.status == 200){
-                setIsLogin({
-                    isCartClick: false ,
-                    isLog: true
-                })
-            }
-        }
-        isLogued()
-        console.log(isLogin);
     // eslint-disable-next-line react-hooks/exhaustive-deps
     },[]);
 
@@ -84,7 +68,7 @@ function Carta() {
                     removeProductFromCart={removeProductFromCart} 
                     addToCart={addToCart} 
                     categorias={categorias}
-                    setIsLogin={setIsLogin} isLogin={isLogin}
+                    setCartClick={setCartClick}
                     /> 
                     
                     : 
@@ -94,7 +78,7 @@ function Carta() {
                         return (
                             <CartaItem key={generateUniqueKey()} isProductInCart={isProductInCart} 
                             removeProductFromCart={removeProductFromCart} addToCart={addToCart}
-                            product={product} setIsLogin={setIsLogin} isLogin={isLogin}/>
+                            product={product} setCartClick={setCartClick} />
                         )})}
                 </div>
                 <div className="carta__buttons">
@@ -104,7 +88,9 @@ function Carta() {
                         </button></NavLink>
                 </div>
             </div>
-            <Modal position={"top"} isSubmitted={isLogin.isCartClick && !isLogin.isLog} handleSubmit={setIsLogin} msg={!isLogin.isLog ? "Debes estar logueado para usar el carrito" : ""}></Modal>
+            <Modal isSubmitted={isCartClick && !auth.isLogin} 
+            position={"top"}
+            handleSubmit={()=>setCartClick(false)} msg={!auth.isLogin ? "Debes estar logueado para usar el carrito" : ""}></Modal>
         </>
 
      );

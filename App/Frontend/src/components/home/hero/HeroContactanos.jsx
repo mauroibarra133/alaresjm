@@ -2,7 +2,7 @@ import { useState, useId } from 'react';
 import '../../../styles/hero/heroContactanos.css'
 import {useForm} from 'react-hook-form';
 import {AgregarDuda} from '../../../services/dudas.services'
-import {DevTool}from '@hookform/devtools'
+// import {DevTool}from '@hookform/devtools'
 
 import Modal from '../../Modal';
 
@@ -13,7 +13,7 @@ function HeroContactanos() {
     const phoneId = useId();
     const mailId = useId();
     const dudaId = useId();
-    const { register, handleSubmit, formState, reset, control } = useForm({
+    const { register, handleSubmit, formState, reset } = useForm({
         mode: 'onBlur',
         
     });
@@ -27,28 +27,32 @@ function HeroContactanos() {
     function handleClick(){
         if(Object.keys(errors).length == 0) setClicked(!clicked)
     }
+    function handleCloseModal(){
+        setFormStatus({
+            isSubmitted: false,
+            goodStatus: false
+        })
+    }
+
+    function handleOpenModal(status){
+        setFormStatus({
+            isSubmitted: true,
+            goodStatus: status
+        })
+    }
 
     async function onSubmit(data){
         const response = await AgregarDuda(data);
         console.log(response);
         reset();
         if(response.status >= 200 && response.status < 300){
-            setFormStatus({
-                isSubmitted: true,
-                goodStatus:true
-            });
+            handleOpenModal(true)
         }else{
-            setFormStatus({
-                isSubmitted: true,
-                goodStatus:false
-            });
+            handleOpenModal(false)
         }
-        setTimeout(() => {
-            setFormStatus({
-                isSubmitted: false,
-                goodStatus: false
-            })
-        }, 3000);
+        // setTimeout(() => {
+        //     handleCloseModal()
+        // }, 3000);
     }
     return ( 
         <div className={`hero-contactanos__container ${clicked ? "active" : ""}`} name='#contacto' >
@@ -104,10 +108,10 @@ function HeroContactanos() {
                 <button className={`hero-contactanos__button button`} type='submit'  onClick={handleClick} disabled={!isDirty || !isValid}>Enviar</button>
             </form>
             <Modal isSubmitted={formStatus.isSubmitted}
-             handleSubmit={setFormStatus}
+             handleSubmit={handleCloseModal}
              isGoodStatus={formStatus.goodStatus}
               msg={formStatus.goodStatus ?"Tu duda y/o inquietud se ha enviado correctamente!" : "Tu consulta no ha sido enviada correctamente. Porfavor intente mas tarde."}/>
-              <DevTool control={control}></DevTool>
+              {/* <DevTool control={control}></DevTool> */}
         </div>
      );
 }
