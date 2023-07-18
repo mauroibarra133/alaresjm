@@ -42,3 +42,20 @@ async function getMail(email){
     
     return result
 }
+
+export async function existsMail(req,res){
+    const {email} = req.body
+
+    try {
+        const pool = await getConnection()
+        const result = await pool.request()
+        .input('email',sql.Text,email)
+        .query(queries.Login.getUserData)
+        res.status(200).json(result.recordset[0].email)
+
+    } catch (error) {
+        res.status(400).json(false)
+    }
+
+
+}

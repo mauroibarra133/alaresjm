@@ -14,3 +14,17 @@ export const isAuth = async () => {
     throw new Error("Error al verificar la autenticación");
   }
 };
+
+export async function existsMail(email){
+  try {
+    const response = await axios.post("http://localhost:4000/email",
+      {email: email}
+      )
+  return response.data
+
+  } catch (error) {
+    console.log(error);
+    return false
+  }
+
+}

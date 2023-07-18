@@ -4,20 +4,57 @@ import logoImg from '../../assets/images/alares-logo.png'
 import { NavLink } from 'react-router-dom';
 import {useForm} from 'react-hook-form';
 import foodImg from '../../assets/images/food-bg.png'
-import { useId } from 'react';
+import { useId, useState } from 'react';
+import { existsMail } from '../../services/auth.services';
 import axios from 'axios'
+import Modal from '../Modal'
+import { EMAIL_REGEX, ONLY_LETTERS, PASSWORD_REGEX } from '../../utils/constants';
 
 function SignUp(){
-    const {register, handleSubmit} = useForm();
+    const {register, handleSubmit, formState} = useForm({
+        mode: 'onBlur',
+    });
+    const {errors} = formState;
+
     const emailId = useId();
     const passwordId = useId();
     const nameId = useId();
     const surnameId = useId();
 
+    const [showModal,setShowModal] = useState({
+        isSubmitted: false,
+        isGood: false,
+        msg: ""
+    });
+
+    function closeModal(){
+        setShowModal({
+            isSubmitted: false,
+            isGood: false,
+            msg: ""
+        })
+    }
     async function onSubmit(data){
-        console.log(data);
-        const response = await axios.post('http://localhost:4000/signup',data);
-        console.log(response);
+        const isAlreadyExist = await existsMail(data.regEmail)
+        console.log('already exists:',isAlreadyExist);
+        if(isAlreadyExist){
+            //Manejar modal
+            console.log('Ya existe ');
+            setShowModal({
+                isSubmitted:true,
+                isGood:false,
+                msg: "El email ingresado ya existe"
+
+            })
+        }else{
+            const response = await axios.post('http://localhost:4000/signup',data);
+            setShowModal({
+                isSubmitted: true,
+                isGood: true,
+                msg: "El usuario ha sido creado correctamente"
+            })
+            console.log(response);
+        }
     }
 
 
@@ -33,21 +70,40 @@ function SignUp(){
                             <p className="login__title">LOGIN</p>
                         </div>
                         <form className="login__form" onSubmit={handleSubmit(onSubmit)}>
-                             <div className="login__name login__input-wrapper">
-                                <label htmlFor={nameId}>Nombre</label>
-                                <input type="text" id={nameId} {...register('regName')} placeholder='nombre'/>
+                             <div className="login__wrapper">
+                                <div className='login__input-wrapper'>
+                                    <label htmlFor={nameId}>Nombre</label>
+                                    <input type="text" id={nameId} {...register('regName' , { pattern: ONLY_LETTERS, required:true,maxLength:50,minLength:2 })} placeholder='nombre' />
+                                </div>
+                                {errors.regName?.type === 'required' && <p role="alert" className='form-error'>Nombre es requerido</p>}
+                                {errors.regName?.type === 'pattern' && <p role="alert" className='form-error'>Solo deben incluir letras</p>}
                             </div>
-                            <div className="login__surname login__input-wrapper">
-                                <label htmlFor={surnameId}>Apellido</label>
-                                <input type="text" id={surnameId} {...register('regSurname')} placeholder='apellido'/>
+                            <div className="login__wrapper">
+                                <div className="login__input-wrapper">
+                                    <label htmlFor={surnameId}>Apellido</label>
+                                    <input type="text" id={surnameId} {...register('regSurname', { pattern: ONLY_LETTERS, required:true,maxLength:50,minLength:2 })}placeholder='apellido'/>
+                                </div>  
+                                {errors.regSurname?.type === 'required' && <p role="alert" className='form-error'>El apellido es requerido</p>}
+                                {errors.regSurname?.type === 'pattern' && <p role="alert" className='form-error'>Solo deben incluir letras</p>}
                             </div>
-                            <div className="login__email login__input-wrapper">
-                                <label htmlFor={emailId}>Email</label>
-                                <input type="text" id={emailId} {...register('regEmail')} placeholder='email'/>
+                            <div className="login__wrapper">
+                                <div className="login__input-wrapper">
+                                    <label htmlFor={emailId}>Email</label>
+                                    <input type="text" id={emailId} {...register('regEmail',{pattern: EMAIL_REGEX, required:true,minLength:8})} placeholder='email'/>
+                                </div>
+                            {errors.regEmail?.type === 'required' && <p role="alert" className='form-error'>El mail es requerido</p>}                               
+                            {errors.regEmail?.type === 'minLength' && <p role="alert" className='form-error'>El mail debe ser mas largo</p>}                               
+                            {errors.regEmail?.type === 'pattern' && <p role="alert" className='form-error'>Formato de mail incorrecto</p>}                               
                             </div>
-                            <div className="login__password login__input-wrapper">
-                                <label htmlFor={passwordId}>Password</label>
-                                <input type="password" id={passwordId} {...register('regPassword')} placeholder='password'/>
+                            <div className="login__wrapper ">
+                                <div className='login__input-wrapper'>
+                                    <label htmlFor={passwordId}>Password</label>
+                                    <input type="password" id={passwordId} {...register('regPassword', {minLength: 8,required:true, pattern: PASSWORD_REGEX })} placeholder='password'/>
+                                </div>
+                            {errors.regPassword?.type === 'required' && <p role="alert" className='form-error'>La contraseña es requerida</p>}
+                            {errors.regPassword?.type === 'pattern' && <p role="alert" className='form-error'>La contraseña debe contener al menos una letra mayúscula, una letra minúscula, un número y un carácter especial </p>}
+                            {errors.regPassword?.type === 'minLength' && <p role="alert" className='form-error'>La contraseña debe ser de al menos 8 caracteres </p>}
+                             
                             </div>
                             <div className="login__button">
                                 <button type='submit' className='button'>REGISTRARSE</button>
@@ -62,9 +118,9 @@ function SignUp(){
                 </NavLink>
             </div>
         </div>
-        {/* <Modal isSubmitted={errorStatus.isSubmitted} isGoodStatus={!errorStatus.existError} msg={errorStatus.msg}
-        handleSubmit={setErrorStatus}
-        ></Modal> */}
+        <Modal isSubmitted={showModal.isSubmitted} isGoodStatus={showModal.isGood} msg={showModal.msg}
+        handleSubmit={closeModal}
+        ></Modal>
      </div>
     )
 }

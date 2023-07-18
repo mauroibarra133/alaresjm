@@ -49,3 +49,13 @@ label.disabled{
         cursor: not-allowed;
     
 }
+
+.form-error{
+    text-align: end;
+    color: var(--red-error-2);
+    font-family: 'Amiri Bold';
+    font-size: .8rem;
+    z-index: var(--normal-z);
+    padding: 0 .5rem;
+    
+}

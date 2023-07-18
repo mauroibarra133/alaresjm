@@ -2,6 +2,8 @@ import { useState, useId } from 'react';
 import '../../../styles/hero/heroContactanos.css'
 import {useForm} from 'react-hook-form';
 import {AgregarDuda} from '../../../services/dudas.services'
+import { EMAIL_REGEX, ONLY_LETTERS, ONLY_NUMBERS } from '../../../utils/constants';
+
 // import {DevTool}from '@hookform/devtools'
 
 import Modal from '../../Modal';
@@ -13,6 +15,7 @@ function HeroContactanos() {
     const phoneId = useId();
     const mailId = useId();
     const dudaId = useId();
+
     const { register, handleSubmit, formState, reset } = useForm({
         mode: 'onBlur',
         
@@ -65,35 +68,35 @@ function HeroContactanos() {
                     <div className="hero-contactanos__input">
                         <div>
                             <label htmlFor={nameId}>Nombre</label>
-                            <input id={nameId} type="text" placeholder='Ej: Juan' {...register('nombre', { pattern: /^[A-Za-z\s]+$/, required:true,maxLength:50,minLength:2 })} />
+                            <input id={nameId} type="text" placeholder='Ej: Juan' {...register('nombre', { pattern: ONLY_LETTERS, required:true,maxLength:50,minLength:2 })} />
                         </div>
-                        {errors.nombre?.type === 'required' && <p role="alert">Nombre es requerido</p>}
-                        {errors.nombre?.type === 'pattern' && <p role="alert">Solo deben incluir letras</p>}
+                        {errors.nombre?.type === 'required' && <p role="alert" className='form-error'>Nombre es requerido</p>}
+                        {errors.nombre?.type === 'pattern' && <p role="alert" className='form-error'>Solo deben incluir letras</p>}
                     </div>
                     <div className="hero-contactanos__input">
                         <div>
                             <label htmlFor={surnameId}>Apellido</label>
-                            <input id={surnameId} type="text" placeholder='Ej: Gonzales'{...register('apellido',{ pattern: /^[A-Za-z\s]+$/, required:true,maxLength:50,minLength:2})}/>
+                            <input id={surnameId} type="text" placeholder='Ej: Gonzales'{...register('apellido',{ pattern: ONLY_LETTERS, required:true,maxLength:50,minLength:2})}/>
                         </div>
-                        {errors.apellido?.type === 'required' && <p role="alert">El apellido es requerido</p>}
-                        {errors.apellido?.type === 'pattern' && <p role="alert">Solo deben incluir letras</p>}
+                        {errors.apellido?.type === 'required' && <p role="alert" className='form-error'>El apellido es requerido</p>}
+                        {errors.apellido?.type === 'pattern' && <p role="alert" className='form-error'>Solo deben incluir letras</p>}
 
         
                     </div>
                     <div className="hero-contactanos__input">
                         <div>
                             <label htmlFor={phoneId} >Telefono</label>
-                            <input id={phoneId} type="tel" placeholder='Ej: 3525-6491324'{...register('telefono',{ pattern: /^[0-9]+$/ , required:true,minLength:6})} />
+                            <input id={phoneId} type="tel" placeholder='Ej: 3525-6491324'{...register('telefono',{ pattern: ONLY_NUMBERS , required:true,minLength:6})} />
                         </div>
-                        {errors.telefono?.type === 'required' && <p role="alert">El numero es requerido</p>}
-                        {errors.telefono?.type === 'pattern' && <p role="alert">Solo debe incluir numeros</p>}
+                        {errors.telefono?.type === 'required' && <p role="alert" className='form-error'>El numero es requerido</p>}
+                        {errors.telefono?.type === 'pattern' && <p role="alert" className='form-error'>Solo debe incluir numeros</p>}
                     </div>
                     <div className="hero-contactanos__input">
                         <div>
                             <label htmlFor={mailId}>Mail</label>
-                            <input id={mailId} type="email" placeholder='Ej: alares@gmail.com'{...register('mail',{required:true,minLength:8})}/>
+                            <input id={mailId} type="email" placeholder='Ej: alares@gmail.com'{...register('mail',{pattern: EMAIL_REGEX, required:true,minLength:8})}/>
                         </div>
-                            {errors.mail?.type === 'required' && <p role="alert">El mail es requerido</p>}
+                            {errors.mail?.type === 'required' && <p role="alert" className='form-error'>El mail es requerido</p>}
                     </div>
                     <div className="hero-contactanos__input">
                         <div>
@@ -101,8 +104,8 @@ function HeroContactanos() {
                             <textarea name="duda" id={dudaId} cols="30" rows="10" 
                                 placeholder='Ej: Como contrato el servicio de foodtruck?' {...register('descripcion', {required:true, minLength:10})}></textarea>
                         </div>
-                        {errors.descripcion?.type === 'required' && <p role="alert">La duda es requerida</p>}
-                        {errors.descripcion?.type === 'minLength' && <p role="alert">Debe ser mayor a 10 caracteres</p>}
+                        {errors.descripcion?.type === 'required' && <p role="alert" className='form-error'>La duda es requerida</p>}
+                        {errors.descripcion?.type === 'minLength' && <p role="alert" className='form-error'>Debe ser mayor a 10 caracteres</p>}
                     </div>
                 </div>
                 <button className={`hero-contactanos__button button`} type='submit'  onClick={handleClick} disabled={!isDirty || !isValid}>Enviar</button>

@@ -83,7 +83,7 @@
     margin: 0 auto;
 }
 
-.login__form div input{
+.login__form div div input{
     max-width: 150px;
     border-radius: 3.125rem;
     padding: .5rem .8rem;
@@ -92,6 +92,10 @@
     box-shadow: 20px 20px 60px 0px rgba(197, 197, 197, 0.25) inset, 0px 4px 4px 0px rgba(187, 187, 187, 0.25);
 }
 
+.login__wrapper{
+    display: flex;
+    flex-direction: column;
+}
 .login__button{
     display: flex;
     justify-content: center;

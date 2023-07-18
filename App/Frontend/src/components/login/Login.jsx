@@ -8,9 +8,14 @@ import { useNavigate,NavLink } from 'react-router-dom';
 import { useAuth } from '../../hooks/useAuth';
 import Modal from '../Modal'
 import foodImg from '../../assets/images/food-bg.png'
+import { EMAIL_REGEX, PASSWORD_REGEX } from '../../utils/constants';
 
 function Login() {
-    const {register, handleSubmit} = useForm();
+    const {register, handleSubmit, formState} = useForm({
+        mode: 'onBlur'
+    });
+    const {errors} = formState;
+
     const userId = useId();
     const passwordId = useId();
     const navigate = useNavigate();
@@ -58,13 +63,23 @@ function Login() {
                                 <p className="login__title">SIGNUP</p>
                             </div>
                             <form className="login__form" onSubmit={handleSubmit(onSubmit)}>
-                                <div className="login__email login__input-wrapper">
-                                    <label htmlFor={userId}>Email</label>
-                                    <input type="text" id={userId} {...register('email')} placeholder='email'/>
+                                <div className="login__wrapper">
+                                    <div className='login__input-wrapper'>
+                                        <label htmlFor={userId}>Email</label>
+                                        <input type="text" id={userId} {...register('email',{pattern: EMAIL_REGEX, required:true,minLength:8})} placeholder='email'/>
+                                    </div>
+                                    {errors.email?.type === 'required' && <p role="alert" className='form-error'>El mail es requerido</p>}                               
+                                    {errors.email?.type === 'minLength' && <p role="alert" className='form-error'>El mail debe ser mas largo</p>}                               
+                                    {errors.email?.type === 'pattern' && <p role="alert" className='form-error'>Formato de mail incorrecto</p>}     
                                 </div>
-                                <div className="login__password login__input-wrapper">
-                                    <label htmlFor={passwordId}>Password</label>
-                                    <input type="password" id={passwordId} {...register('password')} placeholder='password'/>
+                                <div className="login__wrapper">
+                                    <div className="login__input-wrapper">
+                                        <label htmlFor={passwordId}>Password</label>
+                                        <input type="password" id={passwordId} {...register('password', {minLength: 8,required:true, pattern: PASSWORD_REGEX })} placeholder='password'/>
+                                    </div>
+                                    {errors.password?.type === 'required' && <p role="alert" className='form-error'>La contraseña es requerida</p>}
+                                    {errors.password?.type === 'pattern' && <p role="alert" className='form-error'>La contraseña debe contener al menos una letra mayúscula, una letra minúscula, un número y un carácter especial </p>}
+                                    {errors.password?.type === 'minLength' && <p role="alert" className='form-error'>La contraseña debe ser de al menos 8 caracteres </p>}
                                 </div>
                                 <div className="login__button">
                                     <button type='submit' className='button'>INICIAR SESION</button>

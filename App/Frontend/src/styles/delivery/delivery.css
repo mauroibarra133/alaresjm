@@ -171,11 +171,6 @@ select option{
     padding-left: .4rem;
 }
 .input-error{
-    text-align: end;
-    color: var(--red-error-2);
-    font-family: 'Amiri Bold';
-    font-size: .8rem;
-    z-index: var(--normal-z);
     line-height: .7rem;
     padding: .2rem 0;
     max-width: 170px;

@@ -3,10 +3,10 @@ import { useForm } from "react-hook-form";
 import { useEffect, useId } from "react";
 import { Wallet } from '@mercadopago/sdk-react'
 import '../../styles/delivery/delivery.css'
+import { ONLY_NUMBERS, ADDRESS_REGEX } from "../../utils/constants";
 
 
 function FormDelivery({onSubmit,total, preferenceId, isOrderedEft}) {
-    const direccionPattern = /^[a-zA-Z0-9\s.,#-]+$/;
 
     const clientNameId = useId();
     const clientDirectionId = useId();
@@ -43,8 +43,8 @@ function FormDelivery({onSubmit,total, preferenceId, isOrderedEft}) {
                                 value: /^[A-Za-z\s]+$/,
                                 message: 'Solo se permiten letras'
                         }})} />
-                    {errors.nombreCliente?.type === 'required' && <p role="alert" className='input-error'>{errors.nombreCliente.message}</p>}
-                    {errors.nombreCliente?.type === 'pattern' && <p role="alert" className='input-error'>{errors.nombreCliente.message}</p>}
+                    {errors.nombreCliente?.type === 'required' && <p role="alert" className='form-error input-error'>{errors.nombreCliente.message}</p>}
+                    {errors.nombreCliente?.type === 'pattern' && <p role="alert" className='form-error input-error'>{errors.nombreCliente.message}</p>}
                 </div>
             
             </div>
@@ -61,9 +61,9 @@ function FormDelivery({onSubmit,total, preferenceId, isOrderedEft}) {
                 <div>
                     <input type="text" id={clientDirectionId}  
                     {...register('direccionCliente',{required: "Debes incluir la direccion",
-                    disabled: watch("tipoEntrega") !== "1", pattern:direccionPattern})}/>
-                    {errors.direccionCliente?.type === 'pattern' && <p role="alert" className='input-error'>Algunos caracteres no estan permitidos</p>}
-                    {errors.direccionCliente?.type === 'required' && <p role="alert" className='input-error'>{errors.direccionCliente.message}</p>}
+                    disabled: watch("tipoEntrega") !== "1", pattern:ADDRESS_REGEX})}/>
+                    {errors.direccionCliente?.type === 'pattern' && <p role="alert" className='form-error input-error'>Algunos caracteres no estan permitidos</p>}
+                    {errors.direccionCliente?.type === 'required' && <p role="alert" className='form-error input-error'>{errors.direccionCliente.message}</p>}
                 </div>
 
             </div>
@@ -81,14 +81,14 @@ function FormDelivery({onSubmit,total, preferenceId, isOrderedEft}) {
                     {...register('montoEft',{required: "Debes incluir con cuanto efectivo nos pagas.",
                     disabled: watch("tipoPago") === "2",
                     pattern: {
-                        value: /^[0-9]+$/,                            
+                        value: ONLY_NUMBERS,                            
                         message: 'Solo se permiten numeros'
                     },
                     validate: ()=> watch("montoEft") >= total || "El monto a pagar debe ser superior al total"
                 })}/>
-                        {errors.montoEft?.type === 'required' && <p role="alert" className='input-error'>{errors.montoEft.message}</p>}
-                        {errors.montoEft?.type === 'pattern' && <p role="alert" className='input-error'>{errors.montoEft.message}</p>}
-                        {errors.montoEft?.type === 'validate' && <p role="alert" className='input-error'>{errors.montoEft.message}</p>}
+                        {errors.montoEft?.type === 'required' && <p role="alert" className='form-error input-error'>{errors.montoEft.message}</p>}
+                        {errors.montoEft?.type === 'pattern' && <p role="alert" className='form-error input-error'>{errors.montoEft.message}</p>}
+                        {errors.montoEft?.type === 'validate' && <p role="alert" className='form-error input-error'>{errors.montoEft.message}</p>}
                 </div>
 
             </div>

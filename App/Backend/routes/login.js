@@ -1,6 +1,6 @@
 import {Router} from 'express'
 const router = Router() //Creo el router
-import { login } from '../controllers/login';
+import { login,existsMail } from '../controllers/login';
 import jwt from 'jsonwebtoken'
 import config from '../config';
 
@@ -24,4 +24,6 @@ router.post('/token/',(req,res)=>{
         }
     })
 })
+
+router.post('/email',existsMail)
 export default router;
