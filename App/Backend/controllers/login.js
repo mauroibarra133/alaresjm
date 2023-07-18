@@ -4,7 +4,6 @@ import config from '../config.js'
 
 export async function login (req,res){
     const {email,password} = req.body
-    console.log(!email);
     //Check if data it was send
     if(!email || !password){
          res.status(400).json( {msg:'No han sido ingresados todos los datos'})
@@ -16,7 +15,6 @@ export async function login (req,res){
         }
         else{
             const userData = data.recordset[0]
-            console.log('User data: ',userData);
             //Check if the info is correct
             if(password === (userData.contraseña).toString()){
                 const token = jwt.sign({    

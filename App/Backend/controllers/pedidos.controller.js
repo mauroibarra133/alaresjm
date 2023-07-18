@@ -43,7 +43,6 @@ export async function addOrderEft(req,res){
 
     try {
         const paymentID = generatePaymentID();
-        console.log("Payment ID", paymentID);
         const pool = await getConnection()
         await pool.request()
         

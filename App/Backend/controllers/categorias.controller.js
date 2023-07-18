@@ -6,9 +6,7 @@ export async function getCategories(req,res){
             const result = await pool.request().query(queries.Categorias.getAllCategories) //Hacemos la consulta
             res.json(result.recordset)
     } catch (error) {
-        res.status(500)
-        res.send(error.message)
-        console.log(error);
+        res.status(500).json({msg: "No se pudo obtener las categorias"})
     }
 
 }

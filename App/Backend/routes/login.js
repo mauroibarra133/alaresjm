@@ -26,4 +26,5 @@ router.post('/token/',(req,res)=>{
 })
 
 router.post('/email',existsMail)
+
 export default router;

@@ -18,7 +18,6 @@ export async function addDescOrderTransf(items,id_pedido) {
       // Envía una respuesta adecuada si es necesario
     } catch (error) {
       // Manejo de errores si ocurre alguna excepción
-      console.error(error);
       throw error; // Lanza el error para manejarlo en un nivel superior
     }
   }

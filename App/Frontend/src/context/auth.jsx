@@ -14,8 +14,7 @@ export function AuthProvider({children}){
     );
 async function isLogued(){
         const response = await isAuth()
-        console.log(response);
-        if(response.status == 200){
+        if(response != undefined){
             setAuth({
                 isLogin: true ,
                 data: response.data.data
@@ -29,7 +28,6 @@ async function isLogued(){
 
 
 
-console.log(auth);
     return(
         <AuthContext.Provider value={
             {auth,

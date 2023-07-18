@@ -17,9 +17,7 @@ export async function getProducts(req,res){
         }
            
     } catch (error) {
-        res.status(500)
-        res.send(error.message)
-        console.log(error);
+        res.status(500).json({msg: "No se pudo obtener los productos"})
     }
 
 }
@@ -44,20 +42,24 @@ export async function addProduct(req,res){
         res.json({nombre,descripcion,id_categoria}); // Porque el pool request solo retorna las filas afectadas
         
     } catch (error) {
-        res.status(500)
-        res.send(error.message)
+        res.status(500).json({msg: "No se pudo agregar el producto"})
     }
     
 }   
 
 export async function getProductById(req,res){
     const { id } = req.params;
-    const pool = await getConnection() //Es una promesa, es el cliente para realizar consultas
+    try {
+            const pool = await getConnection() //Es una promesa, es el cliente para realizar consultas
     const result = await pool.request()
         .input('id',id)
         .query(queries.Products.getProductById) //Hacemos la consulta
     
     res.send(result.recordset[0])
+    } catch (error) {
+        res.status(500).json({msg: "No se pudo obtener el producto de esa categoria"})       
+    }
+
 }
 
 export async function deleteProductById(req,res){

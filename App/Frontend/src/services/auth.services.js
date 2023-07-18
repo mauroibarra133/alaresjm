@@ -10,8 +10,8 @@ export const isAuth = async () => {
     });
     return response;
   } catch (error) {
-    console.log(error.response.data.msg);
-    throw new Error("Error al verificar la autenticación");
+    console.log("Error al verificar la autenticación");
+
   }
 };
 
@@ -23,7 +23,6 @@ export async function existsMail(email){
   return response.data
 
   } catch (error) {
-    console.log(error);
     return false
   }
 

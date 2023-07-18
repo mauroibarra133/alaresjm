@@ -32,7 +32,8 @@ function Carta() {
 
     useEffect(()=>{
         async function buscarCategorias(){
-            getCategories().then(data => setCategorias(data));
+            getCategories().then(data => setCategorias(data))
+            .catch(error => console.log(error));
         }
         buscarCategorias();
 

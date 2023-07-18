@@ -12,7 +12,6 @@ export async function addUsuario(req,res){
         .input('rol',sql.VarChar,'User')
         .input('puntos',sql.Int,0)
         .query(queries.Usuarios.addUser)
-        console.log(result);
         res.status(200).json({msg: "Usuario Creado"})
     } catch (error) {
         console.log(error);

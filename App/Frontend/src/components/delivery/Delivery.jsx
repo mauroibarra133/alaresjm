@@ -3,6 +3,7 @@ import Path from '../Path';
 import '../../styles/delivery/delivery.css'
 import {useEffect, useState} from 'react'
 import { useCart } from '../../hooks/useCart';
+import { useAuth } from '../../hooks/useAuth';
 import CartItem from './CartItem';
 import CartVacio from './cartVacio';
 import FormDelivery from './FormDelivery';
@@ -22,6 +23,8 @@ const [isOrderedEft, setIsOrderedEft] = useState({
   isSubmitted : false,
   goodStatus: false
 })
+const {auth} = useAuth();
+
 function handleCloseModal(){
     setIsOrderedEft({
       isSubmitted: false,
@@ -62,7 +65,7 @@ const handleOrder = async (pedido) => {
         const fecha_ISO = fecha_hoy.toISOString();
         const response = await axios.post("http://localhost:4000/pedidos",{
           fecha: fecha_ISO,
-          id_usuario: 1,
+          id_usuario: auth.data.id,
           direccion: pedido.direccionCliente,
           nota: pedido.notaPedido,
           total: parseInt(pedido.total),

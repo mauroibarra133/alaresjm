@@ -32,7 +32,6 @@ export const receiveWebHook = async (req,res)=>{
             await addDescOrderTransf(items,id_pedido)
         }
     } catch (error) {
-        console.log(error);
         return res.sendStatus(500).json({error: error.message})
     }
 }   
@@ -63,6 +62,6 @@ export const create_preference =(req, res) => {
         });
       })
       .catch(function (error) {
-        console.log(error);
+        res.status(500).json({msg: error})
       });
 }
