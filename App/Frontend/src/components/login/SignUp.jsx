@@ -5,7 +5,7 @@ import { NavLink } from 'react-router-dom';
 import {useForm} from 'react-hook-form';
 import foodImg from '../../assets/images/food-bg.png'
 import { useId } from 'react';
-
+import axios from 'axios'
 
 function SignUp(){
     const {register, handleSubmit} = useForm();
@@ -14,9 +14,13 @@ function SignUp(){
     const nameId = useId();
     const surnameId = useId();
 
-    function onSubmit(data){
+    async function onSubmit(data){
         console.log(data);
+        const response = await axios.post('http://localhost:4000/signup',data);
+        console.log(response);
     }
+
+
     return ( 
         <div className="login__container">
         <Path pathPrev={'Home'} pathActual={'Login'}></Path>

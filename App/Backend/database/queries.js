@@ -39,6 +39,8 @@ VALUES (@fecha, @id_usuario, @direccion, @nota, @total, @id_tipo_pago, @id_tipo_
     },
     Login: {
         getUserData: 'SELECT * FROM usuarios WHERE CAST(email AS varchar(max)) = CAST(@email AS varchar(max))'
-
+    },
+    Usuarios: {
+        addUser: "INSERT INTO usuarios (fecha_creacion,nombre,apellido,email,contraseña,rol, puntos) VALUES (GETDATE(),@nombre, @apellido, @email, @password, @rol, @puntos)"
     }
 }
