@@ -42,5 +42,8 @@ VALUES (@fecha, @id_usuario, @direccion, @nota, @total, @id_tipo_pago, @id_tipo_
     },
     Usuarios: {
         addUser: "INSERT INTO usuarios (fecha_creacion,nombre,apellido,email,contraseña,rol, puntos) VALUES (GETDATE(),@nombre, @apellido, @email, @password, @rol, @puntos)"
+    },
+    Reservas: {
+        addReserva: "INSERT INTO reservas (fecha,hora,id_usuario, cantidad_personas, lugar, cliente_reserva) VALUES (@fecha,@hora,@id_usuario,@cantidad_personas,@lugar,@cliente_reserva)"
     }
 }

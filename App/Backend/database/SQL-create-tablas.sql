@@ -48,14 +48,14 @@ CREATE TABLE tipos_entrega (
 	nombre VARCHAR(25) NOT NULL
 )
 
-
 CREATE TABLE reservas (
 	id INT PRIMARY KEY IDENTITY(1,1),
 	fecha DATE NOT NULL,
-	hora TIME NOT NULL,
+	hora VARCHAR(5) NOT NULL,
 	id_usuario INT NOT NULL,
 	cantidad_personas INT NOT NULL CHECK(cantidad_personas > 0),
 	lugar VARCHAR(30) NOT NULL,
+	cliente_reserva VARCHAR(30) NOT NULL,
 	FOREIGN KEY (id_usuario) REFERENCES usuarios(id)
 	ON DELETE NO ACTION
 	ON UPDATE CASCADE

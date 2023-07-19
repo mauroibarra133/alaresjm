@@ -12,6 +12,7 @@ import ScrollToTop from './components/helpers/ScrollToTop'
 import Login from './components/login/Login'
 import RequireAuth from './components/login/RequireAuth'
 import SignUp from './components/login/SignUp'
+import Reservas from './components/reserva/Reservas'
 
 function App() {
 
@@ -24,7 +25,7 @@ function App() {
       <Routes>
         <Route path='/' element={<Home/>}></Route>
         <Route path='/carta' element={<Carta/>}> </Route>
-        <Route path='/reservas' element={<div>Reservas</div>}></Route>
+        <Route path='/reservas' element={<Reservas/>}></Route>
         <Route path='/delivery' element={
           <RequireAuth>
               <Delivery/>
