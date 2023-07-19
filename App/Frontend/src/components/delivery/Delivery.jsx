@@ -59,13 +59,14 @@ const handleOrder = async (pedido) => {
         }
 
     }else{
+      console.log(auth);
       //SI es efectivo limpio el carrito y muestro un modal
       try {
         const fecha_hoy = new Date()
         const fecha_ISO = fecha_hoy.toISOString();
         const response = await axios.post("http://localhost:4000/pedidos",{
           fecha: fecha_ISO,
-          id_usuario: auth.data.id,
+          id_usuario: auth.data.user_id,
           direccion: pedido.direccionCliente,
           nota: pedido.notaPedido,
           total: parseInt(pedido.total),
