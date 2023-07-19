@@ -1,7 +1,8 @@
-import { useId } from 'react';
+import { useId,useState } from 'react';
 import '../../styles/reserva/reservas.css'
 import {useForm} from 'react-hook-form'
 import axios from 'axios'
+import Modal from '../Modal'
 import {useAuth} from '../../hooks/useAuth'
 
 function Reservas() {
@@ -14,19 +15,45 @@ const {register, handleSubmit,formState} = useForm({
         mode: 'onBlur'
     })
 const {errors} = formState;
-console.log(auth);
+const [showModal,setShowModal] = useState({
+    isSubmitted: false,
+    isGood: false,
+    msg: ""
+});
+
+function handleCloseModal(){
+    setShowModal({
+    isSubmitted: false,
+    isGood: false,
+    msg: ""});
+    }
+
+function handleOpenModal(valor){
+    setShowModal({
+    isSubmitted: true,
+    isGood: valor,
+    msg: valor == true ? "Tu reserva se ha registrado correctamente" : "Tu reserva no se ha podido confirmar.Intente mas tarde"
+});
+}
+
 async function onSubmit(data){
     console.log(data);
-    const response = await axios.post("http://localhost:4000/reservas",{
-        fecha: data.fecha,
-        hora: data.hora,
-        id_usuario: 1,
-        cantidad_personas: data.comensales,
-        lugar: data.zona,
-        cliente_reserva: data.cliente
-    });
+    try {
+        const response = await axios.post("http://localhost:4000/reservas",{
+            fecha: data.fecha,
+            hora: data.hora,
+            id_usuario: auth.data.user_id,
+            cantidad_personas: data.comensales,
+            lugar: data.zona,
+            cliente_reserva: data.cliente
+        });
+        console.log(response);
+        handleOpenModal(true);
+    } catch (error) {
+        handleOpenModal(false);
+        
+    }
 
-    console.log(response);
 }
     return (
         <div className="reservas__container">
@@ -78,9 +105,8 @@ async function onSubmit(data){
                         <button className="button" type='submit'>RESERVAR</button>
                     </div>
                 </form>
-
             </div>
-
+            <Modal isSubmitted={showModal.isSubmitted} isGoodStatus={showModal.isGood} handleSubmit={handleCloseModal} msg={showModal.msg}></Modal>
         </div>
      );
 }

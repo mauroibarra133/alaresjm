@@ -20,7 +20,7 @@ app.set('port', port)
 //Middlewares
 app.use(express.json());  // Para que nuestro servidor pueda aceptar datos en json (debemos configurar eso)
 app.use(express.urlencoded({extended: false}))  // Para que pueda aceptar datos desde forms HTML
-app.use(cors());
+app.use(cors("http://localhost:5173"));
 
 app.use(productosRouter) 
 app.use(dudasRouter) 
