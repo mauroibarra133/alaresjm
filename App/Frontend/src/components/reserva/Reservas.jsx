@@ -4,7 +4,7 @@ import {useForm} from 'react-hook-form'
 import axios from 'axios'
 import Modal from '../Modal'
 import {useAuth} from '../../hooks/useAuth'
-
+import {ONLY_LETTERS} from '../../utils/constants'
 function Reservas() {
 
     const customersId = useId()
@@ -96,9 +96,10 @@ async function onSubmit(data){
                     <div className="reservas__row">
                         <div>
                             <label htmlFor={clientId}>A nombre de</label>
-                            <input type="text" name={clientId} id={clientId} {...register("cliente",{required: true})}/>
+                            <input type="text" name={clientId} id={clientId} {...register("cliente",{required: true, pattern: ONLY_LETTERS})}/>
                         </div>
                         {errors.cliente?.type === 'required' && <p role="alert" className='form-error'>El nombre es requerido</p>}                               
+                        {errors.cliente?.type === 'pattern' && <p role="alert" className='form-error'>El nombre solo debe incluir letras</p>}                               
                     </div>
 
                     <div className="button__wrapper">

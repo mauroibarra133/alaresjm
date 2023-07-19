@@ -13,6 +13,7 @@ import Login from './components/login/Login'
 import RequireAuth from './components/login/RequireAuth'
 import SignUp from './components/login/SignUp'
 import Reservas from './components/reserva/Reservas'
+import RankingClientes from './components/ranking/RankingClientes'
 
 function App() {
 
@@ -25,6 +26,7 @@ function App() {
       <Routes>
         <Route path='/' element={<Home/>}></Route>
         <Route path='/carta' element={<Carta/>}> </Route>
+        <Route path='/clientes' element={<RankingClientes/>}> </Route>
         <Route path='/reservas' element={
           <RequireAuth>
               <Reservas/>

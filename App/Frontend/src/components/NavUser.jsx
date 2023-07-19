@@ -12,16 +12,30 @@ function NavUser({clicked, handleUserClick}) {
         <div className={`nav ${clicked ? 'active'  : ''} user`}>
         <div className="nav__container user" >
             {!auth.isLogin && (
-                <NavLink to='/api/login'  className='nav__item-container' >
+                <NavLink to='/api/login'  className='nav__item-container user' >
                     <div className='nav__item user' onClick={handleUserClick}><p>INICIAR SESION</p></div>
                 </NavLink>
             )}
             {auth.isLogin && (
-            <NavLink to='/api/login'  className='nav__item-container' >
+            <NavLink to='/a'  className='nav__item-container user' >
                 <div className='nav__item user' onClick={handleUserClick}><p>MI CUENTA</p></div>
             </NavLink>
             )}
-
+                        {auth.isLogin && (
+            <NavLink to='/'  className='nav__item-container user' >
+                <div className='nav__item user' onClick={handleUserClick}><p>MIS PEDIDOS</p></div>
+            </NavLink>
+            )}
+                        {auth.isLogin && (
+            <NavLink to='/'  className='nav__item-container user' >
+                <div className='nav__item user' onClick={handleUserClick}><p>MIS RESERVAS </p></div>
+            </NavLink>
+            )}
+                        {auth.isLogin && (
+            <NavLink to='/'  className='nav__item-container user' >
+                <div className='nav__item user' onClick={handleUserClick}><p>CERRAR SESION</p></div>
+            </NavLink>
+            )}
 
         </div>
     </div>

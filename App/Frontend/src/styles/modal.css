@@ -40,6 +40,9 @@
 .modal__top.bad{
     background-color: var(--red-error-2);
 }
+.modal__info.info{
+    background-color: #6EB5FF;
+}
 .modal__body{
     display: flex;
     flex-direction: column;
@@ -56,7 +59,11 @@
     font-family: 'Amiri';
     font-size: .9rem;
 }
-
+.modal__buttons{
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+}
 .modal__button{
     max-width: 200px;
     background-color: var(--green-2);
@@ -73,6 +80,9 @@
 .modal__button.bad{
     background-color: var(--red-error-2);
 }
+.modal__button.info{
+    background-color: #6EB5FF
+}
 .modal__button:hover{
     background-color: var(--green-1);
     cursor: pointer;
@@ -83,5 +93,9 @@
 }
 .modal__button.bad:hover{
     background-color: var(--red-error);
+    cursor: pointer;
+}
+.modal__button.info:hover{
+    background-color:  #6EB5FF;
     cursor: pointer;
 }

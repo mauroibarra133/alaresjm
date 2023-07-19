@@ -80,10 +80,16 @@
     .nav__container.user{
         flex-direction: column;
         border-bottom-left-radius: 12px;
+        padding: 1rem;
+
     }
     .nav__item-container{
         width: 100%;
         border-right: 1px solid white;
+    }
+    .nav__item-container.user{
+        width: 100%;
+        border-right: none;
     }
     .nav__item{
         display: flex;
@@ -103,6 +109,7 @@
         align-self: stretch;
         border-bottom: 1px solid #FFF;
         padding: 1rem 1.125rem;
+        border-right: none;
     }
     .nav__item p{
         font-size: .8rem;

@@ -1,0 +1,114 @@
+@import '../fonts.css';
+@import '../variables.css';
+
+/* COntainer */
+.ranking__container{
+    width: 100%;
+    min-height: 100vh;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1rem;
+}
+/* Title */
+.ranking__title{
+    display: flex;
+    justify-content: center;
+}
+.ranking__title .mes, .ranking__title .año{
+    color: var(--black-1);
+    text-align: center;
+    font-family: 'Pirata One';
+    font-size: 1.75rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+/* Desc */
+.ranking__desc{
+    position: relative;
+    width: 100%;
+    display: flex;
+    padding: 0.8rem 0rem;
+    align-items: center;
+    gap: 0.625rem;
+    border-radius: 1.25rem;
+    border: 1px solid #DDD;
+    background: #E8E8E8;
+}
+.ranking__desc p{
+    color: #000;
+    text-align: center;
+    font-family: 'Amiri';
+    font-size: 0.875rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+.ranking__desc img{
+    position: absolute;
+    top: -2.2rem;
+    right: -1rem;
+    width: 50px;
+    object-fit: contain;
+}
+/* Table */
+.ranking__table-container{
+    display: flex;
+    padding: 1.8rem 0.5rem;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.625rem;
+    border-radius: 1.25rem;
+    background: #FFC692;
+    min-height: 300px;
+}
+
+.ranking__table-header{
+    width: 100%;
+    display: flex;
+    padding: 0rem 0.625rem 0.3125rem 0.625rem;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #000;
+}
+
+.ranking__table-body{
+    width: 100%;
+    display: flex;
+    padding: 0.625rem 0rem;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.625rem;
+}
+.ranking__table-row{
+    width: 100%;
+    display: flex;
+    padding: 0rem 0.625rem;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.ranking__cliente{
+    color: #000;
+    text-align: center;
+    font-family: Amiri;
+    font-size: 0.9375rem;
+    font-weight: 700;
+    line-height: 1.5rem; /* 160% */
+    letter-spacing: 0.00188rem;
+}
+
+/* First Positions */
+
+.ranking__table-row:first-child{
+    background: rgba(212, 149, 89, 0.60);
+}
+.ranking__table-row:nth-child(2){
+    background: rgba(212, 149, 89, 0.40);
+}
+.ranking__table-row:nth-child(3){
+    background: rgba(212, 149, 89, 0.20);
+}
