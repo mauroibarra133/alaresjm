@@ -27,3 +27,12 @@ export async function existsMail(email){
   }
 
 }
+export async function login(data){
+  const response = await axios.post('http://localhost:4000/api/login',data)
+  return response
+}
+
+export async function signup(data){
+  const response = await axios.post('http://localhost:4000/signup',data)
+  return response
+}

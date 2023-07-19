@@ -35,7 +35,7 @@ function Nav({clicked, handleBurgerClick}) {
             <NavLink to='/carta'   className='nav__item-container' >
                 <div className='nav__item' onClick={handleLocation}><p>NUESTRA CARTA</p></div>
             </NavLink>
-            <NavLink to='/clientes'   className='nav__item-container' >
+            <NavLink to='/ranking'   className='nav__item-container' >
                 <div className='nav__item' onClick={handleLocation}><p>MEJORES CLIENTES</p></div>
             </NavLink>
             <NavLink to='/delivery'   className='nav__item-container' >

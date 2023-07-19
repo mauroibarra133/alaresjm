@@ -1,10 +1,12 @@
 import { useId,useState } from 'react';
 import '../../styles/reserva/reservas.css'
 import {useForm} from 'react-hook-form'
-import axios from 'axios'
 import Modal from '../Modal'
 import {useAuth} from '../../hooks/useAuth'
 import {ONLY_LETTERS} from '../../utils/constants'
+import Path from '../Path';
+import { agregarReserva } from '../../services/reservas.services';
+
 function Reservas() {
 
     const customersId = useId()
@@ -39,15 +41,8 @@ function handleOpenModal(valor){
 async function onSubmit(data){
     console.log(data);
     try {
-        const response = await axios.post("http://localhost:4000/reservas",{
-            fecha: data.fecha,
-            hora: data.hora,
-            id_usuario: auth.data.user_id,
-            cantidad_personas: data.comensales,
-            lugar: data.zona,
-            cliente_reserva: data.cliente
-        });
-        console.log(response);
+        const reserva = await agregarReserva(data.fecha,data.hora,auth.data.user_id,data.comensales,data.zona,data.cliente)
+        console.log(reserva);
         handleOpenModal(true);
     } catch (error) {
         handleOpenModal(false);
@@ -57,6 +52,7 @@ async function onSubmit(data){
 }
     return (
         <div className="reservas__container">
+            <Path pathPrev={'Home'} pathActual={'Reservas'} goTo={'Home'}></Path>
             <div className="reservas__title"><h2>RESERVAS</h2></div>
             <div className="reservas__form-wrapper">
                 <form className="reservas__form" onSubmit={handleSubmit(onSubmit)}>

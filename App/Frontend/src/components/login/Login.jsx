@@ -3,12 +3,12 @@ import '../../styles/login/login.css'
 import logoImg from '../../assets/images/alares-logo.png'
 import {useForm} from 'react-hook-form';
 import { useId, useState } from 'react';
-import axios from 'axios'
 import { useNavigate,NavLink } from 'react-router-dom';
 import { useAuth } from '../../hooks/useAuth';
 import Modal from '../Modal'
 import foodImg from '../../assets/images/food-bg.png'
 import { EMAIL_REGEX, PASSWORD_REGEX } from '../../utils/constants';
+import { login } from '../../services/auth.services';
 
 function Login() {
     const {register, handleSubmit, formState} = useForm({
@@ -27,10 +27,11 @@ function Login() {
 })
      async function onSubmit(data){
         try {
-            const response = await axios.post('http://localhost:4000/api/login',data)
+            const response = await login(data)
+            console.log(response);
             if (response){
-                document.cookie = `token=${response.data.token}; max-age=${60 * 60}; path=/; samesite=strict`
-                console.log(response.data);
+                const oneHour = 60*60
+                document.cookie = `token=${response.data.token}; max-age=${oneHour}; path=/; samesite=strict; `
                 navigate('/')
                 isLogued()
                 setErrorStatus({
@@ -53,7 +54,7 @@ function Login() {
 
     return ( 
         <div className="login__container">
-            <Path pathPrev={'Home'} pathActual={'Login'}></Path>
+            <Path pathPrev={'Home'} pathActual={'Login'} goTo={'Home'}></Path>
             <div className="login__box-container">
                 <div className="login__box">
                         <img src={logoImg} alt="" className='login__logo' />

@@ -45,5 +45,8 @@ VALUES (@fecha, @id_usuario, @direccion, @nota, @total, @id_tipo_pago, @id_tipo_
     },
     Reservas: {
         addReserva: "INSERT INTO reservas (fecha,hora,id_usuario, cantidad_personas, lugar, cliente_reserva) VALUES (@fecha,@hora,@id_usuario,@cantidad_personas,@lugar,@cliente_reserva)"
+    },
+    Ranking: {
+        getRanking: "SELECT * FROM RankingPuntos ORDER BY Puntos DESC"
     }
 }

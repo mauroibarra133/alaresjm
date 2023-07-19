@@ -10,7 +10,8 @@ import FormDelivery from './FormDelivery';
 import { generateUniqueKey } from '../../utils/functions';
 import { initMercadoPago } from '@mercadopago/sdk-react'
 import Modal from '../Modal';
-import axios from 'axios';
+import { createPreferenceMP } from '../../services/mercadoPago.services';
+import { crearPedido } from '../../services/pedidos.services';
 
 function Delivery() {
 
@@ -33,16 +34,7 @@ function handleCloseModal(){
 }
 const createPreference = async ({nombreCliente, direccionCliente, tipoPago, tipoEntrega, notaPedido}) => {
   try {
-    const response = await axios.post("http://localhost:4000/create_preference", {
-      items: modifyCart(cart),
-      name: nombreCliente,
-      address: direccionCliente,
-      extra: {
-        tipoPago: tipoPago,
-        tipoEntrega: tipoEntrega,
-        notaPedido: notaPedido
-      }
-    });
+      const response= createPreferenceMP(modifyCart(cart), nombreCliente, direccionCliente, tipoPago, tipoEntrega, notaPedido)
     return response;
   } catch (error) {
     console.log(error);
@@ -64,18 +56,9 @@ const handleOrder = async (pedido) => {
       try {
         const fecha_hoy = new Date()
         const fecha_ISO = fecha_hoy.toISOString();
-        const response = await axios.post("http://localhost:4000/pedidos",{
-          fecha: fecha_ISO,
-          id_usuario: auth.data.user_id,
-          direccion: pedido.direccionCliente,
-          nota: pedido.notaPedido,
-          total: parseInt(pedido.total),
-          id_tipo_pago: parseInt(pedido.tipoPago),
-          id_estado: 28,
-          id_tipo_entrega: parseInt(pedido.tipoEntrega),
-          monto_cambio: parseInt(pedido.montoEft),
-          items: modifyCart(cart)
-        })
+        const response = await crearPedido(fecha_ISO, auth.data.user_id,  pedido.direccionCliente,pedido.notaPedido,parseInt(pedido.total),
+        parseInt(pedido.tipoPago),parseInt(pedido.tipoEntrega), parseInt(pedido.montoEft), modifyCart(cart) )
+
         console.log(response);
         if(response.status >= 200 && response.status < 300){
           console.log("salio bien wn");
@@ -128,7 +111,7 @@ const onSubmit = (data)=>{
     return ( 
         <>
         <div className="delivery__container" >
-            <Path pathPrev={'Home'} pathActual={Delivery.name}/>
+            <Path pathPrev={'Home'} pathActual={Delivery.name} goTo={'Home'}/>
             <div className="pedido__container">
                 <div className="pedido__items">
                     {cart.length === 0 ? <CartVacio/> : cart.map(product => (

@@ -114,4 +114,12 @@ CREATE TABLE estados_duda (
 	nombre VARCHAR(30)
 
 )
+
+CREATE TABLE RankingPuntos (
+    id_usuario INT PRIMARY KEY,
+    nombre VARCHAR(50),
+    apellido VARCHAR(50),
+    Puntos INT
+);
+
 */

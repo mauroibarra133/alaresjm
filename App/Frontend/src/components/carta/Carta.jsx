@@ -48,7 +48,7 @@ function Carta() {
     return ( 
         <>
             <div className='carta__container'>
-             <NavLink to={'/'}><Path pathPrev={'Home'} pathActual={'Carta'}/></NavLink>
+                <Path pathPrev={'Home'} pathActual={'Carta'}goTo={'Home'} />
                 <div className='carta__tags-container'>
                     <div className="carta__tags">
                         {categorias && categorias.map((categ)=> (

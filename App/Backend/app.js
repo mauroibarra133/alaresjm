@@ -8,6 +8,7 @@ import pedidosRouter from './routes/pedidos'
 import loginRouter from './routes/login'
 import usuariosRouter from './routes/usuarios'
 import reservasRouter from './routes/reservas'
+import rankingRouter from './routes/ranking'
 import mercadopagoRouter from './routes/mercadoPago'
 const app = express()
 
@@ -30,5 +31,6 @@ app.use(pedidosRouter)
 app.use(loginRouter)
 app.use(usuariosRouter)
 app.use(reservasRouter)
+app.use(rankingRouter)
 
 export default app

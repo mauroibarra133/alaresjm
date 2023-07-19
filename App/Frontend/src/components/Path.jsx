@@ -1,10 +1,16 @@
-import '../styles/path.css'
-
+import '../styles/path.css';
+import { useNavigate } from 'react-router-dom';
 // eslint-disable-next-line react/prop-types
-function Path({pathPrev,pathActual}) {
+function Path({pathPrev,pathActual, goTo}) {
+    const navigate = useNavigate();
+
+    function handleClick() {
+        navigate(`/${goTo}`.toLowerCase());
+    }
+
     return ( 
 
-        <div className="path__container"><p className='path'>{pathPrev}</p><span className='path-span'>{`/${pathActual}`}</span></div>
+        <div className="path__container"><p className='path' onClick={handleClick}>{pathPrev}</p><span className='path-span'>{`/${pathActual}`}</span></div>
 
      );
 }

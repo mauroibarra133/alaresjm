@@ -5,8 +5,7 @@ import { NavLink } from 'react-router-dom';
 import {useForm} from 'react-hook-form';
 import foodImg from '../../assets/images/food-bg.png'
 import { useId, useState } from 'react';
-import { existsMail } from '../../services/auth.services';
-import axios from 'axios'
+import { existsMail, signup } from '../../services/auth.services';
 import Modal from '../Modal'
 import { EMAIL_REGEX, ONLY_LETTERS, PASSWORD_REGEX } from '../../utils/constants';
 
@@ -47,7 +46,7 @@ function SignUp(){
 
             })
         }else{
-            const response = await axios.post('http://localhost:4000/signup',data);
+            const response = await signup(data)
             setShowModal({
                 isSubmitted: true,
                 isGood: true,
@@ -60,7 +59,7 @@ function SignUp(){
 
     return ( 
         <div className="login__container">
-        <Path pathPrev={'Home'} pathActual={'Login'}></Path>
+        <Path pathPrev={'Home'} pathActual={'Login'} goTo={'Home'}></Path>
         <div className="login__box-container">
             <div className="login__box">
                     <img src={logoImg} alt="" className='login__logo' />
