@@ -17,7 +17,7 @@ function NavUser({clicked, handleUserClick}) {
                 </NavLink>
             )}
             {auth.isLogin && (
-            <NavLink to='/a'  className='nav__item-container user' >
+            <NavLink to='/mi-cuenta'  className='nav__item-container user' >
                 <div className='nav__item user' onClick={handleUserClick}><p>MI CUENTA</p></div>
             </NavLink>
             )}

@@ -1,0 +1,39 @@
+@import '../variables.css';
+@import '../fonts.css';
+
+.micuenta__container{
+    min-height: 100vh;
+    height: auto;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
+    padding: 4rem 1rem;
+    background-color: var(--orange-1);
+}
+
+.micuenta__container h2{
+    font-family: 'Pirata One';
+}
+
+.micuenta__info{
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    width: 100%;
+    max-width: 250px;
+    margin: 0 auto;
+    background-color: #fff;
+    -webkit-box-shadow: 9px 7px 75px -22px rgba(140,138,135,1);
+    -moz-box-shadow: 9px 7px 75px -22px rgba(140,138,135,1);
+    box-shadow: 9px 7px 75px -22px rgba(140,138,135,1);
+    border-radius: 12px;
+    padding: 2rem;
+    box-sizing: content-box;
+}
+.micuenta__field{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+}
