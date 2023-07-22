@@ -22,12 +22,12 @@ function NavUser({clicked, handleUserClick}) {
             </NavLink>
             )}
                         {auth.isLogin && (
-            <NavLink to='/'  className='nav__item-container user' >
+            <NavLink to='/mis-pedidos'  className='nav__item-container user' >
                 <div className='nav__item user' onClick={handleUserClick}><p>MIS PEDIDOS</p></div>
             </NavLink>
             )}
                         {auth.isLogin && (
-            <NavLink to='/'  className='nav__item-container user' >
+            <NavLink to='/mis-reservas'  className='nav__item-container user' >
                 <div className='nav__item user' onClick={handleUserClick}><p>MIS RESERVAS </p></div>
             </NavLink>
             )}

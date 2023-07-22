@@ -28,7 +28,6 @@ function Login() {
      async function onSubmit(data){
         try {
             const response = await login(data)
-            console.log(response);
             if (response){
                 const oneHour = 60*60
                 document.cookie = `token=${response.data.token}; max-age=${oneHour}; path=/; samesite=strict; `

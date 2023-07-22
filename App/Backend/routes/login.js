@@ -20,6 +20,7 @@ router.post('/token/',(req,res)=>{
         if (err){
             res.status(403).json({msg: "No autorizado", data: data})
         }else{
+            // console.log(data);
             res.status(200).json({msg: "Exito", data})
         }
     })

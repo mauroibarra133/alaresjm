@@ -44,7 +44,11 @@ VALUES (@fecha, @id_usuario, @direccion, @nota, @total, @id_tipo_pago, @id_tipo_
         addUser: "INSERT INTO usuarios (fecha_creacion,nombre,apellido,email,contraseña,rol, puntos) VALUES (GETDATE(),@nombre, @apellido, @email, @password, @rol, @puntos)"
     },
     Reservas: {
-        addReserva: "INSERT INTO reservas (fecha,hora,id_usuario, cantidad_personas, lugar, cliente_reserva) VALUES (@fecha,@hora,@id_usuario,@cantidad_personas,@lugar,@cliente_reserva)"
+        addReserva: "INSERT INTO reservas (fecha,hora,id_usuario, cantidad_personas, lugar, cliente_reserva) VALUES (@fecha,@hora,@id_usuario,@cantidad_personas,@lugar,@cliente_reserva)",
+        getReservas: "SELECT * FROM reservas",
+        getReservasByDate: "SELECT * FROM reservas WHERE fecha = @fecha",
+        getReservasByUser: "SELECT * FROM reservas WHERE id_usuario = @user_id",
+        getReservasByUserAndDate: "SELECT * FROM reservas WHERE id_usuario = @user_id AND fecha = @fecha"
     },
     Ranking: {
         getRanking: "SELECT * FROM RankingPuntos ORDER BY Puntos DESC"

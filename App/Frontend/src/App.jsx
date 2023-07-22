@@ -15,6 +15,7 @@ import SignUp from './components/login/SignUp'
 import Reservas from './components/reserva/Reservas'
 import RankingClientes from './components/ranking/RankingClientes'
 import MiCuenta from './components/login/MiCuenta'
+import MisReservas from './components/reserva/MisReservas'
 
 function App() {
 
@@ -40,7 +41,16 @@ function App() {
           </RequireAuth>}/>
         <Route path='/api/login' element={<Login/>}> </Route>  
         <Route path='/signup' element={<SignUp/>}> </Route>  
-        <Route path='/mi-cuenta' element={<MiCuenta/>}> </Route>  
+        <Route path='/mi-cuenta' element={
+          <RequireAuth>
+              <MiCuenta/>
+          </RequireAuth>
+        }> </Route>  
+                <Route path='/mis-reservas' element={
+          <RequireAuth>
+              <MisReservas/>
+          </RequireAuth>
+        }> </Route>  
         <Route path='*' element={<ErrorPage/>}> </Route>
       </Routes>
       <Footer/>

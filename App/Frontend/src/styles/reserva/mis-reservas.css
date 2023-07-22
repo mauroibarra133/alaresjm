@@ -1,0 +1,160 @@
+@import '../fonts.css';
+@import '../variables.css';
+
+.misreservas__container{
+    min-height: 100vh;
+    height: auto;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+    padding: 2rem 1rem;
+    max-width: 700px;
+    background-color: #ffffff4c;
+    margin: 0 auto;
+}
+
+/* Tabla + filtro */
+.misreservas__form{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+
+}
+.misreservas__filter{
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: .2rem;
+}
+.misreservas__filter:hover{
+    cursor: pointer;
+    color: var(--gray-1);
+}
+.misreservas__filter p{
+    font-family: 'Lato';
+    font-size: .7rem;
+}
+.misreservas__filter img{
+    width: 15px;
+    height: 15px;
+}
+.misreservas__datos{
+    display: flex;
+    flex-direction: column;
+    padding: .5rem;
+    border-radius: 10px;
+    border: 1px solid var(--gray-1);
+}
+
+/* Header */
+.datos__header{
+    display: grid;
+    grid-template-columns: repeat(5,1fr);
+    justify-items: center;
+    border-bottom: 1px solid var(--gray-1);
+    padding-bottom: .4rem;
+}
+.datos__header p{
+    font-size: .9rem;
+    color: var(--gray-1);
+}
+
+/* Datos */
+
+.datos__body{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    padding-bottom: .5rem;
+    padding: .5rem 0;
+    gap: 1rem;
+}
+
+.datos__body-row{
+    display: grid;
+    grid-template-columns: repeat(5,1fr);
+}
+
+.datos__body-dato{
+    width: 100%;
+    font-size: .9rem;
+    color: var(--gray-2);
+}
+
+/* vacio */
+.datos__body.vacio{
+    padding: 2rem;
+}
+.misreservas__button{
+    display: flex;
+    justify-content: center;
+}
+.misreservas__button button{
+    background-color: var(--black-1);
+}
+
+/* fecha */
+.fecha{
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+}
+.fecha__today--container{
+    display: flex;
+    justify-content: center;
+    gap: .5rem;
+}
+.fecha__today--container img{
+    width: 15px;
+    height: 15px;
+    filter: hue-rotate(180deg);
+}
+.fecha__today{
+    color: var(--orange-2);
+}
+.fecha__today:hover{
+    color: var(--black-1);
+    cursor: pointer;
+}
+
+.fecha input:hover{
+    cursor: pointer;
+}
+.fecha__buscar{
+    display: flex;
+    justify-content: center;
+}
+.button{
+    background-color: var(--black-1);
+}
+.button img{
+    filter: invert(1);
+}
+
+/* Comensales */
+.datos__body-comensales{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: .3rem;
+}
+.user-icon{
+    width: 11px;
+    height: 11px;
+}
+.datos__body-dato.acciones{
+    display: flex;
+    justify-content: center;
+    gap: .5rem;
+}
+.datos__body-dato.acciones img{
+    width: 15px;
+    height: 15px;
+}
+
+/* Boton ocultar */
+

@@ -19,7 +19,9 @@ export async function login (req,res){
             if(password === (userData.contraseña).toString()){
                 const token = jwt.sign({    
                     email: userData.email,
-                    user: userData.usuario,
+                    nombre: userData.nombre,
+                    apellido: userData.apellido,
+                    puntos: userData.puntos,
                     user_id: userData.id,
                     rol: userData.rol
                 },config.secret_token, {expiresIn: "60m"})
