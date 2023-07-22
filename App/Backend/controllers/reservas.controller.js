@@ -2,7 +2,7 @@ import {getConnection, sql, queries} from '../database/' //Traigo la conexion de
 
 
 export async function addReserva(req,res){
-    let {fecha, hora, id_usuario, cantidad_personas, lugar, cliente_reserva} = req.body
+    let {fecha, hora, id_usuario, cantidad_personas, lugar, cliente_reserva, id_estado} = req.body
 
     try {
         const pool = await getConnection()
@@ -14,6 +14,7 @@ export async function addReserva(req,res){
         .input('cantidad_personas',sql.Int,cantidad_personas)
         .input('lugar',sql.VarChar,lugar)
         .input('cliente_reserva',sql.VarChar,cliente_reserva)
+        .input('id_estado',sql.Int,id_estado)
         .query(queries.Reservas.addReserva)
 
         res.status(200).json({msg: "Tu reserva se ha enviado correctamente"})        
@@ -76,4 +77,21 @@ export async function getReservas(req, res) {
     } catch (error) {
         console.log(error);
     }
+}
+
+export async function deleteReserva(req,res){
+    const id = req.params.id
+    try {
+        const pool = await getConnection();
+        await pool
+        .request()
+        .input('id', sql.Int, id)
+        .query(queries.Reservas.deleteReserva);
+        res.status(200).json({msg: "Reserva eliminada correctamente"})  
+    } catch (error) {
+        console.log(error);
+        
+    }
+      
+
 }

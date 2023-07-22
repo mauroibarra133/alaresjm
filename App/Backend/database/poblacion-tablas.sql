@@ -1,4 +1,9 @@
 /*
+
+
+INSERT INTO  estados_reserva (nombre) VALUES 
+('A confirmar'), ('Reservado'), ('Cancelado')
+
 INSERT INTO tìpos_pagos (nombre) VALUES
 ('Efectivo'), ('Transferencia')
 

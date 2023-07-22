@@ -45,7 +45,7 @@ function MisReservas() {
         //Si hay filtro
         if (isFilterActive) {
             const filterReservas = reservas.filter(reserva => {
-                if(reserva.fecha >= fechaHoy){
+                if(new Date(reserva.fecha).toISOString().split('T')[0] >= fechaHoy){
                     return reserva
                 }
             })
@@ -55,12 +55,9 @@ function MisReservas() {
             }
             //Si hay reservas
             return filterReservas.map(reserva => {
-                const fechaString = reserva.fecha;
-                const fecha = new Date(fechaString);
-                const fechaLegible = fecha.toLocaleDateString();
         
                 return (
-                    <Reserva reserva={reserva} fechaLegible={fechaLegible} key={reserva.id}/>
+                    <Reserva reserva={reserva}  key={reserva.id} fechaHoy={fechaHoy}/>
                 );
           });
         //si el filtro no está activo
@@ -74,7 +71,7 @@ function MisReservas() {
                 const fechaLegible = fecha.toLocaleDateString();
           
                 return (
-                    <Reserva fechaLegible={fechaLegible} reserva={reserva} key={reserva.id}/>
+                    <Reserva fechaLegible={fechaLegible} reserva={reserva} key={reserva.id} fechaHoy={fechaHoy}/>
                 );
               });
         }
@@ -109,6 +106,7 @@ function MisReservas() {
                         <p className="datos__header-column">Hora</p>
                         <p className="datos__header-column">Comens.</p>
                         <p className="datos__header-column">Lugar</p>
+                        <p className="datos__header-column">Estado</p>
                         <p className="datos__header-column">Acciones</p>
                     </div>
                     <div className="datos__body">

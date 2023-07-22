@@ -56,6 +56,7 @@ CREATE TABLE reservas (
 	cantidad_personas INT NOT NULL CHECK(cantidad_personas > 0),
 	lugar VARCHAR(30) NOT NULL,
 	cliente_reserva VARCHAR(30) NOT NULL,
+	id_estado INT;
 	FOREIGN KEY (id_usuario) REFERENCES usuarios(id)
 	ON DELETE NO ACTION
 	ON UPDATE CASCADE
@@ -121,5 +122,10 @@ CREATE TABLE RankingPuntos (
     apellido VARCHAR(50),
     Puntos INT
 );
+
+CREATE TABLE estados_reserva (
+	id INT IDENTITY(1,1) PRIMARY KEY,
+	nombre VARCHAR(25) NOT NULL
+)
 
 */

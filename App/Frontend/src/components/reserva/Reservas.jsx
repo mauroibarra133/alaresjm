@@ -6,13 +6,16 @@ import {useAuth} from '../../hooks/useAuth'
 import {ONLY_LETTERS} from '../../utils/constants'
 import Path from '../Path';
 import { agregarReserva } from '../../services/reservas.services';
+import { useNavigate } from 'react-router-dom';
 
 function Reservas() {
-
+    const navigate = useNavigate()
     const customersId = useId()
     const zoneId = useId()
     const clientId = useId()
     const {auth} = useAuth()
+    const today = new Date().toISOString().split('T')[0];
+
 const {register, handleSubmit,formState} = useForm({
         mode: 'onBlur'
     })
@@ -44,12 +47,32 @@ async function onSubmit(data){
         const reserva = await agregarReserva(data.fecha,data.hora,auth.data.user_id,data.comensales,data.zona,data.cliente)
         console.log(reserva);
         handleOpenModal(true);
+        navigate('/')
     } catch (error) {
         handleOpenModal(false);
         
     }
 
 }
+
+const validateDate = (value) => {
+    if (value < today) {
+      return 'La fecha debe ser mayor o igual a hoy.';
+    }
+    return true;
+  };
+
+  const validateTime = (value) => {
+    const selectedTime = new Date(`1970-01-01T${value}`);
+    const startTime = new Date(`1970-01-01T19:00`);
+    const endTime = new Date(`1970-01-01T23:00`);
+
+    if (selectedTime < startTime || selectedTime > endTime) {
+      return 'La hora debe estar entre las 19:00 y las 23:00.';
+    }
+    return true;
+  };
+
     return (
         <div className="reservas__container">
             <Path pathPrev={'Home'} pathActual={'Reservas'} goTo={'Home'}></Path>
@@ -59,16 +82,18 @@ async function onSubmit(data){
                     <div className="reservas__row">
                         <div>
                             <label htmlFor="">Fecha</label>
-                            <input type="date"  {...register("fecha",{required: true})} />
+                            <input type="date"  {...register("fecha",{required: true, validate: validateDate,})} />
                         </div>
                         {errors.fecha?.type === 'required' && <p role="alert" className='form-error'>La fecha es requerida.</p>}                               
+                        {errors.fecha?.type === 'validate' && <p role="alert" className='form-error'>La fecha es pasada.</p>}                               
                     </div>
                     <div className="reservas__row">
                         <div>
                             <label htmlFor="">Hora</label>
-                            <input type="time"  {...register("hora",{required: true})} />
+                            <input type="time"  {...register("hora",{required: true,validate: validateTime})} />
                         </div>
                         {errors.hora?.type === 'required' && <p role="alert" className='form-error'>La hora es requerida.</p>}                               
+                        {errors.hora?.type === 'validate' && <p role="alert" className='form-error'>Debe ser entre las 19:00hs y 23:00hs.</p>}                               
 
                     </div>
                     <div className="reservas__row">

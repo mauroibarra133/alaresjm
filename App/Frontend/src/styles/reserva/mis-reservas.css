@@ -53,7 +53,7 @@
 /* Header */
 .datos__header{
     display: grid;
-    grid-template-columns: repeat(5,1fr);
+    grid-template-columns: repeat(6,1fr);
     justify-items: center;
     border-bottom: 1px solid var(--gray-1);
     padding-bottom: .4rem;
@@ -76,14 +76,24 @@
 
 .datos__body-row{
     display: grid;
-    grid-template-columns: repeat(5,1fr);
+    grid-template-columns: repeat(6,1fr);
+    border-bottom: 1px solid var(--gray-1);
+    padding-bottom: 1rem;
+}
+.datos__body-row:last-child{
+    border:none
+
 }
 
 .datos__body-dato{
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 100%;
     font-size: .9rem;
     color: var(--gray-2);
 }
+
 
 /* vacio */
 .datos__body.vacio{
@@ -155,6 +165,16 @@
     width: 15px;
     height: 15px;
 }
-
+.datos__body-dato.acciones img:hover{
+    cursor: pointer;
+    filter: invert(.3);
+}
+.old{
+    filter: invert(.7);
+    pointer-events: none;
+}
+.new{
+    filter: invert(0);
+}
 /* Boton ocultar */
 

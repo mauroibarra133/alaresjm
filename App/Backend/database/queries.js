@@ -44,11 +44,21 @@ VALUES (@fecha, @id_usuario, @direccion, @nota, @total, @id_tipo_pago, @id_tipo_
         addUser: "INSERT INTO usuarios (fecha_creacion,nombre,apellido,email,contraseña,rol, puntos) VALUES (GETDATE(),@nombre, @apellido, @email, @password, @rol, @puntos)"
     },
     Reservas: {
-        addReserva: "INSERT INTO reservas (fecha,hora,id_usuario, cantidad_personas, lugar, cliente_reserva) VALUES (@fecha,@hora,@id_usuario,@cantidad_personas,@lugar,@cliente_reserva)",
-        getReservas: "SELECT * FROM reservas",
-        getReservasByDate: "SELECT * FROM reservas WHERE fecha = @fecha",
-        getReservasByUser: "SELECT * FROM reservas WHERE id_usuario = @user_id",
-        getReservasByUserAndDate: "SELECT * FROM reservas WHERE id_usuario = @user_id AND fecha = @fecha"
+        addReserva: "INSERT INTO reservas (fecha,hora,id_usuario, cantidad_personas, lugar, cliente_reserva,id_estado) VALUES (@fecha,@hora,@id_usuario,@cantidad_personas,@lugar,@cliente_reserva, @id_estado)",
+        getReservas: `SELECT R.id,R.fecha,R.hora,R.id_usuario,R.cantidad_personas,R.lugar,R.cliente_reserva,E.nombre as estado
+                        FROM reservas R
+                        JOIN estados_reserva E ON E.id = R.id_estado`,
+        getReservasByDate: `SELECT R.id,R.fecha,R.hora,R.id_usuario,R.cantidad_personas,R.lugar,R.cliente_reserva,E.nombre as estado
+                            FROM reservas R
+                             JOIN estados_reserva E ON E.id = R.id_estado
+                             WHERE R.fecha = @fecha`,
+        getReservasByUser: `SELECT R.id,R.fecha,R.hora,R.id_usuario,R.cantidad_personas,R.lugar,R.cliente_reserva,E.nombre as estado
+        FROM reservas R
+        JOIN estados_reserva E ON E.id = R.id_estado WHERE R.id_usuario = @user_id`,
+        getReservasByUserAndDate: `SELECT R.id,R.fecha,R.hora,R.id_usuario,R.cantidad_personas,R.lugar,R.cliente_reserva,E.nombre as estado
+        FROM reservas R
+        JOIN estados_reserva E ON E.id = R.id_estado WHERE id_usuario = @user_id AND fecha = @fecha` ,
+        deleteReserva: `DELETE FROM reservas WHERE id = @id`
     },
     Ranking: {
         getRanking: "SELECT * FROM RankingPuntos ORDER BY Puntos DESC"

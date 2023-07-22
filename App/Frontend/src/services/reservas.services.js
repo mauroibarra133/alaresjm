@@ -7,7 +7,8 @@ export async function agregarReserva(fecha,hora,id_usuario, cantidad,lugar,clien
         id_usuario: id_usuario,
         cantidad_personas: cantidad,
         lugar: lugar,
-        cliente_reserva: cliente_reserva
+        cliente_reserva: cliente_reserva,
+        id_estado: 1
     });
     return response
 }
@@ -20,4 +21,13 @@ export async function getReservas(user_id) {
     console.log(response);
     return response;
   }
-  
+
+  export async function deleteReserva(id){
+    try {
+        const response = await axios.delete(`http://localhost:4000/reservas/${id}`)
+        return response
+    
+    } catch (error) {
+        return error
+    }
+}
