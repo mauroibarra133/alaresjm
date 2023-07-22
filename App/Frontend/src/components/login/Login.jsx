@@ -25,18 +25,28 @@ function Login() {
         existError: false,
         msg: ''
 })
+
+function handleCloseModal(){
+    const estado = setErrorStatus.existError
+    setErrorStatus({
+        isSubmitted: false,
+        existError: false,
+        msg: ""
+    })
+    !estado ? navigate('/') : null
+
+}
      async function onSubmit(data){
         try {
             const response = await login(data)
             if (response){
                 const oneHour = 60*60
                 document.cookie = `token=${response.data.token}; max-age=${oneHour}; path=/; samesite=strict; `
-                navigate('/')
                 isLogued()
                 setErrorStatus({
                     isSubmitted: true,
                     existError: false,
-                    msg: response.data.msg
+                    msg: "Ha sido logueado correctamente"
                 })
             }
         } catch (error) {
@@ -95,7 +105,7 @@ function Login() {
                 </div>
             </div>
             <Modal isSubmitted={errorStatus.isSubmitted} isGoodStatus={!errorStatus.existError} msg={errorStatus.msg}
-            handleSubmit={setErrorStatus}
+            handleSubmit={handleCloseModal}
             ></Modal>
         </div>
 

@@ -1,20 +1,20 @@
 import Path from '../Path'
 import '../../styles/login/login.css'
 import logoImg from '../../assets/images/alares-logo.png'
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import {useForm} from 'react-hook-form';
 import foodImg from '../../assets/images/food-bg.png'
-import { useId, useState } from 'react';
+import { useId, useState} from 'react';
 import { existsMail, signup } from '../../services/auth.services';
 import Modal from '../Modal'
 import { EMAIL_REGEX, ONLY_LETTERS, PASSWORD_REGEX } from '../../utils/constants';
 
 function SignUp(){
-    const {register, handleSubmit, formState} = useForm({
+    const {register, handleSubmit, formState, reset} = useForm({
         mode: 'onBlur',
     });
     const {errors} = formState;
-
+    const navigate = useNavigate()
     const emailId = useId();
     const passwordId = useId();
     const nameId = useId();
@@ -27,11 +27,13 @@ function SignUp(){
     });
 
     function closeModal(){
+        const estado = showModal.isGood
         setShowModal({
             isSubmitted: false,
             isGood: false,
             msg: ""
-        })
+        });
+        estado ? navigate('/api/login') : null
     }
     async function onSubmit(data){
         const isAlreadyExist = await existsMail(data.regEmail)
@@ -52,6 +54,7 @@ function SignUp(){
                 isGood: true,
                 msg: "El usuario ha sido creado correctamente"
             })
+            reset()
             console.log(response);
         }
     }
