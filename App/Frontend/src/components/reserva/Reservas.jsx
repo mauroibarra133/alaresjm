@@ -7,6 +7,7 @@ import {ONLY_LETTERS} from '../../utils/constants'
 import Path from '../Path';
 import { agregarReserva } from '../../services/reservas.services';
 import { useNavigate } from 'react-router-dom';
+import { validateDate, validateTime } from "../../utils/functions";
 
 function Reservas() {
     const navigate = useNavigate()
@@ -14,7 +15,6 @@ function Reservas() {
     const zoneId = useId()
     const clientId = useId()
     const {auth} = useAuth()
-    const today = new Date().toISOString().split('T')[0];
 
 const {register, handleSubmit,formState} = useForm({
         mode: 'onBlur'
@@ -32,6 +32,7 @@ function handleCloseModal(){
     isGood: false,
     msg: ""});
     }
+    navigate('/')
 
 function handleOpenModal(valor){
     setShowModal({
@@ -47,7 +48,6 @@ async function onSubmit(data){
         const reserva = await agregarReserva(data.fecha,data.hora,auth.data.user_id,data.comensales,data.zona,data.cliente)
         console.log(reserva);
         handleOpenModal(true);
-        navigate('/')
     } catch (error) {
         handleOpenModal(false);
         
@@ -55,23 +55,7 @@ async function onSubmit(data){
 
 }
 
-const validateDate = (value) => {
-    if (value < today) {
-      return 'La fecha debe ser mayor o igual a hoy.';
-    }
-    return true;
-  };
 
-  const validateTime = (value) => {
-    const selectedTime = new Date(`1970-01-01T${value}`);
-    const startTime = new Date(`1970-01-01T19:00`);
-    const endTime = new Date(`1970-01-01T23:00`);
-
-    if (selectedTime < startTime || selectedTime > endTime) {
-      return 'La hora debe estar entre las 19:00 y las 23:00.';
-    }
-    return true;
-  };
 
     return (
         <div className="reservas__container">

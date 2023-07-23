@@ -18,7 +18,8 @@
     --overlay-1: rgba(0, 0, 0, 0.5);
     --overlay-2:rgba(0, 0, 0, 0.3);
     --overlay-z: 1;
-    --modal-z: 10000;
+    --modal-info-z: 10000;
+    --modal-z: 100000;
     --header-z: 1000;
     --nav-z: 100;
     --normal-z: 10;

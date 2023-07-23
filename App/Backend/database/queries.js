@@ -58,7 +58,9 @@ VALUES (@fecha, @id_usuario, @direccion, @nota, @total, @id_tipo_pago, @id_tipo_
         getReservasByUserAndDate: `SELECT R.id,R.fecha,R.hora,R.id_usuario,R.cantidad_personas,R.lugar,R.cliente_reserva,E.nombre as estado
         FROM reservas R
         JOIN estados_reserva E ON E.id = R.id_estado WHERE id_usuario = @user_id AND fecha = @fecha` ,
-        deleteReserva: `DELETE FROM reservas WHERE id = @id`
+        deleteReserva: `DELETE FROM reservas WHERE id = @id`,
+        updateReserva: `UPDATE reservas SET fecha = @fecha, hora = @hora, cantidad_personas = @comensales, lugar = @zona, cliente_reserva = @cliente
+        WHERE id = @id`
     },
     Ranking: {
         getRanking: "SELECT * FROM RankingPuntos ORDER BY Puntos DESC"

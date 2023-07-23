@@ -95,3 +95,27 @@ export async function deleteReserva(req,res){
       
 
 }
+
+export async function updateReserva(req, res) {
+    const id = req.params.id;
+    const updatedData = req.body; // Asumiendo que los datos actualizados están en el cuerpo de la solicitud
+
+    try {
+        const pool = await getConnection();
+        await pool
+            .request()
+            .input('id', sql.Int, id)
+            // Aquí deberías usar los campos correspondientes de la tabla de reservas y sus valores actualizados
+            .input('fecha', sql.Date, updatedData.fecha)
+            .input('hora', sql.VarChar, updatedData.hora)
+            .input('comensales', sql.Int, parseInt(updatedData.comensales))
+            .input('zona', sql.VarChar, updatedData.zona)
+            .input('cliente', sql.VarChar, updatedData.cliente)
+            .query(queries.Reservas.updateReserva);
+
+        res.status(200).json({ msg: "Reserva modificada correctamente" });
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ msg: "Error al modificar la reserva" });
+    }
+}

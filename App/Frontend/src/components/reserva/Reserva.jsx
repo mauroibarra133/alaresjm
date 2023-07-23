@@ -7,9 +7,14 @@ import '../../styles/reserva/mis-reservas.css'
 import {convertirHoraADate, calcularTiempoRestante} from '../../utils/functions'
 import Modal from '../Modal'
 import {deleteReserva} from '../../services/reservas.services'
+import ModalModificar from './ModalModificar'
+import Overlay from '../Overlay'
+
+
 function Reserva({reserva, fechaHoy}) { // fechaHoy: YYYY-MM-DD
   const fechaReserva = new Date(reserva.fecha).toISOString().split('T')[0]
   const tiempoParaCancelar = 1
+  console.log(reserva);
   const [showModal, setShowModal] = useState(
     {
       isClicked: false,
@@ -17,11 +22,16 @@ function Reserva({reserva, fechaHoy}) { // fechaHoy: YYYY-MM-DD
       msg: ''
     }
   )
+  const [showModalUpdate, setShowModalUpdate] = useState(false);
+
     function closeModal(){
       setShowModal({
         isClicked: false,
         isGood: false,
       })
+    }
+    function closeUpdateModal(){
+      setShowModalUpdate(false)
     }
     function openModal(estado,msg){
       setShowModal({
@@ -42,15 +52,33 @@ function Reserva({reserva, fechaHoy}) { // fechaHoy: YYYY-MM-DD
             
           }else{
             openModal(false, "Hubo un error al eliminar su reserva, intente mas tarde")
-
           }
-
         }else{
           console.log("Es muy tarde");
           openModal(false, `No se puede cancelar la reserva faltando menos de ${tiempoParaCancelar} hora/s`)
         }
       }
     }  
+    async function handleUpdate(){
+      if( fechaReserva<= fechaHoy){
+        const horaReserva = convertirHoraADate(reserva.hora)
+        const horaRestante = calcularTiempoRestante(horaReserva)
+        if(horaRestante >= tiempoParaCancelar){
+          console.log('Se puede modificar');
+          setShowModalUpdate(true)
+          // const response = await deleteReserva(reserva.id)
+          // if(response.status == 200){
+          //   openModal(true, "Reserva modificada correctamente")
+            
+          // }else{
+          //   openModal(false, "Hubo un error al eliminar su reserva, intente mas tarde")
+          // }
+        }else{
+          console.log("Es muy tarde");
+          openModal(false, `No se puede modificar la reserva faltando menos de ${tiempoParaCancelar} hora/s`)
+        }
+      }
+    }
     const fechaFormateada = `${fechaReserva.substring(8, 10)}/${fechaReserva.substring(5, 7)}`;
     return ( 
 
@@ -64,10 +92,17 @@ function Reserva({reserva, fechaHoy}) { // fechaHoy: YYYY-MM-DD
         <div className="datos__body-dato">{reserva.lugar}</div>
         <div className="datos__body-dato">{reserva.estado}</div>
         <div className="datos__body-dato acciones">
-            <img src={pencilImg} alt="" className={fechaReserva < fechaHoy? 'old' : 'new'}/>
+            <img src={pencilImg} alt="" className={fechaReserva < fechaHoy? 'old' : 'new'} onClick={()=>handleUpdate()}/>
             <img src={cruzImg} alt="" className={fechaReserva < fechaHoy ? 'old' : 'new'} onClick={()=>handleDelete()}/>
         </div>
   <Modal isSubmitted={showModal.isClicked} isGoodStatus={showModal.isGood} handleSubmit={closeModal} msg={showModal.msg} position={'top'}></Modal>
+  {
+    showModalUpdate && (  
+    <Overlay comp={'reserva'}>
+      <ModalModificar showModalUpdate={showModalUpdate} reserva={reserva} handleCloseModalUpdate={closeUpdateModal}></ModalModificar>
+    </Overlay>)
+  }
+
       </div>
      );
 }

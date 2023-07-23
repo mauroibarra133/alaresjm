@@ -31,3 +31,11 @@ export async function getReservas(user_id) {
         return error
     }
 }
+export async function updateReserva(id, updatedData) {
+    try {
+        const response = await axios.put(`http://localhost:4000/reservas/${id}`, updatedData);
+        return response;
+    } catch (error) {
+        return error;
+    }
+}
