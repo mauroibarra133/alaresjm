@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import '../styles/modal.css';
 
 // eslint-disable-next-line react/prop-types
-function Modal({ isSubmitted, handleSubmit, msg, isGoodStatus, position }) {
+function Modal({ isSubmitted, handleSubmit, msg, isGoodStatus, position, offset }) {
   const [modalPosition, setModalPosition] = useState(0);
 
   useEffect(() => {
@@ -23,7 +23,7 @@ function Modal({ isSubmitted, handleSubmit, msg, isGoodStatus, position }) {
       {isSubmitted && (
         <div
           className={`modal__container`}
-          style={{ top: `${ position == "top" ? modalPosition+'px' : 0}`,
+          style={{ top: `${ position == "top" ? modalPosition+'px' : (offset || 0)+'px'}`,
                     left:0
         }}
         >

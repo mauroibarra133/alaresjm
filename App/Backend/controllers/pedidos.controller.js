@@ -70,3 +70,26 @@ export async function addOrderEft(req,res){
     }
     
 }   
+
+export async function getPedidos(req, res) {
+    let result;
+    try {
+        let date = req.query.date;
+        let user_id = req.query.user_id
+
+        //Buscar por user
+        if(user_id || user_id !== undefined){
+            const pool = await getConnection();
+             result = await pool
+                .request()
+                .input('user_id', sql.Int, user_id)
+                .query(queries.Pedidos.getPedidosById);
+                res.status(200).json({msg: "Datos obtenidos correctamente", data: result.recordset})  
+        }
+
+    
+        console.log(result);
+    } catch (error) {
+        console.log(error);
+    }
+}

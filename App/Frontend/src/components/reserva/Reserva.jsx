@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import userImg from '../../assets/images/header-user.svg'
 import pencilImg from '../../assets/images/pencil-solid.svg'
 import cruzImg from '../../assets/images/xmark-solid.svg'
@@ -9,12 +9,29 @@ import Modal from '../Modal'
 import {deleteReserva} from '../../services/reservas.services'
 import ModalModificar from './ModalModificar'
 import Overlay from '../Overlay'
+import goodStatus from '../../assets/images/comprobado.png'
+import waitStatus from '../../assets/images/procesando.png'
+import badStatus from '../../assets/images/cancelar.png'
 
+const statusReservas = [
+  {
+    status: "A Confirmar",
+    img: waitStatus
+  },
+  {
+    status: "Reservado",
+    img: goodStatus
+  },
+  {
+    status: "Cancelado",
+    img: badStatus
+  }
+];
 
 function Reserva({reserva, fechaHoy}) { // fechaHoy: YYYY-MM-DD
   const fechaReserva = new Date(reserva.fecha).toISOString().split('T')[0]
-  const tiempoParaCancelar = 1
-  console.log(reserva);
+  const tiempoParaCancelar = 1 //En horas
+  const [isLargeScreen, setIsLargeScreen] = useState(window.innerWidth > 768);  
   const [showModal, setShowModal] = useState(
     {
       isClicked: false,
@@ -24,13 +41,22 @@ function Reserva({reserva, fechaHoy}) { // fechaHoy: YYYY-MM-DD
   )
   const [showModalUpdate, setShowModalUpdate] = useState(false);
 
-    function closeModal(){
+  function getStatusImage(status) {
+    const reservaStatus = statusReservas.find(item => item.estado === status);
+    if (reservaStatus) {
+      return reservaStatus.img;
+    }
+
+    // Si el estado no se encuentra en statusReservas, devolvemos null o alguna imagen por defecto
+    return null;
+  }
+  function closeModal(){
       setShowModal({
         isClicked: false,
         isGood: false,
       })
     }
-    function closeUpdateModal(){
+  function closeUpdateModal(){
       setShowModalUpdate(false)
     }
     function openModal(estado,msg){
@@ -80,6 +106,18 @@ function Reserva({reserva, fechaHoy}) { // fechaHoy: YYYY-MM-DD
       }
     }
     const fechaFormateada = `${fechaReserva.substring(8, 10)}/${fechaReserva.substring(5, 7)}`;
+
+    useEffect(() => {
+      const handleResize = () => {
+        setIsLargeScreen(window.innerWidth > 768);
+      };
+  
+      window.addEventListener('resize', handleResize);
+      return () => {
+        window.removeEventListener('resize', handleResize);
+      };
+    }, []);
+
     return ( 
 
         <div className="datos__body-row" key={reserva.id}>
@@ -90,7 +128,13 @@ function Reserva({reserva, fechaHoy}) { // fechaHoy: YYYY-MM-DD
           {reserva.cantidad_personas}
         </div>
         <div className="datos__body-dato">{reserva.lugar}</div>
-        <div className="datos__body-dato">{reserva.estado}</div>
+        <div className="datos__body-dato">
+          <img src={getStatusImage()} alt="" className='status-img'/>
+          {isLargeScreen && (
+            <p>{reserva.estado}</p>
+          )}
+          
+        </div>
         <div className="datos__body-dato acciones">
             <img src={pencilImg} alt="" className={fechaReserva < fechaHoy? 'old' : 'new'} onClick={()=>handleUpdate()}/>
             <img src={cruzImg} alt="" className={fechaReserva < fechaHoy ? 'old' : 'new'} onClick={()=>handleDelete()}/>

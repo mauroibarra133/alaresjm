@@ -24,11 +24,21 @@ function ModalModificar({showModalUpdate,reserva, handleCloseModalUpdate}) {
 
     const {errors} = formState;
     function closeModal(){
-        setShowModal({
-            isSubmitted: false,
-            isGood: false,
-            msg: ''
-        })
+        if(!showModal.isGood){
+            setShowModal({
+                isSubmitted: false,
+                isGood: false,
+                msg: ''
+            })
+        }else{
+            setShowModal({
+                isSubmitted: false,
+                isGood: false,
+                msg: ''
+            })
+            handleCloseModalUpdate()
+        }
+
     }
     function openModal(status){
         setShowModal({
@@ -115,11 +125,11 @@ function ModalModificar({showModalUpdate,reserva, handleCloseModalUpdate}) {
                             </div>
                         </form>
                     </div>
-                <Modal isSubmitted={showModal.isSubmitted} isGoodStatus={showModal.isGood} handleSubmit={closeModal} msg={showModal.msg} ></Modal>
+                <Modal isSubmitted={showModal.isSubmitted} isGoodStatus={showModal.isGood} handleSubmit={closeModal} msg={showModal.msg} offset={-120}></Modal>
                 </div>
         )}
         </>
      );
 }
 
-export default ModalModificar;
+export default ModalModificar;  

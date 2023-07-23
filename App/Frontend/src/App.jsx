@@ -16,6 +16,7 @@ import Reservas from './components/reserva/Reservas'
 import RankingClientes from './components/ranking/RankingClientes'
 import MiCuenta from './components/login/MiCuenta'
 import MisReservas from './components/reserva/MisReservas'
+import MisPedidos from './components/pedidos/MisPedidos'
 
 function App() {
 
@@ -49,6 +50,11 @@ function App() {
                 <Route path='/mis-reservas' element={
           <RequireAuth>
               <MisReservas/>
+          </RequireAuth>
+        }> </Route>  
+            <Route path='/mis-pedidos' element={
+          <RequireAuth>
+              <MisPedidos/>
           </RequireAuth>
         }> </Route>  
         <Route path='*' element={<ErrorPage/>}> </Route>

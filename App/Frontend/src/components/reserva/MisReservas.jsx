@@ -4,7 +4,7 @@ import eyeImg from '../../assets/images/eye-slash.svg'
 import {  useEffect, useState } from 'react';
 import {useAuth} from '../../hooks/useAuth'
 import {getReservas} from '../../services/reservas.services'
-import MisReservasVacio from './MisReservasVacio';
+import MisReservasVacio from '../FormVacio';
 import Reserva from './Reserva';
 
 // import flashImg from '../../assets/images/bolt-solid.svg'
@@ -39,7 +39,7 @@ function MisReservas() {
         const fechaHoy = new Date().toISOString().split('T')[0]
         //Si no tenemos reservas
         if(!reservas){
-            return <MisReservasVacio></MisReservasVacio>
+            return <MisReservasVacio msg={"Aun no tienes ninguna reserva hoy"} msgButton={"RESERVAR"} goTo={'reservas'}></MisReservasVacio>
 
         }
         //Si hay filtro
@@ -80,7 +80,7 @@ function MisReservas() {
       
     return ( 
         <div className="misreservas__container">
-            <Path pathPrev={'Home'} pathActual={'Mis Reservas'}></Path>
+            <Path pathPrev={'Home'} pathActual={'Mis Reservas'} goTo={'home'}></Path>
             {/* <div className="fecha">
                 <div className="fecha__today--container">
                     <img src={flashImg} alt="" />
@@ -111,8 +111,6 @@ function MisReservas() {
                     </div>
                     <div className="datos__body">
                         {(handleReservas())}
-
-
                     </div>
                 </div>
             </div>
