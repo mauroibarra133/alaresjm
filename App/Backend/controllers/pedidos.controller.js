@@ -74,8 +74,7 @@ export async function addOrderEft(req,res){
 export async function getPedidos(req, res) {
     let result;
     try {
-        let date = req.query.date;
-        let user_id = req.query.user_id
+        let user_id = req.body.user_id
 
         //Buscar por user
         if(user_id || user_id !== undefined){

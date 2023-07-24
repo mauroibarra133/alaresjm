@@ -1,0 +1,74 @@
+.verpedidos{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+.verpedidos__fechas{
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+}
+.verpedidos__fecha-ayer, .verpedidos__fecha-hoy{
+    background-color: var(--blue-2);
+}
+
+/* Tabla */
+.verpedidos__pedidos{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: .5rem;
+    border-radius: 10px;
+    border: 1px solid var(--gray-1);
+    max-width: 1200px;
+    margin: 0 auto;
+    overflow-x: auto;
+}
+
+.verpedidos__header{
+    width: 768px;
+    display: grid;
+    grid-template-columns: repeat(8,1fr);
+    justify-items: center;
+    border-bottom: 1px solid var(--gray-1);
+    padding-bottom: .4rem;
+    font-size: .9rem;
+    color: var(--gray-1);
+    overflow-x: auto;
+
+}
+.verpedidos__body{
+    display: flex;
+    width: 768px;
+    flex-direction: column;
+    justify-content: space-around;
+    padding-bottom: .5rem;
+    padding: .5rem 0;
+    gap: 1rem;
+}
+
+.verpedidos__body-row{
+    display: grid;
+    grid-template-columns: repeat(8,1fr);
+    border-bottom: 1px solid var(--gray-1);
+    padding-bottom: 1rem;
+    gap: .5rem;
+}
+.verpedidos__dato-estado{
+    width: 30px;
+}
+.verpedidos__body .verpedidos__body-row:last-child{
+    border:none
+
+}
+
+@media only screen and (min-width: 768px){
+.verpedidos__body, .verpedidos__header{
+    width: 100%;
+}
+.verpedidos__dato-estado{
+    width: 100%;
+    max-width: 130px;
+}
+}

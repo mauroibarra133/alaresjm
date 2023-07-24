@@ -23,6 +23,9 @@
     line-height: 1.5rem;
     letter-spacing: 0.00188rem;
 }
+.path.Dashboard{    
+    color: #89a6ef;
+}
 .path:hover{
     filter: brightness(.7);
     cursor: pointer;

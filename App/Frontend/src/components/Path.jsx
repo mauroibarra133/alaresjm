@@ -10,7 +10,7 @@ function Path({pathPrev,pathActual, goTo}) {
 
     return ( 
 
-        <div className="path__container"><p className='path' onClick={handleClick}>{pathPrev}</p><span className='path-span'>{`/${pathActual}`}</span></div>
+        <div className="path__container"><p className={`path ${pathPrev == 'Dashboard' ? 'Dashboard' : ''}`} onClick={handleClick}>{pathPrev}</p><span className='path-span'>{`/${pathActual}`}</span></div>
 
      );
 }

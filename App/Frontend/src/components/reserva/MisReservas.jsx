@@ -34,16 +34,17 @@ function MisReservas() {
         searchReservas().then(data => setReservas(data.data))
     },[auth.data.user_id])
 
-
+console.log(reservas);
     function handleReservas() {
         const fechaHoy = new Date().toISOString().split('T')[0]
         //Si no tenemos reservas
-        if(!reservas){
+        if(reservas === undefined || reservas.length <= 0){
             return <MisReservasVacio msg={"Aun no tienes ninguna reserva hoy"} msgButton={"RESERVAR"} goTo={'reservas'}></MisReservasVacio>
 
         }
         //Si no hay
         if(!isFilterActive){
+            if(reservas.length > 0){
             return reservas.map(reserva => {
                 const fechaString = reserva.fecha;
                 const fecha = new Date(fechaString);
@@ -54,6 +55,9 @@ function MisReservas() {
                 );
               });
         }
+    }else{
+            return <MisReservasVacio msg={"Aun no tienes ninguna reserva hoy"} msgButton={"RESERVAR"} goTo={'reservas'}></MisReservasVacio>
+    }
         //Si hay filtro
         if (isFilterActive) {
             const filterReservas = reservas.filter(reserva => {
@@ -61,10 +65,6 @@ function MisReservas() {
                     return reserva
                 }
             })
-            //Si no hay reservas en el dia de hoy
-            if(filterReservas.length <= 0){
-                return <MisReservasVacio msg={"Aun no tienes ninguna reserva hoy"} msgButton={"RESERVAR"} goTo={'reservas'}></MisReservasVacio>
-            }
             //Si hay reservas
             return filterReservas.map(reserva => {
         

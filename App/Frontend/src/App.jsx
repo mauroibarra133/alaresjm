@@ -17,6 +17,8 @@ import RankingClientes from './components/ranking/RankingClientes'
 import MiCuenta from './components/login/MiCuenta'
 import MisReservas from './components/reserva/MisReservas'
 import MisPedidos from './components/pedidos/MisPedidos'
+import DashBoard from './components/gestion/DashBoard'
+import VerPedidos from './components/gestion/VerPedidos'
 
 function App() {
 
@@ -45,18 +47,24 @@ function App() {
         <Route path='/mi-cuenta' element={
           <RequireAuth>
               <MiCuenta/>
-          </RequireAuth>
-        }> </Route>  
-                <Route path='/mis-reservas' element={
+          </RequireAuth>}> 
+        </Route>  
+        <Route path='/mis-reservas' element={
           <RequireAuth>
               <MisReservas/>
-          </RequireAuth>
-        }> </Route>  
-            <Route path='/mis-pedidos' element={
+          </RequireAuth>}>
+        </Route>  
+        <Route path='/mis-pedidos' element={
           <RequireAuth>
               <MisPedidos/>
-          </RequireAuth>
-        }> </Route>  
+          </RequireAuth>}> 
+        </Route>  
+        <Route path='/dashboard' element={
+          <RequireAuth>
+              <DashBoard/>
+          </RequireAuth>}> 
+        </Route> 
+        <Route path='/dashboard/ver-pedidos' element={<VerPedidos/>}></Route> 
         <Route path='*' element={<ErrorPage/>}> </Route>
       </Routes>
       <Footer/>

@@ -9,10 +9,9 @@ import Pedido from './Pedido';
 
 function MisPedidos() {
     const [isFilterActive, setFilterActive] = useState(false);
-    const [pedidos,setPedidos] = useState();
+    const [pedidos,setPedidos] = useState([]);
     const {auth} = useAuth()
     const fechaHoy = new Date().toISOString().split('T')[0]
-    
     useEffect(()=>{
         async function searchReservas(){
             if(auth.data.user_id){
@@ -21,11 +20,11 @@ function MisPedidos() {
             }
         }
 
-        searchReservas().then(data => setPedidos(data.data))
+        searchReservas().then(data => setPedidos(data.data)).catch(setPedidos([]))
     },[auth.data.user_id])
 
 function handlePedidos(){
-    if(!pedidos){
+    if(pedidos.length <= 0){
         return <MisPedidosVacio goTo={'delivery'} msg={"Aun no tienes ningun pedido hoy"} msgButton={"PEDIR"}></MisPedidosVacio>
     }else{
 
