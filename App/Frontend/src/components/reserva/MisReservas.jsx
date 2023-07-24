@@ -42,29 +42,8 @@ function MisReservas() {
             return <MisReservasVacio msg={"Aun no tienes ninguna reserva hoy"} msgButton={"RESERVAR"} goTo={'reservas'}></MisReservasVacio>
 
         }
-        //Si hay filtro
-        if (isFilterActive) {
-            const filterReservas = reservas.filter(reserva => {
-                if(new Date(reserva.fecha).toISOString().split('T')[0] >= fechaHoy){
-                    return reserva
-                }
-            })
-            //Si no hay reservas en el dia de hoy
-            if(filterReservas.length <= 0){
-                return <MisReservasVacio></MisReservasVacio>
-            }
-            //Si hay reservas
-            return filterReservas.map(reserva => {
-        
-                return (
-                    <Reserva reserva={reserva}  key={reserva.id} fechaHoy={fechaHoy}/>
-                );
-          });
-        //si el filtro no está activo
-        }else{
-            if(reservas <= 0){
-                return <MisReservasVacio></MisReservasVacio>
-            }
+        //Si no hay
+        if(!isFilterActive){
             return reservas.map(reserva => {
                 const fechaString = reserva.fecha;
                 const fecha = new Date(fechaString);
@@ -75,7 +54,25 @@ function MisReservas() {
                 );
               });
         }
-    
+        //Si hay filtro
+        if (isFilterActive) {
+            const filterReservas = reservas.filter(reserva => {
+                if(new Date(reserva.fecha).toISOString().split('T')[0] >= fechaHoy){
+                    return reserva
+                }
+            })
+            //Si no hay reservas en el dia de hoy
+            if(filterReservas.length <= 0){
+                return <MisReservasVacio msg={"Aun no tienes ninguna reserva hoy"} msgButton={"RESERVAR"} goTo={'reservas'}></MisReservasVacio>
+            }
+            //Si hay reservas
+            return filterReservas.map(reserva => {
+        
+                return (
+                    <Reserva reserva={reserva}  key={reserva.id} fechaHoy={fechaHoy}/>
+                );
+          });
+        }
       }
       
     return ( 

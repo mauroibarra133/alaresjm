@@ -31,7 +31,15 @@ export const  queries ={
         INSERT INTO pedidos (fecha, id_usuario, direccion, nota, total, id_tipo_pago, id_tipo_entrega, id_estado, puntos_parciales, id_pago, monto_cambio)
 VALUES (@fecha, @id_usuario, @direccion, @nota, @total, @id_tipo_pago, @id_tipo_entrega, @id_estado, ROUND(@total/10, 0), @id_pago, @monto_cambio);
         `,
-        searchIdOrder: `SELECT id FROM pedidos WHERE id_pago = @id_pago`
+        searchIdOrder: `SELECT id FROM pedidos WHERE id_pago = @id_pago`,
+        getPedidosByUserId: `SELECT P.id AS id_pedido, P.fecha, STRING_AGG(Pr.nombre, ', ') AS nombres_productos, P.total, E.nombre AS estado_pedido
+                            FROM pedidos P
+                            JOIN desc_pedidos D ON P.id = D.id_pedido
+                            JOIN productos Pr ON Pr.id = D.id_producto
+                            JOIN estados_pedido E ON E.id = P.id_estado
+                            WHERE id_usuario = 7
+                            GROUP BY P.id, P.total, E.nombre, P.fecha
+    `
     },
     DescPedidos:{
         addDescOrder: ` INSERT INTO desc_pedidos (id_producto,cantidad,subtotal,id_pedido) VALUES 
@@ -48,16 +56,9 @@ VALUES (@fecha, @id_usuario, @direccion, @nota, @total, @id_tipo_pago, @id_tipo_
         getReservas: `SELECT R.id,R.fecha,R.hora,R.id_usuario,R.cantidad_personas,R.lugar,R.cliente_reserva,E.nombre as estado
                         FROM reservas R
                         JOIN estados_reserva E ON E.id = R.id_estado`,
-        getReservasByDate: `SELECT R.id,R.fecha,R.hora,R.id_usuario,R.cantidad_personas,R.lugar,R.cliente_reserva,E.nombre as estado
-                            FROM reservas R
-                             JOIN estados_reserva E ON E.id = R.id_estado
-                             WHERE R.fecha = @fecha`,
         getReservasByUser: `SELECT R.id,R.fecha,R.hora,R.id_usuario,R.cantidad_personas,R.lugar,R.cliente_reserva,E.nombre as estado
         FROM reservas R
         JOIN estados_reserva E ON E.id = R.id_estado WHERE R.id_usuario = @user_id`,
-        getReservasByUserAndDate: `SELECT R.id,R.fecha,R.hora,R.id_usuario,R.cantidad_personas,R.lugar,R.cliente_reserva,E.nombre as estado
-        FROM reservas R
-        JOIN estados_reserva E ON E.id = R.id_estado WHERE id_usuario = @user_id AND fecha = @fecha` ,
         deleteReserva: `DELETE FROM reservas WHERE id = @id`,
         updateReserva: `UPDATE reservas SET fecha = @fecha, hora = @hora, cantidad_personas = @comensales, lugar = @zona, cliente_reserva = @cliente
         WHERE id = @id`

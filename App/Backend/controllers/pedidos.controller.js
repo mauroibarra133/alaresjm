@@ -83,7 +83,7 @@ export async function getPedidos(req, res) {
              result = await pool
                 .request()
                 .input('user_id', sql.Int, user_id)
-                .query(queries.Pedidos.getPedidosById);
+                .query(queries.Pedidos.getPedidosByUserId);
                 res.status(200).json({msg: "Datos obtenidos correctamente", data: result.recordset})  
         }
 
