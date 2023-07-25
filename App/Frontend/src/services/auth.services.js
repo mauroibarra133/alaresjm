@@ -20,19 +20,45 @@ export async function existsMail(email){
     const response = await axios.post("http://localhost:4000/email",
       {email: email}
       )
-  return response.data
+      console.log(response);
+      if(response.data){
+        return {data : response.data}
 
+      }else{
+        return {data: false}
+      }
   } catch (error) {
-    return false
+    if(error.response.data == false){
+      return false
+    }
+    return {error: "Error en el servidor, intente nuevamente mas tarde"}
   }
 
 }
 export async function login(data){
-  const response = await axios.post('http://localhost:4000/api/login',data)
-  return response
+  try {
+    const response = await axios.post('http://localhost:4000/api/login',data)
+    console.log(response);
+    if(response.data){
+      return response.data
+    }
+  } catch (error) {
+      
+      if(error.code == "ERR_NETWORK") return {error: "Error en el servidor, intente nuevamente mas tarde"}
+    if(error.response.data){
+      return error.response
+    }
+
+
+
+  }
 }
 
 export async function signup(data){
-  const response = await axios.post('http://localhost:4000/signup',data)
-  return response
+  try {
+    const response = await axios.post('http://localhost:4000/signup',data)
+    return {data: response}
+  } catch (error) {
+    return {error: 'Error en el servidor, intente mas tarde'}
+  }
 }

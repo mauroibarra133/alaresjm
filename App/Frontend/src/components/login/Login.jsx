@@ -27,21 +27,37 @@ function Login() {
 })
 
 function handleCloseModal(){
-    const estado = setErrorStatus.existError
     setErrorStatus({
         isSubmitted: false,
         existError: false,
         msg: ""
     })
-    !estado ? navigate('/') : null
+    !errorStatus.existError ? navigate('/') : null
 
 }
      async function onSubmit(data){
-        try {
             const response = await login(data)
+            console.log(response);
             if (response){
+                //Error en el servidor
+                if(response.error){
+                    setErrorStatus({
+                        isSubmitted: true,
+                        existError: true,
+                        msg: response.error
+                    });
+                    return
+                }
+                if(response.status >= 400){
+                    setErrorStatus({
+                        isSubmitted: true,
+                        existError: true,
+                        msg: response.data.msg
+                    });
+                
+                }else{
                 const oneHour = 60*60
-                document.cookie = `token=${response.data.token}; max-age=${oneHour}; path=/; samesite=strict; `
+                document.cookie = `token=${response.token}; max-age=${oneHour}; path=/; samesite=strict; `
                 isLogued()
                 setErrorStatus({
                     isSubmitted: true,
@@ -49,13 +65,8 @@ function handleCloseModal(){
                     msg: "Ha sido logueado correctamente"
                 })
             }
-        } catch (error) {
-            console.log(error.response.data.msg);
-            setErrorStatus({
-                isSubmitted: true,
-                existError: true,
-                msg: error.response.data.msg
-            })
+            
+
         }
 
     }
