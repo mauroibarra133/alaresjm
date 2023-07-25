@@ -23,22 +23,22 @@ function DashBoard() {
         <div className="dashboard">
             <div className="dashboard__nav">
                 <div onClick={() => handleTagClick(0)}>
-                    <img src={pedidosIcon} alt="Pedidos" className="dashboard__link-icon" />
+                    <img src={pedidosIcon} alt="Pedidos" className={`dashboard__link-icon ${activeTag == 0 ? 'active' : ''}`} />
                 </div>
                 <div  onClick={() => handleTagClick(1)}>
-                    <img src={reservasIcon} alt="Reservas" className="dashboard__link-icon" />
+                    <img src={reservasIcon} alt="Reservas" className={`dashboard__link-icon ${activeTag == 1 ? 'active' : ''}`} />
                 </div>
                 <div  onClick={() => handleTagClick(2)}>
-                    <img src={dudasIcon} alt="Dudas" className="dashboard__link-icon" />
+                    <img src={dudasIcon} alt="Dudas" className={`dashboard__link-icon ${activeTag == 2 ? 'active' : ''}`} />
                 </div>
                 <div  onClick={() => handleTagClick(3)}>
-                    <img src={menuIcon} alt="Carta" className="dashboard__link-icon" />
+                    <img src={menuIcon} alt="Carta" className={`dashboard__link-icon ${activeTag == 3 ? 'active' : ''}`} />
                 </div>
                 <div  onClick={() => handleTagClick(4)}>
-                    <img src={productIcon} alt="Productos" className="dashboard__link-icon" />
+                    <img src={productIcon} alt="Productos" className={`dashboard__link-icon ${activeTag == 4 ? 'active' : ''}`} />
                 </div>
                 <div onClick={() => handleTagClick(5)}>
-                    <img src={priceIcon} alt="Productos" className="dashboard__link-icon" />
+                    <img src={priceIcon} alt="Productos" className={`dashboard__link-icon ${activeTag == 5 ? 'active' : ''}`} />
                 </div>
                 {/* Agrega el resto de los links aquí */}
             </div>

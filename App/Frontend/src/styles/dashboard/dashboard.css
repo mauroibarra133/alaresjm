@@ -16,9 +16,18 @@
     color: #89a6ef;
 }
 .dashboard__link-icon{
+    position: relative;
     width: 40px;
     height: 40px;
 }
+.dashboard__link-icon:hover{
+    cursor: pointer;
+    filter: saturate(1.4);
+}
+.dashboard__link-icon.active {
+    filter: brightness(1.2) hue-rotate(40deg) saturate(2);
+}
+
 
 .dashboard__content{
     padding: 1rem;

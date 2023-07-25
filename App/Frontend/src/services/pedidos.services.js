@@ -15,11 +15,15 @@ export async function crearPedido(fecha_ISO, id_usuario,direccionCliente, notaPe
       return response
 }
 
-export async function getPedidos(user_id) {
-  console.log(user_id);
-  const response = await axios.get("http://localhost:4000/pedidos", { params: {
-      user_id: user_id
-  } });
+export async function getPedidos(params) {
+  const response = await axios.get("http://localhost:4000/pedidos", { params: params });
+  console.log(response);
+  return response;
+}
+
+export async function updatePedido(params) {
+  console.log(params);
+  const response = await axios.put("http://localhost:4000/pedidos",null, { params: params });
   console.log(response);
   return response;
 }

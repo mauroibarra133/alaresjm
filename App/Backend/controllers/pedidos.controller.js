@@ -72,22 +72,51 @@ export async function addOrderEft(req,res){
 }   
 
 export async function getPedidos(req, res) {
-    let result;
-    try {
-        let user_id = req.body.user_id
+    const  date = req.query.date
+    const  user_id = req.query.user_id
 
-        //Buscar por user
-        if(user_id || user_id !== undefined){
+    //Filtrar por usuario
+    if (user_id || user_id !== undefined) {
+        try {
             const pool = await getConnection();
-             result = await pool
+            const result = await pool
                 .request()
                 .input('user_id', sql.Int, user_id)
                 .query(queries.Pedidos.getPedidosByUserId);
-                res.status(200).json({msg: "Datos obtenidos correctamente", data: result.recordset})  
+            res.status(200).json({ msg: "Datos obtenidos correctamente", data: result.recordset });
+        } catch (error) {
+            console.log(error);
+            res.status(500).json({ msg: "Error al obtener los datos" });
         }
-
+    }
+    if(date || date !== undefined){
+        try {
+            const pool = await getConnection();
+            const result = await pool
+                .request()
+                .input('date', sql.Date, date)
+                .query(queries.Pedidos.getPedidosByDate);
+            res.status(200).json({ msg: "Datos obtenidos correctamente", data: result.recordset });
+        } catch (error) {
+            console.log(error);
+            res.status(500).json({ msg: "Error al obtener los datos" });
+        }
+    }
     
-        console.log(result);
+}
+
+export async function updatePedidoOnServer(req,res){
+    const state = req.query.state
+    const id = req.query.id
+    console.log(state,id);
+    try {
+        const pool = await getConnection();
+        const result = await pool
+            .request()
+            .input('state', sql.VarChar, state)
+            .input('id', sql.Int, id)
+            .query(queries.Pedidos.updatePedido);
+        res.status(200).json({ msg: "Estado cambiado correctamente", data: result.recordset });
     } catch (error) {
         console.log(error);
     }

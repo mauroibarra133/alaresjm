@@ -32,14 +32,32 @@ export const  queries ={
 VALUES (@fecha, @id_usuario, @direccion, @nota, @total, @id_tipo_pago, @id_tipo_entrega, @id_estado, ROUND(@total/10, 0), @id_pago, @monto_cambio);
         `,
         searchIdOrder: `SELECT id FROM pedidos WHERE id_pago = @id_pago`,
-        getPedidosByUserId: `SELECT P.id AS id_pedido, P.fecha, STRING_AGG(Pr.nombre, ', ') AS nombres_productos, P.total, E.nombre AS estado_pedido
+        getPedidosByUserId: `SELECT P.id, P.fecha, STRING_AGG(Pr.nombre, ', ') AS nombres_productos, P.total, E.nombre AS estado_pedido
                             FROM pedidos P
                             JOIN desc_pedidos D ON P.id = D.id_pedido
                             JOIN productos Pr ON Pr.id = D.id_producto
                             JOIN estados_pedido E ON E.id = P.id_estado
-                            WHERE id_usuario = 7
+                            WHERE id_usuario = @user_id
                             GROUP BY P.id, P.total, E.nombre, P.fecha
-    `
+    `,
+    getPedidosByDate: `SELECT P.id, CONVERT(varchar(5), DATEADD(hour, -3, P.fecha), 108) AS hora,CONCAT(U.nombre, ' ', U.apellido) as nombre_completo,
+    STRING_AGG(CAST(Pr.nombre + ' (x' + CAST(D.cantidad AS VARCHAR(10)) + ')' AS VARCHAR(100)), ', ') AS descr_pedidos, CAST(P.direccion AS VARCHAR(100)) as direccion,
+                        TP.nombre as tipopago, TE.nombre tipoentrega, CAST(P.nota AS VARCHAR(100)) as nota,P.total, E.nombre AS estado_pedido,
+                        P.monto_cambio
+                        FROM pedidos P 
+                        JOIN desc_pedidos D ON P.id = D.id_pedido
+                        JOIN productos Pr ON Pr.id = D.id_producto
+                        JOIN estados_pedido E ON E.id = P.id_estado
+                        JOIN usuarios U ON U.id = P.id_usuario
+                        JOIN tipos_pagos TP ON TP.id = P.id_tipo_pago
+                        JOIN tipos_entrega TE ON TE.id = P.id_tipo_entrega
+                        WHERE CONVERT(DATE,p.fecha) = @date
+                        GROUP BY  P.id,P.fecha, CONCAT(U.nombre, ' ', U.apellido), CAST(P.direccion AS VARCHAR(100)),TP.nombre,
+                        TE.nombre,CAST(P.nota AS VARCHAR(100)),P.total, E.nombre, P.monto_cambio
+                        ORDER BY  hora DESC`,
+    updatePedido: `UPDATE pedidos
+    SET id_estado = (SELECT id FROM estados_pedido WHERE nombre = @state)
+    WHERE id = @id`
     },
     DescPedidos:{
         addDescOrder: ` INSERT INTO desc_pedidos (id_producto,cantidad,subtotal,id_pedido) VALUES 

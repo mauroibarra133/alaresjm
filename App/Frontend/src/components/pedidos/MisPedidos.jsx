@@ -15,24 +15,23 @@ function MisPedidos() {
     useEffect(()=>{
         async function searchReservas(){
             if(auth.data.user_id){
-                const response = await getPedidos(auth.data.user_id)
-                return response.data
+                const response = await getPedidos({ user_id: auth.data.user_id})
+                setPedidos(response.data.data)
             }
         }
-
-        searchReservas().then(data => setPedidos(data.data)).catch(setPedidos([]))
+        searchReservas()
     },[auth.data.user_id])
+
 
 function handlePedidos(){
     if(pedidos.length <= 0){
         return <MisPedidosVacio goTo={'delivery'} msg={"Aun no tienes ningun pedido hoy"} msgButton={"PEDIR"}></MisPedidosVacio>
     }else{
-
         //Si no hay filtro
         if(!isFilterActive){
-            return pedidos.map(pedido => {
+            return pedidos.map(order => {
                 return (
-                    <Pedido pedido={pedido} key={pedido.id}/>
+                    <Pedido pedido={order} key={order.id}/>
                 );
             }); 
         }
