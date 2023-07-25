@@ -1,3 +1,5 @@
+import { statusPedidos } from "./constants";
+
 export function generateUniqueKey() {
     return Math.random().toString(36).substr(2, 9);
   }
@@ -39,3 +41,10 @@ export const validateTime = (value) => {
   }
   return true;
 };
+
+export function getStatusImage(status) {
+  const pedidoStatus = statusPedidos.find(item => item.status === status);
+  if (pedidoStatus) {
+    return pedidoStatus.img;
+  }
+}

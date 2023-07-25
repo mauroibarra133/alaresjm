@@ -1,0 +1,133 @@
+.verpedido__modal{
+    position: absolute;
+    top: 25%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%;
+    min-height: 70%;
+    height: auto;
+    background-color: #fff;
+    margin: 0 auto;
+    border: 1px solid black;
+    max-width: 700px;
+    display: flex;
+    flex-direction: column;
+}
+/* Top */
+.verpedido__modal-top{
+    height: 40px;
+    width: 100%;
+    background-color: var(--blue-1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #7f95ea;
+    padding: .5rem;
+}
+.verpedido__top-id{
+    width: 100%;
+    text-align: start;
+}
+.verpedido__top-cruz{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: end;
+}
+.verpedido__top-cruz img{
+    width: 20px;
+    height: 20px;
+    filter: invert(.7)
+}
+
+/* Info User */
+.verpedido__infouser{
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: .2rem;
+}
+.verpedido__dato-icon-wrapper{
+    display: flex;
+    gap: .2rem;
+}
+.verpedido__dato-icon{
+    width: 15px;
+    height: 15px;
+}
+
+/* Detalle */
+.verpedido__detalle-wrapper{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    max-width: 700px;
+    padding: 1rem;
+    margin: 0 auto;
+}
+.verpedido__detalle{
+    border: 1px solid black;
+}
+.verpedido__header{
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    justify-content: space-evenly;
+    padding: .3rem;
+    border-bottom: 1px solid black;
+}
+.verpedido__header div{
+    padding: 0 .5rem;
+}
+
+.verpedido__body{
+    display: flex;
+    flex-direction: column;
+
+}
+.verpedido__row{
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    padding: .5rem;
+}
+.verpedido__row-total{
+    border-top: 1px solid black;
+}
+.verpedido__total{
+    grid-column: 3/4;
+    font-weight: 900;
+}
+.verpedido__total-title{
+    grid-column: 1/2;
+    font-weight: 900;  
+}
+
+/* Nota */
+.verpedido__nota{
+    display: flex;
+    padding: 1rem 0;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+
+/* Entrega */
+.verpedido__infoentrega{
+    padding: 1rem;
+    display: flex;
+    justify-content: space-around;
+}
+
+.verpedido__pago, .verpedido__entrega, .verpedido__monto{
+    display: flex;
+    align-items: center;
+    gap: .3rem;
+}
+/* Estado */
+.verpedido__estado{
+    padding: 1rem;
+    width: 100%;
+}
+.verpedido__estado select{
+    max-width: 150px;
+}
