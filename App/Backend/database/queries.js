@@ -41,7 +41,7 @@ VALUES (@fecha, @id_usuario, @direccion, @nota, @total, @id_tipo_pago, @id_tipo_
                             GROUP BY P.id, P.total, E.nombre, P.fecha
     `,
     getPedidosByDate: `SELECT P.id, CONVERT(varchar(5), DATEADD(hour, -3, P.fecha), 108) AS hora,CONCAT(U.nombre, ' ', U.apellido) as nombre_completo,
-    STRING_AGG(CAST(Pr.nombre + ' (x' + CAST(D.cantidad AS VARCHAR(10)) + ')' AS VARCHAR(100)), ', ') AS descr_pedidos, CAST(P.direccion AS VARCHAR(100)) as direccion,
+    STRING_AGG(CAST(Pr.nombre + '-' + CAST(D.cantidad AS VARCHAR(10)) + '-' + CAST(D.subtotal as VARCHAR(10)) AS VARCHAR(100)), ', ') AS descr_pedidos, CAST(P.direccion AS VARCHAR(100)) as direccion,
                         TP.nombre as tipopago, TE.nombre tipoentrega, CAST(P.nota AS VARCHAR(100)) as nota,P.total, E.nombre AS estado_pedido,
                         P.monto_cambio
                         FROM pedidos P 

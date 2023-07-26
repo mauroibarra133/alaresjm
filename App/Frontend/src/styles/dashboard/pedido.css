@@ -1,9 +1,9 @@
 .verpedido__modal{
     position: absolute;
-    top: 25%;
+    top: 15%;
     left: 50%;
     transform: translateX(-50%);
-    width: 80%;
+    width: 95%;
     min-height: 70%;
     height: auto;
     background-color: #fff;
@@ -12,6 +12,8 @@
     max-width: 700px;
     display: flex;
     flex-direction: column;
+    border-radius: 12px;
+
 }
 /* Top */
 .verpedido__modal-top{
@@ -23,10 +25,15 @@
     align-items: center;
     color: #7f95ea;
     padding: .5rem;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+
 }
 .verpedido__top-id{
     width: 100%;
-    text-align: start;
+    transform: translateX(50%);
+    font-family: 'Amiri';
+    text-transform: uppercase;
 }
 .verpedido__top-cruz{
     width: 100%;
@@ -39,7 +46,10 @@
     height: 20px;
     filter: invert(.7)
 }
-
+.verpedido__top-cruz img:hover{
+    filter: invert(.7) brightness(1.2);
+    cursor: pointer;
+}
 /* Info User */
 .verpedido__infouser{
     padding: 1rem;
@@ -68,16 +78,18 @@
 }
 .verpedido__detalle{
     border: 1px solid black;
+    border-radius: 6px;
 }
 .verpedido__header{
     display: grid;
     grid-template-columns: repeat(3,1fr);
     justify-content: space-evenly;
-    padding: .3rem;
     border-bottom: 1px solid black;
 }
 .verpedido__header div{
-    padding: 0 .5rem;
+    padding:  .3rem .5rem;
+    color: #7f95ea;
+    background-color: var(--blue-2);
 }
 
 .verpedido__body{
@@ -130,4 +142,31 @@
 }
 .verpedido__estado select{
     max-width: 150px;
+    border: 1px solid var(--blue-3);
+    background-color: var(--blue-1);
+    color: #fff;
+    /* Ocultar la flecha predeterminada */
+  appearance: none;
+  -webkit-appearance: none;
+  /* Agregar la flecha personalizada utilizando un pseudo-elemento */
+  background-image: url('../../assets/images/flecha-down.png');
+  background-size: 10px; /* Ajusta el tamaño de la flecha según tus necesidades */
+  background-repeat: no-repeat;
+  background-position: 95% center; /* Puedes ajustar la posición de la flecha si es necesario */
+  padding-right: 20px; /* Ajusta este valor para que el texto no se superponga con la flecha */
+}
+.verpedido__estado select option{
+    background-color: var(--blue-1);
+}
+.verpedido__estado select:hover {
+    background-color: var(--blue-2); 
+    cursor: pointer;
+  }
+.a:hover{
+    background-color: #fff;
+}
+@media only screen and (min-width: 768px){
+    .verpedido__modal{
+        width: 80%;
+    }
 }

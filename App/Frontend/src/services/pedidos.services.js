@@ -17,7 +17,7 @@ export async function crearPedido(fecha_ISO, id_usuario,direccionCliente, notaPe
 
 export async function getPedidos(params) {
   const response = await axios.get("http://localhost:4000/pedidos", { params: params });
-  console.log(response);
+  // console.log(response.data.data);
   return response;
 }
 

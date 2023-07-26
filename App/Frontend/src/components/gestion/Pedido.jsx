@@ -9,9 +9,10 @@ import entregaIcon from '../../assets/images/entrega.png'
 import pagoIcon from '../../assets/images/tarjeta-de-credito.png'
 
 /* eslint-disable react/prop-types */
-function Pedido({onEstadoChange, modalPedido}) {
+function Pedido({onEstadoChange, modalPedido, closeModal}) {
     const pedido = modalPedido.pedido
     const [estado, setEstado] = useState(pedido.estado_pedido)
+
     async function handleState(event){
         if(event.target.value != pedido.estado__pedido){
             const response = await updatePedido({
@@ -32,7 +33,7 @@ function Pedido({onEstadoChange, modalPedido}) {
             <div className={`verpedido__modal-top`}>
                 <p className="verpedido__top-id">{`Pedido nº ${pedido.id}`}</p>
                 <div className="verpedido__top-cruz">
-                <img src={cruzIcon} alt="" />
+                <img src={cruzIcon} alt=""  onClick={closeModal}/>
                 </div>
             </div>
             <div className="verpedido__infouser">
@@ -51,14 +52,18 @@ function Pedido({onEstadoChange, modalPedido}) {
             <div className="verpedido__detalle-wrapper">
                 <div className="verpedido__detalle">
                     <div className="verpedido__header">
-                        <div>Cantidad</div>
                         <div>Nombre</div>
+                        <div>Cantidad</div>
                         <div>Subtotal</div>
                     </div>
                     <div className="verpedido__body">
-                        <div className="verpedido__row">
-                        {pedido.descr_pedidos}
-                        </div>
+                        {
+                            pedido.descr_pedidos.split(',').map((row, i) => (
+                                <div className="verpedido__row" key={i}>{row.split('-').map((dato,i) => (
+                                    <div key={i}>{ i == 2 ? '$'+dato : dato}</div>
+                                ))}</div>
+                            ))
+                        }
                         <div className="verpedido__row verpedido__row-total">
                             <div className="verpedido__total-title">TOTAL</div>
                             <div className="verpedido__total">{'$'+pedido.total}</div>
@@ -83,12 +88,12 @@ function Pedido({onEstadoChange, modalPedido}) {
                     </div>
                 </div>
 
-                <div className="verpedido__monto">{'$'+pedido.monto_cambio || ''}</div>
+                <div className="verpedido__monto">{`$${pedido.monto_cambio || 0}`}</div>
 
             </div>
             <div className="verpedido__estado">
                 <select name="" id=""  defaultValue={estado} value={estado == pedido.estado__pedido ? estado :  pedido.estado__pedido} onChange={handleState}>
-                    <option value="A confirmar">A confirmar</option>
+                    <option value="A confirmar" className="a">A confirmar</option>
                     <option value="Confirmado">Confirmado</option>
                     <option value="Listo">Listo</option>
                     <option value="En Reparto">En Reparto</option>

@@ -3,6 +3,8 @@ import '../../styles/dashboard/verpedidos.css'
 import {getPedidos} from '../../services/pedidos.services'
 import { getStatusImage } from '../../utils/functions';
 import Pedido from './Pedido';
+import Overlay from '../Overlay'
+import VerPedidosVacio from '../FormVacio'
 
 function VerPedidos() {
     const [pedidos,setPedidos] = useState([]);
@@ -30,7 +32,6 @@ function VerPedidos() {
     },[filterFecha])
 
 
-
       useEffect(() => {
         const handleResize = () => {
           setIsLargeScreen(window.innerWidth > 768);
@@ -42,6 +43,12 @@ function VerPedidos() {
         };
       }, []);
 
+      async function traerPedidos(){
+        const result = await getPedidos({date: filterFecha})
+        if(result.status == 200){
+            setPedidos(result.data.data)
+        }
+    }
     function handleDate(data){
         setFilterFecha(data.target.value)
     }
@@ -56,6 +63,14 @@ function VerPedidos() {
             isSubmitted:true,
             pedido: pedido
         });
+    }
+    function closeModalPedido(){
+        setModalPedido({
+            isSubmitted:false,
+            pedido: {}
+        });
+        traerPedidos()
+        
     }
     return ( 
         <div className="verpedidos">
@@ -78,7 +93,8 @@ function VerPedidos() {
                     <div className="verpedidos__header-column">Estado</div>
                 </div>
                 <div className="verpedidos__body">
-                    {pedidos && pedidos.map(pedido =>(
+                    {pedidos.length <= 0 ? <VerPedidosVacio msg={'No hay pedidos el dia de hoy'} msgButton={':('}></VerPedidosVacio> :
+                     pedidos.map(pedido =>(
                         <div className="verpedidos__body-row" key={pedido.id} onClick={()=>     openModalPedido(pedido)}>
                             <div className="verpedidos_dato">{pedido.hora}</div>
                             <div className="verpedidos_dato">{pedido.nombre_completo}</div>
@@ -89,11 +105,13 @@ function VerPedidos() {
                             </div>
                         </div>
 
-                    ))};
+                    ))}
                 </div>
             </div>
             {modalPedido.isSubmitted && (
-                        <Pedido modalPedido={modalPedido}></Pedido>
+                <Overlay>
+                        <Pedido modalPedido={modalPedido} closeModal={closeModalPedido}></Pedido>
+                </Overlay>
                     )}
         </div>
      );

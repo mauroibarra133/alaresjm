@@ -43,16 +43,20 @@
     flex-direction: column;
     justify-content: space-around;
     padding-bottom: .5rem;
-    padding: .5rem 0;
-    gap: 1rem;
 }
 
 .verpedidos__body-row{
     display: grid;
     grid-template-columns: repeat(3,1fr);
     border-bottom: 1px solid var(--gray-1);
-    padding-bottom: 1rem;
+    padding: 1rem;
     gap: .5rem;
+}
+.verpedidos__body-row:hover{
+    background-color: rgba(166, 166, 255, 0.423);
+    border-radius: 12px;
+    cursor: pointer;
+    
 }
 .verpedidos__dato-estado{
     width: 30px;
@@ -69,7 +73,6 @@
 }
 .verpedidos__body .verpedidos__body-row:last-child{
     border:none;
-    padding-bottom: 0;
 }
 
 @media only screen and (min-width: 768px){
