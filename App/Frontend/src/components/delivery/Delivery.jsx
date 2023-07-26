@@ -11,7 +11,9 @@ import { generateUniqueKey } from '../../utils/functions';
 import { initMercadoPago } from '@mercadopago/sdk-react'
 import Modal from '../Modal';
 import { createPreferenceMP } from '../../services/mercadoPago.services';
-import { crearPedido } from '../../services/pedidos.services';
+import { crearPedido, getPedidos } from '../../services/pedidos.services';
+import io from 'socket.io-client';
+const socket = io('/');
 
 function Delivery() {
 
@@ -58,10 +60,15 @@ const handleOrder = async (pedido) => {
         const fecha_ISO = fecha_hoy.toISOString();
         const response = await crearPedido(fecha_ISO, auth.data.user_id,  pedido.direccionCliente,pedido.notaPedido,parseInt(pedido.total),
         parseInt(pedido.tipoPago),parseInt(pedido.tipoEntrega), parseInt(pedido.montoEft), modifyCart(cart) )
-
-        console.log(response);
         if(response.status >= 200 && response.status < 300){
           console.log("salio bien wn");
+
+          //MAndar el pedido por socket
+          const response = await getPedidos({date: fecha_hoy})
+          
+          socket.emit('pedidoNuevo',response.data.data[0]);
+
+          //Mostrar modal
           setIsOrderedEft({
             isSubmitted : true,
             goodStatus: true

@@ -84,3 +84,34 @@
     max-width: 130px;
 }
 }
+
+@keyframes slideDown {
+    from {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      background-color: #fff;
+    }
+    to {
+      opacity: 1;
+      background-color: var(--blue-4);  
+    }
+  }
+  .animate-slide-down {
+    animation-name: slideDown;
+    animation-duration: 1s;
+  }
+  .animate-fade-in {
+    animation-name: fadeIn;
+    animation-duration: 1s;
+  }

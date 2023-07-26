@@ -5,6 +5,8 @@ import { getStatusImage } from '../../utils/functions';
 import Pedido from './Pedido';
 import Overlay from '../Overlay'
 import VerPedidosVacio from '../FormVacio'
+import io from 'socket.io-client';
+const socket = io('/');
 
 function VerPedidos() {
     const [pedidos,setPedidos] = useState([]);
@@ -42,6 +44,41 @@ function VerPedidos() {
           window.removeEventListener('resize', handleResize);
         };
       }, []);
+
+      useEffect(() => {
+        // Crear una instancia de socket.io-client y conectar al servidor
+    
+        // Escuchar el evento 'connect' para saber cuándo se ha establecido la conexión
+        socket.on('connect', () => {
+            console.log(socket);
+        
+          console.log('Conectado al servidor Socket.IO');
+    
+          // Escuchar el evento 'pedidoAdmin' emitido por el servidor
+          socket.on('pedidoAdmin', (nuevoPedido) => {
+            console.log('Nuevo pedido recibido:', nuevoPedido);
+    
+            // Actualizar el estado de pedidos con el nuevo pedido recibido
+            // Usamos el callback en setPedidos para asegurar que siempre estamos
+            // actualizando el estado basado en el estado anterior
+            setPedidos((prevPedidos) => [nuevoPedido,...prevPedidos]);
+            const tablaPedidos = document.getElementById('verpedidos__body');
+            tablaPedidos.classList.add('animate-slide-down');
+            const nuevoPedidoRow = document.getElementById(`pedido-${nuevoPedido.id}`);
+            nuevoPedidoRow.classList.add('animate-fade-in');
+            setTimeout(() => {
+                tablaPedidos.classList.remove('animate-slide-down');
+                nuevoPedidoRow.classList.remove('animate-fade-in');
+        }, 1000);
+          });
+        });
+    
+        // Desuscribirse del evento 'pedidoAdmin' cuando el componente se desmonte
+        return () => {
+          socket.off('pedidoAdmin');
+        };
+      }, []);
+
 
       async function traerPedidos(){
         const result = await getPedidos({date: filterFecha})
@@ -92,10 +129,10 @@ function VerPedidos() {
                     <div className="verpedidos__header-column">Paga con</div> */}
                     <div className="verpedidos__header-column">Estado</div>
                 </div>
-                <div className="verpedidos__body">
+                <div className="verpedidos__body" id='verpedidos__body'>
                     {pedidos.length <= 0 ? <VerPedidosVacio msg={'No hay pedidos el dia de hoy'} msgButton={':('}></VerPedidosVacio> :
                      pedidos.map(pedido =>(
-                        <div className="verpedidos__body-row" key={pedido.id} onClick={()=>     openModalPedido(pedido)}>
+                        <div className={`verpedidos__body-row`} id={`pedido-${pedido.id}`} key={pedido.id} onClick={()=>     openModalPedido(pedido)}>
                             <div className="verpedidos_dato">{pedido.hora}</div>
                             <div className="verpedidos_dato">{pedido.nombre_completo}</div>
                             <div className="verpedidos_dato"><img src={getStatusImage(pedido.estado_pedido)} alt="" />

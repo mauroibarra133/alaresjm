@@ -1,4 +1,6 @@
 import express  from "express";
+import http from 'http'
+import { Server as SocketServer } from "socket.io";
 import config from "./config";
 import cors from 'cors'
 import productosRouter from './routes/productos'
@@ -10,18 +12,28 @@ import usuariosRouter from './routes/usuarios'
 import reservasRouter from './routes/reservas'
 import rankingRouter from './routes/ranking'
 import mercadopagoRouter from './routes/mercadoPago'
+
 const app = express()
+const httpServer = http.createServer(app)
+const io = new SocketServer(httpServer)
+httpServer.listen(4000)
 
+app.set('socketio', io);// aqui asignas el socket global
+//socket
+io.on('connection', (socket)=>{
+    console.log('conectado', socket.id);
 
-//settings
-let port;
-port = config.port
-app.set('port', port)
+    socket.on('pedidoNuevo',(data)=> {
+        console.log(data)
+        io.emit('pedidoAdmin',data)
+    })
+})
+
 
 //Middlewares
 app.use(express.json());  // Para que nuestro servidor pueda aceptar datos en json (debemos configurar eso)
 app.use(express.urlencoded({extended: false}))  // Para que pueda aceptar datos desde forms HTML
-app.use(cors("http://localhost:5173"));
+app.use(cors());
 
 app.use(productosRouter) 
 app.use(dudasRouter) 
