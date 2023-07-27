@@ -12,14 +12,20 @@
     justify-content: center;
     align-items: center;
   }
-  
+  .overlay.verpedidos{
+    overflow-y: auto;
+
+  }
   .overlay-content {
     background-color: #fff;
     padding: 20px;
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
   }
+  .overlay-content.verpedidos{
+    overflow-y: auto;
 
+  }
   .overlay-close {
     position: absolute;
     top: 10px;

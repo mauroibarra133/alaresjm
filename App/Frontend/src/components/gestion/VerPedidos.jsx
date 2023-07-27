@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from 'react';
 import '../../styles/dashboard/verpedidos.css'
 import {getPedidos} from '../../services/pedidos.services'
@@ -18,22 +19,27 @@ function VerPedidos() {
     
     const [filterFecha,setFilterFecha] = useState(fechaHoy);
     const [isLargeScreen, setIsLargeScreen] = useState(window.innerWidth > 768);  
+    const [isFilterActive,setIsFilterActive] = useState({
+        entregado: false,
+        cancelado: false
+    })
+
     const [modalPedido, setModalPedido] = useState({
         isSubmitted: false,
         pedido: {}
     });  
-
-    useEffect(()=>{
+    
+useEffect(()=>{
         async function traerPedidos(){
             const result = await getPedidos({date: filterFecha})
             if(result.status == 200){
-                setPedidos(result.data.data)
+                setPedidos(filterPedidos(result.data.data))
             }
         }
         traerPedidos()
     },[filterFecha])
 
-
+console.log(pedidos);
       useEffect(() => {
         const handleResize = () => {
           setIsLargeScreen(window.innerWidth > 768);
@@ -80,41 +86,85 @@ function VerPedidos() {
       }, []);
 
 
-      async function traerPedidos(){
+    async function traerPedidos(){
         const result = await getPedidos({date: filterFecha})
         if(result.status == 200){
             setPedidos(result.data.data)
         }
     }
+
     function handleDate(data){
         setFilterFecha(data.target.value)
     }
+
     // async function fetchPedidos() {
     //     const result = await getPedidos({ date: filterFecha });
     //     if (result.status === 200) {
     //       setPedidos(result.data.data);
     //     }
     //   }
+    function filterPedidos(pedidos){
+        if(!isFilterActive.entregado && !isFilterActive.cancelado){
+            return pedidos
+        }
+        if(isFilterActive.entregado && isFilterActive.cancelado){
+            return pedidos.filter(pedido => {
+                if (pedido.estado_pedido != 'Cancelado' && pedido.estado_pedido != 'Entregado'){
+                    return pedido
+                }
+            })
+        }
+        //Filtrar entregados
+        if(isFilterActive.entregado){
+            return pedidos.filter(pedido => pedido.estado_pedido != 'Entregado')
+        }
+        if(isFilterActive.cancelado){
+            return pedidos.filter(pedido => pedido.estado_pedido != 'Cancelado')
+        }
+
+    }
     function openModalPedido(pedido){
         setModalPedido({
             isSubmitted:true,
             pedido: pedido
         });
+        document.body.classList.add('disable-scroll');
     }
     function closeModalPedido(){
         setModalPedido({
             isSubmitted:false,
             pedido: {}
         });
+        document.body.classList.remove('disable-scroll');
+
         traerPedidos()
         
     }
+    console.log(isFilterActive);
     return ( 
         <div className="verpedidos">
             <div className="verpedidos__fechas">
                 <div className="verpedidos__fecha-ayer button "  onClick={()=>setFilterFecha(fechaAyer)}>Ayer</div>
                 <input className="verpedidos__fecha-input" type="date" onChange={handleDate} value={filterFecha}></input>
                 <div className="verpedidos__fecha-hoy button" onClick={()=>setFilterFecha(fechaHoy)}>Hoy</div>
+            </div>
+            <div className="verpedidos__filters">
+                <div className="verpedidos__filter">
+                    <img src={getStatusImage('Entregado')} alt="Entregado"  className='verpedidos__icon'/>
+                    <label htmlFor="">Ocultar Entregados</label>
+                    <input type="checkbox" onClick={()=> setIsFilterActive({
+                        entregado: !isFilterActive.entregado,
+                        cancelado: isFilterActive.cancelado
+                    })}/>
+                </div>
+                <div className="verpedidos__filter">
+                <img src={getStatusImage('Cancelado')} alt="Cancelado" className='verpedidos__icon'/>
+                    <label htmlFor="">Ocultar Cancelados</label>
+                    <input type="checkbox" onClick={()=> setIsFilterActive({
+                        entregado: isFilterActive.entregado,
+                        cancelado: !isFilterActive.cancelado
+                    })}/>
+                </div>
             </div>
             <div className="verpedidos__pedidos">
                 <div className="verpedidos__header">
@@ -130,8 +180,8 @@ function VerPedidos() {
                     <div className="verpedidos__header-column">Estado</div>
                 </div>
                 <div className="verpedidos__body" id='verpedidos__body'>
-                    {pedidos.length <= 0 ? <VerPedidosVacio msg={'No hay pedidos el dia de hoy'} msgButton={':('}></VerPedidosVacio> :
-                     pedidos.map(pedido =>(
+                    {filterPedidos(pedidos).length <= 0 ? <VerPedidosVacio msg={'No hay pedidos el dia de hoy'} msgButton={':('}></VerPedidosVacio> :
+                     filterPedidos(pedidos).map(pedido =>(
                         <div className={`verpedidos__body-row`} id={`pedido-${pedido.id}`} key={pedido.id} onClick={()=>     openModalPedido(pedido)}>
                             <div className="verpedidos_dato">{pedido.hora}</div>
                             <div className="verpedidos_dato">{pedido.nombre_completo}</div>
@@ -146,7 +196,7 @@ function VerPedidos() {
                 </div>
             </div>
             {modalPedido.isSubmitted && (
-                <Overlay>
+                <Overlay comp={'verpedidos'}>
                         <Pedido modalPedido={modalPedido} closeModal={closeModalPedido}></Pedido>
                 </Overlay>
                     )}

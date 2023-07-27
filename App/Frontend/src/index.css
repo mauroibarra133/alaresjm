@@ -42,3 +42,7 @@ body {
   display: flex;
   align-items: start;
 }
+
+body.disable-scroll{
+  overflow: hidden;
+}

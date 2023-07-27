@@ -28,6 +28,8 @@ function Header() {
         }
         setShowOverlay(!userClicked);
         setUserClicked(!userClicked)
+
+        
     }
     return (  
             <>

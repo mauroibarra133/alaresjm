@@ -39,6 +39,7 @@ VALUES (@fecha, @id_usuario, @direccion, @nota, @total, @id_tipo_pago, @id_tipo_
                             JOIN estados_pedido E ON E.id = P.id_estado
                             WHERE id_usuario = @user_id
                             GROUP BY P.id, P.total, E.nombre, P.fecha
+                            ORDER BY P.fecha DESC
     `,
     getPedidosByDate: `SELECT P.id, CONVERT(varchar(5), DATEADD(hour, -3, P.fecha), 108) AS hora,CONCAT(U.nombre, ' ', U.apellido) as nombre_completo,
     STRING_AGG(CAST(Pr.nombre + '-' + CAST(D.cantidad AS VARCHAR(10)) + '-' + CAST(D.subtotal as VARCHAR(10)) AS VARCHAR(100)), ', ') AS descr_pedidos, CAST(P.direccion AS VARCHAR(100)) as direccion,

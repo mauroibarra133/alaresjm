@@ -27,6 +27,10 @@ io.on('connection', (socket)=>{
         console.log(data)
         io.emit('pedidoAdmin',data)
     })
+    socket.on('pedidoActualizado',(data)=> {
+        console.log(data)
+        io.emit('pedidoActualizado',data)
+    })
 })
 
 

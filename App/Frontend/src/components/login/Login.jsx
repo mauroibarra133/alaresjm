@@ -32,6 +32,7 @@ function handleCloseModal(){
         existError: false,
         msg: ""
     })
+    document.body.classList.remove('disable-scroll');
     !errorStatus.existError ? navigate('/') : null
 
 }
@@ -46,6 +47,7 @@ function handleCloseModal(){
                         existError: true,
                         msg: response.error
                     });
+                    document.body.classList.add('disable-scroll');
                     return
                 }
                 if(response.status >= 400){
@@ -54,7 +56,7 @@ function handleCloseModal(){
                         existError: true,
                         msg: response.data.msg
                     });
-                
+                document.body.classList.add('disable-scroll');
                 }else{
                 const oneHour = 60*60
                 document.cookie = `token=${response.token}; max-age=${oneHour}; path=/; samesite=strict; `
@@ -64,6 +66,7 @@ function handleCloseModal(){
                     existError: false,
                     msg: "Ha sido logueado correctamente"
                 })
+                document.body.classList.add('disable-scroll');
             }
             
 

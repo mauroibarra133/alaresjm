@@ -6,12 +6,16 @@ import MisPedidosVacio from '../FormVacio'
 import { useAuth } from '../../hooks/useAuth';
 import {getPedidos} from '../../services/pedidos.services'
 import Pedido from './Pedido';
+import io from 'socket.io-client';
+const socket = io('/');
 
 function MisPedidos() {
     const [isFilterActive, setFilterActive] = useState(false);
     const [pedidos,setPedidos] = useState([]);
+    const [pedidoAct,setPedidoAct] = useState(false);
     const {auth} = useAuth()
     const fechaHoy = new Date().toISOString().split('T')[0]
+
     useEffect(()=>{
         async function searchReservas(){
             if(auth.data.user_id){
@@ -22,6 +26,44 @@ function MisPedidos() {
         searchReservas()
     },[auth.data.user_id])
 
+    useEffect(() => {
+        // Crear una instancia de socket.io-client y conectar al servidor
+        // Escuchar el evento 'connect' para saber cuándo se ha establecido la conexión
+        socket.on('connect', () => {
+            console.log(socket);
+        
+          console.log('Conectado al servidor Socket.IO');
+    
+          // Escuchar el evento 'pedidoAdmin' emitido por el servidor
+          socket.on('pedidoActualizado', (pedidoActualizado) => {
+            console.log('Nuevo pedido recibido:', pedidoActualizado);
+            setPedidoAct(pedidoActualizado)
+
+          });
+        });
+        // Desuscribirse del evento 'pedidoAdmin' cuando el componente se desmonte
+
+      });
+
+useEffect(()=>{
+    if(pedidoAct){
+        // Función para modificar el estado del pedido específico
+        const pedidosActualizados = pedidos.map((pedido) => {
+        if (pedido.id === pedidoAct.id) {
+        // Actualizamos solo el pedido que coincide con el id del pedido actualizado
+        return {
+          ...pedido,
+          estado_pedido: pedidoAct.estado_pedido, // Aquí debes actualizar los campos específicos que desees
+          // Agrega aquí los demás campos que quieras actualizar
+        };
+      }
+      return pedido; // Si no coincide, devolvemos el pedido sin modificar
+    });
+    console.log(pedidosActualizados);
+    setPedidos(pedidosActualizados);
+    setPedidoAct(false);
+  }
+},[pedidoAct])
 
 function handlePedidos(){
     if(pedidos.length <= 0){

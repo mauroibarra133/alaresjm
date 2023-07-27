@@ -13,6 +13,29 @@
     background-color: var(--blue-2);
 }
 
+/* Filters */
+.verpedidos__filters{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 1rem;
+  border: 1px solid black;
+  border-radius: 16px;
+  background-color: var(--gray-3);
+}
+.verpedidos__filter{
+  display: flex;
+  gap: .5rem;
+  justify-content: center;
+  align-items: center;
+}
+.verpedidos__filter input{
+  width: auto;
+}
 /* Tabla */
 .verpedidos__pedidos{
     width: 100%;
@@ -67,7 +90,7 @@
     align-items: center;
     gap: .5rem;
 }
-.verpedidos_dato img{
+.verpedidos_dato img, .verpedidos__icon{
     width: 30px;
     height: 30px;
 }
@@ -75,6 +98,8 @@
     border:none;
 }
 
+
+/* Media */
 @media only screen and (min-width: 768px){
 .verpedidos__body, .verpedidos__header{
     width: 100%;
@@ -85,6 +110,7 @@
 }
 }
 
+/* Animaciones y sus estilos */
 @keyframes slideDown {
     from {
       opacity: 0;
