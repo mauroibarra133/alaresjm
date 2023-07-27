@@ -1,15 +1,15 @@
-.verpedidos{
+.verpedidos,.verreservas{
     width: 100%;
     display: flex;
     flex-direction: column;
     gap: 2rem;
 }
-.verpedidos__fechas{
+.filtro__fechas{
     display: flex;
     gap: 1rem;
     justify-content: center;
 }
-.verpedidos__fecha-ayer, .verpedidos__fecha-hoy{
+.filtro__fechas-button{
     background-color: var(--blue-2);
 }
 
@@ -37,7 +37,7 @@
   width: auto;
 }
 /* Tabla */
-.verpedidos__pedidos{
+.verpedidos__pedidos, .ver-lista{
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -48,7 +48,7 @@
     margin: 0 auto;
 }
 
-.verpedidos__header{
+.verpedidos__header, .ver-lista__header{
     width: 100%;
     display: grid;
     grid-template-columns: repeat(3,1fr);
@@ -60,7 +60,7 @@
     overflow-x: auto;
 
 }
-.verpedidos__body{
+.verpedidos__body, .ver-lista__body{
     display: flex;
     width: 100%;
     flex-direction: column;

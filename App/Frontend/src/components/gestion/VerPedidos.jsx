@@ -28,8 +28,8 @@ function VerPedidos() {
         isSubmitted: false,
         pedido: {}
     });  
-    
-useEffect(()=>{
+
+    useEffect(()=>{
         async function traerPedidos(){
             const result = await getPedidos({date: filterFecha})
             if(result.status == 200){
@@ -143,15 +143,15 @@ console.log(pedidos);
     console.log(isFilterActive);
     return ( 
         <div className="verpedidos">
-            <div className="verpedidos__fechas">
-                <div className="verpedidos__fecha-ayer button "  onClick={()=>setFilterFecha(fechaAyer)}>Ayer</div>
+            <div className="verpedidos__fechas filtro__fechas">
+                <div className="verpedidos__fecha-ayer button filtro__fechas-button"  onClick={()=>setFilterFecha(fechaAyer)}>Ayer</div>
                 <input className="verpedidos__fecha-input" type="date" onChange={handleDate} value={filterFecha}></input>
-                <div className="verpedidos__fecha-hoy button" onClick={()=>setFilterFecha(fechaHoy)}>Hoy</div>
+                <div className="verpedidos__fecha-hoy button filtro__fechas-button" onClick={()=>setFilterFecha(fechaHoy)}>Hoy</div>
             </div>
             <div className="verpedidos__filters">
                 <div className="verpedidos__filter">
                     <img src={getStatusImage('Entregado')} alt="Entregado"  className='verpedidos__icon'/>
-                    <label htmlFor="">Ocultar Entregados</label>
+                    <label htmlFor="">Ocultar Entregados</label>    
                     <input type="checkbox" onClick={()=> setIsFilterActive({
                         entregado: !isFilterActive.entregado,
                         cancelado: isFilterActive.cancelado
@@ -166,8 +166,8 @@ console.log(pedidos);
                     })}/>
                 </div>
             </div>
-            <div className="verpedidos__pedidos">
-                <div className="verpedidos__header">
+            <div className="verpedidos__pedidos ver-lista">
+                <div className="verpedidos__header ver-lista__header">
                     <div className="verpedidos__header-column">Hora</div>
                     <div className="verpedidos__header-column">Cliente</div>
                     {/* <div className="verpedidos__header-column">Detalle</div>

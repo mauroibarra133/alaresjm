@@ -35,3 +35,17 @@
     flex-direction: column;
     gap: 2rem;
 }
+
+@media only screen and (min-width: 768px){
+    .dashboard__nav{
+        justify-content: space-evenly;
+        padding: 1rem 5rem;
+
+    }
+    .dashboard__nav p{
+        color: #89a6ef;
+        text-transform: uppercase;
+        font-family: 'Amiri';
+        font-size: .9rem;
+    }
+}

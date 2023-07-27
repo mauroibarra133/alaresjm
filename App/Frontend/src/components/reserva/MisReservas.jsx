@@ -26,7 +26,7 @@ function MisReservas() {
     useEffect(()=>{
         async function searchReservas(){
             if(auth.data.user_id){
-                const response = await getReservas(auth.data.user_id)
+                const response = await getReservas({user_id: auth.data.user_id})
                 return response.data
             }
         }

@@ -29,7 +29,8 @@ export async function getReservas(req, res) {
     let result;
     try {
         let user_id = req.query.user_id
-
+        let date = req.query.date
+        console.log(date);
         //Buscar por user
         if(user_id || user_id !== undefined){
             const pool = await getConnection();
@@ -39,7 +40,16 @@ export async function getReservas(req, res) {
                 .query(queries.Reservas.getReservasByUser);
                 res.status(200).json({msg: "Datos obtenidos correctamente", data: result.recordset})  
         }
+        if(date){
+            const pool = await getConnection();
+            result = await pool
+               .request()
+               .input('date', sql.Date, date)
+               .query(queries.Reservas.getReservasByDate);
+               res.status(200).json({msg: "Datos obtenidos correctamente", data: result.recordset})  
+        }
         console.log(result);
+       
     } catch (error) {
         console.log(error);
     }
