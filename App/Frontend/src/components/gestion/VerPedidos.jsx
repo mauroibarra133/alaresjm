@@ -182,10 +182,10 @@ console.log(pedidos);
                 <div className="verpedidos__body" id='verpedidos__body'>
                     {filterPedidos(pedidos).length <= 0 ? <VerPedidosVacio msg={'No hay pedidos el dia de hoy'} msgButton={':('}></VerPedidosVacio> :
                      filterPedidos(pedidos).map(pedido =>(
-                        <div className={`verpedidos__body-row`} id={`pedido-${pedido.id}`} key={pedido.id} onClick={()=>     openModalPedido(pedido)}>
-                            <div className="verpedidos_dato">{pedido.hora}</div>
-                            <div className="verpedidos_dato">{pedido.nombre_completo}</div>
-                            <div className="verpedidos_dato"><img src={getStatusImage(pedido.estado_pedido)} alt="" />
+                        <div className={`verpedidos__body-row ver-lista__row`} id={`pedido-${pedido.id}`} key={pedido.id} onClick={()=>     openModalPedido(pedido)}>
+                            <div className="verpedidos_dato ver-lista__dato">{pedido.hora}</div>
+                            <div className="verpedidos_dato ver-lista__dato">{pedido.nombre_completo}</div>
+                            <div className="verpedidos_dato ver-lista__dato"><img src={getStatusImage(pedido.estado_pedido)} alt="" />
                                 {isLargeScreen && (
                                     <p>{pedido.estado_pedido}</p>
                                 )}

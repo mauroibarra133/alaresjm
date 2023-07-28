@@ -68,14 +68,18 @@
     padding-bottom: .5rem;
 }
 
-.verpedidos__body-row{
+.ver-lista__row{
     display: grid;
     grid-template-columns: repeat(3,1fr);
     border-bottom: 1px solid var(--gray-1);
     padding: 1rem;
     gap: .5rem;
 }
-.verpedidos__body-row:hover{
+.verreservas__body-row{
+  padding-left: 0;
+  padding-right: 0;
+}
+.ver-lista__row:hover{
     background-color: rgba(166, 166, 255, 0.423);
     border-radius: 12px;
     cursor: pointer;
@@ -84,17 +88,22 @@
 .verpedidos__dato-estado{
     width: 30px;
 }
-.verpedidos_dato{
+.ver-lista__dato{
     display: flex;
     justify-content: center;
     align-items: center;
     gap: .5rem;
 }
-.verpedidos_dato img, .verpedidos__icon{
+
+.ver-lista__dato img, .verpedidos__icon{
     width: 30px;
     height: 30px;
 }
-.verpedidos__body .verpedidos__body-row:last-child{
+.verreservas__dato{
+  display: flex;
+  gap: 0;
+}
+.ver-lista__row:last-child{
     border:none;
 }
 

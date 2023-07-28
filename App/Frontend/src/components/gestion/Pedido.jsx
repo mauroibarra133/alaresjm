@@ -32,14 +32,14 @@ function Pedido({modalPedido, closeModal}) {
         }
     }
     return ( 
-        <div className="verpedido__modal">
-            <div className={`verpedido__modal-top`}>
-                <p className="verpedido__top-id">{`Pedido nº ${pedido.id}`}</p>
-                <div className="verpedido__top-cruz">
+        <div className="dashboard__modal">
+            <div className={`verpedido__modal-top dashboard__modal-top`}>
+                <p className="verpedido__top-id dashboard__modal-top-id ">{`Pedido nº ${pedido.id}`}</p>
+                <div className="verpedido__top-cruz dashboard__top-cruz">
                 <img src={cruzIcon} alt=""  onClick={closeModal}/>
                 </div>
             </div>
-            <div className="verpedido__estado">
+            <div className="verpedido__estado dashboard__estado-modal">
                 <select name="" id=""  defaultValue={estado} value={estado == pedido.estado__pedido ? estado :  pedido.estado__pedido} onChange={handleState}>
                     <option value="A confirmar">A confirmar</option>
                     <option value="Confirmado">Confirmado</option>

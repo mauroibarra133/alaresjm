@@ -1,4 +1,4 @@
-.verpedido__modal{
+.dashboard__modal{
     position: absolute;
     top: 15%;
     left: 50%;
@@ -16,7 +16,7 @@
     overflow-y: auto;
 }
 /* Top */
-.verpedido__modal-top{
+.dashboard__modal-top{
     height: 40px;
     width: 100%;
     background-color: var(--blue-1);
@@ -29,24 +29,24 @@
     border-top-right-radius: 12px;
 
 }
-.verpedido__top-id{
+.dashboard__modal-top-id{
     width: 100%;
     transform: translateX(50%);
     font-family: 'Amiri';
     text-transform: uppercase;
 }
-.verpedido__top-cruz{
+.dashboard__top-cruz{
     width: 100%;
     height: 100%;
     display: flex;
     justify-content: end;
 }
-.verpedido__top-cruz img{
+.dashboard__top-cruz img{
     width: 20px;
     height: 20px;
     filter: invert(.7)
 }
-.verpedido__top-cruz img:hover{
+.dashboard__top-cruz img:hover{
     filter: invert(.7) brightness(1.2);
     cursor: pointer;
 }
@@ -136,11 +136,11 @@
     gap: .3rem;
 }
 /* Estado */
-.verpedido__estado{
+.dashboard__estado-modal{
     padding: 1rem;
     width: 100%;
 }
-.verpedido__estado select{
+.dashboard__estado-modal select{
     max-width: 150px;
     border: 1px solid var(--blue-3);
     background-color: var(--blue-1);
@@ -155,10 +155,10 @@
   background-position: 95% center; /* Puedes ajustar la posición de la flecha si es necesario */
   padding-right: 20px; /* Ajusta este valor para que el texto no se superponga con la flecha */
 }
-.verpedido__estado select option{
+.dashboard__estado-modal select option{
     background-color: var(--blue-1);
 }
-.verpedido__estado select:hover {
+.dashboard__estado-modal select:hover {
     background-color: var(--blue-2); 
     cursor: pointer;
   }
@@ -166,7 +166,39 @@
     background-color: #fff;
 }
 @media only screen and (min-width: 768px){
-    .verpedido__modal{
+    .dashboard__modal{
         width: 80%;
     }
+}
+
+
+/* RESERVAS */
+/* Info reserva */
+.verreserva__info{
+    width: 100%;
+    padding: 2rem 0;
+    max-width: 400px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+.verreserva__modal{
+    top: 30%;
+    min-height: 40%;
+    width: 30%;
+    min-width: 300px;
+}
+.verreserva__group{
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+    align-items: center;
+    gap: .5rem;
+}
+.verreserva__dato{
+    min-width: 100px;
 }
