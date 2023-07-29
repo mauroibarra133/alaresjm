@@ -1,0 +1,362 @@
+/* Container */
+.veritems{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.reserva-status-img{
+  margin: 0;
+}
+/* Fechas */
+.veritems__fechas{
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+}
+.veritems__fechas-button{
+    background-color: var(--blue-2);
+}
+
+/* Filters */
+.veritems__filters{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 1rem;
+  border: 1px solid black;
+  border-radius: 16px;
+  background-color: var(--gray-3);
+}
+.veritems__filter{
+  display: flex;
+  gap: .5rem;
+  justify-content: center;
+  align-items: center;
+}
+.veritems__filter input{
+  width: auto;
+}
+/* Tabla */
+  .veritems__lista{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: .5rem;
+    border-radius: 10px;
+    border: 1px solid var(--gray-1);
+    max-width: 900px;
+    margin: 0 auto;
+}
+    /* Header */
+.veritems__header{
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    justify-items: center;
+    border-bottom: 1px solid var(--gray-1);
+    padding-bottom: .4rem;
+    font-size: .9rem;
+    color: var(--gray-1);
+    overflow-x: auto;
+
+}
+    /* Body */
+.veritems__body{
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    justify-content: space-around;
+    padding-bottom: .5rem;
+}
+        /* Fila */
+.veritems__row{
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    border-bottom: 1px solid var(--gray-1);
+    padding: 1rem;
+    gap: .5rem;
+}
+.verreservas__row{
+  padding-left: 0;
+  padding-right: 0;
+}
+.veritems__row:hover{
+    background-color: rgba(166, 166, 255, 0.423);
+    border-radius: 12px;
+    cursor: pointer;
+}
+.veritems__row:last-child{
+  border:none;
+}
+    /* Dato */
+.veritems__dato{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: .5rem;
+  }
+
+.veritems__dato img, .verpedidos__icon{
+    width: 30px;
+    height: 30px;
+}
+.verreservas__dato{
+  display: flex;
+  gap: .5rem;
+}
+
+
+
+/* Media */
+@media only screen and (min-width: 768px){
+.veritems__body, .veritems__header{
+    width: 100%;
+}
+.verpedidos__dato-estado{
+    width: 100%;
+    max-width: 130px;
+}
+}
+
+/* Animaciones y sus estilos */
+@keyframes slideDown {
+    from {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      background-color: #fff;
+    }
+    to {
+      opacity: 1;
+      background-color: var(--blue-4);  
+    }
+  }
+  .animate-slide-down {
+    animation-name: slideDown;
+    animation-duration: 1s;
+  }
+  .animate-fade-in {
+    animation-name: fadeIn;
+    animation-duration: 1s;
+  }
+
+
+  /* Reservas */
+  .verreservas{
+    gap: 0;
+  }
+  .verreservas__fechas{
+    padding-bottom: 2rem;
+  }
+
+  
+  .verreservas__filters{
+    width: 100%;
+    display: flex;
+    justify-content: end;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  /* Duda */
+.verdudas{
+  gap: 0;
+}
+.verdudas__dato p{
+  word-wrap: break-word; /* La palabra se cortará al final del contenedor */
+}
+
+/* Carta */
+.vercarta{
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+  max-width: 700px;
+  width: 100%;
+  margin: 0 auto;
+}
+/* Search */
+.vercarta__search-wrapper{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+.vercarta__search{
+  position: relative;
+  display: flex;
+  gap: .5rem;
+  align-items: center;
+}
+.vercarta__search input{
+  padding: .3rem;
+  min-width: 200px;
+}
+.vercarta__search img{
+  position: absolute;
+  right: .5rem;
+}
+.vercarta__search-button{
+  font-size: .7rem;
+}
+/* Tags */
+.vercarta__filters{
+  display: flex;
+  width: 100%;
+  justify-content: start;
+  gap: .5rem;
+  padding: .6rem .3rem;
+  overflow-x: auto;
+  max-width: 900px;
+  margin: 0 auto;
+}
+.vercarta__filter{
+  display: flex;
+  max-width: 100px;
+  width: 100%;
+  margin: 0 auto;
+  padding: .2rem  .3rem;
+  justify-content: center;
+  align-items: center;
+  gap: 0.625rem;
+  flex: 1 0 0;
+  border-radius: 0.375rem;
+  border: 1px solid rgba(0, 0, 0, 0.40);
+  background: var(--blue-3);
+  color: #FFF;
+  text-align: center;
+  font-family: 'Lato';
+  font-size: 0.7rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 1.5rem;
+  letter-spacing: 0.00113rem;
+}
+.vercarta__filter:hover{
+  background-color: var(--gray-1);
+  cursor: pointer;
+}
+.vercarta__filter.active{
+  background: var(--blue-2);
+}
+.dashboard-icon.vercarta__acciones{
+  width: 20px;
+  height: 20px;
+}
+.vercarta__header{
+  gap: 1rem;
+}
+.vercarta__row{
+  gap: 1rem;
+}
+.vercarta__dato, .vercarta__header-column{
+  width: 100%;
+  grid-column: 3/7;
+  display: flex;
+  justify-content: start;
+  padding: .5rem 0;   
+}
+.vercarta__dato p, .vercarta__header-column p{
+  text-align: start;
+}
+.vercarta__dato:first-child, .vercarta__header-column:first-child{
+  justify-content: center;
+  grid-column: 1/2;
+
+}
+.vercarta__dato:last-child, .vercarta__header-column:last-child{
+  grid-column: 7/8;
+}
+
+.vercarta__paginacion-wrapper{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.vercarta__paginacion{
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  border-radius: 16px;
+  background-color: #FFF;
+  padding: .5rem 1rem;
+  overflow-x: auto;
+  max-width: 900px;
+  padding: .6rem .3rem;
+  justify-content: start;
+  margin: 0 auto;
+  
+}
+.vercarta__pagina{
+  display: flex;
+  justify-content: center;
+}
+.vercarta__pagina--button{
+  display: flex;
+  justify-content: center;
+  border: 2px solid var(--blue-4);
+  background-color: var(--blue-3);
+  padding: .2rem .5rem;
+  color: white;
+  font-weight: 500;
+  font-family: 'Amiri';
+  border-radius: 16px;
+}
+.vercarta__pagina--button:hover{
+  background-color: var(--blue-4);
+  color: white;
+  cursor: pointer;
+}
+.vercarta__pagina p{
+  border: 2px solid var(--blue-4);
+  padding: .3rem .6rem;
+  border-radius: 50%;
+  color: var(--gray-2);
+}
+.vercarta__pagina p:hover{
+  background-color: var(--blue-3);
+  color: white;
+  cursor: pointer;
+}
+.vercarta__pagina p.active{
+  background-color: var(--blue-1);
+  color: white;
+}
+
+@media only screen and (min-width: 768px){
+
+.vercarta__search-wrapper{
+  flex-direction: row;
+  gap: 2rem;
+  max-width: 900px;
+  margin: 0 auto;
+  justify-content: center;
+}
+.vercarta__search input{
+  min-width: 400px;
+  padding: .5rem;
+}
+}
+

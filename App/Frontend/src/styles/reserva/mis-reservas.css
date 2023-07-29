@@ -99,6 +99,9 @@
 .datos__body.vacio{
     padding: 2rem;
 }
+.datos__body p{
+    text-align: center;
+}
 .misreservas__button{
     display: flex;
     justify-content: center;

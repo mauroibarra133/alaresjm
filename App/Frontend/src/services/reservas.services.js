@@ -31,6 +31,7 @@ export async function getReservas(params) {
 export async function updateReserva(id, updatedData) {
     try {
         const response = await axios.put(`http://localhost:4000/reservas/${id}`, updatedData);
+        console.log(updatedData);
         return response;
     } catch (error) {
         return error;

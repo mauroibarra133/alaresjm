@@ -31,8 +31,9 @@ function handleCloseModal(){
     isSubmitted: false,
     isGood: false,
     msg: ""});
-    }
     navigate('/')
+
+    }
 
 function handleOpenModal(valor){
     setShowModal({

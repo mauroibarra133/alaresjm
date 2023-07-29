@@ -56,7 +56,7 @@ function ModalModificar({showModalUpdate,reserva, handleCloseModalUpdate}) {
                     msg: 'No se ha modificado ningun campo'
                 })
             }else{
-                const response = await updateReserva(reserva.id, data)
+                const response = await updateReserva(reserva.id, {...data, estado: 'A Confirmar'})
                 if(response.status === 200){
                     openModal(true)
                 }else{

@@ -51,16 +51,16 @@ function Pedido({modalPedido, closeModal}) {
                 </select>
             </div>
             <div className="verpedido__infouser">
-                <div className="verpedido__dato verpedido__dato-icon-wrapper">
-                    <img src={userIcon} alt="" className="verpedido__dato-icon"/>
+                <div className="verpedido__dato dashboard__dato">
+                    <img src={userIcon} alt="" className="dashboard-icon verpedido__dato-icon"/>
                     <div>{pedido.nombre_completo}</div></div>
 
-                <div className="verpedido__dato verpedido__dato-icon-wrapper"> 
-                    <img src={locationIcon} alt="" className="verpedido__dato-icon" />
+                <div className="verpedido__dato dashboard__dato"> 
+                    <img src={locationIcon} alt="" className="dashboard-icon verpedido__dato-icon" />
                     <div>{pedido.direccion}</div>
                     </div>
-                <div className="verpedido__dato verpedido__dato-icon-wrapper">
-                    <img src={relojIcon} alt="" className="verpedido__dato-icon"/>
+                <div className="verpedido__dato dashboard__dato">
+                    <img src={relojIcon} alt="" className="dashboard-icon verpedido__dato-icon"/>
                     <div>{pedido.hora}</div></div>
             </div>
             <div className="verpedido__detalle-wrapper">
@@ -93,11 +93,11 @@ function Pedido({modalPedido, closeModal}) {
             <div className="verpedido__infoentrega">
                 <div>
                     <div className="verpedido__entrega">
-                        <img src={entregaIcon} className="verpedido__dato-icon" alt="" />
+                        <img src={entregaIcon} className="dashboard-icon verpedido__dato-icon" alt="" />
                         <div>{pedido.tipoentrega}</div>
                     </div>
                     <div className="verpedido__pago">
-                        <img src={pagoIcon} className="verpedido__dato-icon" alt="" />
+                        <img src={pagoIcon} className="dashboard-icon verpedido__dato-icon" alt="" />
                         <div>{pedido.tipopago}</div>
                     </div>
                 </div>

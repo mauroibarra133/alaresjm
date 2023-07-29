@@ -10,6 +10,8 @@ import cookingStatus from '../assets/images/sombrero-de-cocinero.png'
 import readyStatus from '../assets/images/caja-de-entrega.png'
 import OKStatus from '../assets/images/comprobado.png'
 import deliveryStatus from '../assets/images/enviado.png'
+import noReadStatus from '../assets/images/mensaje-no-leido.png'
+import readStatus from '../assets/images/doble-verificacion.png'
 
 export const meses = {
     0: 'Enero',
@@ -52,7 +54,23 @@ export const meses = {
         img: OKStatus
     },
     {
+      status: "Reservado",
+      img: OKStatus
+  },
+    {
         status: "Cancelado",
         img: badStatus
+    },
+    {
+      status: "No Leido",
+      img: noReadStatus
+    },
+    {
+      status: "Leido",
+      img: readStatus
+    },
+    {
+      status: "Respondido",
+      img: OKStatus
     }
   ];

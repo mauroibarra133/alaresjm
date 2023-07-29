@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from 'react';
-import '../../styles/dashboard/verpedidos.css'
+import '../../styles/dashboard/veritems.css'
 import {getPedidos} from '../../services/pedidos.services'
 import { getStatusImage } from '../../utils/functions';
 import Pedido from './Pedido';
@@ -39,7 +39,6 @@ function VerPedidos() {
         traerPedidos()
     },[filterFecha])
 
-console.log(pedidos);
       useEffect(() => {
         const handleResize = () => {
           setIsLargeScreen(window.innerWidth > 768);
@@ -142,14 +141,14 @@ console.log(pedidos);
     }
     console.log(isFilterActive);
     return ( 
-        <div className="verpedidos">
-            <div className="verpedidos__fechas filtro__fechas">
-                <div className="verpedidos__fecha-ayer button filtro__fechas-button"  onClick={()=>setFilterFecha(fechaAyer)}>Ayer</div>
+        <div className="veritems verpedidos">
+            <div className="verpedidos__fechas veritems__fechas">
+                <div className="verpedidos__fecha-ayer button veritems__fechas-button"  onClick={()=>setFilterFecha(fechaAyer)}>Ayer</div>
                 <input className="verpedidos__fecha-input" type="date" onChange={handleDate} value={filterFecha}></input>
-                <div className="verpedidos__fecha-hoy button filtro__fechas-button" onClick={()=>setFilterFecha(fechaHoy)}>Hoy</div>
+                <div className="verpedidos__fecha-hoy button veritems__fechas-button" onClick={()=>setFilterFecha(fechaHoy)}>Hoy</div>
             </div>
-            <div className="verpedidos__filters">
-                <div className="verpedidos__filter">
+            <div className="veritems__filters verpedidos__filters">
+                <div className="veritems__filter verpedidos__filter">
                     <img src={getStatusImage('Entregado')} alt="Entregado"  className='verpedidos__icon'/>
                     <label htmlFor="">Ocultar Entregados</label>    
                     <input type="checkbox" onClick={()=> setIsFilterActive({
@@ -157,7 +156,7 @@ console.log(pedidos);
                         cancelado: isFilterActive.cancelado
                     })}/>
                 </div>
-                <div className="verpedidos__filter">
+                <div className="veritems__filter verpedidos__filter">
                 <img src={getStatusImage('Cancelado')} alt="Cancelado" className='verpedidos__icon'/>
                     <label htmlFor="">Ocultar Cancelados</label>
                     <input type="checkbox" onClick={()=> setIsFilterActive({
@@ -166,10 +165,10 @@ console.log(pedidos);
                     })}/>
                 </div>
             </div>
-            <div className="verpedidos__pedidos ver-lista">
-                <div className="verpedidos__header ver-lista__header">
-                    <div className="verpedidos__header-column">Hora</div>
-                    <div className="verpedidos__header-column">Cliente</div>
+            <div className="verpedidos__pedidos veritems__lista">
+                <div className="verpedidos__header veritems__header">
+                    <div className="veritems__header-column verpedidos__header-column">Hora</div>
+                    <div className=" veritems__header-column  verpedidos__header-column">Cliente</div>
                     {/* <div className="verpedidos__header-column">Detalle</div>
                     <div className="verpedidos__header-column">Direccion</div>
                     <div className="verpedidos__header-column">Tipo Pago</div>
@@ -177,15 +176,15 @@ console.log(pedidos);
                     <div className="verpedidos__header-column">Nota</div>
                     <div className="verpedidos__header-column">Total</div>
                     <div className="verpedidos__header-column">Paga con</div> */}
-                    <div className="verpedidos__header-column">Estado</div>
+                    <div className="veritems__header-column  verpedidos__header-column">Estado</div>
                 </div>
-                <div className="verpedidos__body" id='verpedidos__body'>
+                <div className="veritems__body verpedidos__body" id='verpedidos__body'>
                     {filterPedidos(pedidos).length <= 0 ? <VerPedidosVacio msg={'No hay pedidos el dia de hoy'} msgButton={':('}></VerPedidosVacio> :
                      filterPedidos(pedidos).map(pedido =>(
-                        <div className={`verpedidos__body-row ver-lista__row`} id={`pedido-${pedido.id}`} key={pedido.id} onClick={()=>     openModalPedido(pedido)}>
-                            <div className="verpedidos_dato ver-lista__dato">{pedido.hora}</div>
-                            <div className="verpedidos_dato ver-lista__dato">{pedido.nombre_completo}</div>
-                            <div className="verpedidos_dato ver-lista__dato"><img src={getStatusImage(pedido.estado_pedido)} alt="" />
+                        <div className={`veritems__row verpedidos__body-row`} id={`pedido-${pedido.id}`} key={pedido.id} onClick={()=>     openModalPedido(pedido)}>
+                            <div className="veritems__dato verpedidos__dato ver-lista__dato">{pedido.hora}</div>
+                            <div className="veritems__dato verpedidos__dato ver-lista__dato">{pedido.nombre_completo}</div>
+                            <div className="veritems__dato verpedidos__dato ver-lista__dato"><img src={getStatusImage(pedido.estado_pedido)} alt="" />
                                 {isLargeScreen && (
                                     <p>{pedido.estado_pedido}</p>
                                 )}

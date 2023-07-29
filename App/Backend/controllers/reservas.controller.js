@@ -77,6 +77,7 @@ export async function updateReserva(req, res) {
     const updatedData = req.body; // Asumiendo que los datos actualizados están en el cuerpo de la solicitud
 
     try {
+        console.log(updatedData);
         const pool = await getConnection();
         await pool
             .request()
@@ -84,9 +85,10 @@ export async function updateReserva(req, res) {
             // Aquí deberías usar los campos correspondientes de la tabla de reservas y sus valores actualizados
             .input('fecha', sql.Date, updatedData.fecha)
             .input('hora', sql.VarChar, updatedData.hora)
-            .input('comensales', sql.Int, parseInt(updatedData.comensales))
-            .input('zona', sql.VarChar, updatedData.zona)
-            .input('cliente', sql.VarChar, updatedData.cliente)
+            .input('comensales', sql.Int, parseInt(updatedData.comensales) ||parseInt(updatedData.cantidad_personas))
+            .input('zona', sql.VarChar, updatedData.zona || updatedData.lugar)
+            .input('cliente', sql.VarChar, updatedData.cliente || updatedData.cliente_reserva)
+            .input('estado', sql.VarChar, updatedData.estado)
             .query(queries.Reservas.updateReserva);
 
         res.status(200).json({ msg: "Reserva modificada correctamente" });

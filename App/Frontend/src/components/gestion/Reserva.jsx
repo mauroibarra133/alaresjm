@@ -1,5 +1,5 @@
 import {  useState } from "react";
-import { updatePedido } from "../../services/pedidos.services";
+import { updateReserva } from "../../services/reservas.services";
 import '../../styles/dashboard/pedido.css'
 import cruzIcon from '../../assets/images/xmark-solid.svg'
 import userIcon from '../../assets/images/usuario.png'
@@ -14,13 +14,14 @@ import relojIcon from '../../assets/images/reloj-de-pared.png'
 function Reserva({modalReserva, closeModal}) {
     const reserva = modalReserva.reserva
     const fechaReserva = new Date(reserva.fecha).toISOString().split('T')[0];
+    const fechaTransformada = `${fechaReserva.slice(8, 10)}-${fechaReserva.slice(5, 7)}`;
     const [estado, setEstado] = useState(reserva.estado)
 
     async function handleState(event){
         if(event.target.value != reserva.estado){
-            const response = await updatePedido({
-                id: reserva.id,
-                state: event.target.value
+            const response = await updateReserva(reserva.id,{
+                ...reserva,
+                estado: event.target.value
             })
             if(response.status == 200){
                 setEstado(event.target.value)
@@ -41,33 +42,33 @@ function Reserva({modalReserva, closeModal}) {
                 </div>
             </div>
             <div className="verreserva__estado dashboard__estado-modal">
-                <select name="" id=""  defaultValue={estado} value={estado == reserva.estado ? estado :  reserva.estado} onChange={handleState}>
-                    <option value="A confirmar">A confirmar</option>
-                    <option value="Confirmado">Confirmado</option>
+                <select name="" id="" defaultValue={estado}  onChange={handleState}>
+                    <option value="A Confirmar">A Confirmar</option>
+                    <option value="Reservado">Reservado</option>
                     <option value="Cancelado">Cancelado</option>
                 </select>
             </div>
             <div className="verreserva__info">
-                <div className="verpedido__dato verpedido__dato-icon-wrapper">
+                <div className="verreserva__dato-name dashboard__dato">
                     <div style={{fontFamily: 'Amiri'}}>{reserva.cliente_reserva}</div>
                 </div>
                 <div className="verreserva__group">
-                    <div className="verpedido__dato verpedido__dato-icon-wrapper verreserva__dato">
-                        <img src={userIcon} alt="" className="verpedido__dato-icon"/>
+                    <div className="dashboard__dato verreserva__dato">
+                        <img src={userIcon} alt="" className="dashboard-icon"/>
                         <div>{reserva.cantidad_personas}</div>
                     </div>
-                    <div className="verpedido__dato verpedido__dato-icon-wrapper verreserva__dato"> 
-                            <img src={locationIcon} alt="" className="verpedido__dato-icon" />
+                    <div className="verreserva__dato dashboard__dato "> 
+                            <img src={locationIcon} alt="" className="dashboard-icon" />
                             <div>{reserva.lugar}</div>
                     </div>
                 </div>
                 <div className="verreserva__group">
-                    <div className="verpedido__dato verpedido__dato-icon-wrapper verreserva__dato">
-                        <img src={relojIcon} alt="" className="verpedido__dato-icon"/>
-                        <div>{fechaReserva}</div>
+                    <div className="verreserva__dato dashboard__dato">
+                        <img src={relojIcon} alt="" className="dashboard-icon"/>
+                        <div>{fechaTransformada}</div>
                     </div>
-                    <div className="verpedido__dato verpedido__dato-icon-wrapper verreserva__dato">
-                        <img src={relojIcon} alt="" className="verpedido__dato-icon"/>
+                    <div className="verreserva__dato dashboard__dato ">
+                        <img src={relojIcon} alt="" className="dashboard-icon"/>
                         <div>{reserva.hora}</div>
                     </div>
                 </div>

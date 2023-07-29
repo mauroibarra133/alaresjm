@@ -16,12 +16,15 @@ export const  queries ={
         updateProductById: 'UPDATE productos SET nombre = @nombre, descripcion = @descripcion, id_categoria = @id_categoria WHERE id = @id '
     },
     Dudas:{
-        getAllDudas: 'SELECT * FROM dudas',
+        getAllDudas: `SELECT D.id,CONCAT(D.nombre,' ',D.apellido) as nombreCompleto,D.telefono,D.mail, D.descripcion as duda, E.nombre as estado FROM dudas D
+        JOIN estados_duda E ON E.id = D.id_estado
+        `,
         getDudasByStatus: 'SELECT * FROM dudas WHERE id_estado = @id_estado',
         addDuda: 'INSERT INTO dudas (nombre,apellido,telefono,mail,descripcion,id_estado) VALUES (@nombre, @apellido, @telefono,@mail,@descripcion,@id_estado)', 
         getDudaById: 'SELECT * FROM dudas WHERE id = @id',
         deleteDuda: 'DELETE FROM dudas WHERE id = @id ',
-        updateDudaById: 'UPDATE dudas SET nombre = @nombre, apellido = @apellido, telefono = @telefono,mail= @mail,descripcion = @descripcion, id_estado = @id_estado WHERE id = @id '
+        updateDudaById: `UPDATE dudas SET nombre = @nombre, apellido = @apellido, telefono = @telefono,mail= @mail,descripcion = @descripcion, 
+        id_estado = (SELECT id FROM estados_duda WHERE nombre = @estado) WHERE id = @id `
     },
     Categorias:{
         getAllCategories: 'SELECT * FROM categorias_producto'
@@ -82,8 +85,10 @@ VALUES (@fecha, @id_usuario, @direccion, @nota, @total, @id_tipo_pago, @id_tipo_
         FROM reservas R
         JOIN estados_reserva E ON E.id = R.id_estado WHERE R.fecha = @date`,
         deleteReserva: `DELETE FROM reservas WHERE id = @id`,
-        updateReserva: `UPDATE reservas SET fecha = @fecha, hora = @hora, cantidad_personas = @comensales, lugar = @zona, cliente_reserva = @cliente
-        WHERE id = @id`
+        updateReserva: `UPDATE reservas SET fecha = @fecha, hora = @hora, 
+        cantidad_personas = @comensales, lugar = @zona, cliente_reserva = @cliente,
+        id_estado = (SELECT id FROM estados_reserva WHERE nombre = @estado)
+        WHERE id = @id`,
     },
     Ranking: {
         getRanking: "SELECT * FROM RankingPuntos ORDER BY Puntos DESC"

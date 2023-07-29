@@ -4,13 +4,19 @@
     background-color: #fff;
 }
 .dashboard__nav{
-    display: flex;
-    flex-wrap: wrap;
     background-color: #5a64a8;
-    padding: 1rem 0;
+
+}
+.dashboard__links-wrapper{
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    justify-content: space-between;
     gap: .5rem;
-    justify-content: center;
     align-items: center;
+    display: flex;
+    padding: 1rem;
+    flex-wrap: wrap;
 }
 .dashboard__link{
     color: #89a6ef;

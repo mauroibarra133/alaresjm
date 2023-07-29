@@ -76,23 +76,24 @@ export async function deleteDudaById(req,res){
 
 }
 export async function updateDudaById (req,res){
-    let {nombre, apellido,telefono,mail,descripcion, id_estado} = req.body
+    let {nombreCompleto,telefono,mail,duda, estado} = req.body
+    const nombre = nombreCompleto.split(' ')[0]
+    const apellido = nombreCompleto.split(' ')[1]
     const { id } = req.params;
 
-    if(!id_estado || id_estado ==''){
-        id_estado = 1
+    if(!estado || estado ==''){
+        estado = 1
     }
 
     const pool = await getConnection() //Es una promesa, es el cliente para realizar consultas
-    const result = await pool.request()
+    await pool.request()
         .input('nombre',sql.VarChar,nombre)
         .input('apellido',sql.VarChar,apellido)
         .input('telefono',sql.VarChar,telefono.toString())
         .input('mail',sql.VarChar,mail)
-        .input('descripcion',sql.Text,descripcion)
-        .input('id_estado',sql.Int,id_estado)
+        .input('descripcion',sql.Text,duda)
+        .input('estado',sql.VarChar,estado)
         .input('id',sql.Int,id)
         .query(queries.Dudas.updateDudaById) //Hacemos la consulta
-        res.json({id,nombre,apellido,telefono,mail,descripcion,id_estado})
         res.sendStatus(204)
 }
