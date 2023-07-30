@@ -80,7 +80,7 @@
     display: grid;
     grid-template-columns: repeat(3,1fr);
     border-bottom: 1px solid var(--gray-1);
-    padding: 1rem;
+    padding: 1rem 1rem;
     gap: .5rem;
 }
 .verreservas__row{
@@ -102,6 +102,7 @@
     justify-content: center;
     align-items: center;
     gap: .5rem;
+    font-size: .9rem;
   }
 
 .veritems__dato img, .verpedidos__icon{
@@ -270,15 +271,20 @@
 .vercarta__row{
   gap: 1rem;
 }
+.vercarta__row{
+  padding: .5rem 1rem;
+}
 .vercarta__dato, .vercarta__header-column{
   width: 100%;
   grid-column: 3/7;
   display: flex;
   justify-content: start;
-  padding: .5rem 0;   
+  padding: .2rem 0;   
 }
 .vercarta__dato p, .vercarta__header-column p{
   text-align: start;
+  font-size: .8rem;
+
 }
 .vercarta__dato:first-child, .vercarta__header-column:first-child{
   justify-content: center;

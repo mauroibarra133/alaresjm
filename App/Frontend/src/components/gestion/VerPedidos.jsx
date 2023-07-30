@@ -96,12 +96,6 @@ function VerPedidos() {
         setFilterFecha(data.target.value)
     }
 
-    // async function fetchPedidos() {
-    //     const result = await getPedidos({ date: filterFecha });
-    //     if (result.status === 200) {
-    //       setPedidos(result.data.data);
-    //     }
-    //   }
     function filterPedidos(pedidos){
         if(!isFilterActive.entregado && !isFilterActive.cancelado){
             return pedidos
@@ -181,7 +175,7 @@ function VerPedidos() {
                 <div className="veritems__body verpedidos__body" id='verpedidos__body'>
                     {filterPedidos(pedidos).length <= 0 ? <VerPedidosVacio msg={'No hay pedidos el dia de hoy'} msgButton={':('}></VerPedidosVacio> :
                      filterPedidos(pedidos).map(pedido =>(
-                        <div className={`veritems__row verpedidos__body-row`} id={`pedido-${pedido.id}`} key={pedido.id} onClick={()=>     openModalPedido(pedido)}>
+                        <div className={`veritems__row verpedidos__body-row`} id={`pedido-${pedido.id}`} key={pedido.id} onClick={()=>openModalPedido(pedido)}>
                             <div className="veritems__dato verpedidos__dato ver-lista__dato">{pedido.hora}</div>
                             <div className="veritems__dato verpedidos__dato ver-lista__dato">{pedido.nombre_completo}</div>
                             <div className="veritems__dato verpedidos__dato ver-lista__dato"><img src={getStatusImage(pedido.estado_pedido)} alt="" />

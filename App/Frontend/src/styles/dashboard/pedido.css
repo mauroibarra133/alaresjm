@@ -234,3 +234,46 @@
 .verduda__info-wrapper label{
     color: var(--gray-1);
 }
+
+/* CARTA */
+.vercarta__modal{
+    width: 90%;
+    max-width: 500px;
+    margin: 0 auto;
+}
+.vercarta__modal-body{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+    gap: 3rem;
+}
+.vercarta__modal-info{
+    padding-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    max-width: 400px;
+    width: 100%;
+    margin: 0 auto;
+}
+.vercarta__modal-row{
+    display: flex;
+    justify-content: space-between;
+}
+.vercarta__modal-row textarea{
+    border: 1px solid black;
+    border-radius: 6px;
+    max-width: 120px;
+}
+
+@media only screen and (min-width: 768px){
+    .vercarta__modal-row textarea{
+    max-width: 170px;
+    }
+    .vercarta__modal{
+        min-width: 500px;
+        width: 40%;
+    }
+}
