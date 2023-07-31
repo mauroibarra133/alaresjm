@@ -10,7 +10,7 @@ import io from 'socket.io-client';
 const socket = io('/');
 
 function MisPedidos() {
-    const [isFilterActive, setFilterActive] = useState(false);
+    const [isFilterActive, setFilterActive] = useState(true);
     const [pedidos,setPedidos] = useState([]);
     const [pedidoAct,setPedidoAct] = useState(false);
     const {auth} = useAuth()

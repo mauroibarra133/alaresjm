@@ -258,16 +258,26 @@
     width: 100%;
     margin: 0 auto;
 }
-.vercarta__modal-row{
+.vercarta__modal-row div{
+    width: 100%;
     display: flex;
     justify-content: space-between;
+}
+.vercarta__modal-row{
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+
 }
 .vercarta__modal-row textarea{
     border: 1px solid black;
     border-radius: 6px;
     max-width: 120px;
 }
-
+.modal-item-error{
+    width: 120px;
+    
+}
 @media only screen and (min-width: 768px){
     .vercarta__modal-row textarea{
     max-width: 170px;
@@ -275,5 +285,9 @@
     .vercarta__modal{
         min-width: 500px;
         width: 40%;
+    }
+    .modal-item-error{
+        width: 170px;
+        
     }
 }

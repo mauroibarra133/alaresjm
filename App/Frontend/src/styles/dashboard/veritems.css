@@ -189,7 +189,7 @@
 .vercarta{
   display: flex;
   flex-direction: column;
-  gap: 2.5rem;
+  gap: 1rem;
   max-width: 700px;
   width: 100%;
   margin: 0 auto;
@@ -366,3 +366,17 @@
 }
 }
 
+.vercarta-item-status{
+  position: relative;
+  padding-bottom: 1rem;
+  width: 100%;
+  font-family: 'Amiri Bold';
+  font-size: .9rem;
+  transform: translateY(30px);
+}
+.vercarta-item-status.good{
+  color: var(--green-1);
+}
+.vercarta-item-status.bad{
+  color: var(--red-error-2);
+}

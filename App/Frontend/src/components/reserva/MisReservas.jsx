@@ -14,7 +14,7 @@ function MisReservas() {
     const {auth} = useAuth()
     // const [date,setDate] = useState(new Date().toISOString().split('T')[0])
     const [reservas,setReservas] = useState();
-    const [isFilterActive, setFilterActive] = useState(false);
+    const [isFilterActive, setFilterActive] = useState(true);
 
     // async function handleDate(){
     //     const hoy = new Date().toISOString().split('T')[0];

@@ -10,9 +10,9 @@ export const  queries ={
                                 FROM productos p
                                 WHERE p.id_categoria = @id_categoria
                                 `,
-        addProduct: 'INSERT INTO productos (nombre, descripcion, id_categoria) VALUES (@nombre, @descripcion, @id_categoria)', 
+        addProduct: 'INSERT INTO productos (nombre, descripcion, id_categoria) VALUES (@nombre, @descripcion, @id_categoria); SELECT SCOPE_IDENTITY() AS newId', 
         getProductById: 'SELECT * FROM productos WHERE id = @id',
-        deleteProduct: 'DELETE FROM productos WHERE id = @id ',
+        deleteProduct: 'DELETE FROM precios WHERE id_producto = @id; DELETE FROM productos WHERE id = @id ',
         updateProductById: 'UPDATE productos SET nombre = @nombre, descripcion = @descripcion, id_categoria = @id_categoria WHERE id = @id '
     },
     Dudas:{
@@ -92,5 +92,11 @@ VALUES (@fecha, @id_usuario, @direccion, @nota, @total, @id_tipo_pago, @id_tipo_
     },
     Ranking: {
         getRanking: "SELECT * FROM RankingPuntos ORDER BY Puntos DESC"
+    },
+    Prices: {
+        addPrecioChico: "INSERT INTO precios (id_producto,id_tamaño,precio) VALUES (@id,1,@precioChico)",
+        addPrecioGrande: "INSERT INTO precios (id_producto,id_tamaño,precio) VALUES (@id,3,@precioGrande)",
+        updatePrecioChico: "UPDATE precios SET precio = @precioChico WHERE id_producto = @id AND id_tamaño = 1",
+        updatePrecioGrande: "UPDATE precios SET precio = @precioGrande  WHERE id_producto = @id AND id_tamaño = 3"
     }
 }

@@ -154,7 +154,10 @@ INSERT INTO precios (id_producto, id_tamaño, precio) VALUES
 (52, 1, 1400),
 (52, 3, 1600),
 (53, 1, 1500),
-(53, 3, 1700)
+(53, 3, 1700),
+(1,1,0),(2,1,0),(3,1,0),(4,1,0),(5,1,0),(6,1,0),(7,1,0),(8,1,0),(9,1,0),
+(10,1,0),(11,1,0),(12,1,0),(13,1,0),(14,1,0),(15,1,0),(27,1,0),(29,1,0),(30,1,0),
+(31,1,0),(32,1,0),(36,3,0),(37,3,0),(38,3,0),(39,1,0),(40,3,0)
 
 INSERT INTO dudas (nombre,apellido,telefono,mail,descripcion,id_estado)VALUES
 ('Mauro','Ibarra','3525649133','mauroibarra133@gmail.com','Como trabajo para ustedes porfa',1)
