@@ -9,7 +9,7 @@ import { generateUniqueKey } from '../../utils/functions';
 import Path from '../Path';
 import Tag from './Tag'
 import InitialMenu from './InitialMenu';
-import carritoImg from '../../assets/images/carrito.png'
+import carritoImg from '../../assets/images/carrito.webp'
 import ItemMenu from './ItemMenu';
 import Modal from '../Modal';
 

@@ -1,10 +1,10 @@
+/* eslint-disable react/prop-types */
 import { createContext, useEffect, useState } from "react";
 import { isAuth } from "../services/auth.services";
 
 export const AuthContext = createContext();
 
 
-// eslint-disable-next-line react/prop-types
 export function AuthProvider({children}){
     const [auth, setAuth] = useState(
         {
@@ -12,6 +12,7 @@ export function AuthProvider({children}){
             data: {}
         }
     );
+    
 async function isLogued(){
         const response = await isAuth()
         if(response != undefined){

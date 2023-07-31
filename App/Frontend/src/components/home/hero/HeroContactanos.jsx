@@ -1,14 +1,14 @@
 import { useState, useId } from 'react';
-import '../../../styles/hero/heroContactanos.css'
 import {useForm} from 'react-hook-form';
-import {AgregarDuda} from '../../../services/dudas.services'
+import {addDoubt} from '../../../services/dudas.services'
 import { EMAIL_REGEX, ONLY_LETTERS, ONLY_NUMBERS } from '../../../utils/constants';
+import Modal from '../../Modal';
+import '../../../styles/hero/heroContactanos.css'
 
 // import {DevTool}from '@hookform/devtools'
 
-import Modal from '../../Modal';
-
 function HeroContactanos() {
+    //Constants
     const formContactId = useId();
     const nameId = useId();
     const surnameId = useId();
@@ -16,17 +16,20 @@ function HeroContactanos() {
     const mailId = useId();
     const dudaId = useId();
 
-    const { register, handleSubmit, formState, reset } = useForm({
-        mode: 'onBlur',
-        
-    });
-    const {errors, isValid, isDirty} = formState;
+    //States
     const [clicked,setClicked] = useState(false);
     const [formStatus,setFormStatus] = useState({
         isSubmitted : false,
         goodStatus: false
     });
 
+    //Hooks
+    const { register, handleSubmit, formState, reset } = useForm({
+        mode: 'onBlur',
+    });
+    const {errors, isValid, isDirty} = formState;
+
+    //Functions
     function handleClick(){
         if(Object.keys(errors).length == 0) setClicked(!clicked)
     }
@@ -45,7 +48,7 @@ function HeroContactanos() {
     }
 
     async function onSubmit(data){
-        const response = await AgregarDuda(data);
+        const response = await addDoubt(data);
         console.log(response);
         reset();
         if(response.status >= 200 && response.status < 300){

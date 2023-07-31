@@ -1,10 +1,10 @@
 import  { useEffect, useState } from "react";
 import '../../styles/hero/carrusel/carrusel.css';
 import Glide from "@glidejs/glide";
-import imgCarrusel1 from '../../assets/images/foodtruck-1.jpg';
-import imgCarrusel2 from '../../assets/images/foodtruck-2.jpg';
-import imgCarrusel3 from '../../assets/images/foodtruck-3.jpg';
-import imgCarrusel4 from '../../assets/images/foodtruck-4.jpg';
+import imgCarrusel1 from '../../assets/images/foodtruck-1-min.webp';
+import imgCarrusel2 from '../../assets/images/foodtruck-2-min.webp';
+import imgCarrusel3 from '../../assets/images/foodtruck-3-min.webp';
+import imgCarrusel4 from '../../assets/images/foodtruck-4-min.webp';
 
 const sliderConfiguration= {
   gap: 20,
@@ -50,20 +50,20 @@ function Carrusel(){
         <div className='glide__track' data-glide-el='track'>
           <ul className='glide__slides'>
             <li className='glide__slide slider'>
-                <img src={imgCarrusel1} alt="" />
+                <img src={imgCarrusel1} alt="Imagen Carrusel" />
             </li>
             <li className='glide__slide slider'>
-                <img src={imgCarrusel2} alt="" />
+                <img src={imgCarrusel2} alt="Imagen Carrusel" />
 
             </li>
             <li className='glide__slide slider'>
-                <img src={imgCarrusel3} alt="" />
+                <img src={imgCarrusel3} alt="Imagen Carrusel" />
             </li>
             <li className='glide__slide slider'>
-                <img src={imgCarrusel4} alt="" />
+                <img src={imgCarrusel4} alt="Imagen Carrusel" />
             </li>
             <li className={`glide__slide slider`}>
-                <img src={imgCarrusel4} alt="" />
+                <img src={imgCarrusel4} alt="Imagen Carrusel" />
             </li>
           </ul>
         </div>

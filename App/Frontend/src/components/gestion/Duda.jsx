@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import {  useId, useState } from "react";
-import { AgregarDuda as updateDuda } from "../../services/dudas.services";
+import { addDoubt as updateDoubt } from "../../services/dudas.services";
 import '../../styles/dashboard/modalDashboard.css'
 import cruzIcon from '../../assets/images/xmark-solid.svg'
 import userIcon from '../../assets/images/usuario.png'
@@ -16,7 +16,7 @@ function Duda({modalDuda, closeModal}) {
     //functions
     async function handleState(event){
         if(event.target.value != duda.estado){
-            const response = await updateDuda({
+            const response = await updateDoubt({
                 ...duda,
                 estado: event.target.value
             })

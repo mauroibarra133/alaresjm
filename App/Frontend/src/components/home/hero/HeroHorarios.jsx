@@ -1,6 +1,6 @@
 import clockIcon from '../../../assets/images/clock-icon.svg'
 import locationIcon from '../../../assets/images/location-icon.svg'
-import repartidorIcon from '../../../assets/images/repartidor-icon.png'
+import repartidorIcon from '../../../assets/images/repartidor-icon-min.webp'
 import '../../../styles/hero/heroHorarios.css'
 
 function HeroHorarios() {

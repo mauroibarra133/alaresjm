@@ -1,0 +1,180 @@
+@import '../variables.css';
+@import '../fonts.css';
+
+/* Container */
+.myaccount__container{
+    min-height: 100vh;
+    height: auto;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    padding: 2rem 1rem;
+    background-color: var(--gray-3)
+}
+
+.myaccount__bigtitle{
+    font-family: 'Pirata One';
+}
+
+.myaccount-wrapper{
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+/* Contauenr info */
+.myaccount__info-wrapper{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
+    margin: 0 auto;
+    background-color: #fff;
+    -webkit-box-shadow: 9px 7px 75px -22px rgba(140,138,135,1);
+    -moz-box-shadow: 9px 7px 75px -22px rgba(140,138,135,1);
+    box-shadow: 9px 7px 75px -22px rgba(140,138,135,1);
+    border-radius: 12px;
+    padding: 1rem;
+    max-width: 500px;
+}
+.myaccount__title{
+    display: flex;
+    border-bottom: 1px solid black;
+}
+.myaccount__title h2{
+    font-size: 1.2rem;
+    font-family: 'Amiri';
+}
+/* Puntos */
+.myaccount__info{
+    width: 100%;
+    display: flex;
+    gap: 1rem;
+}
+.myaccount__pts{
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    gap: .5rem;
+    align-items: center;
+    justify-content: center;
+}
+.myaccount__pts img{
+    width: 90px;
+    height: 90px;
+}
+.myaccount__pts p{
+    font-family: 'Amiri Bold';
+    font-size: 2rem;
+    color: var(--gray-2);
+}
+.myaccount__pts span{
+    font-size: 1.6rem;
+    color: var(--gray-2);
+}
+/* Campos */
+.myaccount__fields{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
+    margin: 0 auto;
+    padding: 1rem 0;
+}
+.myaccount__field{
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+}
+
+/* Items */
+.myaccount__items{
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.myaccount__item{
+    width: 100%;
+    display: flex;
+    justify-content: space-around ;
+    align-items: center;
+    gap: 1rem;
+    -webkit-box-shadow: 9px 7px 75px -22px rgba(140,138,135,1);
+    -moz-box-shadow: 9px 7px 75px -22px rgba(140,138,135,1);
+    box-shadow: 9px 7px 75px -22px rgba(140,138,135,1);
+    border-radius: 18px;
+    padding: 1rem;
+    max-width: 400px;
+    margin: 0 auto;
+}
+.myaccount__item:first-child{
+    background-color: rgba(124, 124, 187,.5);
+
+}
+.myaccount__item:nth-child(2){
+    background-color: rgba(97, 97, 174, 0.7);
+
+}
+
+.myaccount__item:hover{
+    filter: brightness(1.4);
+    cursor: pointer;
+}
+.myaccount__item:hover .item__arrow{
+    transform: translateX(10px);
+    filter: invert(.8);
+}
+.myaccount__item:hover .item__info h3{
+    filter: invert(.8);
+}
+.myaccount__item img{
+    width: 40px;
+    height: 40px;
+}
+
+.item__info{
+    display: flex;
+    flex-direction: column;
+}
+
+.item__info h3{
+    font-size: 1rem;
+    color: var(--black-1);
+    font-family: 'Amiri';
+    text-align: start;
+    transition: all .5s ease;
+
+}
+.item__info p{
+    font-size: .8rem;
+    color: var(--gray-2);
+
+    transition: all .5s ease;
+
+}
+
+.item__arrow{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30px;
+    height: 30px;
+    transition: all .5s ease;
+}
+.item__arrow img{
+    width: 100%;
+    height: 100%;
+}
+
+@media only screen and (min-width:900px){
+    .myaccount__info-wrapper{
+        width: fit-content;
+        min-width: 500px;
+    }
+    .myaccount__items{
+        width: fit-content;
+        min-width: 400px;
+        margin: 0 auto;
+    }
+}

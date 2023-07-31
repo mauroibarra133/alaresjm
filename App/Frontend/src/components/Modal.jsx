@@ -1,10 +1,12 @@
+/* eslint-disable react/prop-types */
 import { useEffect, useState } from 'react';
 import '../styles/modal.css';
 
-// eslint-disable-next-line react/prop-types
 function Modal({ isSubmitted, handleSubmit, msg, isGoodStatus, position, offset }) {
+  //States
   const [modalPosition, setModalPosition] = useState(0);
 
+  //Use Effects
   useEffect(() => {
     const handleScroll = () => {
       const scrollTop = window.scrollY || document.documentElement.scrollTop;

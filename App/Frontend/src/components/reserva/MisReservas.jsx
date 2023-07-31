@@ -1,57 +1,52 @@
 import Path from '../Path'
-import '../../styles/reserva/mis-reservas.css'
 import eyeImg from '../../assets/images/eye-slash.svg'
+import MisReservasVacio from '../FormVacio';
+import Booking from './Booking';
 import {  useEffect, useState } from 'react';
 import {useAuth} from '../../hooks/useAuth'
 import {getBookings} from '../../services/reservas.services'
-import MisReservasVacio from '../FormVacio';
-import Reserva from './Reserva';
+import '../../styles/reserva/mis-reservas.css'
 
-// import flashImg from '../../assets/images/bolt-solid.svg'
-// import lupaImg from '../../assets/images/magnifying-glass-solid.svg'
 
 function MisReservas() {
+
+    //Hooks
     const {auth} = useAuth()
-    // const [date,setDate] = useState(new Date().toISOString().split('T')[0])
-    const [reservas,setReservas] = useState();
+
+    //states
+    const [bookings,setBookings] = useState();
     const [isFilterActive, setFilterActive] = useState(true);
 
-    // async function handleDate(){
-    //     const hoy = new Date().toISOString().split('T')[0];
-    //     setDate(hoy);
-    //     const response = await searchReservas()
-    //     console.log(response);
-    // }
-
+    //Use effects
     useEffect(()=>{
-        async function searchReservas(){
+        async function searchBookings(){
             if(auth.data.user_id){
                 const response = await getBookings({user_id: auth.data.user_id})
                 return response.data
             }
         }
 
-        searchReservas().then(data => setReservas(data.data))
+        searchBookings().then(data => setBookings(data.data))
     },[auth.data.user_id])
 
-console.log(reservas);
-    function handleReservas() {
-        const fechaHoy = new Date().toISOString().split('T')[0]
+
+    function handleBookings() {
+        const todayDate = new Date().toISOString().split('T')[0]
         //Si no tenemos reservas
-        if(reservas === undefined || reservas.length <= 0){
+        if(bookings === undefined || bookings.length <= 0){
             return <MisReservasVacio msg={"Aun no tienes ninguna reserva hoy"} msgButton={"RESERVAR"} goTo={'reservas'}></MisReservasVacio>
 
         }
         //Si no hay
         if(!isFilterActive){
-            if(reservas.length > 0){
-            return reservas.map(reserva => {
-                const fechaString = reserva.fecha;
+            if(bookings.length > 0){
+            return bookings.map(booking => {
+                const fechaString = booking.fecha;
                 const fecha = new Date(fechaString);
                 const fechaLegible = fecha.toLocaleDateString();
           
                 return (
-                    <Reserva fechaLegible={fechaLegible} reserva={reserva} key={reserva.id} fechaHoy={fechaHoy}/>
+                    <Booking fechaLegible={fechaLegible} booking={booking} key={booking.id} fechaHoy={todayDate}/>
                 );
               });
         }
@@ -60,16 +55,16 @@ console.log(reservas);
     }
         //Si hay filtro
         if (isFilterActive) {
-            const filterReservas = reservas.filter(reserva => {
-                if(new Date(reserva.fecha).toISOString().split('T')[0] >= fechaHoy){
-                    return reserva
+            const filteredBookings = bookings.filter(booking => {
+                if(new Date(booking.fecha).toISOString().split('T')[0] >= todayDate){
+                    return booking
                 }
             })
             //Si hay reservas
-            return filterReservas.map(reserva => {
+            return filteredBookings.map(booking => {
         
                 return (
-                    <Reserva reserva={reserva}  key={reserva.id} fechaHoy={fechaHoy}/>
+                    <Booking booking={booking}  key={booking.id} fechaHoy={todayDate}/>
                 );
           });
         }
@@ -78,19 +73,6 @@ console.log(reservas);
     return ( 
         <div className="misreservas__container">
             <Path pathPrev={'Home'} pathActual={'Mis Reservas'} goTo={'home'}></Path>
-            {/* <div className="fecha">
-                <div className="fecha__today--container">
-                    <img src={flashImg} alt="" />
-                <p onClick={handleDate} className='fecha__today'>HOY</p>
-                <img src={flashImg} alt="" />
-                </div>
-                <input type="date" value={date} onChange={(e) => setDate(e.target.value)} />
-                <div className='fecha__buscar'>
-                    <button className="button" onClick={searchReservas}>
-                        <img src={lupaImg} alt="" />
-                    </button>
-                </div>
-            </div> */}
             <div className="misreservas__form">
             <div className="misreservas__filter" onClick={() => setFilterActive(!isFilterActive)} >
                 <img src={eyeImg} alt="Icono de oculto" />
@@ -107,7 +89,7 @@ console.log(reservas);
                         <p className="datos__header-column">Acciones</p>
                     </div>
                     <div className="datos__body">
-                        {(handleReservas())}
+                        {(handleBookings())}
                     </div>
                 </div>
             </div>

@@ -1,6 +1,6 @@
+/* eslint-disable react/prop-types */
 import '../styles/path.css';
 import { useNavigate } from 'react-router-dom';
-// eslint-disable-next-line react/prop-types
 function Path({pathPrev,pathActual, goTo}) {
     const navigate = useNavigate();
 

@@ -9,7 +9,7 @@
     height: calc(100vh) ;
     flex-direction: column;
     align-items: center;
-    background-image: url('../../assets/images/hero-home-background.jpg');
+    background-image: url('../../assets/images/hero-home-background-min.webp');
     background-position: 50% 50%;
     background-size: cover;
     padding: 1rem;

@@ -14,7 +14,7 @@ import RequireAuth from './components/login/RequireAuth'
 import SignUp from './components/login/SignUp'
 import Reservas from './components/reserva/Reservas'
 import RankingClientes from './components/ranking/RankingClientes'
-import MiCuenta from './components/login/MiCuenta'
+import MyAccount from './components/login/MyAccount'
 import MisReservas from './components/reserva/MisReservas'
 import MisPedidos from './components/pedidos/MisPedidos'
 import DashBoard from './components/gestion/DashBoard'
@@ -46,7 +46,7 @@ function App() {
         <Route path='/signup' element={<SignUp/>}> </Route>  
         <Route path='/mi-cuenta' element={
           <RequireAuth>
-              <MiCuenta/>
+              <MyAccount/>
           </RequireAuth>}> 
         </Route>  
         <Route path='/mis-reservas' element={

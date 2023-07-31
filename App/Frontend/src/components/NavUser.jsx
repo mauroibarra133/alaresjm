@@ -1,7 +1,7 @@
+/* eslint-disable react/prop-types */
 import '../styles/nav.css'
 import { NavLink} from 'react-router-dom';
 import {useAuth} from '../hooks/useAuth'
-// eslint-disable-next-line react/prop-types
 function NavUser({clicked, handleUserClick}) {
 
     const {auth} = useAuth()

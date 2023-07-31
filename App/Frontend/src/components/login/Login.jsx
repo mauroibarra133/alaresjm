@@ -1,16 +1,17 @@
 import Path from '../Path'
-import '../../styles/login/login.css'
-import logoImg from '../../assets/images/alares-logo.png'
+import logoImg from '../../assets/images/alares-logo.webp'
+import Modal from '../Modal'
+import foodImg from '../../assets/images/food-bg.webp'
 import {useForm} from 'react-hook-form';
 import { useId, useState } from 'react';
 import { useNavigate,NavLink } from 'react-router-dom';
 import { useAuth } from '../../hooks/useAuth';
-import Modal from '../Modal'
-import foodImg from '../../assets/images/food-bg.png'
 import { EMAIL_REGEX, PASSWORD_REGEX } from '../../utils/constants';
 import { login } from '../../services/auth.services';
+import '../../styles/login/login.css'
 
 function Login() {
+    //Hooks
     const {register, handleSubmit, formState} = useForm({
         mode: 'onBlur'
     });
@@ -20,22 +21,25 @@ function Login() {
     const passwordId = useId();
     const navigate = useNavigate();
     const {isLogued} = useAuth();
+
+    //States
     const [errorStatus, setErrorStatus] = useState({
         isSubmitted: false,
         existError: false,
         msg: ''
 })
 
-function handleCloseModal(){
-    setErrorStatus({
-        isSubmitted: false,
-        existError: false,
-        msg: ""
-    })
-    document.body.classList.remove('disable-scroll');
-    !errorStatus.existError ? navigate('/') : null
+    //functions
+    function handleCloseModal(){
+        setErrorStatus({
+            isSubmitted: false,
+            existError: false,
+            msg: ""
+        })
+        document.body.classList.remove('disable-scroll');
+        !errorStatus.existError ? navigate('/') : null
 
-}
+    }
      async function onSubmit(data){
             const response = await login(data)
             console.log(response);

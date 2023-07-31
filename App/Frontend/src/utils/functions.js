@@ -1,4 +1,4 @@
-import { statusPedidos } from "./constants";
+import { ordersStatus } from "./constants";
 
 export function generateUniqueKey() {
     return Math.random().toString(36).substr(2, 9);
@@ -8,19 +8,19 @@ export function updateLocalStorage(state){
   window.localStorage.setItem("cart",JSON.stringify(state))
 }
 
-export function convertirHoraADate(hora) {
-  const [horas, minutos] = hora.split(":");
-  const fechaActual = new Date();
-  fechaActual.setHours(horas);
-  fechaActual.setMinutes(minutos);
-  return fechaActual;
+export function convertHourToDate(hour) {
+  const [hours, minutes] = hour.split(":");
+  const actualDate = new Date();
+  actualDate.setHours(hours);
+  actualDate.setMinutes(minutes);
+  return actualDate;
 }
-export function calcularTiempoRestante(horaReserva){
-  const timeHoy = new Date().getTime();
-  const timeReserva = horaReserva.getTime()
+export function calculateLeftTime(bookingHour){
+  const todayTime = new Date().getTime();
+  const bookingTime = bookingHour.getTime()
 
-  const horaRestante = (timeHoy - timeReserva)/3600000
-  return Math.abs(horaRestante)
+  const leftHour = (todayTime - bookingTime)/3600000
+  return Math.abs(leftHour)
 }
 
 export const validateDate = (value) => {
@@ -43,8 +43,8 @@ export const validateTime = (value) => {
 };
 
 export function getStatusImage(status) {
-  const pedidoStatus = statusPedidos.find(item => item.status === status);
-  if (pedidoStatus) {
-    return pedidoStatus.img;
+  const orderStatus = ordersStatus.find(item => item.status === status);
+  if (orderStatus) {
+    return orderStatus.img;
   }
 }

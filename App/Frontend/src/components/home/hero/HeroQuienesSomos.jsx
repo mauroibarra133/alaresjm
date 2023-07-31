@@ -1,7 +1,7 @@
-import iconPasta from '../../../assets/images/quienesSomos-icon-pasta.png'
-import iconBurger from '../../../assets/images/quienesSomos-icon-burger.png'
-import iconPizza from '../../../assets/images/quienesSomos-icon-pizza.png'
-import iconTragos from '../../../assets/images/quienesSomos-icon-tragos.png'
+import iconPasta from '../../../assets/images/pasta-min.webp'
+import iconBurger from '../../../assets/images/hamburgo-min.webp'
+import iconPizza from '../../../assets/images/pizza-min.webp'
+import iconTragos from '../../../assets/images/martini-min.webp'
 import '../../../styles/hero/heroQuienesSomos.css'
 
 function HeroQuienesSomos() {

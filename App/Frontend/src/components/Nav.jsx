@@ -1,12 +1,14 @@
+/* eslint-disable react/prop-types */
 import '../styles/nav.css'
 import {Link} from 'react-scroll';
 import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 
-// eslint-disable-next-line react/prop-types
 function Nav({clicked, handleBurgerClick}) {
+    //Hooks
     const location =useLocation()
     const navigate =useNavigate()
 
+    //Functions
     function handleLocation(){
         if(location.pathname != '/'){
             navigate('/')

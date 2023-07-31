@@ -1,6 +1,6 @@
-import burgerIcon from '../assets/images/header-menu-burger.svg';
-import userIcon from '../assets/images/header-user.svg';
-import alaresLogo from '../assets/images/alares-logo.png';
+import burgerIcon from '../assets/images/header-menu-burger.webp';
+import userIcon from '../assets/images/header-user.webp';
+import alaresLogo from '../assets/images/alares-logo.webp';
 import  '../styles/header.css';
 import { useState } from 'react';
 import Nav from './Nav'
@@ -9,11 +9,12 @@ import NavUser from './NavUser';
 import Overlay from './Overlay';
 
 function Header() {
+    //states
     const [burgerClicked,setBurgerClicked] = useState(false);
     const [userClicked,setUserClicked] = useState(false);
     const [showOverlay, setShowOverlay] = useState(false);
 
-
+    //Functions
     const handleBurgerClick = ()=>{
         if(!burgerClicked && userClicked){
             setUserClicked(!userClicked)
@@ -29,7 +30,6 @@ function Header() {
         setShowOverlay(!userClicked);
         setUserClicked(!userClicked)
 
-        
     }
     return (  
             <>

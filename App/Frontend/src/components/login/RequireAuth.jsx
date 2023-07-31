@@ -4,8 +4,10 @@ import { Navigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 
 function RequireAuth({ children }) {
+  //States
   const [authenticated, setAuthenticated] = useState(true);
 
+  //UseEffects
   useEffect(() => {
     const checkAuth = async () => {
       try {

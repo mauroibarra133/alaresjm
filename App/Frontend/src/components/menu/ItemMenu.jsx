@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import carritoImg from '../../assets/images/carrito.png';
+import carritoImg from '../../assets/images/carrito.webp';
 import { useAuth } from '../../hooks/useAuth';
 
 

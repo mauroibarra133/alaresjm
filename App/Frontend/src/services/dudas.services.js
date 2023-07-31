@@ -13,7 +13,7 @@ export  async function Buscar(estado) {
     return resp.data;
   }
 
-export  async function AgregarDuda(duda){
+export  async function addDoubt(duda){
     if (!duda.id) {
         return await axios.post(urlResource, duda);
       } else {

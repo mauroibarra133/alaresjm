@@ -1,15 +1,17 @@
-import Path from '../Path'
-import '../../styles/login/login.css'
-import logoImg from '../../assets/images/alares-logo.png'
 import { NavLink, useNavigate } from 'react-router-dom';
 import {useForm} from 'react-hook-form';
-import foodImg from '../../assets/images/food-bg.png'
 import { useId, useState} from 'react';
 import { existsMail, signup } from '../../services/auth.services';
-import Modal from '../Modal'
 import { EMAIL_REGEX, ONLY_LETTERS, PASSWORD_REGEX } from '../../utils/constants';
+import Path from '../Path'
+import logoImg from '../../assets/images/alares-logo.webp'
+import foodImg from '../../assets/images/food-bg.webp'
+import Modal from '../Modal'
+import '../../styles/login/login.css'
 
 function SignUp(){
+
+    //hooks
     const {register, handleSubmit, formState, reset} = useForm({
         mode: 'onBlur',
     });
@@ -20,12 +22,14 @@ function SignUp(){
     const nameId = useId();
     const surnameId = useId();
 
+    //states
     const [showModal,setShowModal] = useState({
         isSubmitted: false,
         isGood: false,
         msg: ""
     });
 
+    //Functions
     function closeModal(){
         setShowModal({
             isSubmitted: false,
@@ -34,6 +38,7 @@ function SignUp(){
         });
         showModal.isGood ? navigate('/api/login') : null
     }
+
     async function onSubmit(data){
         const isAlreadyExist = await existsMail(data.regEmail)
         //SI existe un error
@@ -66,13 +71,12 @@ function SignUp(){
         }
     }
 
-
     return ( 
         <div className="login__container">
         <Path pathPrev={'Home'} pathActual={'Login'} goTo={'Home'}></Path>
         <div className="login__box-container">
             <div className="login__box">
-                    <img src={logoImg} alt="" className='login__logo' />
+                    <img src={logoImg} alt="Alares Logo" className='login__logo' />
                     <div className="login__square">
                         <div className="login__titles">
                             <p className="login__title">SIGNUP</p>

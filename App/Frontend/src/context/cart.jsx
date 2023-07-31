@@ -1,10 +1,11 @@
+/* eslint-disable react/prop-types */
 import { createContext, useState } from "react";
 import { updateLocalStorage } from "../utils/functions";
 
 export const CartContext = createContext();
 
-// eslint-disable-next-line react/prop-types
 export function CartProvider({children}){
+    //States
     const [cart, setCart] = useState(JSON.parse(window.localStorage.getItem("cart")) || []);
 
     const addToCart = product =>{

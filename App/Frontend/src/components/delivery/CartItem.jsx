@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
-import plusIcon from '../../assets/images/plus.svg'
-import minusIcon from '../../assets/images/minus.svg'
+import plusIcon from '../../assets/images/plus.webp'
+import minusIcon from '../../assets/images/minus.webp'
 import { useCart } from '../../hooks/useCart';
 import { useId } from 'react';
 

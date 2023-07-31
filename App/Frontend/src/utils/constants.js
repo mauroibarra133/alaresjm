@@ -30,7 +30,7 @@ export const meses = {
     11: 'Diciembre'
   };
   
-  export const statusPedidos = [
+  export const ordersStatus = [
     {
       status: "A confirmar",
       img: waitStatus
