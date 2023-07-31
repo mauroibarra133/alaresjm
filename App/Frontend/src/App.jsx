@@ -1,7 +1,7 @@
 import './App.css'
 import Header from './components/Header'
 import Home from './components/Home'
-import Carta from './components/carta/Carta'
+import Menu from './components/menu/Menu'
 import ErrorPage from './components/ErrorPage'
 import {BrowserRouter, Route, Routes} from 'react-router-dom'
 import Delivery from './components/delivery/Delivery'
@@ -31,7 +31,7 @@ function App() {
       <Routes>
         <Route path='/' element={<Home/>}></Route>
         <Route path='/home' element={<Home/>}></Route>
-        <Route path='/carta' element={<Carta/>}> </Route>
+        <Route path='/carta' element={<Menu/>}> </Route>
         <Route path='/ranking' element={<RankingClientes/>}> </Route>
         <Route path='/reservas' element={
           <RequireAuth>

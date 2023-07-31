@@ -4,8 +4,9 @@
 .modal_top{
     opacity: 0.5;
 }
+
 /* Container */
-.carta__container{
+.menu__container{
     width: 100%;
     min-height: calc(100vh - 3rem);
     height: auto;
@@ -17,20 +18,21 @@
     max-width: 1200px;
     margin: 0 auto;
 }
-.carta__container a{
+.menu__container a{
     width: 100%;    
     display: flex;
     justify-content: start;
 }
     
 /* Tags */
-.carta__tags-container{
+
+.menu__tags-container{
     width: 100%;
     display: flex;
     justify-content: center;
     overflow-x: hidden;
 }
-.carta__tags{
+.menu__tags{
     display: flex;
     width: fit-content;
     justify-content: start;
@@ -39,7 +41,7 @@
     overflow-x: auto;
 }
 
-.carta__tag{
+.menu__tag{
     display: flex;
     max-width: 100px;
     width: 100px;
@@ -52,15 +54,15 @@
     border: 1px solid rgba(0, 0, 0, 0.40);
     background: var(--black-2);
 }
-.carta__tag:hover{
+.menu__tag:hover{
     background-color: var(--gray-1);
     cursor: pointer;
 }
-.carta__tag.active{
+.menu__tag.active{
     background: #FFC692;
 
 }
-.carta__tag p{
+.menu__tag p{
     color: #FFF;
     text-align: center;
     font-family: 'Lato';
@@ -71,8 +73,8 @@
     letter-spacing: 0.00113rem;
 }
 
-/* Carta */
-.carta__carta{
+/* menu */
+.menu__menu{
     width: 100%;
     display: grid;
     grid-template-columns: 1fr;
@@ -82,7 +84,7 @@
     margin: 0 auto;
 }
 
-.carta__titulos-tamaños{
+.menu__title-sizes{
     width: 100%;
     display: flex;
     justify-content: end;
@@ -90,7 +92,7 @@
     font-size: .9rem;
     color: var(--gray-1);
 }
-.carta__item{
+.menu__item{
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -99,7 +101,7 @@
     max-width: 300px;
 }
 
-.carta__item-r1{
+.menu__item-r1{
     display: flex;
     align-items: center;
     width: 100%;
@@ -108,24 +110,24 @@
     justify-content: space-between;
 
 }
-.carta__name-price{
+.menu__name-price{
     display: flex;
     flex-grow: 1;
     justify-content: space-between;
     max-width: 150px;
     line-height:1rem;
 }
-.carta__prices{
+.menu__prices{
     display: flex;
     gap: .5rem;
 }
-.carta__item-r2{
+.menu__item-r2{
     display: flex;
     width: 150px;
 }
 
 
-.carta__img{
+.menu__img{
     width: 16px;
     height: 16px;
     background-color: var(--gray-1);
@@ -134,24 +136,24 @@
     box-sizing: content-box;
 
 }
-.carta__img:hover{
+.menu__img:hover{
     cursor: pointer;
     border-bottom: 2px solid var(--green-ok);
 }
-.carta__item-name{
+.menu__item-name{
     color: #000;
     text-align: left;
     font-family: 'Lato Bold';
     font-size: 0.875rem;
 }
-.carta__item-price{
+.menu__item-price{
     display: flex;
     justify-content: space-between;
     gap: 1rem;
     min-width: 50px;
     max-width: 100px;
 }
-.carta__item-price p{
+.menu__item-price p{
     width: 100%;
     color: #000;
     font-family: 'Lato Black';
@@ -160,13 +162,13 @@
     line-height: normal;
     text-align: left;
 }
-.carta__item-price p:first-child{
+.menu__item-price p:first-child{
     color: var(--gray-2);
 }
-.carta__item-price p.inactive{
+.menu__item-price p.inactive{
     display: none;
 }
-.carta__item-desc{
+.menu__item-desc{
     color: #000;
     font-family: 'Lato';
     font-size: 0.625rem;
@@ -178,70 +180,70 @@
 }
 
 /* Buttons */
-.carta__buttons{
+.menu__buttons{
     display: flex;
     justify-content: center;
     align-items: center;    
     gap: 1.5rem;
     margin-top: 2rem;
 }
-.carta__button{
+.menu__button{
     width: 100px;
 }
-.carta__button-vermas{
+.menu__button-vermas{
     background: #FFC692;
 }
-.carta__button-vermas:hover{
+.menu__button-vermas:hover{
     background-color: var(--orange-2);
     cursor: pointer;
 }
-.carta__button-carrito{
+.menu__button-cart{
     background: var(--black-2, #32353E);
     display: flex;
     gap: .4rem;
 }
-.carta__button-carrito:hover{
+.menu__button-cart:hover{
     background-color: var(--gray-1);
     cursor: pointer;
 }
-.carta__button p{
+.menu__button p{
     text-align: center;
     font-family: 'Lato Black';
     font-size: 0.5625rem;
     line-height: 1.5rem;
     letter-spacing: 0.00113rem;
 }
-.carta__button-vermas p{
+.menu__button-vermas p{
     color: #000;
 }    
 
-.carta__button-carrito p {
+.menu__button-cart p {
     color: var(--white-1, #FFF);
 }
-.carta__button-carrito img{
+.menu__button-cart img{
     height: 15px;
     width: 15px;
 }
 
 
-/* Carta INICIAL */
-.carta__carta--initial{
+/* Initial Menu */
+.menu__menu--initial{
     gap: 2rem;
 }
-.carta-item__wrapper{
+.menu-item__wrapper{
     display: flex;
     flex-direction: column;
     width: 100%;
     margin: 0 auto;
     height: fit-content;
 }
-.carta-items__wrapper{
+.menu-items__wrapper{
     display: flex;
     flex-direction: column;
     gap: .6rem;
 
 }
-.carta-item__title{
+.menu-item__title{
     display: flex;
     justify-content: start;
     width: 100%;
@@ -249,70 +251,70 @@
     margin: 0 auto;
     max-width: 300px;
 }
-.carta-item__title h2 {
+.menu-item__title h2 {
     color: var(--orange-1);
     text-transform: uppercase;
     font-family: 'Amiri Bold';
 }
 
+/* MEDIA QUERYS */
 @media only screen and (min-width:500px){
-    .carta__item{
+    .menu__item{
         max-width: 400px;
 
     }
-    .carta__item-r2{
+    .menu__item-r2{
         display: flex;
         width: 100%;
         max-width: 250px;
     }
-    .carta__name-price{
+    .menu__name-price{
         max-width: none;
         line-height:1rem;
     }
-    .carta-item__title{
+    .menu-item__title{
         max-width: 400px;
     }
 
 }
 
-/* Medias */
 @media only screen and (min-width:768px){
-.carta__carta{
+.menu__menu{
     padding-top: 2rem;
     grid-template-columns: repeat(2,1fr);
 }
-.carta__carta--initial{
+.menu__menu--initial{
     padding-top: 2rem;
     display: flex;
     flex-direction: column;
 }
-.carta-item__title{
+.menu-item__title{
     max-width: none;
     width: 100%;
     max-width: 1000px;
 }
-.carta-items__wrapper{
+.menu-items__wrapper{
     display: grid;
     grid-template-columns: repeat(2,1fr);
 }
-.carta__titulos-tamaños{
+.menu__title-sizes{
     display: grid;
     grid-template-columns: 1fr 1fr;
     width: 100%;
     max-width: none;
 }
-.carta__titulos-tamaños p{
-    text-align: right       ;
+.menu__title-sizes p{
+    text-align: right;
 }
 
 }
 @media only screen and (min-width:850px){
-    .carta__titulos-tamaños{
+    .menu__title-sizes{
         margin-right: calc(7vw);
     }
 }
 @media only screen and (min-width:1090px){
-    .carta__titulos-tamaños{
+    .menu__title-sizes{
         margin-right: calc(13vw);
     }
 }

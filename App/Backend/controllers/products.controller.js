@@ -3,19 +3,9 @@ import {getConnection, sql, queries} from '../database/' //Traigo la conexion de
 export async function getProducts(req,res){
     try {
         const pool = await getConnection() //Es una promesa, es el cliente para realizar consultas
-        const filtro = req.query.categoria;
-
-        if(!filtro){
             const result = await pool.request().query(queries.Products.getAllProducts) //Hacemos la consulta
             res.status(200).json(result.recordset)
 
-        }else{
-            const result = await pool.request()
-            .input('id_categoria',sql.Int,filtro)
-            .query(queries.Products.getProductsByCategory) //Hacemos la consulta
-            res.status(200).json(result.recordset)
-
-        }
            
     } catch (error) {
         res.status(500).json({msg: "No se pudo obtener los productos"})

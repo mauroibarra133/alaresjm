@@ -8,6 +8,7 @@ import { ONLY_NUMBERS, ADDRESS_REGEX } from "../../utils/constants";
 
 function FormDelivery({onSubmit,total, preferenceId, isOrderedEft}) {
 
+    //Constants
     const clientNameId = useId();
     const clientDirectionId = useId();
     const typePayId = useId();
@@ -15,24 +16,28 @@ function FormDelivery({onSubmit,total, preferenceId, isOrderedEft}) {
     const deliveryTypeId = useId();
     const notaId = useId();
 
+    //Hooks
     const {register, watch, formState, handleSubmit, reset} = useForm({
         mode: 'onTouched'
     });
     const {errors} = formState;
 
+
+    //UseEffects
     useEffect(()=>{
         isOrderedEft.isSubmitted ? reset() : null
     },[isOrderedEft.isSubmitted,reset])
 
+    
     return ( 
         <form className='form-container' onSubmit={handleSubmit(onSubmit)}>
-        <div className="pedido__note-container">
+        <div className="order__note-container">
             <label htmlFor={notaId}>Nota de pedido</label>
             <textarea name={notaId} id={notaId} cols="30" rows="5" 
                     placeholder='Por ej: quiero la hamburguesa sin lechuga y las papas sin panceta'
                     {...register('notaPedido')}></textarea>
         </div>
-        <div className="pedido__form">
+        <div className="order__form">
             <div className="form__row">
                 <label htmlFor={clientNameId} >A nombre de</label>
                 <div>
@@ -93,8 +98,8 @@ function FormDelivery({onSubmit,total, preferenceId, isOrderedEft}) {
 
             </div>
         </div>
-        <div className="pedido__button">
-            <button type='submit' className='pedido__confirmar button' disabled={total == 0}>
+        <div className="order__button">
+            <button type='submit' className='order__confirmar button' disabled={total == 0}>
                 Confirmar Pedido
             </button>
             {(preferenceId && watch("tipoPago") === "2") && <Wallet initialization={{ preferenceId,redirectMode: 'modal' }} className='button mp_button'/>}

@@ -3,7 +3,7 @@ import carritoImg from '../../assets/images/carrito.png';
 import { useAuth } from '../../hooks/useAuth';
 
 
-function CartaItem({isProductInCart,removeProductFromCart,addToCart,product, setCartClick}) {
+function ItemMenu({isProductInCart,removeProductFromCart,addToCart,product, setCartClick}) {
 
     const {auth} = useAuth()
 
@@ -18,27 +18,27 @@ function CartaItem({isProductInCart,removeProductFromCart,addToCart,product, set
     }
 
     return ( 
-        <div className="carta__item">
-        <div className="carta__item-r1">
-            <div className='carta__name-price'><p className="carta__item-name">{product.nombre.toString().toUpperCase()}</p></div>
-            <div className="carta__prices">
-                <div className='carta__img' 
+        <div className="menu__item">
+        <div className="menu__item-r1">
+            <div className='menu__name-price'><p className="menu__item-name">{product.nombre.toString().toUpperCase()}</p></div>
+            <div className="menu__prices">
+                <div className='menu__img' 
                     style={{backgroundColor: isProductInCart ? '#fb9999' : '#E8E8E8'}}
                     onClick={()=> handleCartClick()} >
-                    <img src={carritoImg} className={'carta__icono-carrito'} alt="" /></div>
-                <div className="carta__item-price">
+                    <img src={carritoImg} className={'menu__icono-cart'} alt="Carrito" /></div>
+                <div className="menu__item-price">
                     <p className={`${!product.precioChico ? 'inactive' : ''}`}>{product.precioChico ? "$"+product.precioChico : ''} </p>
                     <p className={`${!product.precioGrande ? 'inactive' : ''}`}>{`${product.precioGrande ? "$"+product.precioGrande : ''}`}</p>
                 </div>
             </div>
 
         </div>
-        <div className="carta__item-r2">
-            <p className="carta__item-desc">{product.descripcion.toString().toUpperCase()}</p>
+        <div className="menu__item-r2">
+            <p className="menu__item-desc">{product.descripcion.toString().toUpperCase()}</p>
         </div>
     </div>
 
      );
 }
 
-export default CartaItem;
+export default ItemMenu;

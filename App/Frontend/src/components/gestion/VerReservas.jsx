@@ -1,38 +1,40 @@
-import { useState, useEffect } from "react";
-import {getReservas} from '../../services/reservas.services'
-import { getStatusImage } from "../../utils/functions";
 import '../../styles/dashboard/veritems.css'
+import { useState, useEffect } from "react";
+import {getBookings} from '../../services/reservas.services'
+import { getStatusImage } from "../../utils/functions";
 import VerReservasVacio from '../FormVacio'
 import Overlay from "../Overlay";
 import Reserva from "./Reserva";
 import eyeImg from '../../assets/images/eye-slash.svg'
 
 function VerReservas() {
-    const [reservas,setReservas] = useState([]);
-    const hoy = new Date()
-    const fechaHoy = hoy.toISOString().split('T')[0]
-    const mañana = new Date()
-    mañana.setDate(mañana.getDate() + 1);
-    const fechaMañana = mañana.toISOString().split('T')[0];
-    const [filterFecha,setFilterFecha] = useState(fechaHoy);
-    // const [isFilterActive,setIsFilterActive] = useState(false)
+    //Constants
+    const today = new Date()
+    const todayDate = today.toISOString().split('T')[0]
+    const tomorrow = new Date()
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    const tomorrowDate = tomorrow.toISOString().split('T')[0];
+
+    //States
+    const [bookings,setBookings] = useState([]);
+    const [filterDate,setFilterDate] = useState(todayDate);
     const [isLargeScreen, setIsLargeScreen] = useState(window.innerWidth > 768);  
     const [isFilterActive, setIsFilterActive] = useState(false)
-    const [modalReserva, setModalReserva] = useState({
+    const [modalBooking, setModalBooking] = useState({
         isSubmitted: false,
-        reserva: {}
+        booking: {}
     });  
-    console.log(reservas);
 
+    //Use Effects
     useEffect(()=>{
-        async function traerReservas(){
-            const result = await getReservas({date: filterFecha})
+        async function searchBookings(){
+            const result = await getBookings({date: filterDate})
             if(result.status == 200){
-                setReservas((result.data.data))
+                setBookings((result.data.data))
             }
         }
-        traerReservas()
-    },[filterFecha])
+        searchBookings()
+    },[filterDate])
 
     useEffect(() => {
         const handleResize = () => {
@@ -45,48 +47,50 @@ function VerReservas() {
         };
       }, []);
 
-    function filterReservas(reservas){
+    
+    //functions 
+    function filterBookings(bookings){
         if(!isFilterActive){
-            return reservas
+            return bookings
         }
-        return reservas.filter(reserva => reserva.estado != 'Reservado')
+        return bookings.filter(booking => booking.estado != 'Reservado')
 
     }
-    async function traerReservas(){
-        const result = await getReservas({date: filterFecha})
+    async function searchBookings(){
+        const result = await getBookings({date: filterDate})
         if(result.status == 200){
-            setReservas((result.data.data))
+            setBookings((result.data.data))
         }
     }
 
     function handleDate(data){
-        setFilterFecha(data.target.value)
+        setFilterDate(data.target.value)
     }
 
-    function openModalReserva(reserva){
-        setModalReserva({
+    function openModalBooking(booking){
+        setModalBooking({
             isSubmitted:true,
-            reserva: reserva
+            booking: booking
         });
         document.body.classList.add('disable-scroll');
     }
-    function closeModalReserva(){
-        setModalReserva({
+    function closeModalBooking(){
+        setModalBooking({
             isSubmitted:false,
-            pedido: {}
+            booking: {}
         });
         document.body.classList.remove('disable-scroll');
 
-        traerReservas()
+        searchBookings()
         
     }
 
     return ( 
         <div className="verreservas veritems">
             <div className="verreservas__fechas veritems__fechas">
-                <div className="verreservas__fecha-ayer button veritems__fechas-button" onClick={()=> setFilterFecha(fechaHoy)}>Hoy</div>
-                <input className="verreservas__fecha-input" type="date" onChange={handleDate} value={filterFecha}></input>
-                <div className="verreservas__fecha-hoy button veritems__fechas-button" onClick={()=> setFilterFecha(fechaMañana)}>Mañana</div>
+                <div className="verreservas__fecha-ayer button veritems__fechas-button" onClick={()=> setFilterDate(todayDate)}>Hoy</div>
+                <input className="verreservas__fecha-input" type="date" onChange={handleDate} value={filterDate}></input>
+                <div className="verreservas__fecha-hoy button veritems__fechas-button" onClick={()=> setFilterDate(tomorrowDate)}>Mañana</div>
             </div>
             <div className="verreservas__filters">
             <div className="misreservas__filter" onClick={() => setIsFilterActive(!isFilterActive)} >
@@ -103,26 +107,26 @@ function VerReservas() {
                     <div className="veritems__header-column  verreservas__header-column">Estado</div>
                 </div>
                 <div className="verreservas__body veritems__body">
-                    {filterReservas(reservas).length <= 0 ? <VerReservasVacio msg={'No hay reservas el dia de hoy'} msgButton={':('}/> : filterReservas(reservas).map(reserva => (
+                    {filterBookings(bookings).length <= 0 ? <VerReservasVacio msg={'No hay reservas el dia de hoy'} msgButton={':('}/> : filterBookings(bookings).map(booking => (
 
-                        <div key={reserva.id} className="veritems__row verreservas__row" onClick={()=>  openModalReserva(reserva)} style={{gridTemplateColumns: 'repeat(5,1fr)'}}>
-                            <div className="veritems__dato verreservas__dato">{reserva.hora}</div>
-                            <div className="veritems__dato verreservas__dato">{reserva.cantidad_personas}</div>
-                            <div className="veritems__dato verreservas__dato">{reserva.cliente_reserva}</div>
-                            <div className="veritems__dato verreservas__dato">{reserva.lugar}</div>
+                        <div key={booking.id} className="veritems__row verreservas__row" onClick={()=>  openModalBooking(booking)} style={{gridTemplateColumns: 'repeat(5,1fr)'}}>
+                            <div className="veritems__dato verreservas__dato">{booking.hora}</div>
+                            <div className="veritems__dato verreservas__dato">{booking.cantidad_personas}</div>
+                            <div className="veritems__dato verreservas__dato">{booking.cliente_reserva}</div>
+                            <div className="veritems__dato verreservas__dato">{booking.lugar}</div>
                             <div className="veritems__dato verreservas__dato">
-                                <img src={getStatusImage(reserva.estado)} alt="" className="status-img reserva-status-img" />
+                                <img src={getStatusImage(booking.estado)} alt={booking.estado} className="status-img reserva-status-img" />
                                 {isLargeScreen && (
-                                    <p>{reserva.estado}</p>
+                                    <p>{booking.estado}</p>
                                 )}
                             </div>
                         </div>
                     ))}
                 </div>
             </div>
-            {modalReserva.isSubmitted && (
+            {modalBooking.isSubmitted && (
                 <Overlay comp={'verreservas'}>
-                        <Reserva modalReserva={modalReserva} closeModal={closeModalReserva}></Reserva>
+                        <Reserva modalBooking={modalBooking} closeModal={closeModalBooking}></Reserva>
                 </Overlay>
                     )}
         </div>

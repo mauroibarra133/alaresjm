@@ -4,7 +4,7 @@ import eyeImg from '../../assets/images/eye-slash.svg'
 import '../../styles/pedidos/mispedidos.css'
 import MisPedidosVacio from '../FormVacio'
 import { useAuth } from '../../hooks/useAuth';
-import {getPedidos} from '../../services/pedidos.services'
+import {getOrders} from '../../services/pedidos.services'
 import Pedido from './Pedido';
 import io from 'socket.io-client';
 const socket = io('/');
@@ -19,7 +19,7 @@ function MisPedidos() {
     useEffect(()=>{
         async function searchReservas(){
             if(auth.data.user_id){
-                const response = await getPedidos({ user_id: auth.data.user_id})
+                const response = await getOrders({ user_id: auth.data.user_id})
                 setPedidos(response.data.data)
             }
         }

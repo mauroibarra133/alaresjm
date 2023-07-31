@@ -2,32 +2,36 @@
 import plusIcon from '../../assets/images/plus.svg'
 import minusIcon from '../../assets/images/minus.svg'
 import { useCart } from '../../hooks/useCart';
+import { useId } from 'react';
 
 function CartItem({id,nombre,precioGrande,precioChico,descripcion,quantity, priceSelected, addToCart, removeProductFromCart}){
 
-    const {setPriceSelected} = useCart();
     let selectedValue;
+    const {setPriceSelected} = useCart();
+    const priceId = useId()
+
+    //Functions
     const handleSelectChange = (event) => {
          selectedValue = event.target.value;
         setPriceSelected(id,selectedValue === 'Grande' ? precioGrande : precioChico,selectedValue === "Grande"? 3 : 1);
       };
 
     return (
-        <div className="pedido__item">
-        <div className="pedido__item-r1">
-            <p className="pedido__name">{nombre.toUpperCase()}</p>
-            <select value={priceSelected == precioGrande ? 'Grande' : 'Chico'} onChange={handleSelectChange} name="" id="" className='pedido__item-selectsize'>
+        <div className="order__item">
+        <div className="order__item-r1">
+            <p className="order__name">{nombre.toUpperCase()}</p>
+            <select value={priceSelected == precioGrande ? 'Grande' : 'Chico'} onChange={handleSelectChange} name={priceId} id={priceId} className='order__item-selectsize'>
                 <option value="Grande" >Grande</option>
                 <option value="Chico">Chico</option>
             </select>
-            <p className="pedido__price">{`$${priceSelected*quantity}`}</p>
+            <p className="order__price">{`$${priceSelected*quantity}`}</p>
         </div>
-        <div className="pedido__item-r2">
-        <p className="pedido__desc">{descripcion.toUpperCase()}</p>
-            <div className="pedido__buttons">
-                <img src={plusIcon} alt="" onClick={addToCart}/>
+        <div className="order__item-r2">
+        <p className="order__desc">{descripcion.toUpperCase()}</p>
+            <div className="order__buttons">
+                <img src={plusIcon} alt="Sumar Item" onClick={addToCart}/>
                 <p>{quantity}</p>
-                <img src={minusIcon} alt=""  onClick={removeProductFromCart}/>
+                <img src={minusIcon} alt="Restar item"  onClick={removeProductFromCart}/>
             </div>
         </div>
     </div>

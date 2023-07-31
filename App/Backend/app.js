@@ -23,13 +23,13 @@ app.set('socketio', io);// aqui asignas el socket global
 io.on('connection', (socket)=>{
     console.log('conectado', socket.id);
 
-    socket.on('pedidoNuevo',(data)=> {
+    socket.on('newOrder',(data)=> {
         console.log(data)
-        io.emit('pedidoAdmin',data)
+        io.emit('adminOrder',data)
     })
-    socket.on('pedidoActualizado',(data)=> {
+    socket.on('orderUpdated',(data)=> {
         console.log(data)
-        io.emit('pedidoActualizado',data)
+        io.emit('orderUpdated',data)
     })
 })
 

@@ -1,5 +1,5 @@
 import axios from "axios"
-export async function crearPedido(fecha_ISO, id_usuario,direccionCliente, notaPedido, total, id_tipo_pago,tipoEntrega, monto_cambio,items){
+export async function createOrder(fecha_ISO, id_usuario,direccionCliente, notaPedido, total, id_tipo_pago,tipoEntrega, monto_cambio,items){
     const response = await axios.post("http://localhost:4000/pedidos",{
         fecha: fecha_ISO,
         id_usuario: id_usuario,
@@ -15,7 +15,7 @@ export async function crearPedido(fecha_ISO, id_usuario,direccionCliente, notaPe
       return response
 }
 
-export async function getPedidos(params) {
+export async function getOrders(params) {
   const response = await axios.get("http://localhost:4000/pedidos", { params: params });
   // console.log(response.data.data);
   return response;

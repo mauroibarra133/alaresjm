@@ -1,6 +1,7 @@
-import {  useState } from "react";
+/* eslint-disable react/prop-types */
+import {  useId, useState } from "react";
 import { updatePedido } from "../../services/pedidos.services";
-import '../../styles/dashboard/pedido.css'
+import '../../styles/dashboard/modalDashboard.css'
 import cruzIcon from '../../assets/images/xmark-solid.svg'
 import userIcon from '../../assets/images/usuario.png'
 import locationIcon from '../../assets/images/sitio.png'
@@ -10,11 +11,12 @@ import pagoIcon from '../../assets/images/tarjeta-de-credito.png'
 import io from 'socket.io-client';
 const socket = io('/');
 
-/* eslint-disable react/prop-types */
 function Pedido({modalPedido, closeModal}) {
+    //Constants and states
     const pedido = modalPedido.pedido
+    const stateId = useId()
     const [estado, setEstado] = useState(pedido.estado_pedido)
-
+    //Functions
     async function handleState(event){
         if(event.target.value != pedido.estado__pedido){
             const response = await updatePedido({
@@ -24,7 +26,7 @@ function Pedido({modalPedido, closeModal}) {
             if(response.status == 200){
                 setEstado(event.target.value)
                 pedido.estado_pedido = event.target.value
-                socket.emit('pedidoActualizado',pedido);
+                socket.emit('orderUpdated',pedido);
                 
             }else{
                 console.log('No se pudo wn');
@@ -36,11 +38,11 @@ function Pedido({modalPedido, closeModal}) {
             <div className={`verpedido__modal-top dashboard__modal-top`}>
                 <p className="verpedido__top-id dashboard__modal-top-id ">{`Pedido nº ${pedido.id}`}</p>
                 <div className="verpedido__top-cruz dashboard__top-cruz">
-                <img src={cruzIcon} alt=""  onClick={closeModal}/>
+                <img src={cruzIcon} alt="Cerrar"  onClick={closeModal}/>
                 </div>
             </div>
             <div className="verpedido__estado dashboard__estado-modal">
-                <select name="" id=""  defaultValue={estado} value={estado == pedido.estado__pedido ? estado :  pedido.estado__pedido} onChange={handleState}>
+                <select name={stateId} id={stateId}  defaultValue={estado} value={estado == pedido.estado__pedido ? estado :  pedido.estado__pedido} onChange={handleState}>
                     <option value="A confirmar">A confirmar</option>
                     <option value="Confirmado">Confirmado</option>
                     <option value="En Preparacion">En Preparacion</option>
@@ -52,15 +54,15 @@ function Pedido({modalPedido, closeModal}) {
             </div>
             <div className="verpedido__infouser">
                 <div className="verpedido__dato dashboard__dato">
-                    <img src={userIcon} alt="" className="dashboard-icon verpedido__dato-icon"/>
+                    <img src={userIcon} alt="Nombre Completo" className="dashboard-icon verpedido__dato-icon"/>
                     <div>{pedido.nombre_completo}</div></div>
 
                 <div className="verpedido__dato dashboard__dato"> 
-                    <img src={locationIcon} alt="" className="dashboard-icon verpedido__dato-icon" />
+                    <img src={locationIcon} alt="Direccion" className="dashboard-icon verpedido__dato-icon" />
                     <div>{pedido.direccion}</div>
                     </div>
                 <div className="verpedido__dato dashboard__dato">
-                    <img src={relojIcon} alt="" className="dashboard-icon verpedido__dato-icon"/>
+                    <img src={relojIcon} alt="Hora" className="dashboard-icon verpedido__dato-icon"/>
                     <div>{pedido.hora}</div></div>
             </div>
             <div className="verpedido__detalle-wrapper">
@@ -93,11 +95,11 @@ function Pedido({modalPedido, closeModal}) {
             <div className="verpedido__infoentrega">
                 <div>
                     <div className="verpedido__entrega">
-                        <img src={entregaIcon} className="dashboard-icon verpedido__dato-icon" alt="" />
+                        <img src={entregaIcon} className="dashboard-icon verpedido__dato-icon" alt="Tipo de entrega" />
                         <div>{pedido.tipoentrega}</div>
                     </div>
                     <div className="verpedido__pago">
-                        <img src={pagoIcon} className="dashboard-icon verpedido__dato-icon" alt="" />
+                        <img src={pagoIcon} className="dashboard-icon verpedido__dato-icon" alt="Tipo de pago" />
                         <div>{pedido.tipopago}</div>
                     </div>
                 </div>

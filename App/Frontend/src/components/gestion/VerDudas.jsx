@@ -1,31 +1,31 @@
 import { useState, useEffect } from "react";
-import {getDudas} from '../../services/dudas.services'
+import {getDoubts} from '../../services/dudas.services'
 import { getStatusImage } from "../../utils/functions";
-import '../../styles/dashboard/veritems.css'
 import VerDudasVacio from '../FormVacio'
 import Overlay from "../Overlay";
 import Duda from "./Duda";
 import eyeImg from '../../assets/images/eye-slash.svg'
+import '../../styles/dashboard/veritems.css'
 
 function VerDudas() {
-    const [dudas,setDudas] = useState([]);
-    // const [isFilterActive,setIsFilterActive] = useState(false)
+    //States
+    const [doubts,setDoubts] = useState([]);
     const [isLargeScreen, setIsLargeScreen] = useState(window.innerWidth > 768);  
     const [isFilterActive, setIsFilterActive] = useState(true)
     const [modalDuda, setModalDuda] = useState({
         isSubmitted: false,
         reserva: {}
     });  
-    console.log(dudas);
 
+    //Use Effects
     useEffect(()=>{
-        async function traerDudas(){
-            const result = await getDudas()
+        async function searchDoubts(){
+            const result = await getDoubts()
             if(result.length > 0){
-                setDudas(result)
+                setDoubts(result)
             }
         }
-        traerDudas()
+        searchDoubts()
     },[])
 
     useEffect(() => {
@@ -39,36 +39,35 @@ function VerDudas() {
         };
       }, []);
 
-    function filterDudas(dudas){
+    function filterDoubts(dudas){
         if(!isFilterActive){
             return dudas
         }
         return dudas.filter(duda => duda.estado != 'Respondido')
 
     }
-    async function traerDudas(){
-        const result = await getDudas()
+    async function searchDoubts(){
+        const result = await getDoubts()
         if(result.status == 200){
-            setDudas((result.data.data))
+            setDoubts((result.data.data))
         }
     }
 
-
-    function openModalDuda(duda){
+    function openModalDoubt(duda){
         setModalDuda({
             isSubmitted:true,
             duda: duda
         });
         document.body.classList.add('disable-scroll');
     }
-    function closeModalDuda(){
+    function closeModalDoubt(){
         setModalDuda({
             isSubmitted:false,
             duda: {}
         });
         document.body.classList.remove('disable-scroll');
 
-        traerDudas()
+        searchDoubts()
         
     }
 
@@ -86,12 +85,12 @@ function VerDudas() {
                     <div className="veritems__header-column  verdudas__header-column">Estado</div>
                 </div>
                 <div className="verdudas__body veritems__body">
-                    {filterDudas(dudas).length <= 0 ? <VerDudasVacio msg={'No hay dudas el dia de hoy'} msgButton={':('}/> : filterDudas(dudas).map(duda => (
+                    {filterDoubts(doubts).length <= 0 ? <VerDudasVacio msg={'No hay dudas el dia de hoy'} msgButton={':('}/> : filterDoubts(doubts).map(duda => (
 
-                        <div key={duda.id} className="veritems__row verdudas__row" onClick={()=>  openModalDuda(duda)} style={{gridTemplateColumns: 'repeat(2,1fr)'}}>
+                        <div key={duda.id} className="veritems__row verdudas__row" onClick={()=>  openModalDoubt(duda)} style={{gridTemplateColumns: 'repeat(2,1fr)'}}>
                             <div className="veritems__dato verdudas__dato"><p>{duda.duda}</p></div>
                             <div className="veritems__dato verdudas__dato ">
-                                <img src={getStatusImage(duda.estado)} alt="" className="status-img reserva-status-img" />
+                                <img src={getStatusImage(duda.estado)} alt={duda.estado} className="status-img reserva-status-img" />
                                 {isLargeScreen && (
                                     <p>{duda.estado}</p>
                                 )}
@@ -102,7 +101,7 @@ function VerDudas() {
             </div>
             {modalDuda.isSubmitted && (
                 <Overlay comp={'verreservas'}>
-                        <Duda modalDuda={modalDuda} closeModal={closeModalDuda}></Duda>
+                        <Duda modalDuda={modalDuda} closeModal={closeModalDoubt}></Duda>
                 </Overlay>
                     )}
         </div>

@@ -3,16 +3,16 @@ import { styled } from 'styled-components';
 
 function CartVacio() {
     return ( 
-        <Cartvacio__container>
+        <VoidCart__container>
         <Message__cart> El carrito está vacio</Message__cart>
             <NavLinkStyled to='/carta' ><ButtonStyled className="button" >Ver Carta</ButtonStyled></NavLinkStyled>
-        </Cartvacio__container>
+        </VoidCart__container>
 
      );
 }
 
 
-const Cartvacio__container = styled.div`
+const VoidCart__container = styled.div`
     width: 100%;
     display:flex;
     flex-direction: column;

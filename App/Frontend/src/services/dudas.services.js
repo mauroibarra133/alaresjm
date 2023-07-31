@@ -1,7 +1,7 @@
 import axios from "axios";
 const urlResource = "http://localhost:4000/dudas";
 
-export async function getDudas(){
+export async function getDoubts(){
     const resp = await axios.get(urlResource)
     console.log(resp.data);
     return resp.data

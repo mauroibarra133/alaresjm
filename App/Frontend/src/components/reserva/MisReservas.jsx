@@ -3,7 +3,7 @@ import '../../styles/reserva/mis-reservas.css'
 import eyeImg from '../../assets/images/eye-slash.svg'
 import {  useEffect, useState } from 'react';
 import {useAuth} from '../../hooks/useAuth'
-import {getReservas} from '../../services/reservas.services'
+import {getBookings} from '../../services/reservas.services'
 import MisReservasVacio from '../FormVacio';
 import Reserva from './Reserva';
 
@@ -26,7 +26,7 @@ function MisReservas() {
     useEffect(()=>{
         async function searchReservas(){
             if(auth.data.user_id){
-                const response = await getReservas({user_id: auth.data.user_id})
+                const response = await getBookings({user_id: auth.data.user_id})
                 return response.data
             }
         }

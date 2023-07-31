@@ -10,7 +10,7 @@
     padding: 1rem;
     gap: 2rem;
 }
-.pedido__container{
+.order__container{
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -23,7 +23,7 @@
     margin: 0 auto;
 }
 /* Items */
-.pedido__items{
+.order__items{
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -32,20 +32,20 @@
 }
 
 /* Item Individual */
-.pedido__item{
+.order__item{
     width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
 }
-.pedido__item-r1,.pedido__item-r2, .pedido__item-r3{
+.order__item-r1,.order__item-r2, .order__item-r3{
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 /* Select */
 
-.pedido__item-selectsize{
+.order__item-selectsize{
     border-radius: 6px;
     color: #000;
     background-color: var(--gray-4);
@@ -56,20 +56,20 @@ select option{
     background-color: var(--gray-4);
 }
 
-.pedido__item-selectsize option:checked{
+.order__item-selectsize option:checked{
     background-color: var(--gray-4);
 }
-.pedido__item-r1{
+.order__item-r1{
     gap: .5rem;
 }
 /* Datos */
-.pedido__name{
+.order__name{
     color: #000;
     text-align: left;
     font-family: 'Lato Bold';
     font-size: 0.875rem;
 }
-.pedido__price{
+.order__price{
     width: 100%;
     color: #000;
     font-family: 'Lato Black';
@@ -78,7 +78,7 @@ select option{
     line-height: normal;
     text-align: right;
 }
-.pedido__desc{
+.order__desc{
     color: #000;
     font-family: 'Lato';
     font-size: 0.625rem;
@@ -89,22 +89,22 @@ select option{
     text-align: left;
 }
 /* Botones */
-.pedido__buttons img{
+.order__buttons img{
     height: 15px;
     width: 15px;
 }
-.pedido__buttons p{
+.order__buttons p{
     color: var(--orange-1);
     font-weight: 900;
 }
 
-.pedido__buttons{
+.order__buttons{
     display: flex;
     gap: .3rem;
     padding: .1rem 0 ;
 }
 /* Total */
-.pedido__total{
+.order__total{
     width: 100%;
     display: flex;
     justify-content: space-between;
@@ -112,14 +112,14 @@ select option{
     padding-top: .5rem;
 }
 
-.pedido__total-name, .pedido__total-price{
+.order__total-name, .order__total-price{
     font-family: 'Amiri Bold';
     color: var(--orange-2);
 
 }
 /* NOta */
 
-.pedido__note-container{
+.order__note-container{
     width: 100%;
     max-width: 500px;
     display: flex;
@@ -129,17 +129,17 @@ select option{
     gap: 1rem;
 }
 
-.pedido__note-container label{
+.order__note-container label{
     font-family: 'Lato';
     text-transform: uppercase;
     font-size: .8rem;
 }
-.pedido__note-container textarea{
+.order__note-container textarea{
     border-radius: 10px;
     padding: .4rem;
 }
 /* Pago Datos */
-.pedido__form{
+.order__form{
     width: 100%;
     max-width: 350px;
     display: flex;
@@ -183,7 +183,7 @@ select option{
 }
 /* Pago */
 
-.pedido__pago{
+.order__pago{
     width: 100%;
     max-width: 500px;
     margin: 0 auto;
@@ -197,21 +197,21 @@ select option{
     color: var(--orange-2);
 }
 
-.pedido__pago label{
+.order__pago label{
     font-family: 'Lato ';
 }
 
-.pedido__pago-input-container{
+.order__pago-input-container{
     display: flex;
     justify-content: center;
 }
-.pedido__pago-input-container input{
+.order__pago-input-container input{
     display: flex;
     flex-direction: column;
     color: var(--gray-1);
 }
 /* Boton */
-.pedido__button{
+.order__button{
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -219,7 +219,7 @@ select option{
     align-items: center;
     padding-bottom: 2rem;
 }
-.pedido__button button{
+.order__button button{
     background: var(--black-1);
     color: var(--text-white);
 }

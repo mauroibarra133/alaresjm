@@ -1,3 +1,4 @@
+                            /* GENERAL */
 .dashboard__modal{
     position: absolute;
     top: 15%;
@@ -50,24 +51,6 @@
     filter: invert(.7) brightness(1.2);
     cursor: pointer;
 }
-
-/* Pedido */
-.verpedido__infouser{
-    padding: 1rem;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: .2rem;
-}
-.dashboard__dato{
-    display: flex;
-    gap: .2rem;
-}
-.dashboard-icon{
-    width: 15px;
-    height: 15px;
-}
-
 /* Estado */
 .dashboard__estado-modal{
     padding: 1rem;
@@ -95,11 +78,29 @@
     background-color: var(--blue-2); 
     cursor: pointer;
   }
+  .dashboard__dato{
+    display: flex;
+    gap: .2rem;
+}
+.dashboard-icon{
+    width: 15px;
+    height: 15px;
+}
+@media only screen and (min-width: 768px){
+    .dashboard__modal{
+        width: 80%;
+    }
+}
 
+                                                                        /* PEDIDO */
+.verpedido__infouser{
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: .2rem;
+}
 
-
-
-/* Pedido */
 .verpedido__detalle-wrapper{
     width: 100%;
     display: flex;
@@ -168,15 +169,9 @@
     gap: .3rem;
 }
 
-@media only screen and (min-width: 768px){
-    .dashboard__modal{
-        width: 80%;
-    }
-}
 
 
-
-/* RESERVAS */
+                                                                        /* RESERVAS */
 /* Info reserva */
 .verreserva__info{
     width: 100%;
@@ -206,7 +201,7 @@
 .verreserva__dato{
     min-width: 100px;
 }
-/* Duda MOdal */
+                                                                        /* DUDA */
 .verduda__modal{
     top: 30%;
     min-height: 40%;
@@ -235,7 +230,7 @@
     color: var(--gray-1);
 }
 
-/* CARTA */
+                                                                    /* CARTA */
 .vercarta__modal{
     width: 90%;
     max-width: 500px;

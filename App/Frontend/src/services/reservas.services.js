@@ -13,7 +13,7 @@ export async function agregarReserva(fecha,hora,id_usuario, cantidad,lugar,clien
     return response
 }
 
-export async function getReservas(params) {
+export async function getBookings(params) {
     const response = await axios.get("http://localhost:4000/reservas", {params});
     console.log(response);
     return response;
