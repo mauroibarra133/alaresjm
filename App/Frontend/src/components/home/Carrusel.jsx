@@ -39,7 +39,7 @@ function Carrusel(){
     let sliderExist = Array.from(document.querySelectorAll(".glide"));
     // eslint-disable-next-line react-hooks/exhaustive-deps
     sliderExist.forEach((item)=>{
-      const slider = new Glide(item, sliderConfiguration);
+      const slider =  new Glide(item, sliderConfiguration);
       slider.mount()
     })
   

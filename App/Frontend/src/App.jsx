@@ -1,25 +1,26 @@
 import './App.css'
+import { lazy, Suspense } from 'react'
 import Header from './components/Header'
-import Home from './components/Home'
-import Menu from './components/menu/Menu'
-import ErrorPage from './components/ErrorPage'
-import {BrowserRouter, Route, Routes} from 'react-router-dom'
-import Delivery from './components/delivery/Delivery'
-import Footer from './components/Footer'
-import {CartProvider} from './context/cart';
-import {AuthProvider} from './context/auth';
-import ScrollToTop from './components/helpers/ScrollToTop'
-import Login from './components/login/Login'
+import Home from'./components/Home'
+import Footer from'./components/Footer'
+import Loading from './components/Loading'
+const Menu = lazy(()=> import('./components/menu/Menu'))
+const ErrorPage = lazy(()=> import('./components/ErrorPage'))
+const Delivery = lazy(()=> import('./components/delivery/Delivery'))
+const ScrollToTop = lazy(()=> import('./components/helpers/ScrollToTop'))
+const Login = lazy(()=> import('./components/login/Login'))
 import RequireAuth from './components/login/RequireAuth'
-import SignUp from './components/login/SignUp'
-import Reservas from './components/reserva/Reservas'
-import RankingClientes from './components/ranking/RankingClientes'
-import MyAccount from './components/login/MyAccount'
-import MisReservas from './components/reserva/MisReservas'
-import MisPedidos from './components/pedidos/MisPedidos'
-import DashBoard from './components/gestion/DashBoard'
-import VerPedidos from './components/gestion/VerPedidos'
-
+const SignUp = lazy(()=> import('./components/login/SignUp'))
+const Reservas = lazy(()=> import('./components/reserva/Reservas'))
+const RankingClientes = lazy(()=> import('./components/ranking/RankingClientes'))
+const MyAccount = lazy(()=> import('./components/login/MyAccount'))
+const MisReservas = lazy(()=> import('./components/reserva/MisReservas'))
+const MisPedidos = lazy(()=> import('./components/pedidos/MisPedidos'))
+const DashBoard = lazy(()=> import('./components/gestion/DashBoard'))
+const VerPedidos = lazy(()=> import('./components/gestion/VerPedidos'))
+import {AuthProvider} from './context/auth';
+import {CartProvider} from './context/cart';
+import {BrowserRouter, Route, Routes} from 'react-router-dom'
 function App() {
 
   return (
@@ -28,6 +29,7 @@ function App() {
     <CartProvider>
       <ScrollToTop />
       <Header/>
+        <Suspense fallback={<Loading/>}>
       <Routes>
         <Route path='/' element={<Home/>}></Route>
         <Route path='/home' element={<Home/>}></Route>
@@ -67,6 +69,7 @@ function App() {
         <Route path='/dashboard/ver-pedidos' element={<VerPedidos/>}></Route> 
         <Route path='*' element={<ErrorPage/>}> </Route>
       </Routes>
+        </Suspense>
       <Footer/>
     </CartProvider>
     </AuthProvider>

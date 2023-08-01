@@ -1,12 +1,12 @@
-import confirmedStatus from '../assets/images/comprobar.png'
-import waitStatus from '../assets/images/procesando.png'
-import badStatus from '../assets/images/cancelar.png'
-import cookingStatus from '../assets/images/sombrero-de-cocinero.png'
-import readyStatus from '../assets/images/caja-de-entrega.png'
-import OKStatus from '../assets/images/comprobado.png'
-import deliveryStatus from '../assets/images/enviado.png'
-import noReadStatus from '../assets/images/mensaje-no-leido.png'
-import readStatus from '../assets/images/doble-verificacion.png'
+import confirmedStatus from '../assets/images/comprobar.webp'
+import waitStatus from '../assets/images/procesando.webp'
+import badStatus from '../assets/images/cancelar.webp'
+import cookingStatus from '../assets/images/sombrero-de-cocinero.webp'
+import readyStatus from '../assets/images/caja-de-entrega.webp'
+import OKStatus from '../assets/images/comprobado.webp'
+import deliveryStatus from '../assets/images/enviado.webp'
+import noReadStatus from '../assets/images/mensaje-no-leido.webp'
+import readStatus from '../assets/images/doble-verificacion.webp'
 
 export const PASSWORD_REGEX = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[-_]).{8,}$/
 export const EMAIL_REGEX =  /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;

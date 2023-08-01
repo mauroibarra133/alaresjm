@@ -12,7 +12,7 @@ import usuariosRouter from './routes/usuarios'
 import reservasRouter from './routes/reservas'
 import rankingRouter from './routes/ranking'
 import mercadopagoRouter from './routes/mercadoPago'
-
+import compression from 'compression'
 const app = express()
 const httpServer = http.createServer(app)
 const io = new SocketServer(httpServer)
@@ -38,6 +38,7 @@ io.on('connection', (socket)=>{
 app.use(express.json());  // Para que nuestro servidor pueda aceptar datos en json (debemos configurar eso)
 app.use(express.urlencoded({extended: false}))  // Para que pueda aceptar datos desde forms HTML
 app.use(cors());
+app.use(compression());
 
 app.use(productosRouter) 
 app.use(dudasRouter) 

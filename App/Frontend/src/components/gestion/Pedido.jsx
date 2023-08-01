@@ -3,11 +3,11 @@ import {  useId, useState } from "react";
 import { updatePedido } from "../../services/pedidos.services";
 import '../../styles/dashboard/modalDashboard.css'
 import cruzIcon from '../../assets/images/xmark-solid.svg'
-import userIcon from '../../assets/images/usuario.png'
-import locationIcon from '../../assets/images/sitio.png'
-import relojIcon from '../../assets/images/reloj-de-pared.png'
-import entregaIcon from '../../assets/images/entrega.png'
-import pagoIcon from '../../assets/images/tarjeta-de-credito.png'
+import userIcon from '../../assets/images/usuario.webp'
+import locationIcon from '../../assets/images/sitio.webp'
+import relojIcon from '../../assets/images/reloj-de-pared.webp'
+import entregaIcon from '../../assets/images/entrega.webp'
+import pagoIcon from '../../assets/images/tarjeta-de-credito.webp'
 import io from 'socket.io-client';
 const socket = io('/');
 

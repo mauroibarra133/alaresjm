@@ -3,9 +3,9 @@ import {  useId, useState } from "react";
 import { addDoubt as updateDoubt } from "../../services/dudas.services";
 import '../../styles/dashboard/modalDashboard.css'
 import cruzIcon from '../../assets/images/xmark-solid.svg'
-import userIcon from '../../assets/images/usuario.png'
-import blueMail from '../../assets/images/bluemail.png'
-import phoneImg from '../../assets/images/llamada-telefonica.png'
+import userIcon from '../../assets/images/usuario.webp'
+import blueMail from '../../assets/images/bluemail.webp'
+import phoneImg from '../../assets/images/llamada-telefonica.webp'
 
 function Duda({modalDuda, closeModal}) {
     //Constants and states

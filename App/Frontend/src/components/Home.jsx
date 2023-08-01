@@ -1,20 +1,28 @@
+import { Suspense, lazy } from 'react';
 import HeroHome from './home/hero/HeroHome';
-import HeroQuienesSomos from './home/hero/HeroQuienesSomos';
-import HeroHorarios from './home/hero/HeroHorarios';
-import HeroFoodTruck from './home/hero/HeroFoodTruck';
-import HeroContactanos from './home/hero/HeroContactanos';
 import '../styles/home.css';
+import Loading from './Loading';
+
+// Importa los otros componentes de forma dinámica usando lazy
+const LazyHeroQuienesSomos = lazy(() => import('./home/hero/HeroQuienesSomos'));
+const LazyHeroHorarios = lazy(() => import('./home/hero/HeroHorarios'));
+const LazyHeroFoodTruck = lazy(() => import('./home/hero/HeroFoodTruck'));
+const LazyHeroContactanos = lazy(() => import('./home/hero/HeroContactanos'));
 
 function Home() {
-    return ( 
-        <div className="home__container">
-            <HeroHome/>      
-            <HeroQuienesSomos/>      
-            <HeroHorarios/>     
-            <HeroFoodTruck/>      
-            <HeroContactanos/> 
-        </div>
-     );
+  return (
+    <div className="home__container">
+      <Suspense fallback={<Loading/>}>
+        <HeroHome />
+      {/* Usa Suspense para manejar la carga de los componentes lazy */}
+        {/* Renderiza cada componente lazy dentro de Suspense */}
+        <LazyHeroQuienesSomos />
+        <LazyHeroHorarios />
+        <LazyHeroFoodTruck />
+        <LazyHeroContactanos />
+      </Suspense>
+    </div>
+  );
 }
 
 export default Home;

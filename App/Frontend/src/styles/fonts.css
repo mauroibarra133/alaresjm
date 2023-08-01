@@ -1,41 +1,52 @@
 @font-face {
     font-family: 'Pirata One';
-    src: url('../assets/fonts/PirataOne/PirataOne-Regular.ttf') format('truetype');
+    src: local('sans-serif'),url('../assets/fonts/PirataOne/PirataOne-Regular.woff2') format('truetype');
+    font-display: swap;
   }
 
   @font-face {
     font-family: 'Amiri';
-    src: url('../assets/fonts/Amiri/Amiri-Regular.ttf') format('truetype');
+    src: local('sans-serif'),url('../assets/fonts/Amiri/Amiri-Regular.woff2') format('truetype');
+    font-display: swap;
   }
 
   
   @font-face {
     font-family: 'Amiri Bold';
-    src: url('../assets/fonts/Amiri/Amiri-Bold.ttf') format('truetype');
+    src: local('sans-serif'),url('../assets/fonts/Amiri/Amiri-Bold.woff2') format('truetype');
+    font-display: swap;
   }
   @font-face {
     font-family: 'Post No Bills Colombo';
-    src: url('../assets/fonts/PostNoBillsColombo/postnobillscolombo-semibold.ttf') format('truetype');
+    src: local('sans-serif'),url('../assets/fonts/PostNoBillsColombo/postnobillscolombo-bold.woff2') format('truetype');
+    font-display: swap;
   }
 
   @font-face {
     font-family: 'Post No Bills Colombo Bold';
-    src: url('../assets/fonts/PostNoBillsColombo/postnobillscolombo-bold.ttf') format('truetype');
+    src:local('sans-serif'),url('../assets/fonts/PostNoBillsColombo/postnobillscolombo-bold.woff2') format('truetype');
+    font-display: swap;
   }
 
   @font-face {
     font-family: 'Lato';
-    src: url('../assets/fonts/Lato/Lato-Regular.ttf') format('truetype');
+    src: local('sans-serif'),url('../assets/fonts/Lato/Lato-Regular.ttf') format('truetype');
+    font-display: swap;
   }
   @font-face {
     font-family: 'Lato Light';
-    src: url('../assets/fonts/Lato/Lato-Light.ttf') format('truetype');
+    src: local('sans-serif'),url('../assets/fonts/Lato/Lato-Light.ttf') format('truetype');
+    font-display: swap;
   }
   @font-face {
     font-family: 'Lato Black';
-    src: url('../assets/fonts/Lato/Lato-Black.ttf') format('truetype');
+    src: local('sans-serif'),url('../assets/fonts/Lato/Lato-Black.ttf') format('truetype');
+    font-display: swap;
+
   }
   @font-face {
     font-family: 'Lato Bold';
-    src: url('../assets/fonts/Lato/Lato-Bold.ttf') format('truetype');
+    src: local('sans-serif'),url('../assets/fonts/Lato/Lato-Bold.ttf') format('truetype');
+    font-display: swap;
+
   }

@@ -9,9 +9,9 @@ import '../../styles/reserva/mis-reservas.css'
 import Modal from '../Modal'
 import ModalModificar from './ModalModificar'
 import Overlay from '../Overlay'
-import goodStatus from '../../assets/images/comprobado.png'
-import waitStatus from '../../assets/images/procesando.png'
-import badStatus from '../../assets/images/cancelar.png'
+import goodStatus from '../../assets/images/comprobado.webp'
+import waitStatus from '../../assets/images/procesando.webp'
+import badStatus from '../../assets/images/cancelar.webp'
 
 const statusReservas = [
   {

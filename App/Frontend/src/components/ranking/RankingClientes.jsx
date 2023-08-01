@@ -1,6 +1,6 @@
 import '../../styles/ranking/ranking.css'
 import Path from '../Path'
-import burgerImg from '../../assets/images/burger-deco.png'
+import burgerImg from '../../assets/images/burger-deco.webp'
 import { useEffect, useState } from 'react';
 import { getRanking } from '../../services/rankings.services';
 import {meses} from '../../utils/constants.js';

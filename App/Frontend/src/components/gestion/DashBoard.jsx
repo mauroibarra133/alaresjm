@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
-import ordersIcon from '../../assets/images/entrega-de-pedidos.png';
-import bookingsIcon from '../../assets/images/reserva.png';
-import doubtIcon from '../../assets/images/cotizacion.png';
-import menuIcon from '../../assets/images/menu.png';
+import ordersIcon from '../../assets/images/entrega-de-pedidos.webp';
+import bookingsIcon from '../../assets/images/reserva.webp';
+import doubtIcon from '../../assets/images/cotizacion.webp';
+import menuIcon from '../../assets/images/menu.webp';
 import VerPedidos from "./VerPedidos";
 import VerReservas from "./VerReservas";
 import VerDudas from "./VerDudas";

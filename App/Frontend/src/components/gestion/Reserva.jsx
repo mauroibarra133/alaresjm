@@ -2,9 +2,9 @@
 import {  useId, useState } from "react";
 import { updateReserva } from "../../services/reservas.services";
 import cruzIcon from '../../assets/images/xmark-solid.svg'
-import userIcon from '../../assets/images/usuario.png'
-import locationIcon from '../../assets/images/sitio.png'
-import relojIcon from '../../assets/images/reloj-de-pared.png'
+import userIcon from '../../assets/images/usuario.webp'
+import locationIcon from '../../assets/images/sitio.webp'
+import relojIcon from '../../assets/images/reloj-de-pared.webp'
 import '../../styles/dashboard/modalDashboard.css'
 
 

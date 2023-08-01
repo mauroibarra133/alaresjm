@@ -1,7 +1,7 @@
 import '../styles/errorPage.css'
-import foodImg from '../assets/images/error-comida.png';
-import forkImg from '../assets/images/error-fork.png';
-import knifeImg from '../assets/images/error-knife.png';
+import foodImg from '../assets/images/error-comida.webp';
+import forkImg from '../assets/images/error-fork.webp';
+import knifeImg from '../assets/images/error-knife.webp';
 
 export default function ErrorPage() {
 
