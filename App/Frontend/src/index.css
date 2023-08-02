@@ -46,3 +46,8 @@ body {
 body.disable-scroll{
   overflow: hidden;
 }
+
+input,select{
+  padding: .2rem .5rem;
+  border-radius: 12px;
+}

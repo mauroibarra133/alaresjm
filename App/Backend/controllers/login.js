@@ -51,10 +51,16 @@ export async function existsMail(req,res){
         const result = await pool.request()
         .input('email',sql.Text,email)
         .query(queries.Login.getUserData)
-        res.status(200).json(result.recordset[0].email)
+        if(result.recordset.length > 0){
+            res.status(400).json({msg: 'La cuenta ya esta asociada a otra persona'})
+        }else{
+            res.status(200).json({msg: 'El mail esta disponible'})
+
+        }
 
     } catch (error) {
-        res.status(400).json(false)
+        res.status(500).json({msg: 'Error en el servidor, intente mas tarde'})
+
     }
 
 

@@ -12,22 +12,26 @@ function Duda({modalDuda, closeModal}) {
     const duda = modalDuda.duda
     const stateId = useId()
     const [state, setEstado] = useState(duda.estado)
+    // const [errorDuda, setErrorDuda] = useState(false)
 
     //functions
     async function handleState(event){
         if(event.target.value != duda.estado){
-            const response = await updateDoubt({
-                ...duda,
-                estado: event.target.value
-            })
-            console.log(response);
-            if(response.status >= 200 && response.status < 300){
-                setEstado(event.target.value)
-                duda.estado = event.target.value
-                
-            }else{
-                console.log('No se pudo wn');
+            try {
+                await updateDoubt({
+                    ...duda,
+                    estado: event.target.value
+                })
+                    setEstado(event.target.value)
+                    duda.estado = event.target.value
+            } catch (error) {
+                // setErrorDuda(true)
+                // setTimeout(() => {
+                // setErrorDuda(false)
+                // }, 2000);
             }
+
+                
         }
     }
 
@@ -40,11 +44,12 @@ function Duda({modalDuda, closeModal}) {
                 </div>
             </div>
             <div className="verpedido__estado dashboard__estado-modal">
-                <select name={stateId} id={stateId} defaultValue={state}   onChange={handleState}>
+                <select name={stateId} id={stateId} defaultValue={state} className="input"  onChange={handleState}>
                     <option value="No Leido">No Leido</option>
                     <option value="Leido">Leido</option>
                     <option value="Respondido">Respondido</option>
                 </select>
+                {/* {errorDuda && ( <p className="error-status form-error">Error en el servidor</p>)} */}
             </div>
             <div className="verduda__info-wrapper">
                 <div className="verduda__contact">

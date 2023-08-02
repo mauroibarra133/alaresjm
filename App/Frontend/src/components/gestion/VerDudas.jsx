@@ -4,6 +4,7 @@ import { getStatusImage } from "../../utils/functions";
 import VerDudasVacio from '../FormVacio'
 import Overlay from "../Overlay";
 import Duda from "./Duda";
+import Modal from "../Modal";
 import eyeImg from '../../assets/images/eye-slash.svg'
 import '../../styles/dashboard/veritems.css'
 
@@ -16,14 +17,29 @@ function VerDudas() {
         isSubmitted: false,
         reserva: {}
     });  
+    const [showModal,setShowModal] = useState({
+        isSubmitted: false,
+        isGood: false,
+        msg: ""
+    });
 
     //Use Effects
     useEffect(()=>{
         async function searchDoubts(){
+            try {
             const result = await getDoubts()
             if(result.length > 0){
                 setDoubts(result)
             }
+            } catch (error) {
+                setDoubts([])
+                setShowModal({
+                    isSubmitted: true,
+                    isGood: false,
+                    msg: error.message
+                })
+            }
+
         }
         searchDoubts()
     },[])
@@ -47,10 +63,20 @@ function VerDudas() {
 
     }
     async function searchDoubts(){
+        try {
         const result = await getDoubts()
-        if(result.status == 200){
-            setDoubts((result.data.data))
+        if(result.length > 0){
+            setDoubts(result)
         }
+        } catch (error) {
+            setDoubts([])
+            setShowModal({
+                isSubmitted: true,
+                isGood: false,
+                msg: "Error en la conexion!"
+            })
+        }
+
     }
 
     function openModalDoubt(duda){
@@ -70,7 +96,13 @@ function VerDudas() {
         searchDoubts()
         
     }
-
+    function closeModal(){
+        setShowModal({
+            isSubmitted: false,
+            isGood: false,
+            msg: ""
+        });
+    }
     return ( 
         <div className="verdudas veritems">
             <div className="verdudas__filters verreservas__filters">
@@ -104,6 +136,9 @@ function VerDudas() {
                         <Duda modalDuda={modalDuda} closeModal={closeModalDoubt}></Duda>
                 </Overlay>
                     )}
+        <Modal isSubmitted={showModal.isSubmitted} isGoodStatus={showModal.isGood} msg={showModal.msg}
+            handleSubmit={closeModal}
+        ></Modal>
         </div>
      );
 }

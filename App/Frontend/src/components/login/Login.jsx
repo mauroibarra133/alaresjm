@@ -42,7 +42,6 @@ function Login() {
     }
      async function onSubmit(data){
             const response = await login(data)
-            console.log(response);
             if (response){
                 //Error en el servidor
                 if(response.error){
@@ -60,17 +59,17 @@ function Login() {
                         existError: true,
                         msg: response.data.msg
                     });
-                document.body.classList.add('disable-scroll');
+                    document.body.classList.add('disable-scroll');
                 }else{
-                const oneHour = 60*60
-                document.cookie = `token=${response.token}; max-age=${oneHour}; path=/; samesite=strict; `
-                isLogued()
-                setErrorStatus({
-                    isSubmitted: true,
-                    existError: false,
-                    msg: "Ha sido logueado correctamente"
-                })
-                document.body.classList.add('disable-scroll');
+                    const oneHour = 60*60
+                    document.cookie = `token=${response.token}; max-age=${oneHour}; path=/; samesite=strict; `
+                    isLogued()
+                    setErrorStatus({
+                        isSubmitted: true,
+                        existError: false,
+                        msg: "Ha sido logueado correctamente"
+                    })
+                    document.body.classList.add('disable-scroll');
             }
             
 

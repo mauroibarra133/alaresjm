@@ -22,6 +22,7 @@ function Delivery() {
   //States
   const [total, setTotal] = useState(0);
   const [preferenceId, setPreferenceId] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
   const [isOrderedEft, setIsOrderedEft] = useState({
     isSubmitted : false,
     goodStatus: false
@@ -58,25 +59,36 @@ function Delivery() {
         goodStatus: false
       })
   }
-
+  const handleWalletLoad = () => {
+    setIsLoading(false);
+  };
   async function createPreference({nombreCliente, direccionCliente, tipoPago, tipoEntrega, notaPedido}){
     try {
-        const response= createPreferenceMP(modifyCart(cart), nombreCliente, direccionCliente, tipoPago, tipoEntrega, notaPedido)
+        const response = await createPreferenceMP(modifyCart(cart), nombreCliente, direccionCliente, tipoPago, tipoEntrega, notaPedido)
       return response;
     } catch (error) {
-      console.log(error);
+      return error
     }
   }
   const handleOrder = async (order) => {
       //Creo la preferencia de MP
       if(order.tipoPago === "2"){
-            const {data} = await createPreference(order);
-            const id = data.response.id
-          
+        try {
+          const response = await createPreference(order);
+            const id = response.data.response.id
+    
           if (id) {
             setPreferenceId(id);
-          }
+            handleWalletLoad()
 
+          }
+        } catch (error) {
+          setIsOrderedEft({
+            isSubmitted : true,
+            goodStatus: false
+          })
+        }
+          
       }else{
         //SI es efectivo limpio el carrito y muestro un modal
         try {
@@ -139,7 +151,7 @@ const onSubmit = (data)=>{
                 </button>
                 </div>
             </div>
-            <FormDelivery onSubmit={onSubmit} total={total} preferenceId={preferenceId} isOrderedEft={isOrderedEft}/>
+            <FormDelivery onSubmit={onSubmit} total={total} preferenceId={preferenceId} isOrderedEft={isOrderedEft} isLoading={isLoading} handleWalletLoad={handleWalletLoad}/>
             <Modal isSubmitted={isOrderedEft.isSubmitted} 
             handleSubmit={handleCloseModal}
             isGoodStatus={isOrderedEft.goodStatus}

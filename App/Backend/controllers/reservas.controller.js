@@ -48,10 +48,10 @@ export async function getReservas(req, res) {
                .query(queries.Reservas.getReservasByDate);
                res.status(200).json({msg: "Datos obtenidos correctamente", data: result.recordset})  
         }
-        console.log(result);
        
     } catch (error) {
-        console.log(error);
+        res.status(500)
+
     }
 }
 

@@ -65,7 +65,7 @@
   appearance: none;
   -webkit-appearance: none;
   /* Agregar la flecha personalizada utilizando un pseudo-elemento */
-  background-image: url('../../assets/images/flecha-down.png');
+  background-image: url('../../assets/images/flecha-down.webp');
   background-size: 10px; /* Ajusta el tamaño de la flecha según tus necesidades */
   background-repeat: no-repeat;
   background-position: 95% center; /* Puedes ajustar la posición de la flecha si es necesario */

@@ -28,7 +28,6 @@ function SignUp(){
         isGood: false,
         msg: ""
     });
-
     //Functions
     function closeModal(){
         setShowModal({
@@ -40,34 +39,21 @@ function SignUp(){
     }
 
     async function onSubmit(data){
-        const isAlreadyExist = await existsMail(data.regEmail)
-        //SI existe un error
-        if(isAlreadyExist.error){
-            setShowModal({
-                isSubmitted:true,
-                isGood:false,
-                msg: isAlreadyExist.error
-            });
-            return
-        }
-        if(isAlreadyExist.data){
-            //Manejar modal
-            console.log('Ya existe ');
-            setShowModal({
-                isSubmitted:true,
-                isGood:false,
-                msg: "El email ingresado ya existe"
-
-            })
-        }else{
+        try {
+            await existsMail(data.regEmail)       
             const response = await signup(data)
             setShowModal({
                 isSubmitted: true,
                 isGood: true,
-                msg: "El usuario ha sido creado correctamente"
-            })
-            reset()
-            console.log(response.data);
+                msg: response.data.msg
+                })
+                reset()
+        } catch (error) {
+                    setShowModal({
+                      isSubmitted: true,
+                      isGood: false,
+                      msg: error.message
+                    });            
         }
     }
 

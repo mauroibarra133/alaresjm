@@ -1,9 +1,9 @@
 /* eslint-disable react/prop-types */
 import { useForm } from "react-hook-form";
 import { useEffect, useId } from "react";
-import { Wallet } from '@mercadopago/sdk-react'
 import '../../styles/delivery/delivery.css'
 import { ONLY_NUMBERS, ADDRESS_REGEX } from "../../utils/constants";
+import { Wallet } from "@mercadopago/sdk-react";
 
 
 function FormDelivery({onSubmit,total, preferenceId, isOrderedEft}) {
@@ -102,6 +102,7 @@ function FormDelivery({onSubmit,total, preferenceId, isOrderedEft}) {
             <button type='submit' className='order__confirmar button' disabled={total == 0}>
                 Confirmar Pedido
             </button>
+            
             {(preferenceId && watch("tipoPago") === "2") && <Wallet initialization={{ preferenceId,redirectMode: 'modal' }} className='button mp_button'/>}
         </div>
        

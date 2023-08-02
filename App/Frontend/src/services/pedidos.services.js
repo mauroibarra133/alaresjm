@@ -1,6 +1,8 @@
 import axios from "axios"
+import { ConnectionError } from "../../../Backend/utils/error";
 export async function createOrder(fecha_ISO, id_usuario,direccionCliente, notaPedido, total, id_tipo_pago,tipoEntrega, monto_cambio,items){
-    const response = await axios.post("http://localhost:4000/pedidos",{
+    try {
+      const response = await axios.post("http://localhost:4000/pedidos",{
         fecha: fecha_ISO,
         id_usuario: id_usuario,
         direccion: direccionCliente,
@@ -13,17 +15,23 @@ export async function createOrder(fecha_ISO, id_usuario,direccionCliente, notaPe
         items: items
       })
       return response
+    } catch (error) {
+      throw new ConnectionError()
+    }
+
 }
 
 export async function getOrders(params) {
+  try {
   const response = await axios.get("http://localhost:4000/pedidos", { params: params });
-  // console.log(response.data.data);
   return response;
+
+  } catch (error) {
+    throw new ConnectionError()
+  }
 }
 
 export async function updatePedido(params) {
-  console.log(params);
   const response = await axios.put("http://localhost:4000/pedidos",null, { params: params });
-  console.log(response);
   return response;
 }

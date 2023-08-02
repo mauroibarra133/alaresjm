@@ -1,5 +1,5 @@
 import axios from 'axios'
-
+import { ConnectionError, MailError, ServerError } from '../../../Backend/utils/error';
 export const isAuth = async () => {
   try {
     const token = document.cookie.replace('token=', '');
@@ -15,26 +15,22 @@ export const isAuth = async () => {
   }
 };
 
-export async function existsMail(email){
+
+export async function existsMail(email) {
   try {
-    const response = await axios.post("http://localhost:4000/email",
-      {email: email}
-      )
-      console.log(response);
-      if(response.data){
-        return {data : response.data}
-
-      }else{
-        return {data: false}
-      }
+    const response = await axios.post("http://localhost:4000/email", { email });
+    return response;
   } catch (error) {
-    if(error.response.data == false){
-      return false
+    if (error.response && error.response.status === 400) {
+      throw new MailError();
     }
-    return {error: "Error en el servidor, intente nuevamente mas tarde"}
+    throw new ConnectionError();
   }
-
 }
+
+
+
+
 export async function login(data){
   try {
     const response = await axios.post('http://localhost:4000/api/login',data)
@@ -57,8 +53,11 @@ export async function login(data){
 export async function signup(data){
   try {
     const response = await axios.post('http://localhost:4000/signup',data)
-    return {data: response}
+    return response
   } catch (error) {
-    return {error: 'Error en el servidor, intente mas tarde'}
+    if (error.response && error.response.status === 400) {
+      throw new ServerError();
+    }
+    throw new ConnectionError();
   }
 }

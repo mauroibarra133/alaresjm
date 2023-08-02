@@ -1,13 +1,19 @@
 import axios from "axios";
+import { ConnectionError } from "../../../Backend/utils/error";
 
 const urlSource = 'http://localhost:4000/productos'
 
 
 export  async function getProducts(categoria) {
+  try {
     const resp = await axios.get(urlSource, {
       params: { categoria },
     });
     return resp.data;
+  } catch (error) {
+    throw new ConnectionError()
+  }
+
   }
 
   export async function updateProduct(id, updatedData) {

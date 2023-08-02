@@ -4,7 +4,7 @@ export async function getCategories(req,res){
     try {
         const pool = await getConnection() //Es una promesa, es el cliente para realizar consultas
             const result = await pool.request().query(queries.Categorias.getAllCategories) //Hacemos la consulta
-            res.json(result.recordset)
+            res.status(200).json(result.recordset)
     } catch (error) {
         res.status(500).json({msg: "No se pudo obtener las categorias"})
     }

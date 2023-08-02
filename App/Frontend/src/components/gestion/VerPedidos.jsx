@@ -8,6 +8,7 @@ import Overlay from '../Overlay'
 import VerPedidosVacio from '../FormVacio'
 import io from 'socket.io-client';
 const socket = io('/');
+import Modal from "../Modal";
 
 function VerPedidos() {
     //Constants
@@ -30,7 +31,11 @@ function VerPedidos() {
         entregado: true,
         cancelado: true
     })
-
+    const [showModal,setShowModal] = useState({
+        isSubmitted: false,
+        isGood: false,
+        msg: ""
+    });
     const [modalOrder, setModalOrder] = useState({
         isSubmitted: false,
         pedido: {}
@@ -38,10 +43,18 @@ function VerPedidos() {
 
     useEffect(()=>{
         async function searchOrders(){
+            try {
             const result = await getOrders({date: filterDate})
-            if(result.status == 200){
-                setOrders(filterOrders(result.data.data))
+            setOrders(filterOrders(result.data.data))
+                
+            } catch (error) {
+                setShowModal({
+                    isSubmitted: true,
+                    isGood: false,
+                    msg: error.message
+                })
             }
+
         }
         searchOrders()
     },[filterDate])
@@ -89,11 +102,19 @@ function VerPedidos() {
       }, []);
 
 
-    async function searchOrders(){
+      async function searchOrders(){
+        try {
         const result = await getOrders({date: filterDate})
-        if(result.status == 200){
-            setOrders(result.data.data)
+        setOrders(filterOrders(result.data.data))
+            
+        } catch (error) {
+            setShowModal({
+                isSubmitted: true,
+                isGood: false,
+                msg: error.message
+            })
         }
+
     }
 
     function handleDate(data){
@@ -137,7 +158,13 @@ function VerPedidos() {
         searchOrders()
         
     }
-    console.log(isFilterActive);
+    function closeModal(){
+        setShowModal({
+            isSubmitted: false,
+            isGood: false,
+            msg: ""
+        });
+    }
     return ( 
         <div className="veritems verpedidos">
             <div className="verpedidos__fechas veritems__fechas">
@@ -190,6 +217,9 @@ function VerPedidos() {
                         <Pedido modalPedido={modalOrder} closeModal={closeModalOrder}></Pedido>
                 </Overlay>
                     )}
+            <Modal isSubmitted={showModal.isSubmitted} isGoodStatus={showModal.isGood} msg={showModal.msg}
+            handleSubmit={closeModal}
+        ></Modal>
         </div>
      );
 }

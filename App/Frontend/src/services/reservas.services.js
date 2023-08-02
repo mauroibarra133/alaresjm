@@ -1,4 +1,5 @@
 import axios from "axios";
+import { ConnectionError } from "../../../Backend/utils/error";
 
 export async function agregarReserva(fecha,hora,id_usuario, cantidad,lugar,cliente_reserva){
     const response = await axios.post("http://localhost:4000/reservas",{
@@ -14,9 +15,13 @@ export async function agregarReserva(fecha,hora,id_usuario, cantidad,lugar,clien
 }
 
 export async function getBookings(params) {
+    try {
     const response = await axios.get("http://localhost:4000/reservas", {params});
-    console.log(response);
     return response;
+        
+    } catch (error) {
+        throw new ConnectionError()
+    }
   }
 
   export async function deleteReserva(id){

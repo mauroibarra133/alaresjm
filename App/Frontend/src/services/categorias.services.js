@@ -1,4 +1,5 @@
 import axios from "axios";
+import { ConnectionError } from "../../../Backend/utils/error";
 
 const urlSource = 'http://localhost:4000/categorias'
 
@@ -7,7 +8,7 @@ export async function getCategories(){
         const resp = await axios.get(urlSource);
         return resp.data
     } catch (error) {
-        return error
+        throw new ConnectionError()
     }
 
         

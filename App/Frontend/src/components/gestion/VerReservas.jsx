@@ -6,6 +6,7 @@ import VerReservasVacio from '../FormVacio'
 import Overlay from "../Overlay";
 import Reserva from "./Reserva";
 import eyeImg from '../../assets/images/eye-slash.svg'
+import Modal from "../Modal";
 
 function VerReservas() {
     //Constants
@@ -24,13 +25,24 @@ function VerReservas() {
         isSubmitted: false,
         booking: {}
     });  
-
+    const [showModal,setShowModal] = useState({
+        isSubmitted: false,
+        isGood: false,
+        msg: ""
+    });
     //Use Effects
     useEffect(()=>{
         async function searchBookings(){
+            try {
             const result = await getBookings({date: filterDate})
-            if(result.status == 200){
-                setBookings((result.data.data))
+            setBookings((result.data.data))
+                
+            } catch (error) {
+                setShowModal({
+                    isSubmitted: true,
+                    isGood: false,
+                    msg: error.message
+                })
             }
         }
         searchBookings()
@@ -84,6 +96,13 @@ function VerReservas() {
         searchBookings()
         
     }
+    function closeModal(){
+        setShowModal({
+            isSubmitted: false,
+            isGood: false,
+            msg: ""
+        });
+    }
 
     return ( 
         <div className="verreservas veritems">
@@ -129,8 +148,11 @@ function VerReservas() {
                         <Reserva modalBooking={modalBooking} closeModal={closeModalBooking}></Reserva>
                 </Overlay>
                     )}
+        <Modal isSubmitted={showModal.isSubmitted} isGoodStatus={showModal.isGood} msg={showModal.msg}
+            handleSubmit={closeModal}
+        ></Modal>
         </div>
-     );
+     ); 
 }
 
 export default VerReservas;

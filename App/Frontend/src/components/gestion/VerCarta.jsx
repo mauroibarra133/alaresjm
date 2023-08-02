@@ -32,6 +32,7 @@ function VerCarta() {
         isSubmitted: false,
         item: {}
     });  
+
     //Constants
     const LIMIT = 10;
 
@@ -49,18 +50,33 @@ function VerCarta() {
 
     useEffect(() => { 
         async function getItems(){
-            const response = await getProducts()
-            setItems(response)
+            try {
+                const response = await getProducts()
+                setItems(response)
+            } catch (error) {
+                console.log(error);
+            }
+
 
         }
         async function getTags(){
-            const response = await getCategories()
-            setTags(response)
+            try {
+                const response = await getCategories()
+                setTags(response)
+            } catch (error) {
+                console.log(error);
+            }
+
 
         }
         async function searchCategories(){
-            const response = await getCategories()
-            setCategories(response)
+            try {
+                const response = await getCategories()
+                setCategories(response)
+            } catch (error) {
+                console.log(error);
+            }
+
         }
         getItems()
         getTags()
@@ -165,8 +181,6 @@ function VerCarta() {
             return items.sort((a, b) => a.nombre.localeCompare(b.nombre));
 
     } 
-
-    
    return ( 
         <div className="vercarta">
             <div className="vercarta__search-wrapper">
