@@ -2,11 +2,11 @@ import Path from '../Path'
 import eyeImg from '../../assets/images/eye-slash.svg'
 import MisReservasVacio from '../FormVacio';
 import Booking from './Booking';
+import Modal from '../Modal';
 import {  useEffect, useState } from 'react';
 import {useAuth} from '../../hooks/useAuth'
 import {getBookings} from '../../services/reservas.services'
 import '../../styles/reserva/mis-reservas.css'
-
 
 function MisReservas() {
 
@@ -16,6 +16,11 @@ function MisReservas() {
     //states
     const [bookings,setBookings] = useState();
     const [isFilterActive, setFilterActive] = useState(true);
+    const [errorStatus, setErrorStatus] = useState({
+        isSubmitted: false,
+        existError: false,
+        msg: ''
+})
 
     //Use effects
     useEffect(()=>{
@@ -26,7 +31,9 @@ function MisReservas() {
             }
         }
 
-        searchBookings().then(data => setBookings(data.data))
+        searchBookings().then(data => setBookings(data.data)).catch(
+            openModal()
+        )
     },[auth.data.user_id])
 
 
@@ -69,7 +76,24 @@ function MisReservas() {
           });
         }
       }
-      
+
+    function handleCloseModal(){
+        setErrorStatus({
+            isSubmitted: false,
+            existError: false,
+            msg: ""
+        })
+        document.body.classList.remove('disable-scroll');
+    }
+    function openModal(){
+        setErrorStatus({
+            isSubmitted: true,
+            existError: true,
+            msg: "Error en el sistema, intentelo mas tarde!"
+            });
+    }
+
+
     return ( 
         <div className="misreservas__container">
             <Path pathPrev={'Home'} pathActual={'Mis Reservas'} goTo={'home'}></Path>
@@ -93,6 +117,9 @@ function MisReservas() {
                     </div>
                 </div>
             </div>
+            <Modal isSubmitted={errorStatus.isSubmitted} isGoodStatus={!errorStatus.existError} msg={errorStatus.msg}
+            handleSubmit={handleCloseModal}
+            ></Modal>
         </div>
      );
 }

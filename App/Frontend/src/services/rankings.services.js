@@ -1,10 +1,10 @@
 import axios from 'axios'
+import { ConnectionError } from '../../../Backend/utils/error';
 export async function getRanking(){
     try {
         const response = await axios.get("http://localhost:4000/ranking")
-        console.log(response);
         return response
     } catch (error) {
-        console.log(error);
+        throw new ConnectionError()
     }
 }

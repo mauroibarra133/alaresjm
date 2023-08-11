@@ -11,14 +11,14 @@ router.post('/token/',(req,res)=>{
     const authorizationHeader = req.headers.authorization;
 
     if (!authorizationHeader || !authorizationHeader.startsWith("Bearer ")) {
-      return res.status(403).json({ msg: "No autorizado" });
+      return res.status(403).json({ msg: "No autorizado",type: "auth" });
     }
   
     const token = authorizationHeader.split(" ")[1];
 
     jwt.verify(token,config.secret_token, (err,data)=>{
         if (err){
-            res.status(403).json({msg: "No autorizado", data: data})
+            res.status(403).json({msg: "No autorizado",type: "auth", data: data})
         }else{
             // console.log(data);
             res.status(200).json({msg: "Exito", data})

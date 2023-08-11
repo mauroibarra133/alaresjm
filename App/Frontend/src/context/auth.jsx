@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 import { createContext, useEffect, useState } from "react";
 import { isAuth } from "../services/auth.services";
+import { AuthError } from "../../../Backend/utils/error";
 
 export const AuthContext = createContext();
 
@@ -14,13 +15,16 @@ export function AuthProvider({children}){
     );
     
 async function isLogued(){
+    try {
         const response = await isAuth()
-        if(response != undefined){
-            setAuth({
-                isLogin: true ,
-                data: response.data.data
-            })
-        }
+
+        setAuth({
+            isLogin: true ,
+            data: response.data.data
+        })
+    } catch (error) {
+        throw new AuthError()
+}
     }
 
     useEffect(()=>{

@@ -27,7 +27,7 @@ function HeroContactanos() {
     const { register, handleSubmit, formState, reset } = useForm({
         mode: 'onBlur',
     });
-    const {errors, isValid, isDirty} = formState;
+    const {errors, isValid} = formState;
 
     //Functions
     function handleClick(){
@@ -48,17 +48,14 @@ function HeroContactanos() {
     }
 
     async function onSubmit(data){
-        const response = await addDoubt(data);
-        console.log(response);
-        reset();
-        if(response.status >= 200 && response.status < 300){
+        try {
+            await addDoubt(data);
+            reset();
             handleOpenModal(true)
-        }else{
-            handleOpenModal(false)
+            
+        } catch (error) {
+            handleOpenModal(false)   
         }
-        // setTimeout(() => {
-        //     handleCloseModal()
-        // }, 3000);
     }
     return ( 
         <div className={`hero-contactanos__container ${clicked ? "active" : ""}`} name='#contacto' >
@@ -111,7 +108,7 @@ function HeroContactanos() {
                         {errors.descripcion?.type === 'minLength' && <p role="alert" className='form-error'>Debe ser mayor a 10 caracteres</p>}
                     </div>
                 </div>
-                <button className={`hero-contactanos__button button`} type='submit'  onClick={handleClick} disabled={!isDirty || !isValid}>Enviar</button>
+                <button className={`hero-contactanos__button button`} type='submit'  onClick={handleClick} disabled={!isValid}>Enviar</button>
             </form>
             <Modal isSubmitted={formStatus.isSubmitted}
              handleSubmit={handleCloseModal}

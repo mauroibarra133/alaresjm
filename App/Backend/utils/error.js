@@ -22,3 +22,38 @@ export class ServerError extends Error{
 
     }
 }
+
+export class PasswordError extends Error{
+    constructor(message){
+        super(message)
+        this.name = 'Password Error',
+        this.message = 'La contraseña ingresada es incorrecta'
+
+    }
+}
+
+export class LoginMailError extends Error{
+    constructor(message){
+        super(message)
+        this.name = 'Login Mail Error',
+        this.message = 'El mail no se encuentra asociado a ninguna cuenta'
+
+    }
+}
+export class FillError extends Error{
+    constructor(message){
+        super(message)
+        this.name = 'Fill Error',
+        this.message = 'No se han ingresado todos los datos'
+
+    }
+}
+
+export class AuthError extends Error{
+    constructor(message){
+        super(message)
+        this.name = 'Auth Error',
+        this.message = 'Error al verificar la autenticación'
+
+    }
+}

@@ -15,9 +15,13 @@ function RankingClientes() {
     //Use effects
     useEffect(()=>{
         async function buscarRanking(){
-            const response = await getRanking()
-            console.log(response.data);
-            setRanking(response.data)
+            try {
+                const response = await getRanking()
+                setRanking(response.data)
+            } catch (error) {
+                console.log(error);
+            }
+
         }
         buscarRanking()
     },[]);

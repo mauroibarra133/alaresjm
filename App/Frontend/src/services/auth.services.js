@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { ConnectionError, MailError, ServerError } from '../../../Backend/utils/error';
+import { AuthError, ConnectionError, FillError, LoginMailError, MailError, PasswordError, ServerError } from '../../../Backend/utils/error';
 export const isAuth = async () => {
   try {
     const token = document.cookie.replace('token=', '');
@@ -10,8 +10,13 @@ export const isAuth = async () => {
     });
     return response;
   } catch (error) {
-    console.log("Error al verificar la autenticación");
-
+    if(error.response){
+      if(error.response.data.type == 'auth'){
+        throw new AuthError()
+      } 
+    }else{
+      throw new ConnectionError()
+    }
   }
 };
 
@@ -24,6 +29,7 @@ export async function existsMail(email) {
     if (error.response && error.response.status === 400) {
       throw new MailError();
     }
+    
     throw new ConnectionError();
   }
 }
@@ -34,20 +40,16 @@ export async function existsMail(email) {
 export async function login(data){
   try {
     const response = await axios.post('http://localhost:4000/api/login',data)
-    console.log(response);
-    if(response.data){
       return response.data
-    }
   } catch (error) {
-      
-      if(error.code == "ERR_NETWORK") return {error: "Error en el servidor, intente nuevamente mas tarde"}
-    if(error.response.data){
-      return error.response
+    if(error.response){
+      if(error.response.data.type == 'password') throw new PasswordError()
+      if(error.response.data.type == 'mail') throw new LoginMailError()
+      if(error.response.data.type == 'fill') throw new FillError()
     }
+    throw new ConnectionError();
 
-
-
-  }
+    }
 }
 
 export async function signup(data){

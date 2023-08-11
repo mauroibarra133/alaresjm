@@ -41,40 +41,29 @@ function Login() {
 
     }
      async function onSubmit(data){
+        try {
             const response = await login(data)
-            if (response){
-                //Error en el servidor
-                if(response.error){
-                    setErrorStatus({
-                        isSubmitted: true,
-                        existError: true,
-                        msg: response.error
-                    });
-                    document.body.classList.add('disable-scroll');
-                    return
-                }
-                if(response.status >= 400){
-                    setErrorStatus({
-                        isSubmitted: true,
-                        existError: true,
-                        msg: response.data.msg
-                    });
-                    document.body.classList.add('disable-scroll');
-                }else{
-                    const oneHour = 60*60
-                    document.cookie = `token=${response.token}; max-age=${oneHour}; path=/; samesite=strict; `
-                    isLogued()
-                    setErrorStatus({
-                        isSubmitted: true,
-                        existError: false,
-                        msg: "Ha sido logueado correctamente"
-                    })
-                    document.body.classList.add('disable-scroll');
-            }
-            
+            console.log(response);
 
+            const oneHour = 60*60
+            document.cookie = `token=${response.token}; max-age=${oneHour}; path=/; samesite=strict; `
+            isLogued()
+            setErrorStatus({
+                isSubmitted: true,
+                existError: false,
+                msg: "Ha sido logueado correctamente"
+                })
+            document.body.classList.add('disable-scroll');
+        } catch (error) {
+            setErrorStatus({
+                isSubmitted: true,
+                existError: true,
+                msg: error.message
+                });
+            document.body.classList.add('disable-scroll');
+
+            console.log(error.message);
         }
-
     }
 
 

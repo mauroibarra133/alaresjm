@@ -14,12 +14,13 @@ const sliderConfiguration= {
 };
 
 function Carrusel(){
-
+  //States
   const [windowSize, setWindowSize] = useState({
     width: window.innerWidth,
     height: window.innerHeight
   });
 
+  //Use effects
   useEffect(() => {
     const handleResize = () => {
       setWindowSize({
@@ -28,7 +29,6 @@ function Carrusel(){
       });
       console.log(windowSize);
     };
-
     window.addEventListener('resize', handleResize);
 
     return () => {
@@ -36,8 +36,8 @@ function Carrusel(){
     };
   }, [windowSize]);
 
+  //Constants
     let sliderExist = Array.from(document.querySelectorAll(".glide"));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
     sliderExist.forEach((item)=>{
       const slider =  new Glide(item, sliderConfiguration);
       slider.mount()

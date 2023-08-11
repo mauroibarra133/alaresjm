@@ -6,12 +6,14 @@ export async function login (req,res){
     const {email,password} = req.body
     //Check if data it was send
     if(!email || !password){
-         res.status(400).json( {msg:'No han sido ingresados todos los datos'})
+        res.status(400).json({type: 'fill'})
+
     }else{
         //Check if mail exists
         const data = await getMail(email)
         if(!data.recordset[0]){
-             res.status(400).json({msg:'El mail ingresado no existe'})
+            res.status(400).json({type: 'mail'})
+
         }
         else{
             const userData = data.recordset[0]
@@ -27,7 +29,7 @@ export async function login (req,res){
                 },config.secret_token, {expiresIn: "60m"})
                 res.status(200).json({msg: 'Login excelent',token: token})
             }else{
-                res.status(400).json({ msg: 'La contraseña no es correcta'})
+                res.status(400).json({type: 'password'})
             }
         }
     }

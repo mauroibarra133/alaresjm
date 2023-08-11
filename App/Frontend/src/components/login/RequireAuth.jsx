@@ -12,12 +12,8 @@ function RequireAuth({ children }) {
     const checkAuth = async () => {
       try {
         const response = await isAuth();
-        if (response.status === 200) {
+        console.log(response);
           setAuthenticated(true);
-        } else {
-          setAuthenticated(false);
-        }
-        console.log(response.data.msg);
       } catch (error) {
         setAuthenticated(false);
       }
