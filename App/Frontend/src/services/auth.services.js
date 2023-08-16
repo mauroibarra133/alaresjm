@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { AuthError, ConnectionError, FillError, LoginMailError, MailError, PasswordError, ServerError } from '../../../Backend/utils/error';
+import { AuthError, ConnectionError, FillError, LoginMailError, MailError, PasswordError, ServerError } from '../utils/error';
 export const isAuth = async () => {
   try {
     const token = document.cookie.replace('token=', '');

@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import { createContext, useEffect, useState } from "react";
 import { isAuth } from "../services/auth.services";
-import { AuthError } from "../../../Backend/utils/error";
+import { AuthError } from "../utils/error"
 
 export const AuthContext = createContext();
 

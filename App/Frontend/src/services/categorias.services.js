@@ -1,5 +1,5 @@
 import axios from "axios";
-import { ConnectionError } from "../../../Backend/utils/error";
+import { ConnectionError } from '../utils/error';
 
 const urlSource = 'http://localhost:4000/categorias'
 

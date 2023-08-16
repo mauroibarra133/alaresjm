@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { ConnectionError } from '../../../Backend/utils/error';
+import { ConnectionError } from '../utils/error';
 
 export async function createPreferenceMP(items, nombreCliente, direccionCliente,tipoPago, tipoEntrega, notaPedido){
   try {

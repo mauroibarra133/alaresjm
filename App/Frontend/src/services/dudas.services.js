@@ -1,5 +1,5 @@
 import axios from "axios";
-import { ConnectionError } from "../../../Backend/utils/error";
+import { ConnectionError } from '../utils/error';
 const urlResource = "http://localhost:4000/dudas";
 
 export async function getDoubts(){

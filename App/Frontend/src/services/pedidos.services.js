@@ -1,5 +1,5 @@
 import axios from "axios"
-import { ConnectionError } from "../../../Backend/utils/error";
+import { ConnectionError } from '../utils/error';
 export async function createOrder(fecha_ISO, id_usuario,direccionCliente, notaPedido, total, id_tipo_pago,tipoEntrega, monto_cambio,items){
     try {
       const response = await axios.post("http://localhost:4000/pedidos",{

@@ -24,9 +24,13 @@ export function calculateLeftTime(bookingHour){
 }
 
 export const validateDate = (value) => {
-  const today = new Date().toISOString().split('T')[0];
-  if (value < today) {
-    return 'La fecha debe ser mayor o igual a hoy.';
+  const today = new Date();
+  const year = today.getFullYear();
+  const month = (today.getMonth() + 1).toString().padStart(2, '0');
+  const day = today.getDate().toString().padStart(2, '0');
+  const formattedDateToday = `${year}-${month}-${day}`;
+  if (value < formattedDateToday) {
+    return false;
   }
   return true;
 };
@@ -47,4 +51,13 @@ export function getStatusImage(status) {
   if (orderStatus) {
     return orderStatus.img;
   }
+}
+
+export function transformDate(date){
+  const dateValue = new Date(date);
+  const year = dateValue.getFullYear();
+  const month = (dateValue.getMonth() + 1).toString().padStart(2, '0');
+  const day = dateValue.getDate().toString().padStart(2, '0');
+  const formattedDate = `${year}-${month}-${day}`;
+  return formattedDate
 }

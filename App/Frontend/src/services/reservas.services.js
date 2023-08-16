@@ -1,5 +1,5 @@
 import axios from "axios";
-import { ConnectionError } from "../../../Backend/utils/error";
+import { ConnectionError } from '../utils/error';
 
 export async function agregarReserva(fecha,hora,id_usuario, cantidad,lugar,cliente_reserva){
     try {

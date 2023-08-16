@@ -7,6 +7,7 @@ import {  useEffect, useState } from 'react';
 import {useAuth} from '../../hooks/useAuth'
 import {getBookings} from '../../services/reservas.services'
 import '../../styles/reserva/mis-reservas.css'
+import { transformDate } from '../../utils/functions';
 
 function MisReservas() {
 
@@ -32,19 +33,21 @@ function MisReservas() {
         }
 
         searchBookings().then(data => setBookings(data.data)).catch(
-            openModal()
+            // openModal()
         )
     },[auth.data.user_id])
 
-
+console.log(bookings);
     function handleBookings() {
-        const todayDate = new Date().toISOString().split('T')[0]
+        const today = new Date()
+        const todayDate = transformDate(today)
         //Si no tenemos reservas
         if(bookings === undefined || bookings.length <= 0){
             return <MisReservasVacio msg={"Aun no tienes ninguna reserva hoy"} msgButton={"RESERVAR"} goTo={'reservas'}></MisReservasVacio>
 
-        }
-        //Si no hay
+        }else{
+        //Si hay 
+        //Si no hay filtro
         if(!isFilterActive){
             if(bookings.length > 0){
             return bookings.map(booking => {
@@ -56,26 +59,29 @@ function MisReservas() {
                     <Booking fechaLegible={fechaLegible} booking={booking} key={booking.id} fechaHoy={todayDate}/>
                 );
               });
-        }
-    }else{
-            return <MisReservasVacio msg={"Aun no tienes ninguna reserva hoy"} msgButton={"RESERVAR"} goTo={'reservas'}></MisReservasVacio>
-    }
+            }else{
+                return <MisReservasVacio msg={"Aun no tienes ninguna reserva hoy"} msgButton={"RESERVAR"} goTo={'reservas'}></MisReservasVacio>
+            }
+        }else{
         //Si hay filtro
-        if (isFilterActive) {
             const filteredBookings = bookings.filter(booking => {
-                if(new Date(booking.fecha).toISOString().split('T')[0] >= todayDate){
+                if(transformDate(booking.fecha) >= todayDate){
                     return booking
                 }
             })
-            //Si hay reservas
-            return filteredBookings.map(booking => {
-        
-                return (
-                    <Booking booking={booking}  key={booking.id} fechaHoy={todayDate}/>
-                );
-          });
+            if(filteredBookings.length > 0){
+                return filteredBookings.map(booking => {
+                    return (
+                        <Booking booking={booking}  key={booking.id} fechaHoy={todayDate}/>
+                    );
+              });
+            }else{
+                return <MisReservasVacio msg={"Aun no tienes ninguna reserva hoy"} msgButton={"RESERVAR"} goTo={'reservas'}></MisReservasVacio>  
+            }
+
         }
       }
+    }
 
     function handleCloseModal(){
         setErrorStatus({
@@ -85,13 +91,13 @@ function MisReservas() {
         })
         document.body.classList.remove('disable-scroll');
     }
-    function openModal(){
-        setErrorStatus({
-            isSubmitted: true,
-            existError: true,
-            msg: "Error en el sistema, intentelo mas tarde!"
-            });
-    }
+    // function openModal(){
+    //     setErrorStatus({
+    //         isSubmitted: true,
+    //         existError: true,
+    //         msg: "Error en el sistema, intentelo mas tarde!"
+    //         });
+    // }
 
 
     return ( 
