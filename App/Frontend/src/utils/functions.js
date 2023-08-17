@@ -61,3 +61,25 @@ export function transformDate(date){
   const formattedDate = `${year}-${month}-${day}`;
   return formattedDate
 }
+export function validatePastHour(hour,date){
+  const today = new Date()
+  const formattedDate = transformDate(today)
+
+  if(formattedDate == date){
+    //Hora menor
+    if(hour.substr(0,2)< today.getHours()){
+      return false;
+    }else{
+      //Hora igual
+      if(hour.substr(0,2)== today.getHours()){
+        if(hour.substr(3,2) < today.getMinutes()){
+          return false;
+        }
+      }
+    }
+  }
+  if (formattedDate > date){
+    return false
+  }
+  return true
+}

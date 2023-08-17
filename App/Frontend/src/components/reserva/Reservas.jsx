@@ -7,7 +7,7 @@ import {ONLY_LETTERS} from '../../utils/constants'
 import Path from '../Path';
 import { agregarReserva } from '../../services/reservas.services';
 import { useNavigate } from 'react-router-dom';
-import { validateDate, validateTime } from "../../utils/functions";
+import { validateDate, validatePastHour, validateTime } from "../../utils/functions";
 
 function Reservas() {
     const navigate = useNavigate()
@@ -35,16 +35,20 @@ function handleCloseModal(){
 
     }
 
-function handleOpenModal(valor){
+function handleOpenModal(valor,msgBad= '"Tu reserva no se ha podido confirmar.Intente mas tarde"'){
     setShowModal({
     isSubmitted: true,
     isGood: valor,
-    msg: valor == true ? "Tu reserva se ha registrado correctamente" : "Tu reserva no se ha podido confirmar.Intente mas tarde"
+    msg: valor == true ? "Tu reserva se ha registrado correctamente" : msgBad
 });
 }
 
 async function onSubmit(data){
     console.log(data);
+      if(!validatePastHour(data.hora,data.fecha)){
+        handleOpenModal(false, 'La hora ingresada es antigua')
+        return
+      }
     try {
         const reserva = await agregarReserva(data.fecha,data.hora,auth.data.user_id,data.comensales,data.zona,data.cliente)
         console.log(reserva);

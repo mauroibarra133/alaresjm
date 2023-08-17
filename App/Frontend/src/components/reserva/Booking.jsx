@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import { useState, useEffect } from 'react'
-import {convertHourToDate, calculateLeftTime} from '../../utils/functions'
+import {convertHourToDate, calculateLeftTime, validatePastHour} from '../../utils/functions'
 import {deleteReserva} from '../../services/reservas.services'
 import userImg from '../../assets/images/header-user.webp'
 import pencilImg from '../../assets/images/pencil-solid.svg'
@@ -32,7 +32,6 @@ function Booking({booking, fechaHoy: todayDate}) { // fechaHoy: YYYY-MM-DD
   //Constants
   const dateBooking = new Date(booking.fecha).toISOString().split('T')[0]
   const tiempoParaCancelar = 1 //En horas
-
   //states
   const [isLargeScreen, setIsLargeScreen] = useState(window.innerWidth > 768);  
   const [showModal, setShowModal] = useState(
@@ -44,7 +43,6 @@ function Booking({booking, fechaHoy: todayDate}) { // fechaHoy: YYYY-MM-DD
   )
 
   const [showModalUpdate, setShowModalUpdate] = useState(false);
-
   //Functions
   function getStatusImage(status) {
     const bookingStatus = statusReservas.find(item => item.estado === status);
@@ -71,7 +69,7 @@ function Booking({booking, fechaHoy: todayDate}) { // fechaHoy: YYYY-MM-DD
       })
     }
     async function handleDelete(){
-      if( dateBooking<= todayDate){
+      if( dateBooking >= todayDate){
         const bookingHour = convertHourToDate(booking.hora)
         const leftHour = calculateLeftTime(bookingHour)
         if(leftHour >= tiempoParaCancelar){
@@ -90,7 +88,8 @@ function Booking({booking, fechaHoy: todayDate}) { // fechaHoy: YYYY-MM-DD
       }
     }  
     async function handleUpdate(){
-      if( dateBooking<= todayDate){
+      console.log(dateBooking,todayDate);
+      if( dateBooking >= todayDate){
         const bookingHour = convertHourToDate(booking.hora)
         const leftHour = calculateLeftTime(bookingHour)
         if(leftHour >= tiempoParaCancelar){
@@ -114,7 +113,6 @@ function Booking({booking, fechaHoy: todayDate}) { // fechaHoy: YYYY-MM-DD
         window.removeEventListener('resize', handleResize);
       };
     }, []);
-
     return ( 
 
         <div className="datos__body-row" key={booking.id}>
@@ -133,8 +131,8 @@ function Booking({booking, fechaHoy: todayDate}) { // fechaHoy: YYYY-MM-DD
           
         </div>
         <div className="datos__body-dato acciones">
-            <img src={pencilImg} alt="" className={dateBooking < todayDate? 'old' : 'new'} onClick={()=>handleUpdate()}/>
-            <img src={cruzImg} alt="" className={dateBooking < todayDate ? 'old' : 'new'} onClick={()=>handleDelete()}/>
+            <img src={pencilImg} alt="" className={ !validatePastHour(booking.hora, dateBooking) ? 'old' : 'new'} onClick={()=>handleUpdate()}/>
+            <img src={cruzImg} alt="" className={!validatePastHour(booking.hora, dateBooking)? 'old' : 'new'} onClick={()=>handleDelete()}/>
         </div>
   <Modal isSubmitted={showModal.isClicked} isGoodStatus={showModal.isGood} handleSubmit={closeModal} msg={showModal.msg} position={'top'}></Modal>
   {
