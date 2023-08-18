@@ -30,6 +30,7 @@ function VerReservas() {
         isGood: false,
         msg: ""
     });
+    console.log(modalBooking);
     //Use Effects
     useEffect(()=>{
         async function searchBookings(){

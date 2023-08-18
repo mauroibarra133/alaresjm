@@ -25,10 +25,7 @@ function Duda({modalDuda, closeModal}) {
                     setEstado(event.target.value)
                     duda.estado = event.target.value
             } catch (error) {
-                // setErrorDuda(true)
-                // setTimeout(() => {
-                // setErrorDuda(false)
-                // }, 2000);
+                console.log(error);
             }
 
                 

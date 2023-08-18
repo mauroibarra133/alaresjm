@@ -65,10 +65,12 @@ function VerDudas() {
     async function searchDoubts(){
         try {
         const result = await getDoubts()
+        console.log(result);
         if(result.length > 0){
             setDoubts(result)
         }
         } catch (error) {
+            console.log(error);
             setDoubts([])
             setShowModal({
                 isSubmitted: true,

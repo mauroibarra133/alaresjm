@@ -1,10 +1,10 @@
 /* eslint-disable react/prop-types */
 import '../../styles/pedidos/mispedidos.css'
 import { useEffect,useState } from 'react'
-import { getStatusImage } from '../../utils/functions';
+import { getStatusImage, transformDate } from '../../utils/functions';
 
 function Pedido({pedido}) { // fechaHoy: YYYY-MM-DD
-    const pedidoReserva = new Date(pedido.fecha).toISOString().split('T')[0]
+    const pedidoReserva = transformDate(pedido.fecha)
     const fechaFormateada = `${pedidoReserva.substring(8, 10)}/${pedidoReserva.substring(5, 7)}`;
     const [isLargeScreen, setIsLargeScreen] = useState(window.innerWidth > 768);  
 

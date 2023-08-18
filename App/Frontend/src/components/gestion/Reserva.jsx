@@ -6,15 +6,14 @@ import userIcon from '../../assets/images/usuario.webp'
 import locationIcon from '../../assets/images/sitio.webp'
 import relojIcon from '../../assets/images/reloj-de-pared.webp'
 import '../../styles/dashboard/modalDashboard.css'
-
+import {transformDate }from '../../utils/functions.js'
 
 
 function Reserva({modalBooking, closeModal}) {
     //Constants
     const stateId = useId()
-    const booking = modalBooking.reserva
-    const fechaReserva = new Date(booking.fecha).toISOString().split('T')[0];
-    const fechaTransformada = `${fechaReserva.slice(8, 10)}-${fechaReserva.slice(5, 7)}`;
+    const booking = modalBooking.booking
+    const fechaTransformada = transformDate(booking.fecha)
     const [estado, setEstado] = useState(booking.estado)
 
     //Functions

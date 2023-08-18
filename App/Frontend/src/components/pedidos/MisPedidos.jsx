@@ -7,6 +7,7 @@ import { useAuth } from '../../hooks/useAuth';
 import {getOrders} from '../../services/pedidos.services'
 import Pedido from './Pedido';
 import io from 'socket.io-client';
+import { transformDate } from '../../utils/functions';
 const socket = io('/');
 
 function MisPedidos() {
@@ -80,7 +81,7 @@ function handlePedidos(){
         //Si hay filtro
         if (isFilterActive) {
                 const filterPedidos = pedidos.filter(pedido => {
-                    if(new Date(pedido.fecha).toISOString().split('T')[0] >= fechaHoy){
+                    if(transformDate(pedido.fecha)>= transformDate(fechaHoy)){
                         return pedido
                     }
                 })

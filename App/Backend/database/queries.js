@@ -77,11 +77,12 @@ VALUES (@fecha, @id_usuario, @direccion, @nota, @total, @id_tipo_pago, @id_tipo_
         addReserva: "INSERT INTO reservas (fecha,hora,id_usuario, cantidad_personas, lugar, cliente_reserva,id_estado) VALUES (@fecha,@hora,@id_usuario,@cantidad_personas,@lugar,@cliente_reserva, @id_estado)",
         getReservas: `SELECT R.id,R.fecha,R.hora,R.id_usuario,R.cantidad_personas,R.lugar,R.cliente_reserva,E.nombre as estado
                         FROM reservas R
-                        JOIN estados_reserva E ON E.id = R.id_estado`,
+                        JOIN estados_reserva E ON E.id = R.id_estado
+                        ORDER BY R.fecha DESC`,
         getReservasByUser: `SELECT R.id,R.fecha,R.hora,R.id_usuario,R.cantidad_personas,R.lugar,R.cliente_reserva,E.nombre as estado
         FROM reservas R
         JOIN estados_reserva E ON E.id = R.id_estado WHERE R.id_usuario = @user_id
-        ORDER BY R.fecha DESC`,
+        ORDER BY R.fecha DESC, R.hora DESC`,
         getReservasByDate: `SELECT R.id,R.fecha,R.hora,R.id_usuario,R.cantidad_personas,R.lugar,R.cliente_reserva,E.nombre as estado
         FROM reservas R
         JOIN estados_reserva E ON E.id = R.id_estado WHERE R.fecha < @date

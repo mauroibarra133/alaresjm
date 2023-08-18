@@ -65,7 +65,8 @@ console.log(bookings);
         }else{
         //Si hay filtro
             const filteredBookings = bookings.filter(booking => {
-                if(transformDate(booking.fecha) >= todayDate){
+                console.log(booking.fecha);
+                if(transformDate(booking.fecha) >= transformDate(todayDate)){
                     return booking
                 }
             })

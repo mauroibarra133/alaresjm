@@ -40,8 +40,7 @@ export async function addDuda(req,res){
         res.json({nombre,apellido,telefono,mail,descripcion}); // Porque el pool request solo retorna las filas afectadas
         
     } catch (error) {
-        res.status(500)
-        res.send(error.message)
+        res.status(500).json(error.message)
     }
     
 }   
@@ -94,8 +93,7 @@ export async function updateDudaById (req,res){
             .query(queries.Dudas.updateDudaById) //Hacemos la consulta
             res.sendStatus(204).json({msg: 'Duda actualizada correctamente'})
     } catch (error) {
-        res.status(500)
-        res.send(error.message)
+        res.status(500).json({error: error.message})
     }
 
 
