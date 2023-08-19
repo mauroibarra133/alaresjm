@@ -44,16 +44,16 @@ function Login() {
         try {
             const response = await login(data)
             console.log(response);
+            if(response.status >= 200 && response.status < 300){
+                isLogued()
+                setErrorStatus({
+                    isSubmitted: true,
+                    existError: false,
+                    msg: "Ha sido logueado correctamente"
+                    })
+                document.body.classList.add('disable-scroll');
+            }
 
-            const oneHour = 60*60
-            document.cookie = `token=${response.token}; max-age=${oneHour}; path=/; samesite=strict; `
-            isLogued()
-            setErrorStatus({
-                isSubmitted: true,
-                existError: false,
-                msg: "Ha sido logueado correctamente"
-                })
-            document.body.classList.add('disable-scroll');
         } catch (error) {
             setErrorStatus({
                 isSubmitted: true,

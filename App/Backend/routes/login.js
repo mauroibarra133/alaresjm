@@ -7,21 +7,13 @@ import config from '../config';
 
 router.post('/api/login/',login);
 
-router.post('/token/',(req,res)=>{
-    const authorizationHeader = req.headers.authorization;
-
-    if (!authorizationHeader || !authorizationHeader.startsWith("Bearer ")) {
-      return res.status(403).json({ msg: "No autorizado",type: "auth" });
-    }
-  
-    const token = authorizationHeader.split(" ")[1];
-
+router.get('/token/',(req,res)=>{
+    const token = req.cookies.tokenJWT
     jwt.verify(token,config.secret_token, (err,data)=>{
         if (err){
             res.status(403).json({msg: "No autorizado",type: "auth", data: data})
         }else{
-            // console.log(data);
-            res.status(200).json({msg: "Exito", data})
+            res.status(200).json({msg: "Exito", data: data})
         }
     })
 })
@@ -29,5 +21,14 @@ router.post('/token/',(req,res)=>{
 router.post('/email',existsMail)
 
 
-
+router.get('/logout', (req, res) => {
+    const token = req.cookies.tokenJWT;
+  
+    res.cookie('tokenJWT', token, {
+      expires: new Date(0),
+      httpOnly: true,
+    });
+  
+    res.redirect('/');
+  });
 export default router;

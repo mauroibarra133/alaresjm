@@ -2,7 +2,7 @@
 import '../styles/nav.css'
 import { NavLink} from 'react-router-dom';
 import {useAuth} from '../hooks/useAuth'
-function NavUser({clicked, handleUserClick}) {
+function NavUser({clicked, handleUserClick,closeSession}) {
 
     const {auth} = useAuth()
 console.log(auth);
@@ -39,7 +39,7 @@ console.log(auth);
             
                         {auth.isLogin && (
             <NavLink to='/'  className='nav__item-container user' >
-                <div className='nav__item user' onClick={handleUserClick}><p>CERRAR SESION</p></div>
+                <div className='nav__item user' onClick={closeSession}><p>CERRAR SESION</p></div>
             </NavLink>
             )}
 

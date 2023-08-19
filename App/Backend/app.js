@@ -1,7 +1,6 @@
 import express  from "express";
 import http from 'http'
 import { Server as SocketServer } from "socket.io";
-import config from "./config";
 import cors from 'cors'
 import productosRouter from './routes/productos'
 import dudasRouter from './routes/dudas'
@@ -12,7 +11,9 @@ import usuariosRouter from './routes/usuarios'
 import reservasRouter from './routes/reservas'
 import rankingRouter from './routes/ranking'
 import mercadopagoRouter from './routes/mercadoPago'
+import cookieParser from "cookie-parser";
 import compression from 'compression'
+
 const app = express()
 const httpServer = http.createServer(app)
 const io = new SocketServer(httpServer)
@@ -37,9 +38,14 @@ io.on('connection', (socket)=>{
 //Middlewares
 app.use(express.json());  // Para que nuestro servidor pueda aceptar datos en json (debemos configurar eso)
 app.use(express.urlencoded({extended: false}))  // Para que pueda aceptar datos desde forms HTML
-app.use(cors());
+const corsOptions = {
+    origin: "http://localhost:5173", // Reemplaza con el dominio de tu frontend
+    credentials: true, // Habilita el soporte para credenciales (cookies)
+  };
+  
+app.use(cors(corsOptions));
 app.use(compression());
-
+app.use(cookieParser())
 app.use(productosRouter) 
 app.use(dudasRouter) 
 app.use(categoriasRouter)

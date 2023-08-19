@@ -7,6 +7,7 @@ import Nav from './Nav'
 import { NavLink } from 'react-router-dom';
 import NavUser from './NavUser';
 import Overlay from './Overlay';
+import axios from 'axios';
 
 function Header() {
     //states
@@ -31,6 +32,15 @@ function Header() {
         setUserClicked(!userClicked)
 
     }
+    const closeSession = async ()=>{
+        try {
+            await axios.get('http://localhost:4000/logout',{withCredentials: true})
+            handleUserClick()
+            
+        } catch (error) {
+            console.log(error);
+        }
+    }
     return (  
             <>
             <div className="header__container">
@@ -42,7 +52,7 @@ function Header() {
             </div>
 
             <Nav clicked={burgerClicked} handleBurgerClick={handleBurgerClick}/>
-            <NavUser clicked={userClicked} handleUserClick={handleUserClick}/>
+            <NavUser clicked={userClicked} handleUserClick={handleUserClick} closeSession={closeSession}/>
             {showOverlay && (
                 <Overlay></Overlay>
             )}

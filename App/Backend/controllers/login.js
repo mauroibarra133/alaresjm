@@ -27,7 +27,13 @@ export async function login (req,res){
                     user_id: userData.id,
                     rol: userData.rol
                 },config.secret_token, {expiresIn: "60m"})
-                res.status(200).json({msg: 'Login excelent',token: token})
+                console.log('Generated token:', token);
+                res.cookie('tokenJWT',token,{
+                    httpOnly: true,
+                    maxAge: 8*60*60*1000, // 8 horas
+                    sameSite: "lax"
+                })
+                res.status(200).json({msg: 'Login excelent', status:200})
             }else{
                 res.status(400).json({type: 'password'})
             }

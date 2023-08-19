@@ -2,12 +2,9 @@ import axios from 'axios'
 import { AuthError, ConnectionError, FillError, LoginMailError, MailError, PasswordError, ServerError } from '../utils/error';
 export const isAuth = async () => {
   try {
-    const token = document.cookie.replace('token=', '');
-    const response = await axios.post("http://localhost:4000/token", {}, {
-      headers: {
-        Authorization: `Bearer ${token}`
-      }
+    const response = await axios.get("http://localhost:4000/token",{ withCredentials: true
     });
+    console.log(response);
     return response;
   } catch (error) {
     if(error.response){
@@ -39,7 +36,7 @@ export async function existsMail(email) {
 
 export async function login(data){
   try {
-    const response = await axios.post('http://localhost:4000/api/login',data)
+    const response = await axios.post('http://localhost:4000/api/login',data,{withCredentials: true})
       return response.data
   } catch (error) {
     if(error.response){
