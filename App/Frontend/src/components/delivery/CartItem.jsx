@@ -21,8 +21,8 @@ function CartItem({id,nombre,precioGrande,precioChico,descripcion,quantity, pric
         <div className="order__item-r1">
             <p className="order__name">{nombre.toUpperCase()}</p>
             <select value={priceSelected == precioGrande ? 'Grande' : 'Chico'} onChange={handleSelectChange} name={priceId} id={priceId} className='order__item-selectsize'>
-                <option value="Grande" >Grande</option>
-                <option value="Chico">Chico</option>
+                <option value="Grande" disabled={precioGrande == 0 ? true : false} >Grande</option>
+                <option value="Chico" disabled={precioChico == 0 ? true : false}>Chico</option>
             </select>
             <p className="order__price">{`$${priceSelected*quantity}`}</p>
         </div>

@@ -9,7 +9,6 @@ import { Wallet } from "@mercadopago/sdk-react";
 function FormDelivery({onSubmit,total, preferenceId, isOrderedEft}) {
 
     //Constants
-    const clientNameId = useId();
     const clientDirectionId = useId();
     const typePayId = useId();
     const amountEftvoId = useId();
@@ -38,21 +37,6 @@ function FormDelivery({onSubmit,total, preferenceId, isOrderedEft}) {
                     {...register('notaPedido')}></textarea>
         </div>
         <div className="order__form">
-            <div className="form__row">
-                <label htmlFor={clientNameId} >A nombre de</label>
-                <div>
-                    <input type="text" id={clientNameId} {
-                        ...register('nombreCliente',{
-                            required: "Debes incluir para quien es el pedido", 
-                            pattern: {
-                                value: /^[A-Za-z\s]+$/,
-                                message: 'Solo se permiten letras'
-                        }})} />
-                    {errors.nombreCliente?.type === 'required' && <p role="alert" className='form-error input-error'>{errors.nombreCliente.message}</p>}
-                    {errors.nombreCliente?.type === 'pattern' && <p role="alert" className='form-error input-error'>{errors.nombreCliente.message}</p>}
-                </div>
-            
-            </div>
             <div className="form__row">
                 <label htmlFor={deliveryTypeId}>Tipo Entrega</label>
                 <select name={deliveryTypeId} id={deliveryTypeId}

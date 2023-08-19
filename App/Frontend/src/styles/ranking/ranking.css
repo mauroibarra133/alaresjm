@@ -79,12 +79,21 @@
     padding: 0rem 0.625rem 0.3125rem 0.625rem;
     justify-content: space-between;
     align-items: center;
+    gap: 1rem;
     border-bottom: 1px solid #000;
 }
+.ranking__header-column p{
+    font-family: 'Post No Bills Colombo';
+    text-transform: uppercase;
+    font-size: 1.4rem;
+}
+
 .ranking__header-client{
+    width: 100%;
     display: flex;  
     gap: 1rem;
 }
+
 .ranking__table-body{
     width: 100%;
     display: flex;
@@ -96,24 +105,28 @@
 .ranking__table-row{
     width: 100%;
     display: flex;
-    padding: 0rem 0.625rem;
+    padding: .5rem 0.625rem;
     justify-content: space-between;
     align-items: center;
+    border-radius: 12px;
 }
 .ranking__table-row div{
     display: flex;
     gap: 1rem;
 }
+
 .ranking__client{
     color: #000;
     text-align: center;
-    font-family: Amiri;
-    font-size: 0.9375rem;
+    font-family: 'Amiri';
+    font-size: 1.00375rem;
     font-weight: 700;
     line-height: 1.5rem; /* 160% */
     letter-spacing: 0.00188rem;
 }
-
+.ranking__points{
+    font-family: 'Post No Bills Colombo';
+}
 /* First Positions */
 
 .ranking__table-row:first-child{

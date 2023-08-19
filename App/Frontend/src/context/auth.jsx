@@ -25,7 +25,16 @@ async function isLogued(){
     } catch (error) {
         throw new AuthError()
 }
-    }
+}
+
+function logout(){
+    setAuth(
+        {
+            isLogin: false,
+            data: {}
+        }
+    )
+}
 
     useEffect(()=>{
         isLogued()
@@ -36,7 +45,8 @@ async function isLogued(){
     return(
         <AuthContext.Provider value={
             {auth,
-            isLogued
+            isLogued,
+            logout
         }
         }>
         {children}

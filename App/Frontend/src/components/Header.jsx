@@ -8,13 +8,14 @@ import { NavLink } from 'react-router-dom';
 import NavUser from './NavUser';
 import Overlay from './Overlay';
 import axios from 'axios';
+import { useAuth } from '../hooks/useAuth';
 
 function Header() {
     //states
     const [burgerClicked,setBurgerClicked] = useState(false);
     const [userClicked,setUserClicked] = useState(false);
     const [showOverlay, setShowOverlay] = useState(false);
-
+    const {logout} = useAuth()
     //Functions
     const handleBurgerClick = ()=>{
         if(!burgerClicked && userClicked){
@@ -36,6 +37,7 @@ function Header() {
         try {
             await axios.get('http://localhost:4000/logout',{withCredentials: true})
             handleUserClick()
+            logout()
             
         } catch (error) {
             console.log(error);

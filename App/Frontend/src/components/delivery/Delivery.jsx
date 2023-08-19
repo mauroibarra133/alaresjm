@@ -22,7 +22,6 @@ function Delivery() {
   //States
   const [total, setTotal] = useState(0);
   const [preferenceId, setPreferenceId] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
   const [isOrderedEft, setIsOrderedEft] = useState({
     isSubmitted : false,
     goodStatus: false
@@ -59,9 +58,6 @@ function Delivery() {
         goodStatus: false
       })
   }
-  const handleWalletLoad = () => {
-    setIsLoading(false);
-  };
   async function createPreference({nombreCliente, direccionCliente, tipoPago, tipoEntrega, notaPedido}){
     try {
         const response = await createPreferenceMP(modifyCart(cart), nombreCliente, direccionCliente, tipoPago, tipoEntrega, notaPedido)
@@ -79,7 +75,6 @@ function Delivery() {
     
           if (id) {
             setPreferenceId(id);
-            handleWalletLoad()
 
           }
         } catch (error) {
@@ -128,7 +123,7 @@ const onSubmit = (data)=>{
     }
     handleOrder(order);
 }
-
+console.log(cart);
     return ( 
         <>
         <div className="delivery__container" >
@@ -151,7 +146,7 @@ const onSubmit = (data)=>{
                 </button>
                 </div>
             </div>
-            <FormDelivery onSubmit={onSubmit} total={total} preferenceId={preferenceId} isOrderedEft={isOrderedEft} isLoading={isLoading} handleWalletLoad={handleWalletLoad}/>
+            <FormDelivery onSubmit={onSubmit} total={total} preferenceId={preferenceId} isOrderedEft={isOrderedEft} />
             <Modal isSubmitted={isOrderedEft.isSubmitted} 
             handleSubmit={handleCloseModal}
             isGoodStatus={isOrderedEft.goodStatus}

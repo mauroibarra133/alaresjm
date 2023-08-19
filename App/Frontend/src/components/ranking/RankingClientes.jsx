@@ -38,10 +38,13 @@ function RankingClientes() {
             </div>
             <div className="ranking__table-container">
                 <div className="ranking__table-header">
-                <div className="ranking__header-client">
+                <div className="ranking__header-position ranking__header-column">
+                        <p>#</p>
+                    </div> 
+                <div className=" ranking__header-column ranking__header-client">
                         <p>Clientes</p>
                     </div>
-                    <div className="ranking__header-points">
+                    <div className=" ranking__header-column ranking__header-points">
                         <p>Puntos</p>
                     </div>
                 </div>
