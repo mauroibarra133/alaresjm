@@ -35,7 +35,7 @@ function handleCloseModal(){
 
     }
 
-function handleOpenModal(valor,msgBad= '"Tu reserva no se ha podido confirmar.Intente mas tarde"'){
+function handleOpenModal(valor,msgBad= 'Tu reserva no se ha podido confirmar.Intente mas tarde'){
     setShowModal({
     isSubmitted: true,
     isGood: valor,
@@ -71,7 +71,7 @@ async function onSubmit(data){
                     <div className="reservas__row">
                         <div>
                             <label htmlFor="">Fecha</label>
-                            <input type="date"  {...register("fecha",{required: true, validate: validateDate,})} />
+                            <input type="date"  {...register("fecha",{required: true, validate: validateDate})} />
                         </div>
                         {errors.fecha?.type === 'required' && <p role="alert" className='form-error'>La fecha es requerida.</p>}                               
                         {errors.fecha?.type === 'validate' && <p role="alert" className='form-error'>La fecha es pasada.</p>}                               

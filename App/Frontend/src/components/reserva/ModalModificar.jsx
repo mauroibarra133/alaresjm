@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import { useForm } from "react-hook-form";
 import { useEffect, useId, useState } from "react";
-import { validateDate, validateTime } from "../../utils/functions";
+import { validateDate, validatePastHour, validateTime } from "../../utils/functions";
 import '../../styles/reserva/modal-modificar.css'
 import {ONLY_LETTERS} from '../../utils/constants'
 import cruzImg from '../../assets/images/xmark-solid.svg'
@@ -40,11 +40,12 @@ function ModalModificar({showModalUpdate,reserva, handleCloseModalUpdate}) {
         }
 
     }
-    function openModal(status){
+
+    function openModal(status,msgBad= "Hubo un error al modificar tu reserva"){
         setShowModal({
             isSubmitted: true,
             isGood: status,
-            msg: status ? "Tu reserva ha sido modificada correctamente" : "Hubo un error al modificar tu reserva"
+            msg: status ? "Tu reserva ha sido modificada correctamente" : msgBad
         })
     }
     async function onSubmit(data){
@@ -56,6 +57,10 @@ function ModalModificar({showModalUpdate,reserva, handleCloseModalUpdate}) {
                     msg: 'No se ha modificado ningun campo'
                 })
             }else{
+                if(!validatePastHour(data.hora,data.fecha)){
+                    openModal(false, 'La hora ingresada es antigua')
+                    return
+                  }
                 const response = await updateReserva(reserva.id, {...data, estado: 'A Confirmar'})
                 if(response.status === 200){
                     openModal(true)
@@ -79,7 +84,7 @@ function ModalModificar({showModalUpdate,reserva, handleCloseModalUpdate}) {
                             <div className="reservas__row">
                                 <div>
                                     <label htmlFor="">Fecha</label>
-                                    <input type="date"  defaultValue={fechaReserva} {...register("fecha",{required: true, validate: validateDate,})} />
+                                    <input type="date"  defaultValue={fechaReserva}  {...register("fecha",{required: true, validate: validateDate})} />
                                 </div>
                                 {errors.fecha?.type === 'required' && <p role="alert" className='form-error'>La fecha es requerida.</p>}                               
                                 {errors.fecha?.type === 'validate' && <p role="alert" className='form-error'>La fecha es pasada.</p>}                               

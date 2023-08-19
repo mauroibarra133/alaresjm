@@ -89,7 +89,7 @@ function Booking({booking, fechaHoy: todayDate}) { // fechaHoy: YYYY-MM-DD
     }  
     async function handleUpdate(){
       console.log(dateBooking,todayDate);
-      if( dateBooking >= todayDate){
+      if( dateBooking == todayDate){
         const bookingHour = convertHourToDate(booking.hora)
         const leftHour = calculateLeftTime(bookingHour)
         if(leftHour >= tiempoParaCancelar){
@@ -99,6 +99,8 @@ function Booking({booking, fechaHoy: todayDate}) { // fechaHoy: YYYY-MM-DD
           console.log("Es muy tarde");
           openModal(false, `No se puede modificar la reserva faltando menos de ${tiempoParaCancelar} hora/s`)
         }
+      }else{
+        if(dateBooking > todayDate) setShowModalUpdate(true)
       }
     }
     const formattedDate = `${dateBooking.substring(8, 10)}/${dateBooking.substring(5, 7)}`;

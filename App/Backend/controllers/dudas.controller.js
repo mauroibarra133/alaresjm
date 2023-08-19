@@ -91,7 +91,7 @@ export async function updateDudaById (req,res){
             .input('estado',sql.VarChar,estado)
             .input('id',sql.Int,id)
             .query(queries.Dudas.updateDudaById) //Hacemos la consulta
-            res.sendStatus(204).json({msg: 'Duda actualizada correctamente'})
+            res.status(204).json({msg: 'Duda actualizada correctamente'})
     } catch (error) {
         res.status(500).json({error: error.message})
     }
