@@ -32,8 +32,7 @@ export const  queries ={
     Pedidos:{
         addOrder: `
         INSERT INTO pedidos (fecha, id_usuario, direccion, nota, total, id_tipo_pago, id_tipo_entrega, id_estado, puntos_parciales, id_pago, monto_cambio)
-VALUES (@fecha, @id_usuario, @direccion, @nota, @total, @id_tipo_pago, @id_tipo_entrega, @id_estado, ROUND(@total/10, 0), @id_pago, @monto_cambio);
-        `,
+VALUES (@fecha, @id_usuario, @direccion, @nota, @total, @id_tipo_pago, @id_tipo_entrega, @id_estado, ROUND(@total/10, 0), @id_pago, @monto_cambio); SELECT SCOPE_IDENTITY() AS newId`,
         searchIdOrder: `SELECT id FROM pedidos WHERE id_pago = @id_pago`,
         getPedidosByUserId: `SELECT P.id, P.fecha, STRING_AGG(Pr.nombre, ', ') AS nombres_productos, P.total, E.nombre AS estado_pedido
                             FROM pedidos P

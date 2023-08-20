@@ -16,6 +16,7 @@ export async function createOrder(fecha_ISO, id_usuario,direccionCliente, notaPe
       })
       return response
     } catch (error) {
+      console.log(error);
       throw new ConnectionError()
     }
 
@@ -27,6 +28,7 @@ export async function getOrders(params) {
   return response;
 
   } catch (error) {
+    console.log(error);
     throw new ConnectionError()
   }
 }

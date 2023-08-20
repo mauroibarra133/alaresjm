@@ -1,4 +1,4 @@
-import express  from "express";
+import express from "express";
 import http from 'http'
 import { Server as SocketServer } from "socket.io";
 import cors from 'cors'
@@ -19,35 +19,34 @@ const httpServer = http.createServer(app)
 const io = new SocketServer(httpServer)
 httpServer.listen(4000)
 
-app.set('socketio', io);// aqui asignas el socket global
 //socket
-io.on('connection', (socket)=>{
+io.on('connection', (socket) => {
     console.log('conectado', socket.id);
 
-    socket.on('newOrder',(data)=> {
+    socket.on('newOrder', (data) => {
         console.log(data)
-        io.emit('adminOrder',data)
+        io.emit('adminOrder', data)
     })
-    socket.on('orderUpdated',(data)=> {
+    socket.on('orderUpdated', (data) => {
         console.log(data)
-        io.emit('orderUpdated',data)
+        io.emit('orderUpdated', data)
     })
 })
 
+app.set('socketio', io); // aquí asignas el socket global
 
 //Middlewares
-app.use(express.json());  // Para que nuestro servidor pueda aceptar datos en json (debemos configurar eso)
-app.use(express.urlencoded({extended: false}))  // Para que pueda aceptar datos desde forms HTML
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 const corsOptions = {
-    origin: "http://localhost:5173", // Reemplaza con el dominio de tu frontend
-    credentials: true, // Habilita el soporte para credenciales (cookies)
-  };
-  
+    origin: "http://localhost:5173",
+    credentials: true,
+};
 app.use(cors(corsOptions));
 app.use(compression());
 app.use(cookieParser())
-app.use(productosRouter) 
-app.use(dudasRouter) 
+app.use(productosRouter)
+app.use(dudasRouter)
 app.use(categoriasRouter)
 app.use(mercadopagoRouter)
 app.use(pedidosRouter)
@@ -56,4 +55,4 @@ app.use(usuariosRouter)
 app.use(reservasRouter)
 app.use(rankingRouter)
 
-export default app
+export default app;

@@ -58,9 +58,9 @@ function Delivery() {
         goodStatus: false
       })
   }
-  async function createPreference({nombreCliente, direccionCliente, tipoPago, tipoEntrega, notaPedido}){
+  async function createPreference({direccionCliente, tipoPago, tipoEntrega, notaPedido}){
     try {
-        const response = await createPreferenceMP(modifyCart(cart), nombreCliente, direccionCliente, tipoPago, tipoEntrega, notaPedido)
+        const response = await createPreferenceMP(modifyCart(cart), direccionCliente, tipoPago, tipoEntrega, notaPedido, auth.data.user_id)
       return response;
     } catch (error) {
       return error
@@ -68,14 +68,13 @@ function Delivery() {
   }
   const handleOrder = async (order) => {
       //Creo la preferencia de MP
-      if(order.tipoPago === "2"){
+      if(order.tipoPago == "2"){
         try {
           const response = await createPreference(order);
-            const id = response.data.response.id
+          const id = response.data.response.id
     
           if (id) {
             setPreferenceId(id);
-
           }
         } catch (error) {
           setIsOrderedEft({
@@ -123,7 +122,6 @@ const onSubmit = (data)=>{
     }
     handleOrder(order);
 }
-console.log(cart);
     return ( 
         <>
         <div className="delivery__container" >

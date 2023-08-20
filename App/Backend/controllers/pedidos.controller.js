@@ -1,11 +1,11 @@
 import { queries, getConnection,sql } from "../database"
 import generatePaymentID from '../utils/functions';
 import { addDescOrderTransf } from "./desc_pedidos";
-export async function addOrder(fecha,id_pago,id_usuario,direccion,nota,total,id_tipo_pago,id_tipo_entrega){
+export async function addOrder(fecha,id_pago,id_usuario,direccion,nota,total,id_tipo_pago,id_tipo_entrega,monto_cambio){
     
     try {
         const pool = await getConnection()
-        await pool.request()
+        const result = await pool.request()
         .input('fecha',sql.DateTime,fecha)
         .input('id_usuario',sql.Int,id_usuario)
         .input('direccion',sql.Text,direccion)
@@ -15,27 +15,16 @@ export async function addOrder(fecha,id_pago,id_usuario,direccion,nota,total,id_
         .input('id_tipo_pago',sql.Int,id_tipo_pago)
         .input('id_estado',sql.Int,28)
         .input('id_pago',sql.Int,id_pago)
+        .input('monto_cambio',sql.Int, id_tipo_pago == 2 ? 0 : monto_cambio)
         .query(queries.Pedidos.addOrder)
-
+        return result
     } catch (error) {
+
         console.log(error.message);
     }
     
 }   
 
-export async function searchIdPedido(id_pago){
-    try {
-        const pool = await getConnection() //Es una promesa, es el cliente para realizar consultas
-        const result = await pool.request()
-        .input('id_pago',sql.Int,id_pago)
-        .query(queries.Pedidos.searchIdOrder) //Hacemos la consulta
-
-        return result.recordset[0].id
-        }catch (error) {
-            console.log(error);
-    }
-
-}
 
 export async function addOrderEft(req,res){
     let {fecha,id_usuario,direccion,nota,total,id_tipo_pago,id_tipo_entrega,id_estado, items, monto_cambio} = req.body
@@ -46,7 +35,7 @@ export async function addOrderEft(req,res){
 
                 // Guardar el pedido en la base de datos
                 const pool = await getConnection()
-                await pool.request()
+                const result = await pool.request()
                 
                 
                 .input('fecha',sql.DateTime,fecha)
@@ -60,8 +49,8 @@ export async function addOrderEft(req,res){
                 .input('id_pago',sql.Int,paymentID)
                 .input('monto_cambio',sql.Int,monto_cambio)
                 .query(queries.Pedidos.addOrder)
+                const id_pedido = result.recordset[0].newId
         
-                const id_pedido = await searchIdPedido(paymentID)
                 await addDescOrderTransf(items,id_pedido)
 
         res.sendStatus(200)
@@ -102,6 +91,36 @@ export async function getPedidos(req, res) {
         } catch (error) {
             console.log(error);
             res.status(500).json({ msg: "Error al obtener los datos" });
+        }
+    }
+    
+}
+
+export async function getPedidosTransf(date, user_id) {
+
+    //Filtrar por usuario
+    if (user_id || user_id !== undefined) {
+        try {
+            const pool = await getConnection();
+            const result = await pool
+                .request()
+                .input('user_id', sql.Int, user_id)
+                .query(queries.Pedidos.getPedidosByUserId);
+            return  result.recordset 
+        } catch (error) {
+            console.log(error);
+        }
+    }
+    if(date || date !== undefined){
+        try {
+            const pool = await getConnection();
+            const result = await pool
+                .request()
+                .input('date', sql.Date, date)
+                .query(queries.Pedidos.getPedidosByDate);
+            return  result.recordset 
+        } catch (error) {
+            console.log(error);
         }
     }
     
