@@ -1,45 +1,32 @@
-import clockIcon from '../../../assets/images/clock-icon.svg'
-import locationIcon from '../../../assets/images/location-icon.svg'
 import repartidorIcon from '../../../assets/images/repartidor-icon-min.webp'
 import '../../../styles/hero/heroHorarios.css'
+import { NavLink } from 'react-router-dom';
 
 function HeroHorarios() {
     return ( 
         <div className="hero-horarios__container" name='#horarios'>
             <div className="hero-horarios">
-                <div className="hero-horarios__sections">
-                    <div className="hero-horarios__section">
-                        <div className='hero-horarios__title-container'>
-                        <h3 className="hero-horarios__title">Nuestros Horarios</h3>
-                        </div>
-                        <div className="hero-horarios__section-container">
-                            <img className="hero-horarios-section__icon" src={clockIcon} alt="Icono de Horario" />
-                            <div className="hero-horarios-section__text">
-                                <p>DE 12:00 pm A 15:00 pm</p>
-                                <p>DE 19:00 pm A 03:00 am</p>
-                            </div>
+                <div className="hero-horarios__text-section">
+                    <div className="hero-horarios__text">
+                        <h3 className="hero-horarios__title">Donde estamos</h3>
+                        <p>Estamos ubicados en calle Castulo Peña 582, Jesus Maria</p>
+                    </div>
 
-                        </div>
+                    <div className="hero-horarios__text">
+                        <h3 className="hero-horarios__title">Horarios</h3>
+                        <p> De 12:00 pm a 15:00 pm y 19:00 pm a 03:00 am</p>
                     </div>
-                    <div className="hero-horarios__section">
-                        <div className='hero-horarios__title-container'>
-                            <h3 className="hero-horarios__title">DONDE ESTAMOS</h3>
-                        </div>
-                        <div className="hero-horarios__section-container">
-                            <img className="hero-horarios-hero__icon" src={locationIcon} alt="Icono de Ubicacion" />
-                            <div className="hero-horarios-section__text">
-                                <p>Castulo Peña 582, Jesus María</p>
-                            </div>
-                        </div>
-                    </div>
+
                 </div>
-                
-                <button className='hero-horarios__button'>
+              <div className="hero-horarios__map">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3420.6874214572867!2d-64.098024!3d-30.979203999999996!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9432639d1898555f%3A0x576e166fa4c9dc86!2sA&#39;lares!5e0!3m2!1ses!2sar!4v1692594574161!5m2!1ses!2sar" loading="lazy" referrerPolicy="no-referrer-when-downgrade"></iframe>
+              </div>
+
+            </div>
+            <NavLink className='hero-horarios__button' to='/delivery'>
                     <p>Tenemos Delivery</p>
                     <img src={repartidorIcon} alt="Icono de Repartidor" />
-                </button>  
-            </div>
-
+                </NavLink>  
         </div>
      );
 }

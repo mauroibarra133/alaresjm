@@ -1,3 +1,4 @@
+
 export const  queries ={
     Products: {
         getAllProducts: `SELECT p.id,p.nombre,p.descripcion, p.id_categoria,
@@ -67,10 +68,12 @@ VALUES (@fecha, @id_usuario, @direccion, @nota, @total, @id_tipo_pago, @id_tipo_
         (@id_producto,@cantidad,@subtotal,@id_pedido)`
     },
     Login: {
-        getUserData: 'SELECT * FROM usuarios WHERE CAST(email AS varchar(max)) = CAST(@email AS varchar(max))'
+        getUserData: `SELECT id, fecha_creacion, 
+        CONVERT(VARCHAR(50), DECRYPTBYPASSPHRASE('0e9e09b4175a0ae2df64f8b4734b', contraseñaCifrada)) as contraseña ,
+        nombre,apellido,puntos,rol,email FROM usuarios WHERE CAST(email AS varchar(max)) = CAST(@email AS varchar(max))`
     },
     Usuarios: {
-        addUser: "INSERT INTO usuarios (fecha_creacion,nombre,apellido,email,contraseña,rol, puntos) VALUES (GETDATE(),@nombre, @apellido, @email, @password, @rol, @puntos)"
+        addUser: `INSERT INTO usuarios (fecha_creacion,nombre,apellido,contraseña,email,rol, puntos, contraseñaCifrada) VALUES (GETDATE(),@nombre, @apellido, '',@email,@rol, @puntos,ENCRYPTBYPASSPHRASE('0e9e09b4175a0ae2df64f8b4734b', @password))`
     },
     Reservas: {
         addReserva: "INSERT INTO reservas (fecha,hora,id_usuario, cantidad_personas, lugar, cliente_reserva,id_estado) VALUES (@fecha,@hora,@id_usuario,@cantidad_personas,@lugar,@cliente_reserva, @id_estado)",
@@ -84,7 +87,7 @@ VALUES (@fecha, @id_usuario, @direccion, @nota, @total, @id_tipo_pago, @id_tipo_
         ORDER BY R.fecha DESC, R.hora DESC`,
         getReservasByDate: `SELECT R.id,R.fecha,R.hora,R.id_usuario,R.cantidad_personas,R.lugar,R.cliente_reserva,E.nombre as estado
         FROM reservas R
-        JOIN estados_reserva E ON E.id = R.id_estado WHERE R.fecha < @date
+        JOIN estados_reserva E ON E.id = R.id_estado WHERE R.fecha = @date
         ORDER BY R.fecha DESC`,
         deleteReserva: `DELETE FROM reservas WHERE id = @id`,
         updateReserva: `UPDATE reservas SET fecha = @fecha, hora = @hora, 

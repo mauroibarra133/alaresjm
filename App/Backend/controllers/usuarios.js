@@ -14,6 +14,7 @@ export async function addUsuario(req,res){
         .query(queries.Usuarios.addUser)
         res.status(200).json({msg: "Usuario creado correctamente"})
     } catch (error) {
+        console.log(error);
         res.status(500).json({msg: "El usuario no se ha creado correctamente"})
     }
     
