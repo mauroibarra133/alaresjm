@@ -15,13 +15,20 @@ function MisReservas() {
     const {auth} = useAuth()
 
     //states
-    const [bookings,setBookings] = useState();
+    const [bookings,setBookings] = useState([]);
     const [isFilterActive, setFilterActive] = useState(true);
     const [errorStatus, setErrorStatus] = useState({
         isSubmitted: false,
         existError: false,
         msg: ''
-})
+    })
+    const [page,setPage] = useState(1);
+    const [offsett,setOffset] = useState(0);
+    const [pages,setPages] = useState([]);
+
+    //Constants
+    const LIMIT = 6;
+    const fechaHoy = new Date().toISOString().split('T')[0]
 
     //Use effects
     useEffect(()=>{
@@ -31,18 +38,27 @@ function MisReservas() {
                 return response.data
             }
         }
-
         searchBookings().then(data => setBookings(data.data)).catch(
             // openModal()
         )
     },[auth.data.user_id])
+    
+    useEffect(()=>{
+        const arrPaginas = [];
+        for (let i = 1; i <= Math.ceil((filterBookings(bookings).length == 0 ? 1 : filterBookings(bookings).length ) / LIMIT); i++) {
+            arrPaginas.push(i);
+        }
+        setPages(arrPaginas);
+        handlePage(1);
+        
+    },[bookings,isFilterActive]);
 
-console.log(bookings);
+
     function handleBookings() {
         const today = new Date()
         const todayDate = transformDate(today)
         //Si no tenemos reservas
-        if(bookings === undefined || bookings.length <= 0){
+        if(bookings.length <= 0){
             return <MisReservasVacio msg={"Aun no tienes ninguna reserva hoy"} msgButton={"RESERVAR"} goTo={'reservas'}></MisReservasVacio>
 
         }else{
@@ -50,7 +66,7 @@ console.log(bookings);
         //Si no hay filtro
         if(!isFilterActive){
             if(bookings.length > 0){
-            return bookings.map(booking => {
+            return filterBookings().slice(offsett, LIMIT + offsett).map(booking => {
                 const fechaString = booking.fecha;
                 const fecha = new Date(fechaString);
                 const fechaLegible = fecha.toLocaleDateString();
@@ -64,14 +80,9 @@ console.log(bookings);
             }
         }else{
         //Si hay filtro
-            const filteredBookings = bookings.filter(booking => {
-                console.log(booking.fecha);
-                if(transformDate(booking.fecha) >= transformDate(todayDate)){
-                    return booking
-                }
-            })
+            const filteredBookings = filterBookings()
             if(filteredBookings.length > 0){
-                return filteredBookings.map(booking => {
+                return filteredBookings.slice(offsett, LIMIT + offsett).map(booking => {
                     return (
                         <Booking booking={booking}  key={booking.id} fechaHoy={todayDate}/>
                     );
@@ -92,15 +103,28 @@ console.log(bookings);
         })
         document.body.classList.remove('disable-scroll');
     }
-    // function openModal(){
-    //     setErrorStatus({
-    //         isSubmitted: true,
-    //         existError: true,
-    //         msg: "Error en el sistema, intentelo mas tarde!"
-    //         });
-    // }
 
-
+    function handlePage(pageActual){
+        if(pageActual !== page){
+            window.scrollTo(0, 10);
+            setPage(pageActual);
+            setOffset((pageActual-1) * LIMIT)
+        }
+    }
+    function filterBookings(){
+        if(bookings.length <= 0) return []
+        if(isFilterActive){
+            const filtered = bookings.filter(booking => {
+                if(transformDate(booking.fecha)>= transformDate(fechaHoy)){
+                    return booking
+                }
+            });
+            if (filtered.length <= 0) return []
+            else return filtered
+        }else{
+            return bookings
+        }
+    }
     return ( 
         <div className="misreservas__container">
             <Path pathPrev={'Home'} pathActual={'Mis Reservas'} goTo={'home'}></Path>
@@ -124,6 +148,21 @@ console.log(bookings);
                     </div>
                 </div>
             </div>
+            <div className="misreservas__paginacion-wrapper">
+            <div className="misreservas__paginacion">
+                <div className="misreservas__pagina--button">
+                    <p onClick={()=> handlePage((page - 1) == 0 ? page : page-1) }>Previo</p>
+                </div>
+                {bookings && pages.map(pageAct => (
+                    <div className={`misreservas__pagina`} key={pageAct} onClick={()=>handlePage(pageAct)}>
+                        <p className={`${pageAct == page ? 'active' : ''}`}>{pageAct}</p>
+                    </div>
+                ))}
+                <div className="misreservas__pagina--button">
+                    <p onClick={()=> handlePage((page + 1) > pages.length ? page : page+1)}>Siguiente</p>
+                </div>
+            </div>
+        </div>
             <Modal isSubmitted={errorStatus.isSubmitted} isGoodStatus={!errorStatus.existError} msg={errorStatus.msg}
             handleSubmit={handleCloseModal}
             ></Modal>

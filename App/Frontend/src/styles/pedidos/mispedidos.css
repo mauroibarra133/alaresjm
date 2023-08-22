@@ -92,6 +92,66 @@
     color: var(--gray-2);
 }
 
+
+/* Paginacion */
+
+.mispedidos__paginacion-wrapper{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+  .mispedidos__paginacion{
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    border-radius: 16px;
+    background-color: #FFF;
+    padding: .5rem 1rem;
+    overflow-x: auto;
+    max-width: 900px;
+    padding: .6rem .3rem;
+    justify-content: start;
+    margin: 0 auto;
+  }
+  .mispedidos__pagina{
+    display: flex;
+    justify-content: center;
+  }
+
+  .mispedidos__pagina--button{
+    display: flex;
+    justify-content: center;
+    border: 2px solid var(--orange-2);
+    background-color: var(--orange-1);
+    padding: .2rem .5rem;
+    color: white;
+    font-weight: 500;
+    font-family: 'Amiri';
+    border-radius: 16px;
+  }
+  .mispedidos__pagina--button:hover{
+    background-color: var(--orange-3);
+    color: white;
+    cursor: pointer;
+  }
+  .mispedidos__pagina p{
+    border: 2px solid var(--orange-2);
+    padding: .3rem .6rem;
+    border-radius: 50%;
+    color: var(--gray-2);
+    background-color: var(--orange-3);
+  }
+  .mispedidos__pagina p:hover{
+    background-color: var(--orange-1);
+    color: white;
+    cursor: pointer;
+  }
+  .mispedidos__pagina p.active{
+    background-color: var(--orange-2);
+    color: white
+  }
+
 @media only screen and (min-width: 768px){
     .mispedidos__container .datos__body-dato.pedidos-estado{
         display: flex;

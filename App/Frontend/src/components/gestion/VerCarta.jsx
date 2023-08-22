@@ -89,7 +89,6 @@ function VerCarta() {
             arrPaginas.push(i);
         }
         setPages(arrPaginas);
-        
     },[items,activeTag,search]);
 
 
@@ -140,11 +139,11 @@ function VerCarta() {
         document.body.classList.remove('disable-scroll');    
     }
 
-    function handlePage(page){
-        if(page !== page){
+    function handlePage(pageAct){
+        if(pageAct !== page){
             window.scrollTo(0, 300);
-            setPage(page);
-            setOffset((page-1) * LIMIT)
+            setPage(pageAct);
+            setOffset((pageAct-1) * LIMIT)
         }
 
     }
@@ -223,9 +222,9 @@ function VerCarta() {
                 <div className="vercarta__pagina--button">
                     <p onClick={()=> handlePage((page - 1) == 0 ? page : page-1) }>Previo</p>
                 </div>
-                {filteredItems && pages.map(page => (
-                    <div className={`vercarta__pagina`} key={page} onClick={()=>handlePage(page)}>
-                        <p className={`${page == page ? 'active' : ''}`}>{page}</p>
+                {filteredItems && pages.map(pageAct => (
+                    <div className={`vercarta__pagina`} key={pageAct} onClick={()=>handlePage(pageAct)}>
+                        <p className={`${pageAct == page ? 'active' : ''}`}>{pageAct}</p>
                     </div>
                 ))}
                 <div className="vercarta__pagina--button">
