@@ -22,6 +22,7 @@
     "mercadopago": "^1.5.16",
     "morgan": "^1.10.0",
     "mssql": "^9.1.1",
+    "nodemailer": "^6.9.4",
     "nodemon": "^2.0.22",
     "socket.io": "^4.7.1"
   },

@@ -108,6 +108,9 @@ function Login() {
                     <NavLink to='/signup'>
                     <p className='login__msg'>No tienes una cuenta? <span>Registrate</span></p>
                     </NavLink>
+                    <NavLink to='/change-password'>
+                        <p className='login__msg'>Olvidaste tu contraseña? <span>Reestablecer</span></p>
+                    </NavLink>
                 </div>
             </div>
             <Modal isSubmitted={errorStatus.isSubmitted} isGoodStatus={!errorStatus.existError} msg={errorStatus.msg}

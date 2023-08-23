@@ -21,6 +21,7 @@ const VerPedidos = lazy(()=> import('./components/gestion/VerPedidos'))
 import {AuthProvider} from './context/auth';
 import {CartProvider} from './context/cart';
 import {BrowserRouter, Route, Routes} from 'react-router-dom'
+import ForgotPassword from './components/login/ForgotPassword'
 function App() {
 
   return (
@@ -45,6 +46,7 @@ function App() {
               <Delivery/>
           </RequireAuth>}/>
         <Route path='/api/login' element={<Login/>}> </Route>  
+        <Route path='/change-password' element={<ForgotPassword/>}> </Route>  
         <Route path='/signup' element={<SignUp/>}> </Route>  
         <Route path='/mi-cuenta' element={
           <RequireAuth>
