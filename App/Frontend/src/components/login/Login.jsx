@@ -108,7 +108,7 @@ function Login() {
                     <NavLink to='/signup'>
                     <p className='login__msg'>No tienes una cuenta? <span>Registrate</span></p>
                     </NavLink>
-                    <NavLink to='/change-password'>
+                    <NavLink to='/forgot-password'>
                         <p className='login__msg'>Olvidaste tu contraseña? <span>Reestablecer</span></p>
                     </NavLink>
                 </div>

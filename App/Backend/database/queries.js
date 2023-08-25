@@ -70,7 +70,11 @@ VALUES (@fecha, @id_usuario, @direccion, @nota, @total, @id_tipo_pago, @id_tipo_
     Login: {
         getUserData: `SELECT id, fecha_creacion, 
         CONVERT(VARCHAR(50), DECRYPTBYPASSPHRASE('0e9e09b4175a0ae2df64f8b4734b', contraseñaCifrada)) as contraseña ,
-        nombre,apellido,puntos,rol,email FROM usuarios WHERE CAST(email AS varchar(max)) = CAST(@email AS varchar(max))`
+        nombre,apellido,puntos,rol,email FROM usuarios WHERE CAST(email AS varchar(max)) = CAST(@email AS varchar(max))`,
+        getUserDataByID: `SELECT id, fecha_creacion, 
+        CONVERT(VARCHAR(50), DECRYPTBYPASSPHRASE('0e9e09b4175a0ae2df64f8b4734b', contraseñaCifrada)) as contraseña ,
+        nombre,apellido,puntos,rol,email FROM usuarios WHERE id = @id`,
+        updateUserByID: `UPDATE usuarios SET contraseñaCifrada = ENCRYPTBYPASSPHRASE('0e9e09b4175a0ae2df64f8b4734b', @password) WHERE id = @id`
     },
     Usuarios: {
         addUser: `INSERT INTO usuarios (fecha_creacion,nombre,apellido,contraseña,email,rol, puntos, contraseñaCifrada) VALUES (GETDATE(),@nombre, @apellido, '',@email,@rol, @puntos,ENCRYPTBYPASSPHRASE('0e9e09b4175a0ae2df64f8b4734b', @password))`

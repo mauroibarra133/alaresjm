@@ -115,7 +115,7 @@ function SignUp(){
                 <NavLink to='/api/login'>
                 <p className='login__msg'>Ya tienes una cuenta? <span>Inicia Sesion</span></p>
                 </NavLink>
-                <NavLink to='/change-password'>
+                <NavLink to='/forgot-password'>
                         <p className='login__msg'>Olvidaste tu contraseña? <span>Reestablecer</span></p>
                     </NavLink>
             </div>

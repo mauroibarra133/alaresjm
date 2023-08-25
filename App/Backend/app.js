@@ -34,6 +34,7 @@ io.on('connection', (socket) => {
 })
 
 app.set('socketio', io); // aquí asignas el socket global
+// app.set("view engine", "ejs")
 
 //Middlewares
 app.use(express.json());
@@ -54,5 +55,4 @@ app.use(loginRouter)
 app.use(usuariosRouter)
 app.use(reservasRouter)
 app.use(rankingRouter)
-
 export default app;

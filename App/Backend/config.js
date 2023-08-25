@@ -13,5 +13,7 @@ export default {
     mp_public_token: process.env.PUBLIC_TOKEN_MP || '',
     mp_access_token: process.env.ACCESS_TOKEN_MP || '',
     secret_token: process.env.ACCESS_TOKEN || '',
-    encrypt_code: process.env.ENCRYPT_CODE || ''
+    encrypt_code: process.env.ENCRYPT_CODE || '',
+    st_changepassword: process.env.ST_CHANGEPASSWORD || '',
+    email_password: process.env.EMAIL_PASSWORD || ''
 }

@@ -1,5 +1,6 @@
 import axios from 'axios'
 import { AuthError, ConnectionError, FillError, LoginMailError, MailError, PasswordError, ServerError } from '../utils/error';
+
 export const isAuth = async () => {
   try {
     const response = await axios.get("http://localhost:4000/token",{ withCredentials: true
@@ -60,3 +61,28 @@ export async function signup(data){
     throw new ConnectionError();
   }
 }
+export async function sendPasswordLink(data){
+  const email = data.email
+  try {
+        const response = await axios.post('http://localhost:4000/send-password-link',{email});
+        return response
+      } catch (error) {
+        if (error.response && error.response.status === 400) {
+          throw new ServerError();
+        }
+        throw new ConnectionError();
+      }
+    }
+// export async function sendMail(data){
+//   const email = data.email
+//   try {
+//     const response = await axios.post('http://localhost:4000/forgot-password',{email});
+//     console.log(response);
+//     return response
+//   } catch (error) {
+//     if (error.response && error.response.status === 400) {
+//       throw new ServerError();
+//     }
+//     throw new ConnectionError();
+//   }
+// }

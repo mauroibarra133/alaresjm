@@ -22,6 +22,7 @@ import {AuthProvider} from './context/auth';
 import {CartProvider} from './context/cart';
 import {BrowserRouter, Route, Routes} from 'react-router-dom'
 import ForgotPassword from './components/login/ForgotPassword'
+import PasswordReset from './components/login/ResetPassword'
 function App() {
 
   return (
@@ -46,7 +47,8 @@ function App() {
               <Delivery/>
           </RequireAuth>}/>
         <Route path='/api/login' element={<Login/>}> </Route>  
-        <Route path='/change-password' element={<ForgotPassword/>}> </Route>  
+        <Route path='/forgot-password' element={<ForgotPassword/>}> </Route>  
+        <Route path='/reset-password/:id/:token' element={<PasswordReset/>}> </Route>  
         <Route path='/signup' element={<SignUp/>}> </Route>  
         <Route path='/mi-cuenta' element={
           <RequireAuth>
