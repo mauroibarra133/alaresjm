@@ -5,7 +5,6 @@ export const isAuth = async () => {
   try {
     const response = await axios.get("http://localhost:4000/api/token",{ withCredentials: true
     });
-    console.log(response);
     return response;
   } catch (error) {
     if(error.response){

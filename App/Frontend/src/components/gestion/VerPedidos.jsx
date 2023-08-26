@@ -72,12 +72,9 @@ function VerPedidos() {
 
       useEffect(() => {
         socket.on('connect', () => {
-            console.log(socket);
-            console.log('Conectado al servidor Socket.IO');
     
              // Escuchar el evento 'pedidoAdmin' emitido por el servidor
              socket.on('adminOrder', (newOrder) => {
-            console.log('Nuevo pedido recibido:', newOrder);
     
             // Actualizar el estado de pedidos con el nuevo pedido recibido
             // Usamos el callback en setPedidos para asegurar que siempre estamos

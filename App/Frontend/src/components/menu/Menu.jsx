@@ -27,30 +27,31 @@ function Menu() {
     const footerRef = useRef(null);
 
     //Use Effects
-    
     useEffect(() => {
-        const observer = new IntersectionObserver((entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              setShowButton(false);
-            } else {
-              setShowButton(true);
-            }
-          },{
-            rootMargin: '-50px 0px 0px 0px',
-          });
-        });
-    
-        if (footerRef.current) {
-          observer.observe(footerRef.current);
-        }
-    
-        return () => {
-          if (footerRef.current) {
-            observer.unobserve(footerRef.current);
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.intersectionRatio > 0.25) {
+            setShowButton(false); // Desactivar el botón cuando se pasa el 25% del footer
+          } else {
+            setShowButton(true);
           }
-        };
-      }, []);
+        });
+      }, {
+        threshold: .25
+      });
+    
+      if (footerRef.current) {
+        observer.observe(footerRef.current);
+      }
+    
+      return () => {
+        if (footerRef.current) {
+          observer.unobserve(footerRef.current);
+        }
+      };
+    }, []);
+    
+    
 
     useEffect(()=>{
         async function searchCategories(){
@@ -105,12 +106,6 @@ function Menu() {
                             removeProductFromCart={removeProductFromCart} addToCart={addToCart}
                             product={product} setCartClick={setCartClick} />
                         )})}
-                </div>
-                <div className="menu__buttons">
-                    <NavLink to={'/delivery'}><button className="menu__button-cart menu__button button" >
-                        <p>CARRITO</p>
-                        <img src={carritoImg} alt="Carrito" />
-                        </button></NavLink>
                 </div>
                 {showButton && (
                     <NavLink to={'/delivery'}>

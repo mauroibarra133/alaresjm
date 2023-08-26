@@ -111,7 +111,7 @@ function Pedido({modalPedido, closeModal}) {
                     </div>
                 </div>
 
-                <div className="verpedido__monto">{`$${pedido.monto_cambio || 0}`}</div>
+                <div className="verpedido__monto">{`Paga con $${pedido.monto_cambio || 0}`}</div>
 
             </div>
     </div>

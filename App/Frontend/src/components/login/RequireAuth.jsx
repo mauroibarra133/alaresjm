@@ -11,8 +11,7 @@ function RequireAuth({ children }) {
   useEffect(() => {
     const checkAuth = async () => {
       try {
-        const response = await isAuth();
-        console.log(response);
+        await isAuth();
           setAuthenticated(true);
       } catch (error) {
         setAuthenticated(false);

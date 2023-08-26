@@ -5,7 +5,6 @@ import {useAuth} from '../hooks/useAuth'
 function NavUser({clicked, handleUserClick,closeSession}) {
 
     const {auth} = useAuth()
-console.log(auth);
     
  return ( 
 

@@ -12,6 +12,7 @@ export const receiveWebHook = async (req, res) => {
     if (payment.type === 'payment') {
       const data = await mercadopago.payment.findById(payment['data.id']);
       const fullData = data.body;
+      console.log(data);
       // Pedido
       fecha = fullData.date_approved;
       id_pago = fullData.id;
@@ -74,7 +75,7 @@ export const create_preference =(req, res) => {
         failure: "http://localhost:5173",
         pending: "",
       },
-      notification_url:"https://89ca-190-122-76-4.ngrok.io/webhook",
+      notification_url:"https://96e5-190-122-76-4.ngrok.io/webhook",
       auto_return: "approved"};
     
   

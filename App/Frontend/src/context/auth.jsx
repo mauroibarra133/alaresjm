@@ -17,7 +17,6 @@ export function AuthProvider({children}){
 async function isLogued(){
     try {
         const response = await isAuth()
-        console.log(response);
         setAuth({
             isLogin: true ,
             data: response.data.data

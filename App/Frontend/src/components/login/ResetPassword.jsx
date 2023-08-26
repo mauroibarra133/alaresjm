@@ -58,8 +58,8 @@ function ResetPassword() {
                     <img src={logoImg} alt="" className='login__logo' />
                     <div className="login__square">
                         <div className="login__titles">
-                            <p className="login__title">LOGIN</p>
-                            <p className="login__title">SIGNUP</p>
+                            <p className="login__title">RESET PASSWORD</p>
+                            {/* <p className="login__title">SIGNUP</p> */}
                         </div>
                         <form className="login__form" onSubmit={handleSubmit(onSubmit)}>
                             <div className="login__wrapper reset-passw__wrapper">
