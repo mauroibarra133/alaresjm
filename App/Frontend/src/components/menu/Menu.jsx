@@ -12,6 +12,7 @@ import InitialMenu from './InitialMenu';
 import carritoImg from '../../assets/images/carrito.webp'
 import ItemMenu from './ItemMenu';
 import Modal from '../Modal';
+import { useRef } from 'react';
 
 function Menu() {
     //States
@@ -19,12 +20,38 @@ function Menu() {
     const [products,setProducts] = useState([]);
     const [activeTag, setActiveTag] = useState(null);
     const [isCartClick, setCartClick] = useState(false);
-
+    const [showButton, setShowButton] = useState(false);
     //Hooks
     const {addToCart, checkProductInCart, removeProductFromCart} = useCart();
     const {auth} = useAuth() 
+    const footerRef = useRef(null);
 
     //Use Effects
+    
+    useEffect(() => {
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              setShowButton(false);
+            } else {
+              setShowButton(true);
+            }
+          },{
+            rootMargin: '-50px 0px 0px 0px',
+          });
+        });
+    
+        if (footerRef.current) {
+          observer.observe(footerRef.current);
+        }
+    
+        return () => {
+          if (footerRef.current) {
+            observer.unobserve(footerRef.current);
+          }
+        };
+      }, []);
+
     useEffect(()=>{
         async function searchCategories(){
             getCategories().then(data => setCategories(data))
@@ -39,9 +66,10 @@ function Menu() {
 
     function handleTagClick(tagId){
         if(activeTag === tagId){
-            return;
+            setActiveTag(null);
+        }else{
+            setActiveTag(tagId);
         }
-      setActiveTag(tagId);
     }
 
     function filterProducts(){
@@ -84,7 +112,17 @@ function Menu() {
                         <img src={carritoImg} alt="Carrito" />
                         </button></NavLink>
                 </div>
+                {showButton && (
+                    <NavLink to={'/delivery'}>
+                    <div className="flotant-cart" >
+                    <p>Carrito</p>
+                    <img src={carritoImg} alt="Carrito" />
+                    </div>
+                    </NavLink>
+                )}
+               
             </div>
+            <div ref={footerRef}></div>
             <Modal isSubmitted={isCartClick && !auth.isLogin} 
             position={"top"}
             handleSubmit={()=>setCartClick(false)} msg={!auth.isLogin ? "Debes estar logueado para usar el carrito" : ""}></Modal>

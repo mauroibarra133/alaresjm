@@ -23,7 +23,7 @@ function RequireAuth({ children }) {
   }, []);
 
   if (!authenticated) {
-    return <Navigate to={"/api/login/"} />;
+    return <Navigate to={"/login/"} />;
   }
 
   return children;
