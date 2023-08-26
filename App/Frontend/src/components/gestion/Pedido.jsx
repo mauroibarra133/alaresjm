@@ -9,6 +9,7 @@ import relojIcon from '../../assets/images/reloj-de-pared.webp'
 import entregaIcon from '../../assets/images/entrega.webp'
 import pagoIcon from '../../assets/images/tarjeta-de-credito.webp'
 import io from 'socket.io-client';
+import { useAuth } from "../../hooks/useAuth";
 const socket = io('/');
 
 function Pedido({modalPedido, closeModal}) {
@@ -16,23 +17,29 @@ function Pedido({modalPedido, closeModal}) {
     const pedido = modalPedido.pedido
     const stateId = useId()
     const [estado, setEstado] = useState(pedido.estado_pedido)
+    const {auth} = useAuth()
+
     //Functions
     async function handleState(event){
-        if(event.target.value != pedido.estado__pedido){
-            const response = await updatePedido({
-                id: pedido.id,
-                state: event.target.value
-            })
-            if(response.status == 200){
-                setEstado(event.target.value)
-                pedido.estado_pedido = event.target.value
-                socket.emit('orderUpdated',pedido);
-                
-            }else{
-                console.log('No se pudo wn');
+        if(auth.data.rol !== "Guest"){
+            if(event.target.value != pedido.estado__pedido){
+                const response = await updatePedido({
+                    id: pedido.id,
+                    state: event.target.value
+                })
+                if(response.status == 200){
+                    setEstado(event.target.value)
+                    pedido.estado_pedido = event.target.value
+                    socket.emit('orderUpdated',pedido);
+                    
+                }else{
+                    console.log('No se pudo wn');
+                }
             }
         }
+
     }
+    console.log(auth);
     return ( 
         <div className="dashboard__modal">
             <div className={`verpedido__modal-top dashboard__modal-top`}>
@@ -42,7 +49,7 @@ function Pedido({modalPedido, closeModal}) {
                 </div>
             </div>
             <div className="verpedido__estado dashboard__estado-modal">
-                <select name={stateId} id={stateId}  defaultValue={estado} value={estado == pedido.estado__pedido ? estado :  pedido.estado__pedido} onChange={handleState}>
+                <select name={stateId} id={stateId}  defaultValue={estado} value={estado == pedido.estado__pedido ? estado :  pedido.estado__pedido} onChange={handleState} disabled={auth.data.rol == "Guest" ? true : false}>
                     <option value="A confirmar">A confirmar</option>
                     <option value="Confirmado">Confirmado</option>
                     <option value="En Preparacion">En Preparacion</option>

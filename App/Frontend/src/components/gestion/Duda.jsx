@@ -6,30 +6,34 @@ import cruzIcon from '../../assets/images/xmark-solid.svg'
 import userIcon from '../../assets/images/usuario.webp'
 import blueMail from '../../assets/images/bluemail.webp'
 import phoneImg from '../../assets/images/llamada-telefonica.webp'
+import { useAuth } from "../../hooks/useAuth";
 
 function Duda({modalDuda, closeModal}) {
     //Constants and states
     const duda = modalDuda.duda
     const stateId = useId()
     const [state, setEstado] = useState(duda.estado)
-    // const [errorDuda, setErrorDuda] = useState(false)
+    const {auth} = useAuth()
+
+
 
     //functions
     async function handleState(event){
-        if(event.target.value != duda.estado){
-            try {
-                await updateDoubt({
-                    ...duda,
-                    estado: event.target.value
-                })
-                    setEstado(event.target.value)
-                    duda.estado = event.target.value
-            } catch (error) {
-                console.log(error);
+        if(auth.data.rol !== "Guest"){
+            if(event.target.value != duda.estado){
+                try {
+                    await updateDoubt({
+                        ...duda,
+                        estado: event.target.value
+                    })
+                        setEstado(event.target.value)
+                        duda.estado = event.target.value
+                } catch (error) {
+                    console.log(error);
+                }  
             }
-
-                
         }
+
     }
 
     return ( 
@@ -41,7 +45,7 @@ function Duda({modalDuda, closeModal}) {
                 </div>
             </div>
             <div className="verpedido__estado dashboard__estado-modal">
-                <select name={stateId} id={stateId} defaultValue={state} className="input"  onChange={handleState}>
+                <select name={stateId} id={stateId} defaultValue={state} className="input"  onChange={handleState} disabled={auth.data.rol == "Guest" ? true : false}>
                     <option value="No Leido">No Leido</option>
                     <option value="Leido">Leido</option>
                     <option value="Respondido">Respondido</option>

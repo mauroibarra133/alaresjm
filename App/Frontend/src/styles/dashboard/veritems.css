@@ -288,6 +288,10 @@
   justify-content: start;
   padding: .2rem 0;   
 }
+.vercarta__dato button{
+  background-color: transparent;
+  border: none;
+}
 .vercarta__dato p, .vercarta__header-column p{
   text-align: start;
   font-size: .8rem;

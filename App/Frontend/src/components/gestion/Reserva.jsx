@@ -7,7 +7,7 @@ import locationIcon from '../../assets/images/sitio.webp'
 import relojIcon from '../../assets/images/reloj-de-pared.webp'
 import '../../styles/dashboard/modalDashboard.css'
 import {transformDate }from '../../utils/functions.js'
-
+import { useAuth } from "../../hooks/useAuth";
 
 function Reserva({modalBooking, closeModal}) {
     //Constants
@@ -15,22 +15,26 @@ function Reserva({modalBooking, closeModal}) {
     const booking = modalBooking.booking
     const fechaTransformada = transformDate(booking.fecha)
     const [estado, setEstado] = useState(booking.estado)
+    const {auth} = useAuth()
 
     //Functions
     async function handleState(event){
-        if(event.target.value != booking.estado){
-            const response = await updateReserva(booking.id,{
-                ...booking,
-                estado: event.target.value
-            })
-            if(response.status == 200){
-                setEstado(event.target.value)
-                booking.estado = event.target.value
-                
-            }else{
-                console.log('No se pudo wn');
+        if(auth.data.rol !== "Guest"){
+            if(event.target.value != booking.estado){
+                const response = await updateReserva(booking.id,{
+                    ...booking,
+                    estado: event.target.value
+                })
+                if(response.status == 200){
+                    setEstado(event.target.value)
+                    booking.estado = event.target.value
+                    
+                }else{
+                    console.log('No se pudo wn');
+                }
             }
         }
+
     }
     return ( 
         <div className="verreserva__modal dashboard__modal">
@@ -41,7 +45,7 @@ function Reserva({modalBooking, closeModal}) {
                 </div>
             </div>
             <div className="verreserva__estado dashboard__estado-modal">
-                <select name={stateId} id={stateId} defaultValue={estado}  onChange={handleState}>
+                <select name={stateId} id={stateId} defaultValue={estado}  onChange={handleState} disabled={auth.data.rol == "Guest" ? true : false}>
                     <option value="A Confirmar">A Confirmar</option>
                     <option value="Reservado">Reservado</option>
                     <option value="Cancelado">Cancelado</option>

@@ -31,7 +31,7 @@ console.log(auth);
                 <div className='nav__item user' onClick={handleUserClick}><p>MIS RESERVAS </p></div>
             </NavLink>
             )}  
-                {(auth.isLogin && (auth.data.rol == "Dev" || auth.data.rol == "Admin")) && (
+                {(auth.isLogin && ((auth.data.rol == "Dev" || auth.data.rol == "Guest") || auth.data.rol == "Admin")) && (
             <NavLink to='/dashboard'  className='nav__item-container user' >
                 <div className='nav__item user' onClick={handleUserClick}><p>GESTIONAR WEB </p></div>
             </NavLink>

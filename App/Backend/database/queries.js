@@ -77,7 +77,7 @@ VALUES (@fecha, @id_usuario, @direccion, @nota, @total, @id_tipo_pago, @id_tipo_
         updateUserByID: `UPDATE usuarios SET contraseñaCifrada = ENCRYPTBYPASSPHRASE('0e9e09b4175a0ae2df64f8b4734b', @password) WHERE id = @id`
     },
     Usuarios: {
-        addUser: `INSERT INTO usuarios (fecha_creacion,nombre,apellido,contraseña,email,rol, puntos, contraseñaCifrada) VALUES (GETDATE(),@nombre, @apellido, '',@email,@rol, @puntos,ENCRYPTBYPASSPHRASE('0e9e09b4175a0ae2df64f8b4734b', @password))`
+        addUser: `INSERT INTO usuarios (fecha_creacion,nombre,apellido,email,rol, puntos, contraseñaCifrada) VALUES (GETDATE(),@nombre, @apellido,@email,@rol, @puntos,ENCRYPTBYPASSPHRASE('0e9e09b4175a0ae2df64f8b4734b', @password))`
     },
     Reservas: {
         addReserva: "INSERT INTO reservas (fecha,hora,id_usuario, cantidad_personas, lugar, cliente_reserva,id_estado) VALUES (@fecha,@hora,@id_usuario,@cantidad_personas,@lugar,@cliente_reserva, @id_estado)",

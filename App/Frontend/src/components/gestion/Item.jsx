@@ -5,6 +5,7 @@ import { PRECIO__REGEX } from '../../utils/constants'
 import cruzIcon from '../../assets/images/xmark-solid.svg'
 import '../../styles/dashboard/modalDashboard.css'
 import { useId } from 'react'
+import { useAuth } from '../../hooks/useAuth'
 
 function Item({modalCarta,closeModal, categorias,action, handleMsgStatus}) {
     //Constants
@@ -15,6 +16,7 @@ function Item({modalCarta,closeModal, categorias,action, handleMsgStatus}) {
     const smallPriceId = useId()
     const bigPriceId = useId()
     //Hooks
+    const {auth} = useAuth()
     const {handleSubmit, register, formState} = useForm({
         mode: 'onBlur'
     });
@@ -23,23 +25,26 @@ function Item({modalCarta,closeModal, categorias,action, handleMsgStatus}) {
 
     //Functions
     async function onSubmit(data){
-        const {category} = data
-        const id_categoria = categorias.filter(categ => categ.nombre == category)[0].id
-        if(isDirty){
-            if(action == 'U'){
-               const response = await updateProduct(item.id,{...data,
-                    precioChico : parseInt(data.precioChico.substring(1)),
-                    precioGrande : parseInt(data.precioGrande.substring(1)),
-                    id_categoria : id_categoria})
-                    handleMsgStatus(response,'Producto modificado correctamente', 'Hubo un error al modificar tu producto')
-            }else{
-                 const response = await addProduct({...data,
-                    precioChico : parseInt(data.precioChico.substring(1)),
-                    precioGrande : parseInt(data.precioGrande.substring(1)),
-                    id_categoria : id_categoria})
-                    handleMsgStatus(response,'Producto agregado correctamente', 'Hubo un error al crear tu producto')
+        const {categoria} = data
+        const id_categoria = categorias.filter(categ => categ.nombre === categoria)[0].id
+        if(auth.data.rol !== "Guest"){  
+            if(isDirty){
+                if(action == 'U'){
+                   const response = await updateProduct(item.id,{...data,
+                        precioChico : parseInt(data.precioChico.substring(1)),
+                        precioGrande : parseInt(data.precioGrande.substring(1)),
+                        id_categoria : id_categoria})
+                        handleMsgStatus(response,'Producto modificado correctamente', 'Hubo un error al modificar tu producto')
+                }else{
+                     const response = await addProduct({...data,
+                        precioChico : parseInt(data.precioChico.substring(1)),
+                        precioGrande : parseInt(data.precioGrande.substring(1)),
+                        id_categoria : id_categoria})
+                        handleMsgStatus(response,'Producto agregado correctamente', 'Hubo un error al crear tu producto')
+                }
             }
         }
+
             closeModal()
     }
 
@@ -97,7 +102,7 @@ function Item({modalCarta,closeModal, categorias,action, handleMsgStatus}) {
                     </div>
 
                 </div>
-                <button className='button'type='submit'>{action == 'U' ? 'Grabar' : 'Agregar'}</button>
+                <button disabled={auth.data.rol == "Guest" ? true : false} className='button'type='submit'>{action == 'U' ? 'Grabar' : 'Agregar'}</button>
             </form>
         </div>
     )}

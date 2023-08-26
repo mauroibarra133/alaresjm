@@ -35,7 +35,7 @@ function SignUp(){
             isGood: false,
             msg: ""
         });
-        showModal.isGood ? navigate('/api/login') : null
+        showModal.isGood ? navigate('/login') : null
     }
 
     async function onSubmit(data){

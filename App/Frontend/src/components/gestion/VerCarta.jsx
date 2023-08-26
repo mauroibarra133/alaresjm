@@ -9,7 +9,7 @@ import Item from './Item';
 import pencilImg from '../../assets/images/pencil-solid.svg'
 import cruzImg from '../../assets/images/xmark-solid.svg'
 import '../../styles/dashboard/veritems.css'
-
+import { useAuth } from '../../hooks/useAuth';
 
 function VerCarta() {
     //States 
@@ -35,6 +35,9 @@ function VerCarta() {
 
     //Constants
     const LIMIT = 10;
+
+    //Hooks
+    const {auth} = useAuth()
 
     //UseEffects
     useEffect(() => {
@@ -100,10 +103,12 @@ function VerCarta() {
 
     }
     async function deleteProductByID(id){
-        const response = await deleteProduct(id)
-        console.log(response);
-        setItems(items.filter(item => item.id != id))
-        handleMsgStatus(response,'Eliminado correctamente','Hubo un error al eliminar tu producto')
+        if(auth.data.rol !== "Guest"){
+            const response = await deleteProduct(id)
+            console.log(response);
+            setItems(items.filter(item => item.id != id))
+            handleMsgStatus(response,'Eliminado correctamente','Hubo un error al eliminar tu producto')
+        }
     }
 
     function handleMsgStatus(response,msgGood,msgBad){
@@ -208,8 +213,8 @@ function VerCarta() {
                         <div className="veritems__dato vercarta__dato"><p>{offsett == 0 ? (i+1) : i+1+offsett}</p></div>
                         <div className="veritems__dato vercarta__dato vercarta__dato-nombre"><p>{(item.nombre).toUpperCase()}</p></div>
                         <div className="veritems__dato vercarta__dato">
-                            <img src={pencilImg} alt="Modificar item" className='dashboard-icon vercarta__acciones'onClick={()=>openModalCarta(item, 'U')}/>
-                            <img src={cruzImg} alt="Eliminar item" className='dashboard-icon vercarta__acciones' onClick={()=>deleteProductByID(item.id)}/>
+                            <button  ><img src={pencilImg} alt="Modificar item" className='dashboard-icon vercarta__acciones' onClick={()=>openModalCarta(item, 'U')}/></button>
+                            <button disabled={auth.data.rol == "Guest" ? true : false}  onClick={()=>deleteProductByID(item.id)} ><img src={cruzImg} alt="Eliminar item" className='dashboard-icon vercarta__acciones'/></button>
                         </div>  
             
                 </div>
