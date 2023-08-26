@@ -3,9 +3,9 @@ import {addReserva, getReservas, deleteReserva, updateReserva} from '../controll
 const router = Router() //Creo el router
 
 
-router.get('/reservas',getReservas); 
-router.post('/reservas',addReserva); 
-router.delete('/reservas/:id',deleteReserva); 
-router.put('/reservas/:id',updateReserva); 
+router.get('/api/reservas',getReservas); 
+router.post('/api/reservas',addReserva); 
+router.delete('/api/reservas/:id',deleteReserva); 
+router.put('/api/reservas/:id',updateReserva); 
 
 export default router

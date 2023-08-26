@@ -3,7 +3,7 @@ import { AuthError, ConnectionError, FillError, LoginMailError, MailError, Passw
 
 export const isAuth = async () => {
   try {
-    const response = await axios.get("http://localhost:4000/token",{ withCredentials: true
+    const response = await axios.get("http://localhost:4000/api/token",{ withCredentials: true
     });
     console.log(response);
     return response;
@@ -21,7 +21,7 @@ export const isAuth = async () => {
 
 export async function existsMail(email) {
   try {
-    const response = await axios.post("http://localhost:4000/email", { email });
+    const response = await axios.post("http://localhost:4000/api/email", { email });
     return response;
   } catch (error) {
     if (error.response && error.response.status === 400) {
@@ -52,7 +52,7 @@ export async function login(data){
 
 export async function signup(data){
   try {
-    const response = await axios.post('http://localhost:4000/signup',data)
+    const response = await axios.post('http://localhost:4000/api/signup',data)
     return response
   } catch (error) {
     if (error.response && error.response.status === 400) {
@@ -64,7 +64,7 @@ export async function signup(data){
 export async function sendPasswordLink(data){
   const email = data.email
   try {
-        const response = await axios.post('http://localhost:4000/send-password-link',{email});
+        const response = await axios.post('http://localhost:4000/api/send-password-link',{email});
         return response
       } catch (error) {
         if (error.response && error.response.status === 400) {
@@ -73,16 +73,14 @@ export async function sendPasswordLink(data){
         throw new ConnectionError();
       }
     }
-// export async function sendMail(data){
-//   const email = data.email
-//   try {
-//     const response = await axios.post('http://localhost:4000/forgot-password',{email});
-//     console.log(response);
-//     return response
-//   } catch (error) {
-//     if (error.response && error.response.status === 400) {
-//       throw new ServerError();
-//     }
-//     throw new ConnectionError();
-//   }
-// }
+
+    export async function changePassword(id, token, newPassword) {
+      try {
+        const response = await axios.put(`http://localhost:4000/api/reset-password/${id}`, { token, newPassword });
+        console.log(response);
+        // Manejar la respuesta según tus necesidades
+      } catch (error) {
+        console.error(error);
+        // Manejar errores aquí
+      }
+    }

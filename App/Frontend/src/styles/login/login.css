@@ -88,7 +88,9 @@
     gap: 1rem;
     margin: 0 auto;
 }
-
+.login__input-wrapper label{
+    width: 100%;
+}
 .login__form div div input{
     max-width: 150px;
     border-radius: 3.125rem;
@@ -131,7 +133,10 @@
     font-weight: 700;
 }
 
-
+/* Reset Password Component */
+.reset-passw__wrapper{
+    gap: 1rem;
+}
 
 @media only screen and (min-width: 1024px){
     .login__form{

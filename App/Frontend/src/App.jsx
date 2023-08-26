@@ -46,7 +46,7 @@ function App() {
           <RequireAuth>
               <Delivery/>
           </RequireAuth>}/>
-        <Route path='/api/login' element={<Login/>}> </Route>  
+        <Route path='/login' element={<Login/>}> </Route>  
         <Route path='/forgot-password' element={<ForgotPassword/>}> </Route>  
         <Route path='/reset-password/:id/:token' element={<PasswordReset/>}> </Route>  
         <Route path='/signup' element={<SignUp/>}> </Route>  

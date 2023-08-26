@@ -3,10 +3,10 @@ const router = Router() //Creo el router
 import {addUsuario,sendPasswordLink, getLink,changePassword} from '../controllers/usuarios.js'
 
 
-router.post('/signup',addUsuario);
-router.post('/send-password-link',sendPasswordLink);
-// router.get('/reset-password/:id/:token',getLink);
-// router.post('/reset-password/:id/:token',changePassword);
+router.post('/api/signup',addUsuario);
+router.post('/api/send-password-link',sendPasswordLink);
+router.get('/api/reset-password/:id/:token',getLink)
+router.put('/api/reset-password/:id',changePassword)
 
 
 export default router //Lo export para que la app lo use

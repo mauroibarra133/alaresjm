@@ -12,7 +12,7 @@ console.log(auth);
         <div className={`nav ${clicked ? 'active'  : ''} user`}>
         <div className="nav__container user" >
             {!auth.isLogin && (
-                <NavLink to='/api/login'  className='nav__item-container user' >
+                <NavLink to='/login'  className='nav__item-container user' >
                     <div className='nav__item user' onClick={handleUserClick}><p>INICIAR SESION</p></div>
                 </NavLink>
             )}

@@ -1,6 +1,7 @@
 import axios from "axios";
 import { ConnectionError } from '../utils/error';
-const urlResource = "http://localhost:4000/dudas";
+
+const urlResource = "http://localhost:4000/api/dudas";
 
 export async function getDoubts(){
   try {

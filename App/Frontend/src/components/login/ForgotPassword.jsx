@@ -7,7 +7,7 @@ import foodImg from '../../assets/images/food-bg.webp'
 import { useForm } from "react-hook-form";
 import '../../styles/login/login.css'
 import { sendPasswordLink } from "../../services/auth.services";
-// import {sendMail} from '../../services/auth.services'
+
 function ForgotPassword() {
 
     //Hooks

@@ -1,7 +1,6 @@
 /* Hero Container */
 .hero-horarios__container{
     width: 100%;
-    position: relative;
     height: auto;
     min-height: 100vh;
     border-bottom: 1px solid black;

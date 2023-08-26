@@ -7,7 +7,7 @@ import config from '../config';
 
 router.post('/api/login/',login);
 
-router.get('/token/',(req,res)=>{
+router.get('/api/token/',(req,res)=>{
     const token = req.cookies.tokenJWT
     jwt.verify(token,config.secret_token, (err,data)=>{
         if (err){
@@ -18,10 +18,10 @@ router.get('/token/',(req,res)=>{
     })
 })
 
-router.post('/email',existsMail)
+router.post('/api/email',existsMail)
 
 
-router.get('/logout', (req, res) => {
+router.get('/api/logout', (req, res) => {
     const token = req.cookies.tokenJWT;
   
     res.cookie('tokenJWT', token, {

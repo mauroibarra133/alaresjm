@@ -35,7 +35,7 @@ function Header() {
     }
     const closeSession = async ()=>{
         try {
-            await axios.get('http://localhost:4000/logout',{withCredentials: true})
+            await axios.get('http://localhost:4000/api/logout',{withCredentials: true})
             handleUserClick()
             logout()
             

@@ -1,7 +1,7 @@
 import axios from "axios";
 import { ConnectionError } from '../utils/error';
 
-const urlSource = 'http://localhost:4000/categorias'
+const urlSource = 'http://localhost:4000/api/categorias'
 
 export async function getCategories(){
     try {
