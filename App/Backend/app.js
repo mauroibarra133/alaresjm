@@ -41,15 +41,9 @@ app.set('socketio', io); // aquí asignas el socket global
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 const corsOptions = {
-    origin: "https://alaresjm.onrender.com",
+    origin: "*",
     credentials: true,
 };
-
-app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, '/dist/index.html'));
-  });
-
-
 app.use(cors(corsOptions));
 app.use(compression());
 app.use(cookieParser())
@@ -62,6 +56,9 @@ app.use(loginRouter)
 app.use(usuariosRouter)
 app.use(reservasRouter)
 app.use(rankingRouter)
-app.use(express.static(path.join(__dirname, 'dist')));
-
+app.use(express.static(path.join(__dirname, './dist')));
+app.get('*', (req, res) => {
+    // Envía el archivo HTML principal de tu SPA
+    res.sendFile(path.join(__dirname, './dist/index.html'));
+  });
 export default app;
