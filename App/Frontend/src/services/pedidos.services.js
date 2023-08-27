@@ -1,8 +1,10 @@
 import axios from "axios"
 import { ConnectionError } from '../utils/error';
+import { SERVER_HOST } from "../utils/constants";
+
 export async function createOrder(fecha_ISO, id_usuario,direccionCliente, notaPedido, total, id_tipo_pago,tipoEntrega, monto_cambio,items){
     try {
-      const response = await axios.post("http://localhost:4000/api/pedidos",{
+      const response = await axios.post(`${SERVER_HOST}/api/pedidos`,{
         fecha: fecha_ISO,
         id_usuario: id_usuario,
         direccion: direccionCliente,
@@ -24,7 +26,7 @@ export async function createOrder(fecha_ISO, id_usuario,direccionCliente, notaPe
 
 export async function getOrders(params) {
   try {
-  const response = await axios.get("http://localhost:4000/api/pedidos", { params: params });
+  const response = await axios.get(`${SERVER_HOST}/api/pedidos`, { params: params });
   return response;
 
   } catch (error) {
@@ -34,6 +36,6 @@ export async function getOrders(params) {
 }
 
 export async function updatePedido(params) {
-  const response = await axios.put("http://localhost:4000/api/pedidos",null, { params: params });
+  const response = await axios.put(`${SERVER_HOST}/api/pedidos`,null, { params: params });
   return response;
 }

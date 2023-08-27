@@ -1,7 +1,8 @@
 import axios from "axios";
 import { ConnectionError } from '../utils/error';
+import { SERVER_HOST } from "../utils/constants";
 
-const urlSource = 'http://localhost:4000/api/productos'
+const urlSource = `${SERVER_HOST}/api/productos`
 
 
 export  async function getProducts(categoria) {
@@ -19,7 +20,7 @@ export  async function getProducts(categoria) {
 
   export async function updateProduct(id, updatedData) {
     try {
-        const response = await axios.put(`http://localhost:4000/api/productos/${id}`, updatedData);
+        const response = await axios.put(`${urlSource}/${id}`, updatedData);
         console.log(response);
         return response;
     } catch (error) {
@@ -29,7 +30,7 @@ export  async function getProducts(categoria) {
 
 export async function addProduct(data) {
   try {
-      const response = await axios.post(`http://localhost:4000/api/productos/`, data);
+      const response = await axios.post(urlSource, data);
       console.log(response);
       return response;
   } catch (error) {
@@ -39,7 +40,7 @@ export async function addProduct(data) {
 
 export async function deleteProduct(id) {
   try {
-      const response = await axios.delete(`http://localhost:4000/api/productos/${id}`);
+      const response = await axios.delete(`${urlSource}/${id}`);
       return response;
   } catch (error) {
       return error;

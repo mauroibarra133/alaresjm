@@ -1,7 +1,8 @@
 import axios from "axios";
 import { ConnectionError } from '../utils/error';
+import { SERVER_HOST } from "../utils/constants";
 
-const urlResource = "http://localhost:4000/api/dudas";
+const urlResource =`${SERVER_HOST}/api/dudas`
 
 export async function getDoubts(){
   try {

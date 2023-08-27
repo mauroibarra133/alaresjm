@@ -1,9 +1,10 @@
 import axios from 'axios';
 import { ConnectionError } from '../utils/error';
+import { SERVER_HOST } from '../utils/constants';
 
 export async function createPreferenceMP(items, direccionCliente,tipoPago, tipoEntrega, notaPedido,id_usuario){
   try {
-    const response = await axios.post("http://localhost:4000/create_preference", {
+    const response = await axios.post(`${SERVER_HOST}/create_preference`, {
       items: items,
       address: direccionCliente,
       extra: {

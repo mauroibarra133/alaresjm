@@ -1,9 +1,10 @@
 import axios from 'axios'
 import { AuthError, ConnectionError, FillError, LoginMailError, MailError, PasswordError, ServerError } from '../utils/error';
+import { SERVER_HOST } from '../utils/constants';
 
 export const isAuth = async () => {
   try {
-    const response = await axios.get("http://localhost:4000/api/token",{ withCredentials: true
+    const response = await axios.get(`${SERVER_HOST}/api/token`,{ withCredentials: true
     });
     return response;
   } catch (error) {
@@ -20,7 +21,7 @@ export const isAuth = async () => {
 
 export async function existsMail(email) {
   try {
-    const response = await axios.post("http://localhost:4000/api/email", { email });
+    const response = await axios.post(`${SERVER_HOST}/api/email`, { email });
     return response;
   } catch (error) {
     if (error.response && error.response.status === 400) {
@@ -36,7 +37,7 @@ export async function existsMail(email) {
 
 export async function login(data){
   try {
-    const response = await axios.post('http://localhost:4000/api/login',data,{withCredentials: true})
+    const response = await axios.post(`${SERVER_HOST}/api/login`,data,{withCredentials: true})
       return response.data
   } catch (error) {
     if(error.response){
@@ -51,7 +52,7 @@ export async function login(data){
 
 export async function signup(data){
   try {
-    const response = await axios.post('http://localhost:4000/api/signup',data)
+    const response = await axios.post(`${SERVER_HOST}/api/signup`,data)
     return response
   } catch (error) {
     if (error.response && error.response.status === 400) {
@@ -63,7 +64,7 @@ export async function signup(data){
 export async function sendPasswordLink(data){
   const email = data.email
   try {
-        const response = await axios.post('http://localhost:4000/api/send-password-link',{email});
+        const response = await axios.post(`${SERVER_HOST}/api/send-password-link`,{email});
         return response
       } catch (error) {
         if (error.response && error.response.status === 400) {
@@ -75,7 +76,7 @@ export async function sendPasswordLink(data){
 
     export async function changePassword(id, token, newPassword) {
       try {
-        const response = await axios.put(`http://localhost:4000/api/reset-password/${id}`, { token, newPassword });
+        const response = await axios.put(`${SERVER_HOST}/api/reset-password/${id}`, { token, newPassword });
         console.log(response);
         // Manejar la respuesta según tus necesidades
       } catch (error) {
@@ -86,7 +87,7 @@ export async function sendPasswordLink(data){
 
 export async function getData(id){
   try {
-  const response = await axios.get(`http://localhost:4000/api/usuarios/:${id}`)
+  const response = await axios.get(`${SERVER_HOST}/api/usuarios/:${id}`)
     return response
   } catch (error) {
     console.log(error);

@@ -1,9 +1,11 @@
 import axios from "axios";
 import { ConnectionError } from '../utils/error';
+import { SERVER_HOST } from "../utils/constants";
 
+const urlSource = `${SERVER_HOST}/api/reservas`
 export async function agregarReserva(fecha,hora,id_usuario, cantidad,lugar,cliente_reserva){
     try {
-        const response = await axios.post("http://localhost:4000/api/reservas",{
+        const response = await axios.post(urlSource,{
             fecha: fecha,
             hora: hora,
             id_usuario: id_usuario,
@@ -21,7 +23,7 @@ export async function agregarReserva(fecha,hora,id_usuario, cantidad,lugar,clien
 
 export async function getBookings(params) {
     try {
-    const response = await axios.get("http://localhost:4000/api/reservas", {params});
+    const response = await axios.get(urlSource, {params});
     return response;
         
     } catch (error) {
@@ -31,7 +33,7 @@ export async function getBookings(params) {
 
   export async function deleteReserva(id){
     try {
-        const response = await axios.delete(`http://localhost:4000/api/reservas/${id}`)
+        const response = await axios.delete(`${urlSource}/${id}`)
         return response
     
     } catch (error) {
@@ -40,7 +42,7 @@ export async function getBookings(params) {
 }
 export async function updateReserva(id, updatedData) {
     try {
-        const response = await axios.put(`http://localhost:4000/api/reservas/${id}`, updatedData);
+        const response = await axios.put(`${urlSource}/${id}`, updatedData);
         console.log(updatedData);
         return response;
     } catch (error) {

@@ -7,7 +7,7 @@ export default defineConfig({
   server: {
     proxy: {
       '/socket.io': {
-        target: "http://localhost:4000",
+        target: "https://alaresjm.onrender.com",
         ws: true
       }
     }
