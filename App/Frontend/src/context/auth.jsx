@@ -13,7 +13,6 @@ export function AuthProvider({children}){
             data: {}
         }
     );
-    
 async function isLogued(){
     try {
         const response = await isAuth()

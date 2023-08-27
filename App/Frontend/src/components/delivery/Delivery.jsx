@@ -30,7 +30,7 @@ function Delivery() {
   //Hooks
   const {auth} = useAuth();
   const { cart, clearCart, addToCart, removeProductFromCart, modifyCart } = useCart();
-
+console.log(cart);
   //Use Effects
   useEffect(() => {
     const searchParams = new URLSearchParams(window.location.search);
@@ -72,7 +72,6 @@ function Delivery() {
         try {
           const response = await createPreference(order);
           const id = response.data.response.id
-    
           if (id) {
             setPreferenceId(id);
           }

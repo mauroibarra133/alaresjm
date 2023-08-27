@@ -16,7 +16,7 @@ function ItemMenu({isProductInCart,removeProductFromCart,addToCart,product, setC
 
         }
     }
-
+console.log(product);
     return ( 
         <div className="menu__item">
         <div className="menu__item-r1">
@@ -27,8 +27,8 @@ function ItemMenu({isProductInCart,removeProductFromCart,addToCart,product, setC
                     onClick={()=> handleCartClick()} >
                     <img src={carritoImg} className={'menu__icono-cart'} alt="Carrito" /></div>
                 <div className="menu__item-price">
-                    <p className={`${!product.precioChico ? 'inactive' : ''}`}>{product.precioChico ? "$"+product.precioChico : ''} </p>
-                    <p className={`${!product.precioGrande ? 'inactive' : ''}`}>{`${product.precioGrande ? "$"+product.precioGrande : ''}`}</p>
+                    <p className={`${!product.preciochico ? 'inactive' : ''}`}> {product.preciochico ? "$"+product.preciochico : ''} </p>
+                    <p className={`${!product.preciogrande ? 'inactive' : ''}`}>{`${product.preciogrande ? "$"+product.preciogrande : ''}`}</p>
                 </div>
             </div>
 

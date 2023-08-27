@@ -56,7 +56,7 @@ function RankingClientes() {
                             <div className="ranking__client">{`${fila.nombre} ${fila.apellido}`}</div>
                         </div>
 
-                        <div className="ranking__points">{`${fila.Puntos} pts`}</div>
+                        <div className="ranking__points">{`${fila.puntos} pts`}</div>
                     </div>
   ))}
 </div>

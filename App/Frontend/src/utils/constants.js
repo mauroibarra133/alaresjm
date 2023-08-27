@@ -48,7 +48,7 @@ export const meses = {
         img: readyStatus
     },
     {
-        status: "En reparto",
+        status: "En Reparto",
         img: deliveryStatus
     },
     {

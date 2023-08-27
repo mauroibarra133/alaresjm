@@ -31,14 +31,18 @@ function Item({modalCarta,closeModal, categorias,action, handleMsgStatus}) {
             if(isDirty){
                 if(action == 'U'){
                    const response = await updateProduct(item.id,{...data,
-                        precioChico : parseInt(data.precioChico.substring(1)),
-                        precioGrande : parseInt(data.precioGrande.substring(1)),
+                        precioChico : parseInt((data.precioChico).substring(1)),
+                        precioGrande : parseInt((data.precioGrande).substring(1)),
                         id_categoria : id_categoria})
                         handleMsgStatus(response,'Producto modificado correctamente', 'Hubo un error al modificar tu producto')
                 }else{
+                    console.log({...data,
+                        precioChico : parseInt((data.precioChico).substring(1)),
+                        precioGrande : parseInt((data.precioGrande).substring(1)),
+                        id_categoria : id_categoria});
                      const response = await addProduct({...data,
-                        precioChico : parseInt(data.precioChico.substring(1)),
-                        precioGrande : parseInt(data.precioGrande.substring(1)),
+                        precioChico : parseInt((data.precioChico).substring(1)),
+                        precioGrande : parseInt((data.precioGrande).substring(1)),
                         id_categoria : id_categoria})
                         handleMsgStatus(response,'Producto agregado correctamente', 'Hubo un error al crear tu producto')
                 }
@@ -47,7 +51,6 @@ function Item({modalCarta,closeModal, categorias,action, handleMsgStatus}) {
 
             closeModal()
     }
-
 
     return ( 
         <div className='dashboard__modal vercarta__modal'>
@@ -86,7 +89,7 @@ function Item({modalCarta,closeModal, categorias,action, handleMsgStatus}) {
                     <div className="vercarta__modal-row">
                         <div>
                             <label htmlFor={smallPriceId}>Precio chico</label>
-                            <input id={smallPriceId} type="text" defaultValue={`$${action == 'U' ? (item.precioChico || 0) : 0}`} {...register('precioChico', {pattern: PRECIO__REGEX})}/>
+                            <input id={smallPriceId} type="text" defaultValue={`$${action == 'U' ? (item.preciochico || 0) : 0}`} {...register('precioChico', {pattern: PRECIO__REGEX})}/>
                         </div>
                     {errors.precioChico?.type === 'pattern' && <p role="alert" className='form-error modal-item-error'>Debe comenzar con $ y uno o mas digitos</p>}
 
@@ -95,7 +98,7 @@ function Item({modalCarta,closeModal, categorias,action, handleMsgStatus}) {
                     <div className="vercarta__modal-row">
                         <div>
                             <label htmlFor={bigPriceId}>Precio grande</label>
-                            <input id={bigPriceId} type="text" defaultValue={`$${action == 'U' ? (item.precioGrande || 0) : 0}`} {...register('precioGrande')}/>
+                            <input id={bigPriceId} type="text" defaultValue={`$${action == 'U' ? (item.preciogrande || 0) : 0}`} {...register('precioGrande')}/>
                         </div>
                         {errors.precioGrande?.type === 'pattern' && <p role="alert" className='form-error modal-item-error'>Debe comenzar con $ y uno o mas digitos</p>}
 

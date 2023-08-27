@@ -9,6 +9,7 @@ export  async function getProducts(categoria) {
     const resp = await axios.get(urlSource, {
       params: { categoria },
     });
+    console.log(resp.data);
     return resp.data;
   } catch (error) {
     throw new ConnectionError()

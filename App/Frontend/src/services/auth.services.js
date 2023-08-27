@@ -83,3 +83,13 @@ export async function sendPasswordLink(data){
         // Manejar errores aquí
       }
     }
+
+export async function getData(id){
+  try {
+  const response = await axios.get(`http://localhost:4000/api/usuarios/:${id}`)
+    return response
+  } catch (error) {
+    console.log(error);
+  }
+
+}

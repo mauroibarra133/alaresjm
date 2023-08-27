@@ -1,27 +1,24 @@
-import sql from 'mssql'
-import config from '../config'
+import { Pool } from 'pg'; // Importa la biblioteca pg
 
+import config from '../config';
 
 const dbSettings = {
     user: config.dbUser,
     password: config.dbPassword,
-    server: config.dbServer,
+    host: config.dbServer,
     database: config.dbDataBase,
-    options: {
-        encrypt: true, // for azure
-        trustServerCertificate: true // change to true for local dev / self-signed certs
-    }
+    port: config.dbPort, // Añade el puerto si es necesario
+    ssl: false
+};
 
-}
+const pool = new Pool(dbSettings);
 
-export async function getConnection(){ // la exporto para que otros archivos la usen
+export async function getConnection() {
     try {
-        const pool = await sql.connect(dbSettings); //Se conecta en base a los parametros pasados
-        return pool // para que otros archivos usen el pool para hacer la consulta,
+        const client = await pool.connect();
+        return client; // Retorna el cliente para que otros archivos puedan usarlo para hacer consultas.
     } catch (error) {
-        console.log(error);
+        console.error(error);
+        throw error;
     }
-
 }
-
-export {sql}

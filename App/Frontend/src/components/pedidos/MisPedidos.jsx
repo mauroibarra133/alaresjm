@@ -80,6 +80,7 @@ function MisPedidos() {
             setOffset((pageActual-1) * LIMIT)
         }
     }
+    console.log(pedidos);
     function filterOrders(){
         if(pedidos.length <= 0) return []
         if(isFilterActive){

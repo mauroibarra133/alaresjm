@@ -45,7 +45,7 @@ function VerPedidos() {
         async function searchOrders(){
             try {
             const result = await getOrders({date: filterDate})
-            setOrders(filterOrders(result.data.data))
+            setOrders(result.data.data)
                 
             } catch (error) {
                 setShowModal({
@@ -162,6 +162,7 @@ function VerPedidos() {
             msg: ""
         });
     }
+    console.log(orders);
     return ( 
         <div className="veritems verpedidos">
             <div className="verpedidos__fechas veritems__fechas">

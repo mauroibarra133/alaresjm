@@ -1,110 +1,126 @@
-import {getConnection, sql, queries} from '../database/' //Traigo la conexion de la BD y las queries
+import { getConnection,queries } from '../database/';
 
-export async function getProducts(req,res){
+export async function getProducts(req, res) {
     try {
-        const pool = await getConnection() //Es una promesa, es el cliente para realizar consultas
-            const result = await pool.request().query(queries.Products.getAllProducts) //Hacemos la consulta
-            res.status(200).json(result.recordset)
-
-           
+        const client = await getConnection(); 
+        const result = await client.query(queries.Products.getAllProducts); 
+        res.status(200).json(result.rows); 
+        client.release(); 
     } catch (error) {
-        res.status(500).json({msg: "No se pudo obtener los productos"})
+        console.error(error);
+        res.status(500).json({ msg: 'No se pudieron obtener los productos' });
     }
-
 }
 
-export async function addProduct(req,res){
-    let {nombre, descripcion, id_categoria, precioChico, precioGrande} = req.body
 
-    if (descripcion == null) descripcion= ''
-    if (nombre == null || descripcion == null || id_categoria == null){
-        return res.status(400).json({msg: 'Bad Request. Please fill all fields'})
+export async function addProduct(req, res) {
+    const { nombre, descripcion, id_categoria, precioChico, precioGrande } = req.body;
+    if (descripcion == null) descripcion = '';
+    if (nombre == null || descripcion == null || id_categoria == null) {
+        return res.status(400).json({ msg: 'Bad Request. Please fill all fields' });
     }
 
     try {
-        const pool = await getConnection()
-        const resultNew = await pool.request()
+        const client =  await getConnection(); 
+        await client.query('BEGIN'); 
 
-        .input('nombre',sql.VarChar,nombre)
-        .input('descripcion',sql.Text,descripcion)
-        .input('id_categoria',sql.Int,id_categoria)
-        .query(queries.Products.addProduct)
+        // Inserta el producto
+        const resultNew = await client.query(queries.Products.addProduct, [nombre, descripcion, id_categoria]);
+        const id = resultNew.rows[0].id;
 
-        const id = resultNew.recordset[0].newId
-        const smallPriceResult = await pool.request()
-        .input('id',sql.Int,id)
-        .input('precioChico',sql.Int,precioChico)
-        .query(queries.Prices.addPrecioChico) //Hacemos la consulta
+        // Inserta el precio chico
+        await client.query(queries.Prices.addPrecioChico, [id, precioChico]);
 
-        const bigPriceResult = await pool.request()
-        .input('id',sql.Int,id)
-        .input('precioGrande',sql.Int,precioGrande)
-        .query(queries.Prices.addPrecioGrande) //Hacemos la consulta
+        // Inserta el precio grande
+        await client.query(queries.Prices.addPrecioGrande, [id, precioGrande]);
 
-        res.status(200).json(resultNew,smallPriceResult,bigPriceResult)
-        
+        await client.query('COMMIT');
+
+        client.release();
+
+        res.status(200).json(resultNew.rows, 'Precio chico agregado', 'Precio grande agregado');
     } catch (error) {
-        console.log(error);
-        res.status(500).json({msg: "No se pudo agregar el producto"})
+        console.error(error);
+        res.status(500).json({ msg: 'No se pudo agregar el producto' });
     }
-    
-}   
+}
 
-export async function getProductById(req,res){
+export async function getProductById(req, res) {
     const { id } = req.params;
-    try {
-            const pool = await getConnection() //Es una promesa, es el cliente para realizar consultas
-    const result = await pool.request()
-        .input('id',id)
-        .query(queries.Products.getProductById) //Hacemos la consulta
     
-    res.status(200).send(result.recordset[0])
+    try {
+        const client =  await getConnection();
+        const result = await client.query(queries.Products.getProductById, [id]);
+        client.release(); 
+        
+        if (result.rows.length > 0) {
+            res.status(200).json(result.rows[0]);
+        } else {
+            res.status(404).json({ msg: "Producto no encontrado" });
+        }
     } catch (error) {
-        res.status(500).json({msg: "No se pudo obtener el producto de esa categoria"})       
+        console.error(error);
+        res.status(500).json({ msg: "No se pudo obtener el producto de esa categoría" });
     }
-
 }
 
-export async function deleteProductById(req,res){
+export async function deleteProductById(req, res) {
     try {
         const { id } = req.params;
-        const pool = await getConnection() //Es una promesa, es el cliente para realizar consultas
-        const result = await pool.request()
-            .input('id',id)
-            .query(queries.Products.deleteProduct) //Hacemos la consulta
-    
-        res.sendStatus(204)
+        const client = await getConnection();
+        
+        await client.query('BEGIN');
+
+        const result1 = await client.query(queries.Products.deleteProductPrices, [id]);
+        const result2 = await client.query(queries.Products.deleteProduct, [id]);
+
+        await client.query('COMMIT');
+
+        client.release();
+
+        if (result1.rowCount > 0 || result2.rowCount > 0) {
+            res.sendStatus(204); // Producto y registros de precios eliminados
+        } else {
+            res.status(404).json({ msg: "Producto no encontrado" });
+        }
     } catch (error) {
-        res.status(500)
-        res.send(error.message)
+        console.error(error);
+        await client.query('ROLLBACK');
+        res.status(500).json({ msg: "No se pudo eliminar el producto" });
     }
-
 }
-export async function updateProductById (req,res){
-    let {nombre, descripcion, id_categoria, precioChico, precioGrande} = req.body
+
+
+export async function updateProductById(req, res) {
     const { id } = req.params;
-    console.log(precioChico,precioGrande);
-    if (nombre == null || descripcion == null || id_categoria == null){
-        return res.status(400).json({msg: 'Bad Request. Please fill all fields'})
+    const { nombre, descripcion, id_categoria, precioChico, precioGrande } = req.body;
+
+    if (nombre == null || descripcion == null || id_categoria == null) {
+        return res.status(400).json({ msg: 'Bad Request. Please fill all fields' });
     }
 
-    const pool = await getConnection() //Es una promesa, es el cliente para realizar consultas
-    const productResult = await pool.request()
-        .input('nombre',sql.VarChar,nombre)
-        .input('descripcion',sql.Text,descripcion)
-        .input('id_categoria',sql.Int,id_categoria)
-        .input('id',sql.Int,id)
-        .query(queries.Products.updateProductById) //Hacemos la consulta
+    const client = await getConnection(); // Inicializa client aquí
 
-        const smallPriceResult = await pool.request()
-        .input('id',sql.Int,id)
-        .input('precioChico',sql.Int,precioChico)
-        .query(queries.Prices.updatePrecioChico) //Hacemos la consulta
+    try {
+        await client.query('BEGIN'); 
 
-        const bigPriceResult = await pool.request()
-        .input('id',sql.Int,id)
-        .input('precioGrande',sql.Int,precioGrande)
-        .query(queries.Prices.updatePrecioGrande) //Hacemos la consulta
+        // Actualiza la información del producto
+        const productResult = await client.query(queries.Products.updateProductById, [nombre, descripcion, id_categoria, id]);
 
-        res.status(204).json({productResult,smallPriceResult,bigPriceResult})
+        // Actualiza los precios
+        await client.query(queries.Prices.updatePrecioChico, [precioChico, id]);
+        await client.query(queries.Prices.updatePrecioGrande, [precioGrande, id]);
+
+        await client.query('COMMIT'); 
+
+        res.sendStatus(204); // Producto actualizado con éxito
+    } catch (error) {
+        console.error(error);
+
+        if (client) {
+            await client.query('ROLLBACK'); 
+        }
+
+        res.status(500).json({ msg: "No se pudo actualizar el producto" });
+    }
 }

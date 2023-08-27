@@ -18,7 +18,7 @@ export function CartProvider({children}){
             updateLocalStorage(newCart)
         }else{
             //Si no está en el carrito
-            const newCart = [...cart,{...product,quantity:1,priceSelected: product.precioGrande, id_tamaño: 3}]
+            const newCart = [...cart,{...product,quantity:1,priceSelected: product.preciogrande, id_tamaño: 3}]
             updateLocalStorage(newCart)
             setCart(newCart)
         }

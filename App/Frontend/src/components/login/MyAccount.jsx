@@ -5,12 +5,26 @@ import flechaImg from '../../assets/images/flecha-correcta.webp'
 import reserva3 from '../../assets/images/campana.webp'
 import {useAuth} from '../../hooks/useAuth'
 import { NavLink } from 'react-router-dom'
-
-
+import {getData} from '../../services/auth.services'
+import { useEffect, useState } from 'react'
 const MyAccount = () => {
 
   const {auth} = useAuth()
-  console.log(auth);
+  const [points,setPoints] = useState(0)
+
+  useEffect(()=>{
+    async function getUserData(){
+      try {
+        const data = await getData(auth.data.user_id);
+        console.log(data);
+        setPoints(data.data.points)
+      } catch (error) {
+        console.log(error);
+      }
+
+    }
+    getUserData()
+  })
 
   return (
     <div className="myaccount__container">
@@ -52,7 +66,7 @@ const MyAccount = () => {
               </div>
               <div className="myaccount__pts">
                 <img src={coheteImg} alt="Cohete icono" />
-                <p>{auth.data.puntos || 0}<span> pts</span></p>
+                <p>{points }<span> pts</span></p>
               </div>
           </div>
 

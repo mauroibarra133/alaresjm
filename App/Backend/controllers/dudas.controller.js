@@ -1,101 +1,71 @@
-import {getConnection, sql, queries} from '../database/' //Traigo la conexion de la BD y las queries
+import { getConnection, queries } from '../database/';
 
-export async function getDudas(req,res){
+export async function getDudas(req, res) {
     try {
-        const pool = await getConnection() //Es una promesa, es el cliente para realizar consultas
+        const pool = await getConnection();
         const filtro = req.query.estado;
 
-        if(!filtro){
-            const result = await pool.request().query(queries.Dudas.getAllDudas) //Hacemos la consulta
-            res.status(200).json(result.recordset)
-        }else{
-            const result = await pool.request()
-            .input('id_estado',sql.Int,filtro)
-            .query(queries.Dudas.getDudasByStatus) //Hacemos la consulta
-            res.status(200).json(result.recordset)
-
+        if (!filtro) {
+            const result = await pool.query(queries.Dudas.getAllDudas);
+            res.status(200).json(result.rows);
+        } else {
+            const result = await pool.query(queries.Dudas.getDudasByStatus, [filtro]);
+            res.status(200).json(result.rows);
         }
     } catch (error) {
-        res.status(500).json({msg: error.message})
-
+        res.status(500).json({ msg: error.message });
     }
-
 }
 
-export async function addDuda(req,res){
-    let {nombre, apellido, telefono,mail,descripcion} = req.body
+export async function addDuda(req, res) {
+    let { nombre, apellido, telefono, mail, descripcion } = req.body;
 
     try {
-        const pool = await getConnection()
-        await pool.request()
-
-        .input('nombre',sql.VarChar,nombre)
-        .input('apellido',sql.Text,apellido)
-        .input('telefono',sql.VarChar,telefono.toString())
-        .input('mail',sql.Text,mail)
-        .input('descripcion',sql.Text,descripcion)
-        .input('id_estado',sql.Int,1)
-        .query(queries.Dudas.addDuda)
-
-        res.json({nombre,apellido,telefono,mail,descripcion}); // Porque el pool request solo retorna las filas afectadas
-        
+        const pool = await getConnection();
+        await pool.query(queries.Dudas.addDuda, [nombre, apellido, telefono.toString(), mail, descripcion, 1]);
+        res.json({ nombre, apellido, telefono, mail, descripcion });
     } catch (error) {
-        res.status(500).json(error.message)
+        res.status(500).json({ msg: error.message });
     }
-    
-}   
+}
 
-export async function getDudaById(req,res){
+export async function getDudaById(req, res) {
     const { id } = req.params;
-    const pool = await getConnection() //Es una promesa, es el cliente para realizar consultas
-    const result = await pool.request()
-        .input('id',id)
-        .query(queries.Dudas.getDudaById) //Hacemos la consulta
-    
-    res.send(result.recordset[0])
-}
-
-
-export async function deleteDudaById(req,res){
     try {
-        const { id } = req.params;
-        const pool = await getConnection() //Es una promesa, es el cliente para realizar consultas
-        const result = await pool.request()
-            .input('id',id)
-            .query(queries.Dudas.deleteDuda) //Hacemos la consulta
-    
-        res.sendStatus(204)
+        const pool = await getConnection();
+        const result = await pool.query(queries.Dudas.getDudaById, [id]);
+        res.send(result.rows[0]);
     } catch (error) {
-        res.status(500)
-        res.send(error.message)
+        res.status(500).json({ msg: "No se pudo obtener la duda" });
     }
-
 }
-export async function updateDudaById (req,res){
+
+export async function deleteDudaById(req, res) {
     try {
-        let {nombreCompleto,telefono,mail,duda, estado} = req.body
-        const nombre = nombreCompleto.split(' ')[0]
-        const apellido = nombreCompleto.split(' ')[1]
         const { id } = req.params;
-    
-        if(!estado || estado ==''){
-            estado = 1
+        const pool = await getConnection();
+        await pool.query(queries.Dudas.deleteDuda, [id]);
+        res.sendStatus(204);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+}
+
+export async function updateDudaById(req, res) {
+    try {
+        let { nombrecompleto, telefono, mail, duda, estado } = req.body;
+        const nombre = nombrecompleto.split(' ')[0];
+        const apellido = nombrecompleto.split(' ')[1];
+        const { id } = req.params;
+
+        if (!estado || estado == '') {
+            estado = 1;
         }
-        const pool = await getConnection() //Es una promesa, es el cliente para realizar consultas
-        await pool.request()
-            .input('nombre',sql.VarChar,nombre)
-            .input('apellido',sql.VarChar,apellido)
-            .input('telefono',sql.VarChar,telefono.toString())
-            .input('mail',sql.VarChar,mail)
-            .input('descripcion',sql.Text,duda)
-            .input('estado',sql.VarChar,estado)
-            .input('id',sql.Int,id)
-            .query(queries.Dudas.updateDudaById) //Hacemos la consulta
-            res.status(204).json({msg: 'Duda actualizada correctamente'})
+        const pool = await getConnection();
+        await pool.query(queries.Dudas.updateDudaById, [nombre, apellido, telefono.toString(), mail, duda, estado, id]);
+        res.status(204).json({ msg: 'Duda actualizada correctamente' });
     } catch (error) {
-        res.status(500).json({error: error.message})
+        console.log(error);
+        res.status(500).json({ error: error.message });
     }
-
-
-
 }

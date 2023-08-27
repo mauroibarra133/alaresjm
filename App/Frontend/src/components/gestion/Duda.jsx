@@ -56,7 +56,7 @@ function Duda({modalDuda, closeModal}) {
                 <div className="verduda__contact">
                     <div className="dashboard__dato verduda__dato">
                             <img src={userIcon} alt="Nombre Completo" className="dashboard-icon"/>
-                            <div>{duda.nombreCompleto}</div>
+                            <div>{duda.nombrecompleto}</div>
                     </div>
                     <div className="dashboard__dato verduda__dato">
                             <img src={phoneImg} alt="Telefono" className="dashboard-icon"/>

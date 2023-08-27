@@ -1,11 +1,13 @@
 import mercadopago from "mercadopago"
-import { addOrder, getPedidosTransf } from "./pedidos.controller";
-import { addDescOrderTransf } from "./desc_pedidos";
+import {  getPedidosTransf } from "./pedidos.controller";
 import app from '../app'
+
+import { getConnection, queries } from '../database'; // Importa la función de conexión
 
 export const receiveWebHook = async (req, res) => {
   let items;
   let fecha, id_pago, id_usuario, direccion, nota, total, id_tipo_pago, id_estado, id_tipo_entrega;
+  const pool = await getConnection()
 
   try {
     const payment = req.query;
@@ -16,37 +18,63 @@ export const receiveWebHook = async (req, res) => {
       // Pedido
       fecha = fullData.date_approved;
       id_pago = fullData.id;
-      id_usuario = fullData.metadata.user_id
-      direccion = fullData.metadata.tipo_entrega == 1 ? fullData.additional_info.payer.address.street_name : ' ';
+      id_usuario = fullData.metadata.user_id;
+      direccion =
+        fullData.metadata.tipo_entrega == 1
+          ? fullData.additional_info.payer.address.street_name
+          : ' ';
       nota = fullData.metadata.nota_pedido || '';
       total = fullData.transaction_amount;
       id_tipo_pago = fullData.metadata.tipo_pago;
       id_tipo_entrega = fullData.metadata.tipo_entrega;
-      id_estado = fullData.status === 'approved' ? 1 : null;
+      id_estado = fullData.status === 'approved' ? 28 : null;
+
+      if (fullData.status !== 'approved') {
+        // Si el estado del pago no es 'aprobado', envía una respuesta de error
+        return res.status(400).json({ message: 'El pago no está en estado aprobado' });
+      }
+      // Inicia una transacción
+      await pool.query('BEGIN');
 
       // Agregar el pedido
-      const result = await addOrder(
-        fecha,
-        parseInt(id_pago),
-        id_usuario, 
-        direccion,
-        nota,
-        parseInt(total),
-        parseInt(id_tipo_pago),
-        parseInt(id_tipo_entrega)
+      const orderResult = await pool.query(queries.Pedidos.addOrder,
+        [
+          fecha,
+          parseInt(id_pago),
+          id_usuario,
+          direccion,
+          nota,
+          parseFloat(total),
+          parseInt(id_tipo_entrega),
+          parseInt(id_tipo_pago),
+          parseInt(id_estado),
+          0
+        ]
       );
-      const pedidoID = result.recordset[0].newId
+      console.log(orderResult);
+      const pedidoID = orderResult.rows[0].id;
 
       // Desc Pedido
       items = fullData.additional_info.items;
-      await addDescOrderTransf(items, pedidoID);
+      for (const item of items) {
+        const { id, quantity, unit_price } = item;
 
-      const today = new Date()
+        // Inserta un registro en la tabla "desc_pedidos"
+        await pool.query(queries.DescPedidos.addDescOrder,
+          [parseInt(id), parseInt(quantity), parseFloat(quantity) * parseFloat(unit_price), pedidoID]
+        );
+      }
 
-      const newOrder = await getPedidosTransf(today)
+      // Confirma la transacción
+      await pool.query('COMMIT');
+
+      const today = new Date();
+
+      const newOrder = await getPedidosTransf(today);
       console.log(newOrder[0]);
-      const io = app.get('socketio')
-      io.emit('adminOrder',newOrder[0]);
+      const io = app.get('socketio');
+      io.emit('adminOrder', newOrder[0]);
+
       // Enviar una respuesta de éxito
       res.status(200).json({ message: 'Pago recibido y procesado correctamente' });
     } else {
@@ -56,9 +84,11 @@ export const receiveWebHook = async (req, res) => {
   } catch (error) {
     console.error(error);
     // Manejar errores adecuadamente y enviar una respuesta de error
+    await pool.query('ROLLBACK'); // En caso de error, revierte la transacción
     res.status(500).json({ error: 'Hubo un error al procesar el pago' });
   }
 };
+
 
 
 export const create_preference =(req, res) => {
@@ -75,7 +105,7 @@ export const create_preference =(req, res) => {
         failure: "http://localhost:5173",
         pending: "",
       },
-      notification_url:"https://96e5-190-122-76-4.ngrok.io/webhook",
+      notification_url:"https://f239-190-122-76-4.ngrok.io/webhook",
       auto_return: "approved"};
     
   
