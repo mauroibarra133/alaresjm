@@ -4,12 +4,14 @@ import { addDescOrderTransf } from "./desc_pedidos";
 
 export async function addOrder(fecha,id_pago,id_usuario,direccion,nota,total,id_tipo_pago,id_tipo_entrega,monto_cambio) {
     try {
+  console.log('id_estado',id_estado);
+
       // Inserta un registro en la tabla "pedidos"
       const pool = await getConnection()
       const result = await pool.query(
         queries.Pedidos.addOrder,
         [fecha,parseInt(id_pago),id_usuario,direccion,nota,parseFloat(total),parseInt(id_tipo_entrega),
-            parseInt(id_tipo_pago),28,id_tipo_pago === 2 ? 0 : parseFloat(monto_cambio),
+            parseInt(id_tipo_pago),1,id_tipo_pago === 2 ? 0 : parseFloat(monto_cambio),
         ]
       );
       return result;
@@ -22,7 +24,7 @@ export async function addOrder(fecha,id_pago,id_usuario,direccion,nota,total,id_
 
   export async function addOrderEft(req, res) {
     let { fecha, id_usuario, direccion, nota, total, id_tipo_pago, id_tipo_entrega, id_estado, items, monto_cambio } = req.body;
-  
+  console.log(id_estado);
     try {
       const paymentID = generatePaymentID();
   
