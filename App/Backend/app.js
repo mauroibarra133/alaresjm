@@ -55,5 +55,6 @@ app.use(loginRouter)
 app.use(usuariosRouter)
 app.use(reservasRouter)
 app.use(rankingRouter)
+app.use(express.static(path.join(__dirname, 'dist')));
 
 export default app;
