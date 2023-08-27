@@ -29,7 +29,7 @@ function Pedido({pedido}) { // fechaHoy: YYYY-MM-DD
           {`$${pedido.total}`}
         </div>
         <div className="datos__body-dato pedidos-estado">
-            <img src={getStatusImage(pedido.estado_pedido)} alt="" className='status-img'/>
+            <img src={getStatusImage(pedido.estado_pedido)} alt={pedido.estado_pedido} className='status-img'/>
             {isLargeScreen && (
                 <p>{pedido.estado_pedido}</p>
             )}

@@ -4,7 +4,7 @@ function Loading() {
     return ( 
 
         <LoadingWrapper>
-            <img src={burgerImg} alt="" style={{height: '80px', width: '80px'}}/>
+            <img src={burgerImg} alt="Loading Burger" style={{height: '80px', width: '80px'}}/>
             <LoadingText>
                 Loading...
             </LoadingText>

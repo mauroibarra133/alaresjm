@@ -200,7 +200,7 @@ function VerPedidos() {
                         <div className={`veritems__row verpedidos__body-row`} id={`pedido-${pedido.id}`} key={pedido.id} onClick={()=>openModalOrder(pedido)}>
                             <div className="veritems__dato verpedidos__dato ver-lista__dato">{pedido.hora}</div>
                             <div className="veritems__dato verpedidos__dato ver-lista__dato">{pedido.nombre_completo}</div>
-                            <div className="veritems__dato verpedidos__dato ver-lista__dato"><img src={getStatusImage(pedido.estado_pedido)} alt="" />
+                            <div className="veritems__dato verpedidos__dato ver-lista__dato"><img src={getStatusImage(pedido.estado_pedido)} alt={pedido.estado_pedido} />
                                 {isLargeScreen && (
                                     <p>{pedido.estado_pedido}</p>
                                 )}

@@ -29,14 +29,14 @@ function Footer() {
                     <div className="footer-info__wrapper">
                         <h4>CONTACTO COMERCIAL</h4>
                         <div className="footer-info__text">
-                            <img src={emailIcon} alt="" />
+                            <img src={emailIcon} alt="Email" />
                             <a href="mailto: mauroibarra133@gmail.com" rel='noreferrer' target='_blank'><p>alares@gmail.com</p></a>
                         </div>
                     </div>
                     <div className="footer-info__wrapper">
                         <h4>SEGUINOS</h4>
                         <div className="footer-info__text">
-                            <img src={igIcon} alt="" />
+                            <img src={igIcon} alt="Instagram" />
                             <a href="https://www.instagram.com/alaresjm/" rel='noreferrer' target='_blank'><p>alaresjm</p></a>
                         </div>
                         <div className="footer-info__text">
@@ -45,14 +45,14 @@ function Footer() {
 
                         </div>
                         <div className="footer-info__text">
-                            <img src={phoneIcon} alt="" />
+                            <img src={phoneIcon} alt="Celular" />
                             <a href="tel:+543525431002" rel='noreferrer' target='_blank'><p>3525-431002</p></a>
                         </div>
                     </div>
                     <div className="footer-info__wrapper">
                         <h4>DONDE ESTAMOS</h4>
                         <div className="footer-info__text">
-                            <img src={locationIcon} alt="" />
+                            <img src={locationIcon} alt="Ubicacion" />
                            <a href="https://goo.gl/maps/zjHeALeiZ6j4BMA28" rel='noreferrer' target='_blank'><p>Castulo Peña 582, Jesus Maria</p></a>
                         </div>
                     </div>

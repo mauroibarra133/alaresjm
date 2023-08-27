@@ -121,20 +121,20 @@ function Booking({booking, fechaHoy: todayDate}) { // fechaHoy: YYYY-MM-DD
         <div className="datos__body-dato">{formattedDate}</div>
         <div className="datos__body-dato">{booking.hora}</div>
         <div className="datos__body-dato datos__body-comensales">
-          <img src={userImg} className="user-icon" alt="" />
+          <img src={userImg} className="user-icon" alt="Cantidad de personas" />
           {booking.cantidad_personas}
         </div>
         <div className="datos__body-dato">{booking.lugar}</div>
         <div className="datos__body-dato">
-          <img src={getStatusImage()} alt="" className='status-img'/>
+          <img src={getStatusImage()} alt={booking.estado} className='status-img'/>
           {isLargeScreen && (
             <p>{booking.estado}</p>
           )}
           
         </div>
         <div className="datos__body-dato acciones">
-            <img src={pencilImg} alt="" className={ !validatePastHour(booking.hora, dateBooking) ? 'old' : 'new'} onClick={()=>handleUpdate()}/>
-            <img src={cruzImg} alt="" className={!validatePastHour(booking.hora, dateBooking)? 'old' : 'new'} onClick={()=>handleDelete()}/>
+            <img src={pencilImg} alt="Modificar" className={ !validatePastHour(booking.hora, dateBooking) ? 'old' : 'new'} onClick={()=>handleUpdate()}/>
+            <img src={cruzImg} alt="Eliminar" className={!validatePastHour(booking.hora, dateBooking)? 'old' : 'new'} onClick={()=>handleDelete()}/>
         </div>
   <Modal isSubmitted={showModal.isClicked} isGoodStatus={showModal.isGood} handleSubmit={closeModal} msg={showModal.msg} position={'top'}></Modal>
   {

@@ -72,7 +72,7 @@ function Login() {
             <Path pathPrev={'Home'} pathActual={'Login'} goTo={'Home'}></Path>
             <div className="login__box-container">
                 <div className="login__box">
-                        <img src={logoImg} alt="" className='login__logo' />
+                        <img src={logoImg} alt="Alares Logo" className='login__logo' />
                         <div className="login__square">
                             <div className="login__titles">
                                 <p className="login__title">LOGIN</p>

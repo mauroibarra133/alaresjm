@@ -1,0 +1,1 @@
+import{a as e,C as o,S as s}from"./index-183b0b0a.js";const a=`${s}/api/dudas`;async function c(){try{return(await e.get(a)).data}catch(r){throw new o(r.message)}}async function i(r){if(r.id)try{return console.log("si entra"),await e.put(a+"/"+r.id,r)}catch(t){return t}else try{return await e.post(a,r)}catch(t){throw new o(t.message)}}export{i as a,c as g};
