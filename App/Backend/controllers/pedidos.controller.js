@@ -58,7 +58,7 @@ export async function addOrder(fecha,id_pago,id_usuario,direccion,nota,total,id_
   export async function getPedidos(req, res) {
     const date = req.query.date;
     const user_id = req.query.user_id;
-    res.header('Access-Control-Allow-Origin', 'http://localhost:5173');
+    res.header('Access-Control-Allow-Origin', 'https://alaresjm.onrender.com');
 
     try {
         const client = await getConnection()

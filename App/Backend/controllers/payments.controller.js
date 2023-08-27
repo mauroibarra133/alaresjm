@@ -27,7 +27,7 @@ export const receiveWebHook = async (req, res) => {
       total = fullData.transaction_amount;
       id_tipo_pago = fullData.metadata.tipo_pago;
       id_tipo_entrega = fullData.metadata.tipo_entrega;
-      id_estado = fullData.status === 'approved' ? 28 : null;
+      id_estado = fullData.status === 'approved' ? 1 : null;
 
       if (fullData.status !== 'approved') {
         // Si el estado del pago no es 'aprobado', envía una respuesta de error
@@ -101,11 +101,11 @@ export const create_preference =(req, res) => {
             street_name: req.body.address || ''}
         },
       back_urls: {
-        success: "http://localhost:5173/delivery",
-        failure: "http://localhost:5173",
+        success: "https://alaresjm.onrender.com/delivery",
+        failure: "https://alaresjm.onrender.com/carta",
         pending: "",
       },
-      notification_url:"https://f239-190-122-76-4.ngrok.io/webhook",
+      notification_url:"https://alaresjm.onrender.com/webhook",
       auto_return: "approved"};
     
   

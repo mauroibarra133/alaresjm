@@ -11,7 +11,7 @@ export async function createOrder(fecha_ISO, id_usuario,direccionCliente, notaPe
         nota: notaPedido,
         total: parseInt(total),
         id_tipo_pago: parseInt(id_tipo_pago),
-        id_estado: 28,
+        id_estado: 1, //A confirmar
         id_tipo_entrega: parseInt(tipoEntrega),
         monto_cambio: parseInt(monto_cambio),
         items: items
