@@ -36,13 +36,12 @@ io.on('connection', (socket) => {
 })
 
 app.set('socketio', io); // aquí asignas el socket global
-// app.set("view engine", "ejs")
 
 //Middlewares
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 const corsOptions = {
-    origin: "http://localhost:5173",
+    origin: "https://alaresjm.onrender.com",
     credentials: true,
 };
 app.use(cors(corsOptions));
