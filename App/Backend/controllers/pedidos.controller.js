@@ -41,7 +41,7 @@ export async function addOrder(fecha,id_pago,id_usuario,direccion,nota,total,id_
           parseFloat(total),
           parseInt(id_tipo_entrega),
           parseInt(id_tipo_pago),
-          parseInt(id_estado),
+          1,
           id_tipo_pago === 2 ? 0 : parseFloat(monto_cambio),
         ]
       );

@@ -39,7 +39,7 @@ export const  queries ={
     Pedidos:{
         addOrder: `
         INSERT INTO pedidos (fecha, id_pago, id_usuario, direccion, nota, total, id_tipo_entrega, id_tipo_pago, id_estado, monto_cambio,puntos_parciales) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, ($6/10)) RETURNING id`,
-        searchIdOrder: `SELECT id FROM pedidos WHERE id_pago = @id_pago`,
+        searchIdOrder: `SELECT id FROM pedidos WHERE id_pago = $1`,
         getPedidosByUserId: `SELECT P.id, P.fecha, STRING_AGG(Pr.nombre, ', ') AS nombres_productos, P.total, E.nombre AS estado_pedido
                             FROM pedidos P
                             JOIN desc_pedidos D ON P.id = D.id_pedido
