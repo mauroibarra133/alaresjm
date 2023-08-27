@@ -13,6 +13,8 @@ import rankingRouter from './routes/ranking'
 import mercadopagoRouter from './routes/mercadoPago'
 import cookieParser from "cookie-parser";
 import compression from 'compression'
+import path from 'path';
+
 
 const app = express()
 const httpServer = http.createServer(app)
