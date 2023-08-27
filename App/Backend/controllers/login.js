@@ -46,7 +46,7 @@ export async function login (req,res){
 export async function getMail(email) {
     try {
         const pool = await getConnection();
-        const result = await pool.query(queries.Login.getUserData, [config.encrypt_code,email]);
+        const result = await pool.query(queries.Login.getUserData, [config.encrypt_code.toString(),email]);
         return result.rows;
     } catch (error) {
         throw error;
