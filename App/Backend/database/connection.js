@@ -11,7 +11,7 @@ const dbSettings = {
     ssl: false
 };
 
-const pool = new Pool(dbSettings);
+const pool = new Pool({connectionString: 'postgres://alares:UC5hhl4jJHavq3qQWi8OrLvIs0VMNsSD@dpg-cjlb6qnv9s6c73c4hptg-a/alares'});
 
 export async function getConnection() {
     try {
