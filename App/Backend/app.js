@@ -44,6 +44,12 @@ const corsOptions = {
     origin: "https://alaresjm.onrender.com",
     credentials: true,
 };
+
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '/dist/index.html'));
+  });
+
+
 app.use(cors(corsOptions));
 app.use(compression());
 app.use(cookieParser())
