@@ -29,8 +29,6 @@ function Reserva({modalBooking, closeModal}) {
                     setEstado(event.target.value)
                     booking.estado = event.target.value
                     
-                }else{
-                    console.log('No se pudo wn');
                 }
             }
         }

@@ -14,7 +14,6 @@ export async function createPreferenceMP(items, direccionCliente,tipoPago, tipoE
         user_id: id_usuario
       }
     });
-    console.log('response preference', response);
     return response
   } catch (error) {
     console.log(error);

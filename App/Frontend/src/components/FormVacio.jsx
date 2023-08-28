@@ -7,7 +7,7 @@ function FormVacio({msg, msgButton,goTo}) {
       <div className="datos__body vacio">
         <p className="misreservas__msg">{msg}</p>
         <div className="misreservas__button">
-          <NavLink to={`/${goTo}`}>
+          <NavLink to={goTo ? `/${goTo}` : './'}>
             <button className="button">{msgButton}</button>
           </NavLink>
         </div>

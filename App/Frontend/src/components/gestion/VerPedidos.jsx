@@ -9,6 +9,7 @@ import VerPedidosVacio from '../FormVacio'
 import io from 'socket.io-client';
 const socket = io('/');
 import Modal from "../Modal";
+import LoaderComponent from '../menu/LoaderComponent'
 
 function VerPedidos() {
     //Constants
@@ -16,13 +17,15 @@ function VerPedidos() {
     const filterCancelId = useId()
     const filterDeliveredId = useId()
     const today = new Date()
+    today.setUTCHours(today.getUTCHours() - 3);
     const todayDate = today.toISOString().split('T')[0]
     const yesterday = new Date()
-    yesterday.setDate(yesterday.getDate() - 1);
+    yesterday.setDate(today.getDate() - 1);
     const yesterdayDate = yesterday.toISOString().split('T')[0];
 
     //States
     const [orders,setOrders] = useState([]);
+    const [loading,setLoading] = useState(true);
 
     
     const [filterDate,setFilterDate] = useState(todayDate);
@@ -45,9 +48,11 @@ function VerPedidos() {
         async function searchOrders(){
             try {
             const result = await getOrders({date: filterDate})
+            setLoading(false)
             setOrders(result.data.data)
                 
             } catch (error) {
+            setLoading(false)
                 setShowModal({
                     isSubmitted: true,
                     isGood: false,
@@ -162,7 +167,6 @@ function VerPedidos() {
             msg: ""
         });
     }
-    console.log(orders);
     return ( 
         <div className="veritems verpedidos">
             <div className="verpedidos__fechas veritems__fechas">
@@ -195,20 +199,28 @@ function VerPedidos() {
                     <div className="veritems__header-column  verpedidos__header-column">Estado</div>
                 </div>
                 <div className="veritems__body verpedidos__body" id='verpedidos__body'>
-                    {filterOrders(orders).length <= 0 ? <VerPedidosVacio msg={'No hay pedidos el dia de hoy'} msgButton={':('}></VerPedidosVacio> :
-                     filterOrders(orders).map(pedido =>(
-                        <div className={`veritems__row verpedidos__body-row`} id={`pedido-${pedido.id}`} key={pedido.id} onClick={()=>openModalOrder(pedido)}>
-                            <div className="veritems__dato verpedidos__dato ver-lista__dato">{pedido.hora}</div>
-                            <div className="veritems__dato verpedidos__dato ver-lista__dato">{pedido.nombre_completo}</div>
-                            <div className="veritems__dato verpedidos__dato ver-lista__dato"><img src={getStatusImage(pedido.estado_pedido)} alt={pedido.estado_pedido} />
-                                {isLargeScreen && (
-                                    <p>{pedido.estado_pedido}</p>
-                                )}
-                            </div>
-                        </div>
+  {loading ? (
+    <LoaderComponent size={'minimal'}/>
+  ) : (
+    filterOrders(orders).length <= 0 ? (
+      <VerPedidosVacio msg={'No hay pedidos el día de hoy'} msgButton={':('}></VerPedidosVacio>
+    ) : (
+      filterOrders(orders).map(pedido => (
+        <div className={`veritems__row verpedidos__body-row`} id={`pedido-${pedido.id}`} key={pedido.id} onClick={() => openModalOrder(pedido)}>
+          <div className="veritems__dato verpedidos__dato ver-lista__dato">{pedido.hora}</div>
+          <div className="veritems__dato verpedidos__dato ver-lista__dato">{pedido.nombre_completo}</div>
+          <div className="veritems__dato verpedidos__dato ver-lista__dato">
+            <img src={getStatusImage(pedido.estado_pedido)} alt={pedido.estado_pedido} />
+            {isLargeScreen && (
+              <p>{pedido.estado_pedido}</p>
+            )}
+          </div>
+        </div>
+      ))
+    )
+  )}
+</div>
 
-                    ))}
-                </div>
             </div>
             {modalOrder.isSubmitted && (
                 <Overlay comp={'verpedidos'}>

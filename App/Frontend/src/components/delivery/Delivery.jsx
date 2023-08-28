@@ -14,6 +14,7 @@ import Modal from '../Modal';
 import io from 'socket.io-client';
 import '../../styles/delivery/delivery.css'
 const socket = io('/');
+import trashImg from '../../assets/images/trash.webp'
 
 function Delivery() {
 
@@ -30,7 +31,6 @@ function Delivery() {
   //Hooks
   const {auth} = useAuth();
   const { cart, clearCart, addToCart, removeProductFromCart, modifyCart } = useCart();
-console.log(cart);
   //Use Effects
   useEffect(() => {
     const searchParams = new URLSearchParams(window.location.search);
@@ -124,7 +124,7 @@ const onSubmit = (data)=>{
     return ( 
         <>
         <div className="delivery__container" >
-            <Path pathPrev={'Home'} pathActual={Delivery.name} goTo={'Home'}/>
+            <Path pathPrev={'Home'} pathActual={'Delivery'} goTo={'Home'}/>
             <div className="order__container">
                 <div className="order__items">
                     {cart.length === 0 ? <CartVacio/> : cart.map(product => (
@@ -138,8 +138,8 @@ const onSubmit = (data)=>{
                     <p className="order__total-price">{`$${total}`}</p>
                 </div>
                 <div className="order__button">
-                <button className='button' onClick={clearCart}>
-                    Limpiar Carrito
+                <button className='button delete_cart_button' onClick={clearCart}>
+                    <img src={trashImg} alt="Trash Button" />
                 </button>
                 </div>
             </div>

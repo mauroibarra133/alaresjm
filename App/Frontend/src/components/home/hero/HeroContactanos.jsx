@@ -54,6 +54,7 @@ function HeroContactanos() {
             handleOpenModal(true)
             
         } catch (error) {
+            console.log(error);
             handleOpenModal(false)   
         }
     }
@@ -97,12 +98,14 @@ function HeroContactanos() {
                             <input id={mailId} type="email" placeholder='Ej: alares@gmail.com'{...register('mail',{pattern: EMAIL_REGEX, required:true,minLength:8})}/>
                         </div>
                             {errors.mail?.type === 'required' && <p role="alert" className='form-error'>El mail es requerido</p>}
+                            {errors.mail?.type === 'pattern' && <p role="alert" className='form-error'>Debes ingresar un mail valido</p>}
+                            {errors.mail?.type === 'minLength' && <p role="alert" className='form-error'>Debes ingresar mas de 8 caracteres</p>}
                     </div>
                     <div className="hero-contactanos__input">
                         <div>
                             <label htmlFor={dudaId}>Tu duda</label>
-                            <textarea name="duda" id={dudaId} cols="30" rows="10" 
-                                placeholder='Ej: Como contrato el servicio de foodtruck?' {...register('descripcion', {required:true, minLength:10})}></textarea>
+                            <textarea name="duda" className='hero-contactanos__input-textaerea' id={dudaId} cols="30" rows="10" 
+                                placeholder='Ej: Como contrato el servicio de foodtruck?' {...register('descripcion', {required:true, minLength:10})} ></textarea>
                         </div>
                         {errors.descripcion?.type === 'required' && <p role="alert" className='form-error'>La duda es requerida</p>}
                         {errors.descripcion?.type === 'minLength' && <p role="alert" className='form-error'>Debe ser mayor a 10 caracteres</p>}

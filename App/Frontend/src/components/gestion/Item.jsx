@@ -36,10 +36,6 @@ function Item({modalCarta,closeModal, categorias,action, handleMsgStatus}) {
                         id_categoria : id_categoria})
                         handleMsgStatus(response,'Producto modificado correctamente', 'Hubo un error al modificar tu producto')
                 }else{
-                    console.log({...data,
-                        precioChico : parseInt((data.precioChico).substring(1)),
-                        precioGrande : parseInt((data.precioGrande).substring(1)),
-                        id_categoria : id_categoria});
                      const response = await addProduct({...data,
                         precioChico : parseInt((data.precioChico).substring(1)),
                         precioGrande : parseInt((data.precioGrande).substring(1)),

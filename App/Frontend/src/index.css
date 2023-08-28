@@ -51,3 +51,6 @@ input,select{
   padding: .2rem .5rem;
   border-radius: 12px;
 }
+textarea{
+  resize: none;
+}

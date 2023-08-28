@@ -25,6 +25,7 @@ export async function addDuda(req, res) {
         await pool.query(queries.Dudas.addDuda, [nombre, apellido, telefono.toString(), mail, descripcion, 1]);
         res.json({ nombre, apellido, telefono, mail, descripcion });
     } catch (error) {
+        console.log(error);
         res.status(500).json({ msg: error.message });
     }
 }

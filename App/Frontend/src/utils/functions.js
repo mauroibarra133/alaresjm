@@ -83,3 +83,12 @@ export function validatePastHour(hour,date){
   }
   return true
 }
+
+// Definir la función de validación
+export const greaterThanZero = (value) => {
+  const numericValue = parseFloat(value);
+  if (isNaN(numericValue) || numericValue <= 0) {
+    return false
+  }
+  return true; // La validación pasó
+};

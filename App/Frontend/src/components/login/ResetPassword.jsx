@@ -28,10 +28,8 @@ function ResetPassword() {
 
     //functions
     async function onSubmit(data){
-        console.log(data);
         try {
-            const response = await changePassword(id,token,data.password);
-            console.log(response);
+            await changePassword(id,token,data.password);
         setMsg('La contraseña se ha cambiado correctamente');
             setTimeout(() => {
                 setMsg('')

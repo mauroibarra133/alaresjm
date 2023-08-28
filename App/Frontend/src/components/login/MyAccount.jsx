@@ -16,7 +16,6 @@ const MyAccount = () => {
     async function getUserData(){
       try {
         const data = await getData(auth.data.user_id);
-        console.log(data);
         setPoints(data.data.points)
       } catch (error) {
         console.log(error);
@@ -42,7 +41,7 @@ const MyAccount = () => {
                             type="text"
                             name="nombre"
                             value={auth.data.nombre || ""}
-                            readOnly
+                            readOnly  tabIndex="-1" 
                     />
                     </div>
                     <div className="myaccount__field">
@@ -51,7 +50,7 @@ const MyAccount = () => {
                             type="text"
                             name="apellido"
                             value={auth.data.apellido || ""}
-                            readOnly
+                            readOnly tabIndex="-1" 
                         />
                     </div>
                     <div className="myaccount__field">
@@ -60,7 +59,7 @@ const MyAccount = () => {
                             type="email"
                             name="mail"
                             value={auth.data.email || ""}
-                            readOnly
+                            readOnly tabIndex="-1" 
                         />
                     </div>
               </div>

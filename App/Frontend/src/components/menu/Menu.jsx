@@ -13,6 +13,7 @@ import carritoImg from '../../assets/images/carrito.webp'
 import ItemMenu from './ItemMenu';
 import Modal from '../Modal';
 import { useRef } from 'react';
+import LoaderComponent from './LoaderComponent'
 
 function Menu() {
     //States
@@ -21,6 +22,7 @@ function Menu() {
     const [activeTag, setActiveTag] = useState(null);
     const [isCartClick, setCartClick] = useState(false);
     const [showButton, setShowButton] = useState(false);
+     const [loading, setLoading] = useState(true);
     //Hooks
     const {addToCart, checkProductInCart, removeProductFromCart} = useCart();
     const {auth} = useAuth() 
@@ -59,7 +61,12 @@ function Menu() {
             .catch(error => console.log(error));
         }
         async function searchProducts(){
-            getProducts().then(data => setProducts(data));
+            getProducts().then(data => {
+              setLoading(false)
+              setProducts(data)}).catch((error)=>{
+                console.log(error);
+                setLoading(false); 
+              })
         }
         searchProducts();
         searchCategories();
@@ -81,41 +88,44 @@ function Menu() {
     return ( 
         <>
             <div className='menu__container'>
-                <Path pathPrev={'Home'} pathActual={'Carta'}goTo={'Home'} />
-                <div className='menu__tags-container'>
-                    <div className="menu__tags">
-                        {categories && categories.map((categ)=> (
-                            <Tag key={generateUniqueKey()} name={categ.nombre} isActive={activeTag===categ.id} onClick={() => handleTagClick(categ.id)}/>
-                        ))}
-                    </div>
-
-                </div>
-                <div className='menu__title-sizes'><p>Chicas / Grandes</p></div>
-                                     
-                <div className={`menu__menu ${activeTag == null ? 'menu__menu--initial' : ''}`}>
-                    {activeTag == null ? 
-                    <InitialMenu products={products} checkProductInCart={checkProductInCart} removeProductFromCart={removeProductFromCart} 
-                    addToCart={addToCart} categories={categories}setCartClick={setCartClick}/> 
-                    
-                    : 
-
-                    filterProducts(products).map(product => {
-                        const isProductInCart = checkProductInCart(product);
-                        return (
-                            <ItemMenu key={generateUniqueKey()} isProductInCart={isProductInCart} 
-                            removeProductFromCart={removeProductFromCart} addToCart={addToCart}
-                            product={product} setCartClick={setCartClick} />
-                        )})}
-                </div>
-                {showButton && (
-                    <NavLink to={'/delivery'}>
-                    <div className="flotant-cart" >
-                    <p>Carrito</p>
-                    <img src={carritoImg} alt="Carrito" />
-                    </div>
-                    </NavLink>
-                )}
-               
+            {loading ? (
+        <LoaderComponent />
+      ) : (
+        <>
+          {/* Resto de tu contenido cuando los productos están cargados */}
+          <Path pathPrev={'Home'} pathActual={'Carta'} goTo={'Home'} />
+          <div className='menu__tags-container'>
+            <div className="menu__tags">
+              {categories && categories.map((categ) => (
+                <Tag key={generateUniqueKey()} name={categ.nombre} isActive={activeTag === categ.id} onClick={() => handleTagClick(categ.id)} />
+              ))}
+            </div>
+          </div>
+          <div className='menu__title-sizes'><p>Chicas / Grandes</p></div>
+          <div className={`menu__menu ${activeTag == null ? 'menu__menu--initial' : ''}`}>
+            {activeTag == null ?
+              <InitialMenu products={products} checkProductInCart={checkProductInCart} removeProductFromCart={removeProductFromCart}
+                addToCart={addToCart} categories={categories} setCartClick={setCartClick} />
+              :
+              filterProducts(products).map(product => {
+                const isProductInCart = checkProductInCart(product);
+                return (
+                  <ItemMenu key={generateUniqueKey()} isProductInCart={isProductInCart}
+                    removeProductFromCart={removeProductFromCart} addToCart={addToCart}
+                    product={product} setCartClick={setCartClick} />
+                );
+              })}
+          </div>
+          {showButton && (
+            <NavLink to={'/delivery'}>
+              <div className="flotant-cart" >
+                <p>Carrito</p>
+                <img src={carritoImg} alt="Carrito" />
+              </div>
+            </NavLink>
+          )}
+        </>
+      )}
             </div>
             <div ref={footerRef}></div>
             <Modal isSubmitted={isCartClick && !auth.isLogin} 

@@ -285,6 +285,38 @@
     font-family: 'Amiri Bold';
 }
 
+/* Loader */
+.loader-container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  .loader-container.small{
+    min-height: 80px;
+    height: auto;
+
+  }
+  .loader {
+    border: 6px solid #f3f3f3;
+    border-top: 6px solid var(--orange-1);
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 2s linear infinite;
+  }
+  .loader.small{
+    width: 30px;
+    height: 30px;
+    border-top: 6px solid var(--blue-1);
+
+  }
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+
 /* MEDIA QUERYS */
 @media only screen and (min-width:500px){
     .menu__item{

@@ -7,6 +7,7 @@ import Overlay from "../Overlay";
 import Reserva from "./Reserva";
 import eyeImg from '../../assets/images/eye-slash.svg'
 import Modal from "../Modal";
+import LoaderComponent from '../menu/LoaderComponent'
 
 function VerReservas() {
     //Constants
@@ -21,6 +22,7 @@ function VerReservas() {
     const [filterDate,setFilterDate] = useState(todayDate);
     const [isLargeScreen, setIsLargeScreen] = useState(window.innerWidth > 768);  
     const [isFilterActive, setIsFilterActive] = useState(false)
+    const [loading,setLoading] = useState(true);
     const [modalBooking, setModalBooking] = useState({
         isSubmitted: false,
         booking: {}
@@ -35,9 +37,11 @@ function VerReservas() {
         async function searchBookings(){
             try {
             const result = await getBookings({date: filterDate})
+            setLoading(false)
             setBookings((result.data.data))
                 
             } catch (error) {
+            setLoading(false)
                 setShowModal({
                     isSubmitted: true,
                     isGood: false,
@@ -126,9 +130,14 @@ function VerReservas() {
                     <div className="veritems__header-column  verreservas__header-column">Estado</div>
                 </div>
                 <div className="verreservas__body veritems__body">
-                    {filterBookings(bookings).length <= 0 ? <VerReservasVacio msg={'No hay reservas el dia de hoy'} msgButton={':('}/> : filterBookings(bookings).map(booking => (
-
-                        <div key={booking.id} className="veritems__row verreservas__row" onClick={()=>  openModalBooking(booking)} style={{gridTemplateColumns: 'repeat(5,1fr)'}}>
+                    {loading ? (
+                        <LoaderComponent size={'minimal'}/>
+                    ) : (
+                        filterBookings(bookings).length <= 0 ? (
+                        <VerReservasVacio msg={'No hay reservas el día de hoy'} msgButton={':('}/>
+                        ) : (
+                        filterBookings(bookings).map(booking => (
+                            <div key={booking.id} className="veritems__row verreservas__row" onClick={() => openModalBooking(booking)} style={{ gridTemplateColumns: 'repeat(5, 1fr)' }}>
                             <div className="veritems__dato verreservas__dato">{booking.hora}</div>
                             <div className="veritems__dato verreservas__dato">{booking.cantidad_personas}</div>
                             <div className="veritems__dato verreservas__dato">{booking.cliente_reserva}</div>
@@ -136,12 +145,14 @@ function VerReservas() {
                             <div className="veritems__dato verreservas__dato">
                                 <img src={getStatusImage(booking.estado)} alt={booking.estado} className="status-img reserva-status-img" />
                                 {isLargeScreen && (
-                                    <p>{booking.estado}</p>
+                                <p>{booking.estado}</p>
                                 )}
                             </div>
-                        </div>
-                    ))}
-                </div>
+                            </div>
+                        ))
+                        )
+                    )}
+                    </div>
             </div>
             {modalBooking.isSubmitted && (
                 <Overlay comp={'verreservas'}>

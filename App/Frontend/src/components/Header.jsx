@@ -9,7 +9,7 @@ import NavUser from './NavUser';
 import Overlay from './Overlay';
 import axios from 'axios';
 import { useAuth } from '../hooks/useAuth';
-
+import { SERVER_HOST } from '../utils/constants';
 function Header() {
     //states
     const [burgerClicked,setBurgerClicked] = useState(false);
@@ -35,7 +35,7 @@ function Header() {
     }
     const closeSession = async ()=>{
         try {
-            await axios.get('http://localhost:4000/api/logout',{withCredentials: true})
+            await axios.get(`${SERVER_HOST}/api/logout`,{withCredentials: true})
             handleUserClick()
             logout()
             

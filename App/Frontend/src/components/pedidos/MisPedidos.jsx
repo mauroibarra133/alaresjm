@@ -67,7 +67,6 @@ function MisPedidos() {
         }
         return pedido; 
         });
-        console.log(pedidosActualizados);
         setPedidos(pedidosActualizados);
         setPedidoAct(false);
     }
@@ -80,7 +79,6 @@ function MisPedidos() {
             setOffset((pageActual-1) * LIMIT)
         }
     }
-    console.log(pedidos);
     function filterOrders(){
         if(pedidos.length <= 0) return []
         if(isFilterActive){
@@ -134,21 +132,24 @@ function handlePedidos(){
                     </div>
                 </div>
             </div>
-            <div className="mispedidos__paginacion-wrapper">
-            <div className="mispedidos__paginacion">
-                <div className="mispedidos__pagina--button">
-                    <p onClick={()=> handlePage((page - 1) == 0 ? page : page-1) }>Previo</p>
-                </div>
-                {pedidos && pages.map(pageAct => (
-                    <div className={`mispedidos__pagina`} key={pageAct} onClick={()=>handlePage(pageAct)}>
-                        <p className={`${pageAct == page ? 'active' : ''}`}>{pageAct}</p>
+            {pages.length > 1 && (
+                <div className="mispedidos__paginacion-wrapper">
+                <div className="mispedidos__paginacion">
+                    <div className="mispedidos__pagina--button">
+                        <p onClick={()=> handlePage((page - 1) == 0 ? page : page-1) }>Previo</p>
                     </div>
-                ))}
-                <div className="mispedidos__pagina--button">
-                    <p onClick={()=> handlePage((page + 1) > pages.length ? page : page+1)}>Siguiente</p>
+                    {pedidos && pages.map(pageAct => (
+                        <div className={`mispedidos__pagina`} key={pageAct} onClick={()=>handlePage(pageAct)}>
+                            <p className={`${pageAct == page ? 'active' : ''}`}>{pageAct}</p>
+                        </div>
+                    ))}
+                    <div className="mispedidos__pagina--button">
+                        <p onClick={()=> handlePage((page + 1) > pages.length ? page : page+1)}>Siguiente</p>
+                    </div>
                 </div>
-            </div>
-        </div>
+                </div>
+            )}
+          
         </div>
      );
 }

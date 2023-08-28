@@ -97,11 +97,18 @@ select option{
     color: var(--orange-1);
     font-weight: 900;
 }
+.order__buttons:hover{
+    cursor: pointer;
+}
 
 .order__buttons{
     display: flex;
     gap: .3rem;
     padding: .1rem 0 ;
+}
+.delete_cart_button img{
+    width: 20px;
+    height: 20px;
 }
 /* Total */
 .order__total{
@@ -220,8 +227,8 @@ select option{
     padding-bottom: 2rem;
 }
 .order__button button{
-    background: var(--black-1);
     color: var(--text-white);
+    padding: 0 1rem;
 }
 .mp_button{
     max-width: none;

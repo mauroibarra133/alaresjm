@@ -1,0 +1,1 @@
+import{j as m}from"./index-39b704a7.js";function o({size:a}){return m.jsx("div",{className:`loader-container ${a=="minimal"?"small":""}`,children:m.jsx("div",{className:`loader ${a=="minimal"?"small":""}`})})}export{o as L};

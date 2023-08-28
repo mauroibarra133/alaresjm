@@ -16,7 +16,6 @@ function ItemMenu({isProductInCart,removeProductFromCart,addToCart,product, setC
 
         }
     }
-console.log(product);
     return ( 
         <div className="menu__item">
         <div className="menu__item-r1">

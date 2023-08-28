@@ -21,9 +21,9 @@ export async function addUsuario(req, res) {
             regName,
             regSurname,
             regEmail,
-            regPassword,
             'User', // Rol
             0, // Puntos
+            regPassword,
             config.encrypt_code
         ]);
         client.release();

@@ -10,6 +10,7 @@ import pencilImg from '../../assets/images/pencil-solid.svg'
 import cruzImg from '../../assets/images/xmark-solid.svg'
 import '../../styles/dashboard/veritems.css'
 import { useAuth } from '../../hooks/useAuth';
+import LoaderComponent from "../menu/LoaderComponent";
 
 function VerCarta() {
     //States 
@@ -32,6 +33,8 @@ function VerCarta() {
         isSubmitted: false,
         item: {}
     });  
+    const [loading,setLoading] = useState(true);
+
 
     //Constants
     const LIMIT = 10;
@@ -56,10 +59,11 @@ function VerCarta() {
             try {
                 const response = await getProducts()
                 setItems(response)
+                setLoading(false)
             } catch (error) {
                 console.log(error);
+                setLoading(false)
             }
-
 
         }
         async function getTags(){
@@ -105,7 +109,6 @@ function VerCarta() {
     async function deleteProductByID(id){
         if(auth.data.rol !== "Guest"){
             const response = await deleteProduct(id)
-            console.log(response);
             setItems(items.filter(item => item.id != id))
             handleMsgStatus(response,'Eliminado correctamente','Hubo un error al eliminar tu producto')
         }
@@ -207,36 +210,44 @@ function VerCarta() {
                     <div className="veritems__header-column  vercarta__header-column"><p>ACCIONES</p></div>
             </div>
             <div className="vercarta__body veritems__body">
-                {filteredItems.length <= 0 ? <VerCartaVacio msg={'No hay items'} msgButton={':('}></VerCartaVacio> : 
-                filteredItems.slice(offsett,LIMIT+offsett).map((item,i) =>(
-                    <div className="veritems__row vercarta__row"  style={{gridTemplateColumns: `repeat(7 ,1fr)`}} key={item.id} >
-                        <div className="veritems__dato vercarta__dato"><p>{offsett == 0 ? (i+1) : i+1+offsett}</p></div>
+                {loading ? (
+                <LoaderComponent size={'minimal'}/>
+                ) : (
+                    filteredItems.length <= 0 ? (
+                    <VerCartaVacio msg={'No hay items'} msgButton={':('}></VerCartaVacio>
+                    ) : (
+                    filteredItems.slice(offsett, LIMIT + offsett).map((item, i) => (
+                        <div className="veritems__row vercarta__row" style={{ gridTemplateColumns: `repeat(7, 1fr)` }} key={item.id}>
+                        <div className="veritems__dato vercarta__dato"><p>{offsett === 0 ? (i + 1) : i + 1 + offsett}</p></div>
                         <div className="veritems__dato vercarta__dato vercarta__dato-nombre"><p>{(item.nombre).toUpperCase()}</p></div>
                         <div className="veritems__dato vercarta__dato">
-                            <button  ><img src={pencilImg} alt="Modificar item" className='dashboard-icon vercarta__acciones' onClick={()=>openModalCarta(item, 'U')}/></button>
-                            <button disabled={auth.data.rol == "Guest" ? true : false}  onClick={()=>deleteProductByID(item.id)} ><img src={cruzImg} alt="Eliminar item" className='dashboard-icon vercarta__acciones'/></button>
-                        </div>  
-            
-                </div>
-                ))
-            }
-            </div>
+                            <button ><img src={pencilImg} alt="Modificar item" className='dashboard-icon vercarta__acciones' onClick={() => openModalCarta(item, 'U')} /></button>
+                            <button disabled={auth.data.rol === "Guest"} onClick={() => deleteProductByID(item.id)} ><img src={cruzImg} alt="Eliminar item" className='dashboard-icon vercarta__acciones' /></button>
+                        </div>
+                        </div>
+                    ))
+                    )
+                )}
+    </div>
         </div>
+        {pages.length > 1 && (
         <div className="vercarta__paginacion-wrapper">
-            <div className="vercarta__paginacion">
-                <div className="vercarta__pagina--button">
-                    <p onClick={()=> handlePage((page - 1) == 0 ? page : page-1) }>Previo</p>
+        <div className="vercarta__paginacion">
+            <div className="vercarta__pagina--button">
+                <p onClick={()=> handlePage((page - 1) == 0 ? page : page-1) }>Previo</p>
+            </div>
+            {filteredItems && pages.map(pageAct => (
+                <div className={`vercarta__pagina`} key={pageAct} onClick={()=>handlePage(pageAct)}>
+                    <p className={`${pageAct == page ? 'active' : ''}`}>{pageAct}</p>
                 </div>
-                {filteredItems && pages.map(pageAct => (
-                    <div className={`vercarta__pagina`} key={pageAct} onClick={()=>handlePage(pageAct)}>
-                        <p className={`${pageAct == page ? 'active' : ''}`}>{pageAct}</p>
-                    </div>
-                ))}
-                <div className="vercarta__pagina--button">
-                    <p onClick={()=> handlePage((page + 1) > pages.length ? page : page+1)}>Siguiente</p>
-                </div>
+            ))}
+            <div className="vercarta__pagina--button">
+                <p onClick={()=> handlePage((page + 1) > pages.length ? page : page+1)}>Siguiente</p>
             </div>
         </div>
+    </div>
+        )}
+
         {modalCarta.isSubmitted && (
                 <Overlay comp={'verpedidos'}>
                         <Item modalCarta={modalCarta} closeModal={closeModalCarta} categorias={categories}  action={action} handleMsgStatus={handleMsgStatus}></Item>

@@ -7,6 +7,7 @@ import Duda from "./Duda";
 import Modal from "../Modal";
 import eyeImg from '../../assets/images/eye-slash.svg'
 import '../../styles/dashboard/veritems.css'
+import LoaderComponent from "../menu/LoaderComponent";
 
 function VerDudas() {
     //States
@@ -17,6 +18,7 @@ function VerDudas() {
         isSubmitted: false,
         reserva: {}
     });  
+    const [loading,setLoading] = useState(true);
     const [showModal,setShowModal] = useState({
         isSubmitted: false,
         isGood: false,
@@ -29,9 +31,11 @@ function VerDudas() {
             try {
             const result = await getDoubts()
             if(result.length > 0){
+                setLoading(false)
                 setDoubts(result)
             }
             } catch (error) {
+                setLoading(false)
                 setDoubts([])
                 setShowModal({
                     isSubmitted: true,
@@ -65,7 +69,6 @@ function VerDudas() {
     async function searchDoubts(){
         try {
         const result = await getDoubts()
-        console.log(result);
         if(result.length > 0){
             setDoubts(result)
         }
@@ -119,19 +122,26 @@ function VerDudas() {
                     <div className="veritems__header-column  verdudas__header-column">Estado</div>
                 </div>
                 <div className="verdudas__body veritems__body">
-                    {filterDoubts(doubts).length <= 0 ? <VerDudasVacio msg={'No hay dudas el dia de hoy'} msgButton={':('}/> : filterDoubts(doubts).map(duda => (
-
-                        <div key={duda.id} className="veritems__row verdudas__row" onClick={()=>  openModalDoubt(duda)} style={{gridTemplateColumns: 'repeat(2,1fr)'}}>
-                            <div className="veritems__dato verdudas__dato"><p>{duda.duda}</p></div>
-                            <div className="veritems__dato verdudas__dato ">
-                                <img src={getStatusImage(duda.estado)} alt={duda.estado} className="status-img reserva-status-img" />
-                                {isLargeScreen && (
-                                    <p>{duda.estado}</p>
-                                )}
-                            </div>
-                        </div>
-                    ))}
-                </div>
+      {loading ? (
+        <LoaderComponent size={'minimal'}/>
+      ) : (
+        filterDoubts(doubts).length <= 0 ? (
+          <VerDudasVacio msg={'No hay dudas el día de hoy'} msgButton={':('} />
+        ) : (
+          filterDoubts(doubts).map(duda => (
+            <div key={duda.id} className="veritems__row verdudas__row" onClick={() => openModalDoubt(duda)} style={{ gridTemplateColumns: 'repeat(2, 1fr)' }}>
+              <div className="veritems__dato verdudas__dato"><p>{duda.duda}</p></div>
+              <div className="veritems__dato verdudas__dato">
+                <img src={getStatusImage(duda.estado)} alt={duda.estado} className="status-img reserva-status-img" />
+                {isLargeScreen && (
+                  <p>{duda.estado}</p>
+                )}
+              </div>
+            </div>
+          ))
+        )
+      )}
+    </div>
             </div>
             {modalDuda.isSubmitted && (
                 <Overlay comp={'verreservas'}>

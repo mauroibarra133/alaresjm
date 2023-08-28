@@ -23,8 +23,6 @@ function ForgotPassword() {
     //Functions
     async function onSubmit(data){
        const response = await sendPasswordLink(data)
-       console.log(response);
-
        if(response.status == 201){
             setMsg(true)
         }

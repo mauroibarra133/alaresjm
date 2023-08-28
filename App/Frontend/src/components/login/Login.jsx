@@ -43,7 +43,6 @@ function Login() {
      async function onSubmit(data){
         try {
             const response = await login(data)
-            console.log(response);
             if(response.status >= 200 && response.status < 300){
                 isLogued()
                 setErrorStatus({
@@ -61,8 +60,6 @@ function Login() {
                 msg: error.message
                 });
             document.body.classList.add('disable-scroll');
-
-            console.log(error.message);
         }
     }
 

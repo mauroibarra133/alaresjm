@@ -32,14 +32,11 @@ function Pedido({modalPedido, closeModal}) {
                     pedido.estado_pedido = event.target.value
                     socket.emit('orderUpdated',pedido);
                     
-                }else{
-                    console.log('No se pudo wn');
                 }
             }
         }
 
     }
-    console.log(auth);
     return ( 
         <div className="dashboard__modal">
             <div className={`verpedido__modal-top dashboard__modal-top`}>

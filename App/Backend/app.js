@@ -58,7 +58,6 @@ app.use(reservasRouter)
 app.use(rankingRouter)
 app.use(express.static(path.join(__dirname, './dist')));
 app.get('*', (req, res) => {
-    // Envía el archivo HTML principal de tu SPA
-    res.sendFile(path.join(__dirname, './dist/index.html'));
+    res.sendFile(path.join(__dirname, './dist', 'index.html'));
   });
 export default app;

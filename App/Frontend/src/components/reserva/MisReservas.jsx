@@ -148,6 +148,7 @@ function MisReservas() {
                     </div>
                 </div>
             </div>
+            {pages.length > 1 && (
             <div className="misreservas__paginacion-wrapper">
             <div className="misreservas__paginacion">
                 <div className="misreservas__pagina--button">
@@ -163,6 +164,8 @@ function MisReservas() {
                 </div>
             </div>
         </div>
+            )}
+
             <Modal isSubmitted={errorStatus.isSubmitted} isGoodStatus={!errorStatus.existError} msg={errorStatus.msg}
             handleSubmit={handleCloseModal}
             ></Modal>

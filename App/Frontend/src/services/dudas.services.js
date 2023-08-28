@@ -29,7 +29,6 @@ export  async function addDoubt(duda){
       }
       } else {
         try {
-          console.log('si entra');
         return await axios.put(urlResource + "/" + duda.id, duda);
           
         } catch (error) {

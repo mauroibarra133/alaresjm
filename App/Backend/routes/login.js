@@ -31,4 +31,5 @@ router.get('/api/logout', (req, res) => {
   
     res.redirect('/');
   });
+  
 export default router;

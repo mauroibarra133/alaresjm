@@ -7,7 +7,7 @@ import {ONLY_LETTERS} from '../../utils/constants'
 import Path from '../Path';
 import { agregarReserva } from '../../services/reservas.services';
 import { useNavigate } from 'react-router-dom';
-import { validateDate, validatePastHour, validateTime } from "../../utils/functions";
+import { validateDate, validatePastHour, validateTime, greaterThanZero} from "../../utils/functions";
 
 function Reservas() {
     const navigate = useNavigate()
@@ -44,14 +44,12 @@ function handleOpenModal(valor,msgBad= 'Tu reserva no se ha podido confirmar.Int
 }
 
 async function onSubmit(data){
-    console.log(data);
       if(!validatePastHour(data.hora,data.fecha)){
         handleOpenModal(false, 'La hora ingresada es antigua')
         return
       }
     try {
-        const reserva = await agregarReserva(data.fecha,data.hora,auth.data.user_id,data.comensales,data.zona,data.cliente)
-        console.log(reserva);
+        await agregarReserva(data.fecha,data.hora,auth.data.user_id,data.comensales,data.zona,data.cliente)
         handleOpenModal(true);
     } catch (error) {
         handleOpenModal(false);
@@ -88,9 +86,10 @@ async function onSubmit(data){
                     <div className="reservas__row">
                         <div>
                             <label htmlFor={customersId}>Numero de comensales</label>
-                            <input type="number" id={customersId} {...register("comensales",{required: true})} />
+                            <input type="number" id={customersId} {...register("comensales",{required: true, validate: greaterThanZero})} />
                         </div>
                         {errors.comensales?.type === 'required' && <><p role="alert" className='form-error'>La cantidad de comensales</p><p role="alert" className='form-error'> es requerida.</p></>}                               
+                        {errors.comensales?.type === 'validate' && <><p role="alert" className='form-error'>La cantidad debe ser mayor a cero</p><p role="alert" className='form-error'></p></>}                               
                     </div>
                     <div className="reservas__row">
                         <div>

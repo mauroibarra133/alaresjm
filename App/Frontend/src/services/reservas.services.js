@@ -43,7 +43,6 @@ export async function getBookings(params) {
 export async function updateReserva(id, updatedData) {
     try {
         const response = await axios.put(`${urlSource}/${id}`, updatedData);
-        console.log(updatedData);
         return response;
     } catch (error) {
         return error;

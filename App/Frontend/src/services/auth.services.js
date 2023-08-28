@@ -76,8 +76,7 @@ export async function sendPasswordLink(data){
 
     export async function changePassword(id, token, newPassword) {
       try {
-        const response = await axios.put(`${SERVER_HOST}/api/reset-password/${id}`, { token, newPassword });
-        console.log(response);
+        await axios.put(`${SERVER_HOST}/api/reset-password/${id}`, { token, newPassword });
         // Manejar la respuesta según tus necesidades
       } catch (error) {
         console.error(error);

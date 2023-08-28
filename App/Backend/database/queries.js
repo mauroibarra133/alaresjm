@@ -111,7 +111,7 @@ export const  queries ={
     },
     Usuarios: {
         addUser: `INSERT INTO usuarios (fecha_creacion, nombre, apellido, email, rol, puntos, contraseñaCifrada)
-        VALUES (CURRENT_TIMESTAMP, $1, $2, $3, $4, $5, pgp_sym_encrypt($6, $7));
+        VALUES (CURRENT_TIMESTAMP, $1, $2, $3, $4, $5, pgp_sym_encrypt($6, $7))
         `
     },
     Reservas: {

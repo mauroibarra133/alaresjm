@@ -73,7 +73,6 @@ function Booking({booking, fechaHoy: todayDate}) { // fechaHoy: YYYY-MM-DD
         const bookingHour = convertHourToDate(booking.hora)
         const leftHour = calculateLeftTime(bookingHour)
         if(leftHour >= tiempoParaCancelar){
-          console.log('Se puede modificar');
           const response = await deleteReserva(booking.id)
           if(response.status == 200){
             openModal(true, "Reserva cancelada correctamente")
@@ -82,21 +81,17 @@ function Booking({booking, fechaHoy: todayDate}) { // fechaHoy: YYYY-MM-DD
             openModal(false, "Hubo un error al eliminar su reserva, intente mas tarde")
           }
         }else{
-          console.log("Es muy tarde");
           openModal(false, `No se puede cancelar la reserva faltando menos de ${tiempoParaCancelar} hora/s`)
         }
       }
     }  
     async function handleUpdate(){
-      console.log(dateBooking,todayDate);
       if( dateBooking == todayDate){
         const bookingHour = convertHourToDate(booking.hora)
         const leftHour = calculateLeftTime(bookingHour)
         if(leftHour >= tiempoParaCancelar){
-          console.log('Se puede modificar');
           setShowModalUpdate(true)
         }else{
-          console.log("Es muy tarde");
           openModal(false, `No se puede modificar la reserva faltando menos de ${tiempoParaCancelar} hora/s`)
         }
       }else{
