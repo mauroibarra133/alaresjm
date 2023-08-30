@@ -41,7 +41,7 @@ app.set('socketio', io); // aquí asignas el socket global
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 const corsOptions = {
-    origin: "*",
+    origin: ['http://localhost:5173', 'https://alaresjm.onrender.com'],
     credentials: true,
 };
 app.use(cors(corsOptions));
