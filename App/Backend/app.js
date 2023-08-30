@@ -42,7 +42,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 const corsOptions = {
     origin: ['http://localhost:5173', 'https://alaresjm.onrender.com'],
-    credentials: true,
+    // credentials: true,
 };
 app.use(cors(corsOptions));
 app.use(compression());
