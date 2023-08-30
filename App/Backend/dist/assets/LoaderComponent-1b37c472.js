@@ -1,1 +1,0 @@
-import{j as s}from"./index-3d224542.js";function r({size:a,color:l}){return s.jsx("div",{className:`loader-container ${a=="small"?"small":""} `,children:s.jsx("div",{className:`loader ${a=="small"?"small":""} ${l}`})})}export{r as L};

@@ -3,7 +3,8 @@
 /* Container */
 .hero-contactanos__container{
     position: relative;
-    height: 100vh;
+    min-height: 110vh;
+    height: auto;
     width: 100%;
     display: flex;
     flex-direction: column;

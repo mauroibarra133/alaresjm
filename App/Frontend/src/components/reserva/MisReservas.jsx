@@ -8,6 +8,7 @@ import {useAuth} from '../../hooks/useAuth'
 import {getBookings} from '../../services/reservas.services'
 import '../../styles/reserva/mis-reservas.css'
 import { transformDate } from '../../utils/functions';
+import LoaderComponent from '../LoaderComponent';
 
 function MisReservas() {
 
@@ -25,6 +26,7 @@ function MisReservas() {
     const [page,setPage] = useState(1);
     const [offsett,setOffset] = useState(0);
     const [pages,setPages] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
 
     //Constants
     const LIMIT = 6;
@@ -32,15 +34,22 @@ function MisReservas() {
 
     //Use effects
     useEffect(()=>{
-        async function searchBookings(){
-            if(auth.data.user_id){
-                const response = await getBookings({user_id: auth.data.user_id})
-                return response.data
+        async function searchBookings() {
+            setIsLoading(true);
+        
+            if (auth.data.user_id) {
+                try {
+                    const response = await getBookings({ user_id: auth.data.user_id });
+                    setBookings(response.data.data);
+                } catch (error) {
+                    // Maneja el error aquí si es necesario.
+                } finally {
+                    setIsLoading(false);
+                }
             }
         }
-        searchBookings().then(data => setBookings(data.data)).catch(
-            // openModal()
-        )
+        searchBookings()
+        
     },[auth.data.user_id])
     
     useEffect(()=>{
@@ -54,46 +63,44 @@ function MisReservas() {
     },[bookings,isFilterActive]);
 
 
+    function filterBookings(){
+        if(bookings.length <= 0) return []
+        if(isFilterActive){
+            const filtered = bookings.filter(booking => {
+                if(transformDate(booking.fecha)>= transformDate(fechaHoy)){
+                    return booking
+                }
+            });
+            if (filtered.length <= 0) return []
+            else return filtered
+        }else{
+            return bookings
+        }
+    }
+
     function handleBookings() {
         const today = new Date()
         const todayDate = transformDate(today)
         //Si no tenemos reservas
         if(bookings.length <= 0){
             return <MisReservasVacio msg={"Aun no tienes ninguna reserva hoy"} msgButton={"RESERVAR"} goTo={'reservas'}></MisReservasVacio>
-
         }else{
-        //Si hay 
-        //Si no hay filtro
-        if(!isFilterActive){
-            if(bookings.length > 0){
-            return filterBookings().slice(offsett, LIMIT + offsett).map(booking => {
-                const fechaString = booking.fecha;
-                const fecha = new Date(fechaString);
-                const fechaLegible = fecha.toLocaleDateString();
-          
-                return (
-                    <Booking fechaLegible={fechaLegible} booking={booking} key={booking.id} fechaHoy={todayDate}/>
-                );
-              });
-            }else{
-                return <MisReservasVacio msg={"Aun no tienes ninguna reserva hoy"} msgButton={"RESERVAR"} goTo={'reservas'}></MisReservasVacio>
+        const filteredBookings = filterBookings();
+                if(filteredBookings.length <= 0){
+                    return <MisReservasVacio msg={"Aun no tienes ninguna reserva hoy"} msgButton={"RESERVAR"} goTo={'reservas'}></MisReservasVacio>
+                }else{
+                    return filteredBookings.slice(offsett, LIMIT + offsett).map(booking => {
+                        const fechaString = booking.fecha;
+                        const fecha = new Date(fechaString);
+                        const fechaLegible = fecha.toLocaleDateString();
+                
+                        return (
+                            <Booking fechaLegible={fechaLegible} booking={booking} key={booking.id} fechaHoy={todayDate}/>
+                        );
+                    });
+                }
             }
-        }else{
-        //Si hay filtro
-            const filteredBookings = filterBookings()
-            if(filteredBookings.length > 0){
-                return filteredBookings.slice(offsett, LIMIT + offsett).map(booking => {
-                    return (
-                        <Booking booking={booking}  key={booking.id} fechaHoy={todayDate}/>
-                    );
-              });
-            }else{
-                return <MisReservasVacio msg={"Aun no tienes ninguna reserva hoy"} msgButton={"RESERVAR"} goTo={'reservas'}></MisReservasVacio>  
-            }
-
-        }
       }
-    }
 
     function handleCloseModal(){
         setErrorStatus({
@@ -111,20 +118,7 @@ function MisReservas() {
             setOffset((pageActual-1) * LIMIT)
         }
     }
-    function filterBookings(){
-        if(bookings.length <= 0) return []
-        if(isFilterActive){
-            const filtered = bookings.filter(booking => {
-                if(transformDate(booking.fecha)>= transformDate(fechaHoy)){
-                    return booking
-                }
-            });
-            if (filtered.length <= 0) return []
-            else return filtered
-        }else{
-            return bookings
-        }
-    }
+
     return ( 
         <div className="misreservas__container">
             <Path pathPrev={'Home'} pathActual={'Mis Reservas'} goTo={'home'}></Path>
@@ -144,7 +138,10 @@ function MisReservas() {
                         <p className="datos__header-column">Acciones</p>
                     </div>
                     <div className="datos__body">
-                        {(handleBookings())}
+                    {isLoading ? ( <LoaderComponent size={'small'} color={'orange'}/>
+                ) : (
+                        handleBookings()
+                )}
                     </div>
                 </div>
             </div>

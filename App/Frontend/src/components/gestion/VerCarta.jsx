@@ -10,7 +10,8 @@ import pencilImg from '../../assets/images/pencil-solid.svg'
 import cruzImg from '../../assets/images/xmark-solid.svg'
 import '../../styles/dashboard/veritems.css'
 import { useAuth } from '../../hooks/useAuth';
-import LoaderComponent from "../menu/LoaderComponent";
+import LoaderComponent from "../LoaderComponent";
+
 
 function VerCarta() {
     //States 
@@ -211,7 +212,7 @@ function VerCarta() {
             </div>
             <div className="vercarta__body veritems__body">
                 {loading ? (
-                <LoaderComponent size={'minimal'}/>
+                <LoaderComponent size={'small'} color={'blue'}/>
                 ) : (
                     filteredItems.length <= 0 ? (
                     <VerCartaVacio msg={'No hay items'} msgButton={':('}></VerCartaVacio>

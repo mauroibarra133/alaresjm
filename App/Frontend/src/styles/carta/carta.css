@@ -300,7 +300,6 @@
   }
   .loader {
     border: 6px solid #f3f3f3;
-    border-top: 6px solid var(--orange-1);
     border-radius: 50%;
     width: 50px;
     height: 50px;
@@ -310,7 +309,13 @@
     width: 30px;
     height: 30px;
     border-top: 6px solid var(--blue-1);
+  }
 
+  .loader.orange{
+    border-top: 6px solid var(--orange-1);
+  }
+  .loader.blue{
+    border-top: 6px solid var(--blue-1);
   }
   @keyframes spin {
     0% { transform: rotate(0deg); }

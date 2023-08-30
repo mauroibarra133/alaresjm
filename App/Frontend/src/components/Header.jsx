@@ -17,6 +17,7 @@ function Header() {
     const [showOverlay, setShowOverlay] = useState(false);
     const {logout} = useAuth()
     //Functions
+
     const handleBurgerClick = ()=>{
         if(!burgerClicked && userClicked){
             setUserClicked(!userClicked)
@@ -32,6 +33,13 @@ function Header() {
         setShowOverlay(!userClicked);
         setUserClicked(!userClicked)
 
+    }
+    const handleOverlayClick=()=>{
+        if(burgerClicked){
+            handleBurgerClick()
+        }else{
+            handleUserClick()
+        }
     }
     const closeSession = async ()=>{
         try {
@@ -56,7 +64,7 @@ function Header() {
             <Nav clicked={burgerClicked} handleBurgerClick={handleBurgerClick}/>
             <NavUser clicked={userClicked} handleUserClick={handleUserClick} closeSession={closeSession}/>
             {showOverlay && (
-                <Overlay></Overlay>
+                <Overlay closeNav={handleOverlayClick} showOverlay={showOverlay}></Overlay>
             )}
             </>
             

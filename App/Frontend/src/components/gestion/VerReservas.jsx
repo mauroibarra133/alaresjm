@@ -7,7 +7,7 @@ import Overlay from "../Overlay";
 import Reserva from "./Reserva";
 import eyeImg from '../../assets/images/eye-slash.svg'
 import Modal from "../Modal";
-import LoaderComponent from '../menu/LoaderComponent'
+import LoaderComponent from '../LoaderComponent';
 
 function VerReservas() {
     //Constants
@@ -131,7 +131,7 @@ function VerReservas() {
                 </div>
                 <div className="verreservas__body veritems__body">
                     {loading ? (
-                        <LoaderComponent size={'minimal'}/>
+                        <LoaderComponent size={'small'} color={'blue'}/>
                     ) : (
                         filterBookings(bookings).length <= 0 ? (
                         <VerReservasVacio msg={'No hay reservas el día de hoy'} msgButton={':('}/>

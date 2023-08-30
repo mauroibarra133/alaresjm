@@ -9,11 +9,13 @@ import Pedido from './Pedido';
 import io from 'socket.io-client';
 import { transformDate } from '../../utils/functions';
 const socket = io('/');
+import LoaderComponent from '../LoaderComponent';
 
 function MisPedidos() {
 
     //States
     const [isFilterActive, setFilterActive] = useState(true);
+    const [isLoading, setIsLoading] = useState(true);
     const [pedidos,setPedidos] = useState([]);
     const [pedidoAct,setPedidoAct] = useState(false);
     const [page,setPage] = useState(1);
@@ -39,13 +41,13 @@ function MisPedidos() {
     },[pedidos,isFilterActive]);
     
     useEffect(()=>{
-        async function searchReservas(){
+        async function searchOrders(){
             if(auth.data.user_id){
                 const response = await getOrders({ user_id: auth.data.user_id})
                 setPedidos(response.data.data)
             }
         }
-        searchReservas()
+        searchOrders().then(()=> setIsLoading(false)).catch((error)=>{console.log(error); setIsLoading(false);})
     },[auth.data.user_id])
 
     useEffect(() => {
@@ -97,13 +99,12 @@ function handlePedidos(){
     if(pedidos.length <= 0){
         return <MisPedidosVacio goTo={'delivery'} msg={"Aun no tienes ningun pedido hoy"} msgButton={"PEDIR"}></MisPedidosVacio>
     }else{
-        //Si no hay filtro
         const filteredOrders = filterOrders()
 
             if(filteredOrders.length <= 0){
                 return <MisPedidosVacio goTo={'delivery'} msg={"Aun no tienes ningun pedido hoy"} msgButton={"PEDIR"}></MisPedidosVacio>
             } else {
-                return filterOrders().slice(offsett, LIMIT + offsett).map(order => {
+                return filteredOrders.slice(offsett, LIMIT + offsett).map(order => {
                     return (
                         <Pedido pedido={order} key={order.id} />
                     );
@@ -128,7 +129,11 @@ function handlePedidos(){
                         <p className="datos__header-column">Estado</p>
                     </div>
                     <div className="datos__body">
-                        {handlePedidos()}
+                    {isLoading ? (
+                            <LoaderComponent size={'small'} color={'orange'}/> // Muestra el componente de carga mientras isLoading sea true
+                        ) : (
+                            handlePedidos() // Muestra los datos una vez que isLoading sea false
+                        )}
                     </div>
                 </div>
             </div>

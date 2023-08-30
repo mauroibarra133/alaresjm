@@ -7,7 +7,7 @@ import Duda from "./Duda";
 import Modal from "../Modal";
 import eyeImg from '../../assets/images/eye-slash.svg'
 import '../../styles/dashboard/veritems.css'
-import LoaderComponent from "../menu/LoaderComponent";
+import LoaderComponent from "../LoaderComponent";
 
 function VerDudas() {
     //States
@@ -123,7 +123,7 @@ function VerDudas() {
                 </div>
                 <div className="verdudas__body veritems__body">
       {loading ? (
-        <LoaderComponent size={'minimal'}/>
+        <LoaderComponent size={'small'} color={'blue'}/>
       ) : (
         filterDoubts(doubts).length <= 0 ? (
           <VerDudasVacio msg={'No hay dudas el día de hoy'} msgButton={':('} />

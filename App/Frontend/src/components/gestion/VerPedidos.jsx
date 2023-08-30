@@ -9,7 +9,8 @@ import VerPedidosVacio from '../FormVacio'
 import io from 'socket.io-client';
 const socket = io('/');
 import Modal from "../Modal";
-import LoaderComponent from '../menu/LoaderComponent'
+import LoaderComponent from '../LoaderComponent';
+
 
 function VerPedidos() {
     //Constants
@@ -200,7 +201,7 @@ function VerPedidos() {
                 </div>
                 <div className="veritems__body verpedidos__body" id='verpedidos__body'>
   {loading ? (
-    <LoaderComponent size={'minimal'}/>
+    <LoaderComponent size={'small'} color={'blue'}/>
   ) : (
     filterOrders(orders).length <= 0 ? (
       <VerPedidosVacio msg={'No hay pedidos el día de hoy'} msgButton={':('}></VerPedidosVacio>

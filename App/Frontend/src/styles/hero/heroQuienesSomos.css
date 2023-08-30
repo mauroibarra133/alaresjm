@@ -5,10 +5,12 @@
 .hero-quienessomos__overlay{
     position: relative;
     width: 100%;
-    height: calc(100vh);
+    min-height: 100vh;
+    height: auto;
     background-image: url('../../assets/images/hero-quienesSomos-background-min.webp');
     background-position: 50% 50%;
     background-size: cover;
+    padding-bottom: 2rem ;
 }
 
 .hero-quienessomos__overlay::after{

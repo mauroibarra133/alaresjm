@@ -13,7 +13,7 @@ import carritoImg from '../../assets/images/carrito.webp'
 import ItemMenu from './ItemMenu';
 import Modal from '../Modal';
 import { useRef } from 'react';
-import LoaderComponent from './LoaderComponent'
+import LoaderComponent from '../LoaderComponent';
 
 function Menu() {
     //States
@@ -89,7 +89,7 @@ function Menu() {
         <>
             <div className='menu__container'>
             {loading ? (
-        <LoaderComponent />
+        <LoaderComponent color={'orange'}/>
       ) : (
         <>
           {/* Resto de tu contenido cuando los productos están cargados */}
