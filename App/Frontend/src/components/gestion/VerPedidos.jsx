@@ -10,6 +10,7 @@ import io from 'socket.io-client';
 const socket = io('/');
 import Modal from "../Modal";
 import LoaderComponent from '../LoaderComponent';
+import { DATE_REGEX } from '../../utils/constants';
 
 
 function VerPedidos() {
@@ -18,12 +19,9 @@ function VerPedidos() {
     const filterCancelId = useId()
     const filterDeliveredId = useId()
     const today = new Date()
-    today.setUTCHours(today.getUTCHours() - 3);
     const todayDate = today.toISOString().split('T')[0]
     const yesterday = new Date()
-    yesterday.setDate(today.getDate() - 1);
-    const yesterdayDate = yesterday.toISOString().split('T')[0];
-
+    const yesterdayDate = new Date(yesterday.setTime(yesterday.getTime() - (24 * 60 * 60 * 1000))).toISOString().split('T')[0];
     //States
     const [orders,setOrders] = useState([]);
     const [loading,setLoading] = useState(true);
@@ -121,7 +119,11 @@ function VerPedidos() {
     }
 
     function handleDate(data){
-        setFilterDate(data.target.value)
+        if (DATE_REGEX.test(data.target.value)) {
+            console.log(data.target.value,'aaaaa');
+            setFilterDate(data.target.value)
+          }
+
     }
 
     function filterOrders(orders){

@@ -18,6 +18,7 @@ export  async function getProducts(categoria) {
   }
 
   export async function updateProduct(id, updatedData) {
+    console.log(id, updatedData);
     try {
         const response = await axios.put(`${urlSource}/${id}`, updatedData);
         return response;

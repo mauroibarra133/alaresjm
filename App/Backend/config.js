@@ -16,5 +16,6 @@ export default {
     secret_token: process.env.ACCESS_TOKEN || '',
     encrypt_code: process.env.ENCRYPT_CODE || '',
     st_changepassword: process.env.ST_CHANGEPASSWORD || '',
-    email_password: process.env.EMAIL_PASSWORD || ''
+    email_password: process.env.EMAIL_PASSWORD || '',
+    server_host: process.env.SERVER_HOST || ''
 }

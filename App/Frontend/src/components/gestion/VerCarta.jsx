@@ -11,10 +11,17 @@ import cruzImg from '../../assets/images/xmark-solid.svg'
 import '../../styles/dashboard/veritems.css'
 import { useAuth } from '../../hooks/useAuth';
 import LoaderComponent from "../LoaderComponent";
+import ModalOption from '../ModalOption';
 
 
 function VerCarta() {
     //States 
+    const [deleteModal,setDeleteModal] = useState({
+        data: {
+            id: ''
+        },
+        status: false
+    });
     const [items,setItems] = useState([]);
     const [action,setAction] = useState('');
     const [itemStatus,setItemStatus] = useState(
@@ -107,13 +114,25 @@ function VerCarta() {
         setFilteredItems(response)
 
     }
-    async function deleteProductByID(id){
+    function showModalDelete(id){
+        setDeleteModal({
+            data: {id: id}, status: true
+        })
+    }
+    async function deleteProductByID(){
+        const idDelete = deleteModal.data.id
         if(auth.data.rol !== "Guest"){
-            const response = await deleteProduct(id)
-            setItems(items.filter(item => item.id != id))
+            setItems(items.filter(item => item.id != idDelete))
+            const response = await deleteProduct(idDelete)
             handleMsgStatus(response,'Eliminado correctamente','Hubo un error al eliminar tu producto')
         }
+        setDeleteModal({
+            data: {id: ''}, status: false
+        })
+        document.body.style.overflow = 'auto'
+
     }
+
 
     function handleMsgStatus(response,msgGood,msgBad){
         if(response.status >= 200 && response.status < 300){
@@ -147,7 +166,13 @@ function VerCarta() {
         });
         document.body.classList.remove('disable-scroll');    
     }
+    function closeModalDelete(){
+        setDeleteModal({
+            data: {id: ''}, status: false
+        })
+        document.body.style.overflow = 'auto'
 
+    }
     function handlePage(pageAct){
         if(pageAct !== page){
             window.scrollTo(0, 300);
@@ -222,8 +247,8 @@ function VerCarta() {
                         <div className="veritems__dato vercarta__dato"><p>{offsett === 0 ? (i + 1) : i + 1 + offsett}</p></div>
                         <div className="veritems__dato vercarta__dato vercarta__dato-nombre"><p>{(item.nombre).toUpperCase()}</p></div>
                         <div className="veritems__dato vercarta__dato">
-                            <button ><img src={pencilImg} alt="Modificar item" className='dashboard-icon vercarta__acciones' onClick={() => openModalCarta(item, 'U')} /></button>
-                            <button disabled={auth.data.rol === "Guest"} onClick={() => deleteProductByID(item.id)} ><img src={cruzImg} alt="Eliminar item" className='dashboard-icon vercarta__acciones' /></button>
+                            <button className='veritems__button-action'><img src={pencilImg} alt="Modificar item" className='dashboard-icon vercarta__acciones' onClick={() => openModalCarta(item, 'U')} /></button>
+                            <button className='veritems__button-action' disabled={auth.data.rol === "Guest"} onClick={() => showModalDelete(item.id)} ><img src={cruzImg} alt="Eliminar item" className='dashboard-icon vercarta__acciones' /></button>
                         </div>
                         </div>
                     ))
@@ -231,7 +256,6 @@ function VerCarta() {
                 )}
     </div>
         </div>
-        {pages.length > 1 && (
         <div className="vercarta__paginacion-wrapper">
         <div className="vercarta__paginacion">
             <div className="vercarta__pagina--button">
@@ -247,13 +271,15 @@ function VerCarta() {
             </div>
         </div>
     </div>
-        )}
 
         {modalCarta.isSubmitted && (
                 <Overlay comp={'verpedidos'}>
                         <Item modalCarta={modalCarta} closeModal={closeModalCarta} categorias={categories}  action={action} handleMsgStatus={handleMsgStatus}></Item>
                 </Overlay>
                     )}
+        {deleteModal.status && (
+            <ModalOption handleSubmit={deleteProductByID} id={deleteModal.data.id} position={'top'} closeModal={closeModalDelete} msg={'Estas seguro que deseas eliminar este producto?'}/>
+        )}
     </div>
     )
 } 

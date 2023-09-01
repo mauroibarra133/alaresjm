@@ -17,7 +17,7 @@ export const  queries ={
         getProductById: 'SELECT * FROM productos WHERE id = $1',
         deleteProductPrices: 'DELETE FROM precios WHERE id_producto = $1',
         deleteProduct: 'DELETE FROM productos WHERE id = $1',
-        updateProductById: 'UPDATE productos SET nombre =$1, descripcion = $2, id_categoria = $3 WHERE id = $4 '
+        updateProductById: 'UPDATE productos SET nombre = $1, descripcion = $2, id_categoria = $3 WHERE id = $4 '
     },
     Dudas:{
         getAllDudas: `SELECT D.id, (D.nombre || ' ' || D.apellido) as nombreCompleto, D.telefono, D.mail, D.descripcion as duda, E.nombre as estado
@@ -139,8 +139,8 @@ export const  queries ={
     },
     Prices: {
         addPrecioChico: "INSERT INTO precios (id_producto,id_tamaño,precio) VALUES ($1,1,$2)",
-        addPrecioGrande: "INSERT INTO precios (id_producto,id_tamaño,precio) VALUES ($1,3,$2)",
+        addPrecioGrande: "INSERT INTO precios (id_producto,id_tamaño,precio) VALUES ($1,2,$2)",
         updatePrecioChico: "UPDATE precios SET precio = $1 WHERE id_producto = $2 AND id_tamaño = 1",
-        updatePrecioGrande: "UPDATE precios SET precio = $1  WHERE id_producto = $2 AND id_tamaño = 3"
+        updatePrecioGrande: "UPDATE precios SET precio = $1  WHERE id_producto = $2 AND id_tamaño = 2"
     }
 }

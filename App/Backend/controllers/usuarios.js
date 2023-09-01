@@ -3,7 +3,6 @@ import config from '../config'
 import jwt from 'jsonwebtoken'
 import nodemailer from 'nodemailer'
 
-
 // Configuración de correo electrónico
 const transporter = nodemailer.createTransport({
     service: 'gmail',
@@ -121,7 +120,7 @@ export async function sendPasswordLink(req, res) {
         });
 
         const tokenModified = btoa(unescape(encodeURIComponent(token)));
-        const link = `http://localhost:5173/reset-password/${dataUser.id}/${tokenModified}`; // No me lee la URL hasta el punto
+        const link = `https://${config.server_host}/reset-password/${dataUser.id}/${tokenModified}`; // No me lee la URL hasta el punto
 
         const mailOptions = {
             from: 'alaresbar@gmail.com',

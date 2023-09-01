@@ -65,10 +65,9 @@ export async function getProductById(req, res) {
 }
 
 export async function deleteProductById(req, res) {
+    const client = await getConnection();
     try {
         const { id } = req.params;
-        const client = await getConnection();
-        
         await client.query('BEGIN');
 
         const result1 = await client.query(queries.Products.deleteProductPrices, [id]);
@@ -94,7 +93,7 @@ export async function deleteProductById(req, res) {
 export async function updateProductById(req, res) {
     const { id } = req.params;
     const { nombre, descripcion, id_categoria, precioChico, precioGrande } = req.body;
-
+    console.log(nombre,descripcion,id_categoria,precioChico,precioGrande);
     if (nombre == null || descripcion == null || id_categoria == null) {
         return res.status(400).json({ msg: 'Bad Request. Please fill all fields' });
     }

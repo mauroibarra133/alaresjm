@@ -8,14 +8,14 @@ import Reserva from "./Reserva";
 import eyeImg from '../../assets/images/eye-slash.svg'
 import Modal from "../Modal";
 import LoaderComponent from '../LoaderComponent';
+import { DATE_REGEX } from '../../utils/constants';
 
 function VerReservas() {
     //Constants
     const today = new Date()
     const todayDate = today.toISOString().split('T')[0]
     const tomorrow = new Date()
-    tomorrow.setDate(tomorrow.getDate() + 1);
-    const tomorrowDate = tomorrow.toISOString().split('T')[0];
+    const tomorrowDate = new Date(tomorrow.setTime(tomorrow.getTime() + (24 * 60 * 60 * 1000))).toISOString().split('T')[0];
 
     //States
     const [bookings,setBookings] = useState([]);
@@ -80,7 +80,9 @@ function VerReservas() {
     }
 
     function handleDate(data){
-        setFilterDate(data.target.value)
+        if (DATE_REGEX.test(data.target.value)) {
+            setFilterDate(data.target.value)
+          }
     }
 
     function openModalBooking(booking){

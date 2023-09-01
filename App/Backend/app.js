@@ -41,7 +41,7 @@ app.set('socketio', io); // aquí asignas el socket global
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 const corsOptions = {
-    origin: "*",
+     origin: "*",
     credentials: true,
 };
 app.use(cors(corsOptions));

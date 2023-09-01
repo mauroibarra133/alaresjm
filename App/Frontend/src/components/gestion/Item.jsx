@@ -30,17 +30,29 @@ function Item({modalCarta,closeModal, categorias,action, handleMsgStatus}) {
         if(auth.data.rol !== "Guest"){  
             if(isDirty){
                 if(action == 'U'){
-                   const response = await updateProduct(item.id,{...data,
-                        precioChico : parseInt((data.precioChico).substring(1)),
-                        precioGrande : parseInt((data.precioGrande).substring(1)),
-                        id_categoria : id_categoria})
+                    try {
+                        const response = await updateProduct(item.id,{...data,
+                            precioChico : parseInt((data.precioChico).substring(1)),
+                            precioGrande : parseInt((data.precioGrande).substring(1)),
+                            id_categoria : id_categoria})
+                            console.log(response);
                         handleMsgStatus(response,'Producto modificado correctamente', 'Hubo un error al modificar tu producto')
+
+                    } catch (error) {
+                        console.log(error);
+                    }
+ 
                 }else{
-                     const response = await addProduct({...data,
-                        precioChico : parseInt((data.precioChico).substring(1)),
-                        precioGrande : parseInt((data.precioGrande).substring(1)),
-                        id_categoria : id_categoria})
-                        handleMsgStatus(response,'Producto agregado correctamente', 'Hubo un error al crear tu producto')
+                    try {
+                        const response = await addProduct({...data,
+                            precioChico : parseInt((data.precioChico).substring(1)),
+                            precioGrande : parseInt((data.precioGrande).substring(1)),
+                            id_categoria : id_categoria})
+                            handleMsgStatus(response,'Producto agregado correctamente', 'Hubo un error al crear tu producto')
+                    } catch (error) {
+                        console.log(error);
+                    }
+
                 }
             }
         }

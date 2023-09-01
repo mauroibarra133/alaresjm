@@ -1,3 +1,4 @@
+import config from "../config";
 import { queries, getConnection } from "../database"
 import generatePaymentID from '../utils/functions';
 import { addDescOrderTransf } from "./desc_pedidos";
@@ -61,8 +62,7 @@ export async function addOrder(fecha,id_pago,id_usuario,direccion,nota,total,id_
     const date = req.query.date;
     const user_id = req.query.user_id;
     console.log(user_id,date);
-    // res.header('Access-Control-Allow-Origin', 'https://alaresjm.onrender.com');
-    res.header('Access-Control-Allow-Origin', 'http://localhost:4000');
+    res.header('Access-Control-Allow-Origin', config.server_host);
 
     try {
         const client = await getConnection()

@@ -1,8 +1,8 @@
 import mercadopago from "mercadopago"
 import {  getPedidosTransf } from "./pedidos.controller";
 import app from '../app'
-
 import { getConnection, queries } from '../database'; // Importa la función de conexión
+import config from "../config";
 
 export const receiveWebHook = async (req, res) => {
   let items;
@@ -101,11 +101,11 @@ export const create_preference =(req, res) => {
             street_name: req.body.address || ''}
         },
       back_urls: {
-        success: "https://alaresjm.onrender.com/delivery",
-        failure: "https://alaresjm.onrender.com/carta",
+        success: `https://${config.server_host}/delivery`,
+        failure: `https://${config.server_host}/carta`,
         pending: "",
       },
-      notification_url:"https://alaresjm.onrender.com/webhook",
+      notification_url:`https://${config.server_host}/webhook`,
       auto_return: "approved"};
     
   

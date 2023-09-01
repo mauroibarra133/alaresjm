@@ -14,8 +14,13 @@ export const ONLY_LETTERS = /^[A-Za-z\s]+$/
 export const ONLY_NUMBERS = /^[0-9]+$/ 
 export const ADDRESS_REGEX = /^[a-zA-Z0-9\s.,#-]+$/;
 export const PRECIO__REGEX = /^\$\d+$/
-// export const SERVER_HOST = 'http://localhost:4000'
-export const SERVER_HOST = 'https://alaresjm.onrender.com'
+export const DATE_REGEX = /^\d{4}-\d{2}-\d{2}$/;
+
+
+
+export const SERVER_HOST = 'http://localhost:4000';
+// export const SERVER_HOST = 'https://alaresjm.onrender.com'
+
 export const meses = {
     0: 'Enero',
     1: 'Febrero',
@@ -33,7 +38,7 @@ export const meses = {
   
   export const ordersStatus = [
     {
-      status: "A confirmar",
+      status: "A Confirmar",
       img: waitStatus
     },
     {

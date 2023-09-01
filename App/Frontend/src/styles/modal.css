@@ -40,8 +40,11 @@
 .modal__top.bad{
     background-color: var(--red-error-2);
 }
+.modal__top.info{
+    background-color: var(--blue-1);
+}
 .modal__info.info{
-    background-color: #6EB5FF;
+    background-color:  var(--blue-2);
 }
 .modal__body{
     display: flex;
@@ -81,7 +84,7 @@
     background-color: var(--red-error-2);
 }
 .modal__button.info{
-    background-color: #6EB5FF
+    background-color: var(--blue-1)
 }
 .modal__button:hover{
     background-color: var(--green-1);
@@ -96,6 +99,10 @@
     cursor: pointer;
 }
 .modal__button.info:hover{
-    background-color:  #6EB5FF;
+    background-color:  var(--blue-1);
     cursor: pointer;
+}
+.modal__buttons{
+    display: flex;
+    gap: 1rem;
 }

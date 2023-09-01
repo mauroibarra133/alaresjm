@@ -92,7 +92,6 @@
 .veritems__row:hover{
     background-color: rgba(166, 166, 255, 0.423);
     border-radius: 12px;
-    cursor: pointer;
 }
 .veritems__row:last-child{
   border:none;
@@ -362,6 +361,9 @@
   color: white;
 }
 
+.veritems__button-action{
+  cursor: pointer;
+}
 @media only screen and (min-width: 768px){
 
 .vercarta__search-wrapper{

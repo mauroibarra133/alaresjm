@@ -2,15 +2,6 @@ import { Pool } from 'pg'; // Importa la biblioteca pg
 
 import config from '../config';
 
-// const dbSettings = {
-//     user: config.dbUser,
-//     password: config.dbPassword,
-//     host: config.dbServer,
-//     database: config.dbDataBase,
-//     port: config.dbPort, // Añade el puerto si es necesario
-//     ssl: false
-// };
-
 
 const pool = new Pool({
     user: 'alares',
