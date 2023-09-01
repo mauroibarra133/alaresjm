@@ -1,0 +1,1 @@
+import{j as s,N as i}from"./index-74738f01.js";function n({msg:e,msgButton:r,goTo:a}){return s.jsxs("div",{className:"datos__body vacio",children:[s.jsx("p",{className:"misreservas__msg",children:e}),s.jsx("div",{className:"misreservas__button",children:s.jsx(i,{to:a?`/${a}`:"./",children:s.jsx("button",{className:"button",children:r})})})]})}export{n as F};
