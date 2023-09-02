@@ -4,12 +4,15 @@ import burgerImg from '../../assets/images/burger-deco.webp'
 import { useEffect, useState } from 'react';
 import { getRanking } from '../../services/rankings.services';
 import {meses} from '../../utils/constants.js';
+import ClientesVacio from '../FormVacio'
+import LoaderComponent from '../LoaderComponent'
 
 function RankingClientes() {
     //Constants
     const actualDate = new Date();
 
     //Stattes
+    const [loading, setLoading] = useState(true);
     const [ranking, setRanking] = useState([]);
 
     //Use effects
@@ -18,7 +21,9 @@ function RankingClientes() {
             try {
                 const response = await getRanking()
                 setRanking(response.data)
+                setLoading(false); 
             } catch (error) {
+                setLoading(false); 
                 console.log(error);
             }
 
@@ -48,18 +53,23 @@ function RankingClientes() {
                         <p>Puntos</p>
                     </div>
                 </div>
-                <div className="ranking__table-body">
-                    {ranking && ranking.slice(0,10).map((fila,index) => (
-                    <div className="ranking__table-row" key={fila.id_usuario}>
-                        <div>
-                            <div className="ranking__position">{`${index+1}º`}</div>
-                            <div className="ranking__client">{`${fila.nombre} ${fila.apellido}`}</div>
+                <div className={`ranking__table-body ${loading ? 'center' : ''}`}>
+                    {loading ? (
+                    <LoaderComponent color={'orange'} size={'small'}/> 
+                    ) : ranking.length <= 0 ? (
+                    <ClientesVacio goTo="/carta" msg="Se el primer cliente de este mes!" msgButton={'PEDIR'}/>
+                    ) : (
+                    ranking.slice(0, 10).map((fila, index) => (
+                        <div className="ranking__table-row" key={fila.id_usuario}>
+                            <div>
+                                <div className="ranking__position">{`${index+1}º`}</div>
+                                <div className="ranking__client">{`${fila.nombre} ${fila.apellido}`}</div>
+                            </div>
+                                <div className="ranking__points">{`${fila.puntos} pts`}</div>
                         </div>
-
-                        <div className="ranking__points">{`${fila.puntos} pts`}</div>
-                    </div>
-  ))}
-</div>
+                    ))
+                    )}
+                </div>
 
             </div>
         </div>

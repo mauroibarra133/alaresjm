@@ -102,6 +102,9 @@
     align-items: flex-start;
     gap: 0.625rem;
 }
+.ranking__table-body.center{
+  align-items: center;
+}
 .ranking__table-row{
     width: 100%;
     display: flex;

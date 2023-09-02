@@ -47,6 +47,9 @@
 .veritems__filter input{
   width: auto;
 }
+.veritems__filter label{
+  font-size: .9rem;
+}
 /* Tabla */
   .veritems__lista{
     width: 100%;
