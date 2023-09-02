@@ -57,7 +57,7 @@ function RankingClientes() {
                     {loading ? (
                     <LoaderComponent color={'orange'} size={'small'}/> 
                     ) : ranking.length <= 0 ? (
-                    <ClientesVacio goTo="/carta" msg="Se el primer cliente de este mes!" msgButton={'PEDIR'}/>
+                    <ClientesVacio goTo="carta" msg="Se el primer cliente de este mes!" msgButton={'PEDIR'}/>
                     ) : (
                     ranking.slice(0, 10).map((fila, index) => (
                         <div className="ranking__table-row" key={fila.id_usuario}>
