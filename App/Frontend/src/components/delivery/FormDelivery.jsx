@@ -4,9 +4,9 @@ import { useEffect, useId } from "react";
 import '../../styles/delivery/delivery.css'
 import { ONLY_NUMBERS, ADDRESS_REGEX } from "../../utils/constants";
 import { Wallet } from "@mercadopago/sdk-react";
+import LoaderComponent from '../LoaderComponent'
 
-
-function FormDelivery({onSubmit,total, preferenceId, isOrderedEft}) {
+function FormDelivery({onSubmit,total, preferenceId, isOrderedEft, loading}) {
 
     //Constants
     const clientDirectionId = useId();
@@ -15,6 +15,7 @@ function FormDelivery({onSubmit,total, preferenceId, isOrderedEft}) {
     const deliveryTypeId = useId();
     const notaId = useId();
 
+    //states
     //Hooks
     const {register, watch, formState, handleSubmit, reset} = useForm({
         mode: 'onTouched'
@@ -84,7 +85,7 @@ function FormDelivery({onSubmit,total, preferenceId, isOrderedEft}) {
         </div>
         <div className="order__button">
             <button type='submit' className='order__confirmar button' disabled={total == 0}>
-                Confirmar Pedido
+                {loading ? <LoaderComponent size={'small'} color={'mp-color'}/>: 'Confirmar pedido'}
             </button>
             
             {(preferenceId && watch("tipoPago") === "2") && <Wallet initialization={{ preferenceId,redirectMode: 'modal' }} className='button mp_button'/>}

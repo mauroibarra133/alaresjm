@@ -225,7 +225,6 @@ select option{
     justify-content: center;
     align-items: center;
     padding-bottom: 2rem;
-    background: var(--black-1);
 }
 .order__button button{
     color: var(--text-white);
@@ -233,4 +232,12 @@ select option{
 }
 .mp_button{
     max-width: none;
+}
+.order__confirmar{
+    background: var(--black-1);
+    min-width: 170px;
+    min-height: 35px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }

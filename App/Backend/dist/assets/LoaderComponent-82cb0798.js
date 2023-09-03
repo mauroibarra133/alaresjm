@@ -1,0 +1,1 @@
+import{j as o}from"./index-7ccd8e36.js";function e({size:a,color:r}){return o.jsx("div",{className:`loader-container ${a=="small"?"small":""} `,children:o.jsx("div",{className:`loader ${a} ${r}`})})}export{e as L};

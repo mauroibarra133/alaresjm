@@ -18,7 +18,7 @@ import trashImg from '../../assets/images/trash.webp'
 
 function Delivery() {
 
-  initMercadoPago("TEST-803ddd42-4075-4c56-934e-c037302ed0d6");
+  initMercadoPago("APP_USR-aaad6c69-62aa-4d6b-a9fd-e744881e088a");
 
   //States
   const [total, setTotal] = useState(0);
@@ -26,7 +26,8 @@ function Delivery() {
   const [isOrderedEft, setIsOrderedEft] = useState({
     isSubmitted : false,
     goodStatus: false
-  })
+  });
+  const [loading,setLoading] = useState(false);
 
   //Hooks
   const {auth} = useAuth();
@@ -111,9 +112,11 @@ function Delivery() {
           console.log(error);
         }
       }
+      setLoading(false)
     };
 
 const onSubmit = (data)=>{
+  setLoading(true);
     const order = {
         ...data,
         carritoItems: cart,
@@ -143,7 +146,7 @@ const onSubmit = (data)=>{
                 </button>
                 </div>
             </div>
-            <FormDelivery onSubmit={onSubmit} total={total} preferenceId={preferenceId} isOrderedEft={isOrderedEft} />
+            <FormDelivery onSubmit={onSubmit} total={total} preferenceId={preferenceId} isOrderedEft={isOrderedEft} loading={loading}/>
             <Modal isSubmitted={isOrderedEft.isSubmitted} 
             handleSubmit={handleCloseModal}
             isGoodStatus={isOrderedEft.goodStatus}

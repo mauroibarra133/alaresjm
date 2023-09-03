@@ -310,12 +310,21 @@
     height: 30px;
     border-top: 6px solid var(--blue-1);
   }
+  .loader.small-button{
+    width: 20px;
+    height: 20px;
+    border-top: 6px solid var(--blue-1);
+  }
 
   .loader.orange{
     border-top: 6px solid var(--orange-1);
   }
   .loader.blue{
     border-top: 6px solid var(--blue-1);
+  }
+  .loader.mp-color{
+    border-top: 6px solid #1DA1F2
+
   }
   @keyframes spin {
     0% { transform: rotate(0deg); }

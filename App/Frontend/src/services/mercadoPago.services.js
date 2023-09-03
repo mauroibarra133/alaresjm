@@ -13,10 +13,14 @@ export async function createPreferenceMP(items, direccionCliente,tipoPago, tipoE
         notaPedido: notaPedido,
         user_id: id_usuario
       }
+    },{
+      headers: {
+        'Content-Type': 'application/json',
+      }
     });
     return response
   } catch (error) {
-    console.log(error);
+    console.error('Error al realizar la solicitud a Mercado Pago:', error);
     throw new ConnectionError()
   }
 

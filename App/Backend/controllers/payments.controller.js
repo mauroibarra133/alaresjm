@@ -101,11 +101,11 @@ export const create_preference =(req, res) => {
             street_name: req.body.address || ''}
         },
       back_urls: {
-        success: `https://${config.server_host}/delivery`,
-        failure: `https://${config.server_host}/carta`,
+        success: `https://${config.server_host}/delivery/`,
+        failure: `https://${config.server_host}/carta/`,
         pending: "",
       },
-      notification_url:`https://${config.server_host}/webhook`,
+      notification_url:`https://${config.server_host}/webhook/`,
       auto_return: "approved"};
     
   
@@ -117,6 +117,7 @@ export const create_preference =(req, res) => {
         });
       })
       .catch(function (error) {
+        console.log(error);
         res.status(500).json({msg: error})
       });
 }

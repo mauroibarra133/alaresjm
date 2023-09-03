@@ -3,7 +3,7 @@ import '../styles/carta/carta.css'
 function LoaderComponent({size,color}) {
     return (
       <div className={`loader-container ${size == 'small' ? 'small' : ''} `}>
-        <div className={`loader ${size == 'small' ? 'small' : ''} ${color}`}></div>
+        <div className={`loader ${size} ${color}`}></div>
       </div>
     );
   }
