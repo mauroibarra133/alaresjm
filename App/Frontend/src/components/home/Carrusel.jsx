@@ -43,9 +43,6 @@ function Carrusel(){
             <li className='glide__slide slider'>
                 <img src={imgCarrusel4} alt="Imagen Carrusel" />
             </li>
-            <li className={`glide__slide slider`}>
-                <img src={imgCarrusel4} alt="Imagen Carrusel" />
-            </li>
           </ul>
         </div>
         <div className="glide__bullets" data-glide-el="controls[nav]">

@@ -48,7 +48,7 @@ export async function getUserData(req,res){
     }
 }
 export async function getLink(req, res) {
-    const { id, token } = req.params;
+    const { id } = req.params;
     try {
         const client = await pool.connect();
         const result = await client.query(queries.Login.getUserDataByID, [id]);

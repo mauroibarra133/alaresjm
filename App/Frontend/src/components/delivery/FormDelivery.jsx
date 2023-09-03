@@ -65,23 +65,45 @@ function FormDelivery({onSubmit,total, preferenceId, isOrderedEft, loading}) {
                 </select>
             </div>
             <div className="form__row">
-                <label htmlFor={amountEftvoId}>Abono con</label>
-                <div>
-                    <input type="text" id={amountEftvoId} 
-                    {...register('montoEft',{required: "Debes incluir con cuanto efectivo nos pagas.",
-                    disabled: watch("tipoPago") === "2",
-                    pattern: {
-                        value: ONLY_NUMBERS,                            
-                        message: 'Solo se permiten numeros'
-                    },
-                    validate: ()=> watch("montoEft") >= total || "El monto a pagar debe ser superior al total"
-                })}/>
-                        {errors.montoEft?.type === 'required' && <p role="alert" className='form-error input-error'>{errors.montoEft.message}</p>}
-                        {errors.montoEft?.type === 'pattern' && <p role="alert" className='form-error input-error'>{errors.montoEft.message}</p>}
-                        {errors.montoEft?.type === 'validate' && <p role="alert" className='form-error input-error'>{errors.montoEft.message}</p>}
-                </div>
+    <label htmlFor={amountEftvoId}>Abono con</label>
+    <div>
+        <input
+            type="text"
+            id={amountEftvoId}
+            {...register('montoEft', {
+                required: "Debes incluir con cuanto efectivo nos pagas.",
+                disabled: watch("tipoPago") === "2",
+                pattern: {
+                    value: ONLY_NUMBERS,
+                    message: 'Solo se permiten números'
+                },
+                validate: (value) => {
+                    const parsedValue = parseFloat(value);
+                        if(parsedValue >= total && parsedValue <= parsedValue * 2) {
+                        return "El monto no puede ser tan grande"
 
-            </div>
+                        }else return "El monto a pagar debe ser superior al total"
+                }
+            })}
+        />
+        {errors.montoEft?.type === 'required' && (
+            <p role="alert" className='form-error input-error'>
+                {errors.montoEft.message}
+            </p>
+        )}
+        {errors.montoEft?.type === 'pattern' && (
+            <p role="alert" className='form-error input-error'>
+                {errors.montoEft.message}
+            </p>
+        )}
+        {errors.montoEft?.type === 'validate' && (
+            <p role="alert" className='form-error input-error'>
+                {errors.montoEft.message}
+            </p>
+        )}
+    </div>
+</div>
+
         </div>
         <div className="order__button">
             <button type='submit' className='order__confirmar button' disabled={total == 0}>

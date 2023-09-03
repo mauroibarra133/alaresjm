@@ -95,6 +95,7 @@
 .veritems__row:hover{
     background-color: rgba(166, 166, 255, 0.423);
     border-radius: 12px;
+    cursor: pointer;
 }
 .veritems__row:last-child{
   border:none;
@@ -158,7 +159,6 @@
     animation-name: fadeIn;
     animation-duration: 1s;
   }
-
 
                                                     /* RESERVAS */
   .verreservas{

@@ -40,6 +40,7 @@ export async function login(data){
     const response = await axios.post(`${SERVER_HOST}/api/login`,data,{withCredentials: true})
       return response.data
   } catch (error) {
+    console.log(error);
     if(error.response){
       if(error.response.data.type == 'password') throw new PasswordError()
       if(error.response.data.type == 'mail') throw new LoginMailError()

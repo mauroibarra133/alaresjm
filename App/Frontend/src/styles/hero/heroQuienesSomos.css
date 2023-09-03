@@ -20,7 +20,7 @@
     left: 0;
     top: 0;
     content: '';
-    background-color: var(--overlay-2);
+    background-color: var(--overlay-1);
     z-index: var(--overlay-z);
 }
 /* Hero */

@@ -1,3 +1,4 @@
+import '../../styles/dashboard/dashboard.css'
 import { useState, useEffect } from "react";
 import ordersIcon from '../../assets/images/entrega-de-pedidos.webp';
 import bookingsIcon from '../../assets/images/reserva.webp';
@@ -8,7 +9,6 @@ import VerReservas from "./VerReservas";
 import VerDudas from "./VerDudas";
 import Path from "../Path";
 import VerCarta from './VerCarta';
-import '../../styles/dashboard/dashboard.css'
 
 function DashBoard() {
 

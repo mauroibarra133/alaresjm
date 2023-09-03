@@ -8,6 +8,8 @@ function Modal({ isSubmitted, handleSubmit, msg, isGoodStatus, position, offset 
 
   //Use Effects
   useEffect(() => {
+    document.body.style.overflow= 'hidden'
+
     const handleScroll = () => {
       const scrollTop = window.scrollY || document.documentElement.scrollTop;
       setModalPosition(scrollTop);
@@ -16,6 +18,7 @@ function Modal({ isSubmitted, handleSubmit, msg, isGoodStatus, position, offset 
     window.addEventListener('scroll', handleScroll);
 
     return () => {
+      document.body.style.overflow= 'auto'
       window.removeEventListener('scroll', handleScroll);
     };
   }, []);

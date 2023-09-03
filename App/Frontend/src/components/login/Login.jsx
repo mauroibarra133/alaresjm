@@ -9,6 +9,7 @@ import { useAuth } from '../../hooks/useAuth';
 import { EMAIL_REGEX, PASSWORD_REGEX } from '../../utils/constants';
 import { login } from '../../services/auth.services';
 import '../../styles/login/login.css'
+import LoaderComponent from '../LoaderComponent'
 
 function Login() {
     //Hooks
@@ -28,6 +29,7 @@ function Login() {
         existError: false,
         msg: ''
 })
+const [isLoading, setIsLoading] = useState(false);
 
     //functions
     function handleCloseModal(){
@@ -41,6 +43,7 @@ function Login() {
 
     }
      async function onSubmit(data){
+        setIsLoading(true); 
         try {
             const response = await login(data)
             if(response.status >= 200 && response.status < 300){
@@ -52,14 +55,16 @@ function Login() {
                     })
                 document.body.classList.add('disable-scroll');
             }
-
+        setIsLoading(false); 
         } catch (error) {
             setErrorStatus({
                 isSubmitted: true,
                 existError: true,
                 msg: error.message
                 });
+                console.log(error);
             document.body.classList.add('disable-scroll');
+            setIsLoading(false); 
         }
     }
 
@@ -95,7 +100,9 @@ function Login() {
                                     {errors.password?.type === 'minLength' && <p role="alert" className='form-error'>La contraseña debe ser de al menos 8 caracteres </p>}
                                 </div>
                                 <div className="login__button">
-                                    <button type='submit' className='button'>INICIAR SESION</button>
+                                    <button type='submit' className='button'>
+                                        {isLoading ? <LoaderComponent size={'small-button'} color={'orange'}/> : 'INICIAR SESION'}
+                                    </button>
                                 </div>
                             </form>
                             <img src={foodImg} alt="Foto de comida" className='login__decoration'/>

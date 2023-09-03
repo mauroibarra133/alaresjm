@@ -2,7 +2,6 @@
 import '../styles/overlay.css'
 
 const Overlay = ({ children, comp, closeNav}) => {
-
   return (
     <div className={`overlay`} onClick={closeNav}>
       <div className={`overlay__content ${comp}`}>

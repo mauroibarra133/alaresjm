@@ -9,6 +9,7 @@ router.post('/api/login/',login);
 
 router.get('/api/token/',(req,res)=>{
     const token = req.cookies.tokenJWT
+    console.log('token',token);
     jwt.verify(token,config.secret_token, (err,data)=>{
         if (err){
             res.status(403).json({msg: "No autorizado",type: "auth", data: data})
