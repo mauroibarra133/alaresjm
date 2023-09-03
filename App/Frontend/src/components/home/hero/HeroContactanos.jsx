@@ -59,7 +59,7 @@ function HeroContactanos() {
         }
     }
     return ( 
-        <div className={`hero-contactanos__container ${clicked ? "active" : ""}`} name='#contacto' >
+        <div className={`hero-contactanos__container ${clicked ? "active" : ""}`} name='#contacto' id='contacto'>
             <div className="hero-contactanos__title">
                 <h2>Contactanos</h2>
                 <p>Contrata nuestro servicio de Foodtrack o haznos tus preguntas!</p>

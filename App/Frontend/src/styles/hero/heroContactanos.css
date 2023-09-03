@@ -11,7 +11,7 @@
     justify-content: start;
     align-items: center;
     padding: 1rem;
-    background-image: url('../../assets/images/hero-contactanos-background.webp');
+    background-image: url('../../assets/images/foodtruck-8.webp');
     background-position: 50% 50%;
     background-size: cover;
     padding-top: 2rem;
@@ -27,7 +27,8 @@
     left: 0;
     top: 0;
     content: '';
-    background-color: rgba(255, 198, 146,.48);
+    /* background-color: rgba(255, 198, 146,.48); */
+    background-color: rgba(26, 26, 26, 0.48);
     z-index: var(--overlay-z);
 }
 
@@ -44,14 +45,14 @@
 }
 
 .hero-contactanos__title h2{
-    color: var(--black-1);
+    color: var(--orange-1);
     font-family: 'Pirata One';
     font-size: 2.125rem;
     font-weight: 400;
 }
 
 .hero-contactanos__title p{
-    color: var(--black-1);
+    color: var(--gray-3);
     font-family: 'Lato';
     font-size: 0.875rem;
     font-weight: 400;
@@ -105,7 +106,7 @@
 }
 
 .hero-contactanos__input label{
-    color: #000;
+    color: var(--gray-3);
     font-family: 'Lato';
     font-size: 0.875rem;
     font-weight: 900;
@@ -129,14 +130,15 @@
 /* Boton */
 .hero-contactanos__button{
     display: flex;
-    background: var(--black-1, #000);
-    color: var(--text-white, #FFF);
+    background-color: var(--orange-2);
+    color: var(--black-1);
   
 }
 .hero-contactanos__button:hover{
     background-color: var(--gray-1);
     cursor: pointer;
     border: 1px solid black;
+    color: #FFF;
 }
 
 

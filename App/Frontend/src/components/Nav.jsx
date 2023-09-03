@@ -2,7 +2,6 @@
 import '../styles/nav.css'
 import {Link} from 'react-scroll';
 import { NavLink, useLocation, useNavigate } from 'react-router-dom';
-
 function Nav({clicked, handleBurgerClick}) {
     //Hooks
     const location =useLocation()

@@ -53,7 +53,7 @@ function RankingClientes() {
                         <p>Puntos</p>
                     </div>
                 </div>
-                <div className={`ranking__table-body ${ranking.length <=0 ? 'center' : ''}`}>
+                <div className={`ranking__table-body ${ ranking.length <=0 ? 'center' : ''}`}>
                     {loading ? (
                     <LoaderComponent color={'orange'} size={'small'}/> 
                     ) : ranking.length <= 0 ? (

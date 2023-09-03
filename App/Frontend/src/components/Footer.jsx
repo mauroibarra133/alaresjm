@@ -36,11 +36,11 @@ function Footer() {
                     <div className="footer-info__wrapper">
                         <h4>SEGUINOS</h4>
                         <div className="footer-info__text">
-                            <img src={igIcon} alt="Instagram" />
+                            <img src={igIcon} alt="Instagram de Alares" />
                             <a href="https://www.instagram.com/alaresjm/" rel='noreferrer' target='_blank'><p>alaresjm</p></a>
                         </div>
                         <div className="footer-info__text">
-                            <img src={fbIcon} alt="" />
+                            <img src={fbIcon} alt="Facebook de Alares" />
                             <a href="https://www.facebook.com/profile.php?id=100063529871342" rel='noreferrer' target='_blank'><p>alaresjm</p></a>
 
                         </div>
@@ -52,7 +52,7 @@ function Footer() {
                     <div className="footer-info__wrapper">
                         <h4>DONDE ESTAMOS</h4>
                         <div className="footer-info__text">
-                            <img src={locationIcon} alt="Ubicacion" />
+                            <img src={locationIcon} alt="Ubicacion de Alares" />
                            <a href="https://goo.gl/maps/zjHeALeiZ6j4BMA28" rel='noreferrer' target='_blank'><p>Castulo Peña 582, Jesus Maria</p></a>
                         </div>
                     </div>
