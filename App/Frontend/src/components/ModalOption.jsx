@@ -7,10 +7,7 @@ function ModalOption({ handleSubmit, closeModal,msg}) {
 
   //Use Effects
   useEffect(() => {
-
         document.body.style.overflow = 'hidden'
-
-
   }, []);
 
   return (

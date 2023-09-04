@@ -10,7 +10,7 @@ const pool = new Pool({
     password: config.dbPassword,
     port: config.dbPort,
     ssl: true,
-    max: 10, 
+    max: 20, 
     idleTimeoutMillis: 30000, 
     connectionTimeoutMillis: 2000,
 });
@@ -24,10 +24,11 @@ async function connectWithRetry() {
         return client;
     } catch (error) {
         console.error('Error en la conexión a PostgreSQL:', error);
-        await new Promise((resolve) => setTimeout(resolve, 5000)); 
-        console.log('Reintentando conexión a PostgreSQL...');
-        return connectWithRetry(); 
+        console.log('Reintentando conexión a PostgreSQL (intento ' + retryCount + ')...');
+        await new Promise((resolve) => setTimeout(resolve, 5000));
+        return connectWithRetry(retryCount + 1); // Incrementa el número de intentos
     }
+    
 }
 
 export async function getConnection() {

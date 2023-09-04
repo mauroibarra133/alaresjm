@@ -14,8 +14,8 @@ const transporter = nodemailer.createTransport({
 
 export async function addUsuario(req, res) {
     let { regName, regSurname, regEmail, regPassword } = req.body;
+    const client = await getConnection()
     try {
-        const client = await getConnection()
         await client.query(queries.Usuarios.addUser, [
             regName,
             regSurname,
@@ -30,14 +30,16 @@ export async function addUsuario(req, res) {
     } catch (error) {
         console.log(error);
         res.status(500).json({ msg: "El usuario no se ha creado correctamente" });
+    }finally{
+        client.release()
     }
 }
 
 export async function getUserData(req,res){
     let {id} = req.params
     id = id.substr(1)
+    const client = await getConnection()
     try {
-        const client = await getConnection()
         const result = await client.query(queries.Login.getUserDataByID, [config.encrypt_code,id]);
         const dataUser = result.rows[0] || {};
         client.release();
@@ -45,12 +47,14 @@ export async function getUserData(req,res){
     } catch (error) {
         console.log(error);
         res.send('Not Found');
+    }finally{
+        client.release()
     }
 }
 export async function getLink(req, res) {
     const { id } = req.params;
+    const client = await pool.connect();
     try {
-        const client = await pool.connect();
         const result = await client.query(queries.Login.getUserDataByID, [id]);
         const dataUser = result.rows[0] || {};
         client.release();
@@ -58,6 +62,8 @@ export async function getLink(req, res) {
     } catch (error) {
         console.log(error);
         res.send('Not Verified');
+    }finally{
+        client.release()
     }
 }
 
@@ -66,9 +72,9 @@ export async function changePassword(req, res) {
     let { newPassword, token } = req.body;
 
 
+    const client = await getConnection()
     try {
         // Verificar el id con el token que sean los mismos y no se hayan modificado por URL
-        const client = await getConnection()
         const result = await client.query(queries.Login.getUserDataByID, [config.encrypt_code,id]);
         const dataUser = result.rows[0] || {};
 
@@ -93,6 +99,8 @@ export async function changePassword(req, res) {
         res.status(204).json({ msg: 'Contraseña Cambiada correctamente' });
     } catch (error) {
         console.log(error);
+    }finally{
+        client.release()
     }
 }
 
@@ -101,9 +109,9 @@ export async function sendPasswordLink(req, res) {
     if (!email) {
         res.status(401).json({ status: 'Mail not exist' });
     }
+    const client = await getConnection()
     try {
         // Encontrar datos del usuario
-        const client = await getConnection()
         const result = await client.query(queries.Login.getUserData, [config.encrypt_code,email]);
         const dataUser = result.rows[0] || {};
         client.release();
@@ -152,6 +160,8 @@ export async function sendPasswordLink(req, res) {
     } catch (error) {
         console.log(error);
         res.status(401).json({ msg: 'Invalid User!' });
+    }finally{
+        client.release()
     }
     res.status(201).json({ status: 'Mail founded' });
 }

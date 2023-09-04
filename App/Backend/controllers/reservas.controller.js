@@ -5,8 +5,8 @@ import {getConnection, queries} from '../database/' //Traigo la conexion de la B
 export async function addReserva(req, res) {
     let { fecha, hora, id_usuario, cantidad_personas, lugar, cliente_reserva, id_estado } = req.body;
 
+    const client = await getConnection()
     try {
-        const client = await getConnection()
         const result = await client.query(queries.Reservas.addReserva, [
             fecha,
             hora,
@@ -16,21 +16,22 @@ export async function addReserva(req, res) {
             cliente_reserva,
             id_estado
         ]);
-        client.release();
         res.status(200).json({ msg: "Tu reserva se ha enviado correctamente" });
     } catch (error) {
         console.log(error);
         res.status(500).json({ msg: "No se pudo agregar la reserva" });
+    }finally{
+        client.release()
     }
 }
 
 export async function getReservas(req, res) {
+    const client = await getConnection()
     try {
         const user_id = req.query.user_id;
         const date = req.query.date;
         let result;
 
-        const client = await getConnection()
 
         if (user_id || user_id !== undefined) {
             result = await client.query(queries.Reservas.getReservasByUser, [user_id]);
@@ -48,19 +49,23 @@ export async function getReservas(req, res) {
     } catch (error) {
         console.log(error);
         res.status(500).json({ msg: "Error al obtener los datos" });
+    }finally{
+        client.release()
     }
 }
 
 export async function deleteReserva(req, res) {
     const id = req.params.id;
+    const client = await getConnection()
     try {
-        const client = await getConnection()
         await client.query(queries.Reservas.deleteReserva, [id]);
         client.release();
         res.status(200).json({ msg: "Reserva eliminada correctamente" });
     } catch (error) {
         console.log(error);
         res.status(500).json({ msg: "Error al eliminar la reserva" });
+    }finally{
+        client.release()
     }
 }
 
@@ -68,8 +73,8 @@ export async function updateReserva(req, res) {
     const id = req.params.id;
     const updatedData = req.body; // Asumiendo que los datos actualizados están en el cuerpo de la solicitud
 
+    const client = await getConnection()
     try {
-        const client = await getConnection()
         const result = await client.query(queries.Reservas.updateReserva, [
             updatedData.fecha,
             updatedData.hora,
@@ -79,10 +84,11 @@ export async function updateReserva(req, res) {
             updatedData.estado,
             id
         ]);
-        client.release();
         res.status(200).json({ msg: "Reserva modificada correctamente" });
     } catch (error) {
         console.log(error);
         res.status(500).json({ msg: "Error al modificar la reserva" });
+    }finally{
+        client.release()
     }
 }

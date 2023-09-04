@@ -113,10 +113,13 @@ function HeroContactanos() {
                 </div>
                 <button className={`hero-contactanos__button button`} type='submit'  onClick={handleClick} disabled={!isValid}>Enviar</button>
             </form>
-            <Modal isSubmitted={formStatus.isSubmitted}
+            {formStatus.isSubmitted && (
+                <Modal isSubmitted={formStatus.isSubmitted}
              handleSubmit={handleCloseModal}
              isGoodStatus={formStatus.goodStatus}
               msg={formStatus.goodStatus ?"Tu duda y/o inquietud se ha enviado correctamente!" : "Tu consulta no ha sido enviada correctamente. Porfavor intente mas tarde."}/>
+            
+            )}
               {/* <DevTool control={control}></DevTool> */}
         </div>
      );

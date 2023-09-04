@@ -128,9 +128,12 @@ function Menu() {
       )}
             </div>
             <div ref={footerRef}></div>
-            <Modal isSubmitted={isCartClick && !auth.isLogin} 
-            position={"top"}
-            handleSubmit={()=>setCartClick(false)} msg={!auth.isLogin ? "Debes estar logueado para usar el carrito" : ""}></Modal>
+            {isCartClick && (
+                          <Modal isSubmitted={isCartClick && !auth.isLogin} 
+                          position={"top"}
+                          handleSubmit={()=>setCartClick(false)} msg={!auth.isLogin ? "Debes estar logueado para usar el carrito" : ""}></Modal>
+            )}
+
         </>
 
      );

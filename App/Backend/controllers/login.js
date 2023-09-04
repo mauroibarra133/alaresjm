@@ -44,21 +44,24 @@ export async function login (req,res){
 
 
 export async function getMail(email) {
+    const pool = await getConnection();
+
     try {
-        const pool = await getConnection();
         const result = await pool.query(queries.Login.getUserData, [config.encrypt_code.toString(),email]);
         return result.rows;
     } catch (error) {
         throw error;
+    }finally{
+        pool.release()
     }
 }
 
 
 export async function existsMail(req, res) {
     const { email } = req.body;
+    const pool = await getConnection();
 
     try {
-        const pool = await getConnection();
         const result = await pool.query(queries.Login.getUserData, [config.encrypt_code,email]);
 
         if (result.rows.length > 0) {
@@ -68,5 +71,7 @@ export async function existsMail(req, res) {
         }
     } catch (error) {
         res.status(500).json({ msg: 'Error en el servidor, inténtelo más tarde' });
+    }finally{
+        pool.release()
     }
 }

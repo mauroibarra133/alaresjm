@@ -86,7 +86,9 @@ export const receiveWebHook = async (req, res) => {
     // Manejar errores adecuadamente y enviar una respuesta de error
     await pool.query('ROLLBACK'); // En caso de error, revierte la transacción
     res.status(500).json({ error: 'Hubo un error al procesar el pago' });
-  }
+  }finally{
+    pool.release()
+}
 };
 
 

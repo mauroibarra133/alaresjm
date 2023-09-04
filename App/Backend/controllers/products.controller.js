@@ -1,14 +1,16 @@
 import { getConnection,queries } from '../database/';
 
 export async function getProducts(req, res) {
+    const client = await getConnection(); 
     try {
-        const client = await getConnection(); 
         const result = await client.query(queries.Products.getAllProducts); 
         res.status(200).json(result.rows); 
         client.release(); 
     } catch (error) {
         console.error(error);
         res.status(500).json({ msg: 'No se pudieron obtener los productos' });
+    }finally{
+        client.release()
     }
 }
 
@@ -20,8 +22,8 @@ export async function addProduct(req, res) {
         return res.status(400).json({ msg: 'Bad Request. Please fill all fields' });
     }
 
+    const client =  await getConnection(); 
     try {
-        const client =  await getConnection(); 
         await client.query('BEGIN'); 
 
         // Inserta el producto
@@ -36,20 +38,21 @@ export async function addProduct(req, res) {
 
         await client.query('COMMIT');
 
-        client.release();
 
         res.status(200).json(resultNew.rows, 'Precio chico agregado', 'Precio grande agregado');
     } catch (error) {
         console.error(error);
         res.status(500).json({ msg: 'No se pudo agregar el producto' });
+    }finally{
+        client.release()
     }
 }
 
 export async function getProductById(req, res) {
     const { id } = req.params;
     
+    const client =  await getConnection();
     try {
-        const client =  await getConnection();
         const result = await client.query(queries.Products.getProductById, [id]);
         client.release(); 
         
@@ -61,6 +64,8 @@ export async function getProductById(req, res) {
     } catch (error) {
         console.error(error);
         res.status(500).json({ msg: "No se pudo obtener el producto de esa categoría" });
+    }finally{
+        client.release()
     }
 }
 
@@ -86,6 +91,8 @@ export async function deleteProductById(req, res) {
         console.error(error);
         await client.query('ROLLBACK');
         res.status(500).json({ msg: "No se pudo eliminar el producto" });
+    }finally{
+        client.release()
     }
 }
 
@@ -93,7 +100,6 @@ export async function deleteProductById(req, res) {
 export async function updateProductById(req, res) {
     const { id } = req.params;
     const { nombre, descripcion, id_categoria, precioChico, precioGrande } = req.body;
-    console.log(nombre,descripcion,id_categoria,precioChico,precioGrande);
     if (nombre == null || descripcion == null || id_categoria == null) {
         return res.status(400).json({ msg: 'Bad Request. Please fill all fields' });
     }
@@ -121,5 +127,7 @@ export async function updateProductById(req, res) {
         }
 
         res.status(500).json({ msg: "No se pudo actualizar el producto" });
+    }finally{
+        client.release()
     }
 }

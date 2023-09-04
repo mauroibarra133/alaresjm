@@ -38,13 +38,23 @@ io.on('connection', (socket) => {
 app.set('socketio', io); // aquí asignas el socket global
 
 //Middlewares
+app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', 'http://localhost:5173');
+    res.header('Access-Control-Allow-Credentials', 'true');
+  
+    if (req.method === 'OPTIONS') {
+      res.sendStatus(200);
+    } else {
+      next();
+    }
+  });
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-const corsOptions = {
-     origin: "*",
+app.use(cors({
+    origin: 'http://localhost:5173',
     credentials: true,
-};
-app.use(cors(corsOptions));
+    allowedHeaders: ['Content-Type'],
+  }));
 app.use(compression());
 app.use(cookieParser())
 app.use(productosRouter)
