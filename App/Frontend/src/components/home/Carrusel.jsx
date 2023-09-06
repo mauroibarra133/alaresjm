@@ -52,13 +52,13 @@ function Carrusel() {
         <div className='glide__arrows' data-glide-el='controls'>
           <span
             className='glide__arrow glide__arrow--prev'
-            data-glide-dir='<' style={{fontSize: "22px"}}
+            data-glide-dir='<' style={{fontSize: "23px"}}
           >
             &#8249; {/* Chevrón izquierdo */}
           </span>
           <span
             className='glide__arrow glide__arrow--next'
-            data-glide-dir='>' style={{fontSize: "22px"}}
+            data-glide-dir='>' style={{fontSize: "23px"}}
           >
             &#8250; {/* Chevrón derecho */}
           </span>

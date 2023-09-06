@@ -1,6 +1,5 @@
 .button{
     display: flex;
-    min-width: 138px;
     width: fit-content;
     min-height: 38px;
     height: 2rem;
@@ -19,6 +18,10 @@
     border: none;
 }
 
+.button.fix{
+    min-width: 138px;
+
+}
 .button:hover{
     background-color: var(--gray-1);
     cursor: pointer;

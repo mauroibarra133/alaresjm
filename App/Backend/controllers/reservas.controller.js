@@ -39,7 +39,6 @@ export async function getReservas(req, res) {
             result = await client.query(queries.Reservas.getReservasByDate, [date]);
         }
 
-        client.release();
 
         if (result && result.rows) {
             res.status(200).json({ msg: "Datos obtenidos correctamente", data: result.rows });
@@ -59,7 +58,6 @@ export async function deleteReserva(req, res) {
     const client = await getConnection()
     try {
         await client.query(queries.Reservas.deleteReserva, [id]);
-        client.release();
         res.status(200).json({ msg: "Reserva eliminada correctamente" });
     } catch (error) {
         console.log(error);

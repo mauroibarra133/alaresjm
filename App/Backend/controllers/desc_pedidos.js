@@ -14,8 +14,6 @@ export async function addDescOrderTransf(items, id_pedido) {
 
       await client.query('COMMIT'); // Confirma la transacción
 
-      // Envía una respuesta adecuada si es necesario
-      client.release(); // Libera la conexión
   } catch (error) {
       console.error(error);
       await client.query('ROLLBACK'); // En caso de error, revierte la transacción

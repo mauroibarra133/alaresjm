@@ -42,7 +42,6 @@ export async function getUserData(req,res){
     try {
         const result = await client.query(queries.Login.getUserDataByID, [config.encrypt_code,id]);
         const dataUser = result.rows[0] || {};
-        client.release();
         res.status(201).json({ points: dataUser.puntos});
     } catch (error) {
         console.log(error);
@@ -57,7 +56,6 @@ export async function getLink(req, res) {
     try {
         const result = await client.query(queries.Login.getUserDataByID, [id]);
         const dataUser = result.rows[0] || {};
-        client.release();
         res.status(201).json({ id: dataUser.id });
     } catch (error) {
         console.log(error);
@@ -95,7 +93,6 @@ export async function changePassword(req, res) {
 
         // Actualizar la contraseña
         await client.query(queries.Login.updateUserByID, [newPassword,config.encrypt_code, parseInt(id)]);
-        client.release();
         res.status(204).json({ msg: 'Contraseña Cambiada correctamente' });
     } catch (error) {
         console.log(error);

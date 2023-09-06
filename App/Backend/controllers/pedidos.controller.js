@@ -132,7 +132,6 @@ export async function obtenerPedidoParaAdmin(pedido) {
     const client = await getConnection()
     try {
         const result = await client.query(queries.Pedidos.getPedidosByDate, [date]);
-        client.release();
         return result.rows;
     } catch (error) {
         console.log(error);

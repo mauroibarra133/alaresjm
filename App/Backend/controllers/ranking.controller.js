@@ -5,7 +5,6 @@ export async function getRanking(req, res) {
     const client = await getConnection()
     try {
         const result = await client.query(queries.Ranking.getRanking);
-        client.release();
         res.status(200).json(result.rows);
     } catch (error) {
         console.log(error);
