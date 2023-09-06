@@ -59,7 +59,8 @@ function App() {
         <Route path='/mis-reservas' element={
           <RequireAuth>
               <MisReservas/>
-          </RequireAuth>}>
+          </RequireAuth>
+          }>
         </Route>  
         <Route path='/mis-pedidos' element={
           <RequireAuth>

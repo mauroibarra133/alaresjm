@@ -230,9 +230,14 @@ function VerPedidos() {
                         <Pedido modalPedido={modalOrder} closeModal={closeModalOrder}></Pedido>
                 </Overlay>
                     )}
-            <Modal isSubmitted={showModal.isSubmitted} isGoodStatus={showModal.isGood} msg={showModal.msg}
-            handleSubmit={closeModal}
-        ></Modal>
+                    {
+                        showModal.isSubmitted && (
+                            <Modal isSubmitted={showModal.isSubmitted} isGoodStatus={showModal.isGood} msg={showModal.msg}
+                            handleSubmit={closeModal}
+                        ></Modal>
+                        )
+                    }
+
         </div>
      );
 }

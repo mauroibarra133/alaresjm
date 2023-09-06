@@ -130,7 +130,10 @@ function ModalModificar({showModalUpdate,reserva, handleCloseModalUpdate}) {
                             </div>
                         </form>
                     </div>
+                    {showModal.isSubmitted && (
                 <Modal isSubmitted={showModal.isSubmitted} isGoodStatus={showModal.isGood} handleSubmit={closeModal} msg={showModal.msg} offset={-120}></Modal>
+
+                    )}
                 </div>
         )}
         </>

@@ -162,7 +162,7 @@ function MisReservas() {
             </div>
         </div>
             )}
-
+    {errorStatus.isSubmitted}
             <Modal isSubmitted={errorStatus.isSubmitted} isGoodStatus={!errorStatus.existError} msg={errorStatus.msg}
             handleSubmit={handleCloseModal}
             ></Modal>

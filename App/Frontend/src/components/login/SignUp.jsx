@@ -120,9 +120,14 @@ function SignUp(){
                     </NavLink>
             </div>
         </div>
-        <Modal isSubmitted={showModal.isSubmitted} isGoodStatus={showModal.isGood} msg={showModal.msg}
-        handleSubmit={closeModal}
-        ></Modal>
+        {
+            showModal.isSubmitted && (
+                <Modal isSubmitted={showModal.isSubmitted} isGoodStatus={showModal.isGood} msg={showModal.msg}
+                handleSubmit={closeModal}
+                ></Modal>
+            )
+        }
+
      </div>
     )
 }

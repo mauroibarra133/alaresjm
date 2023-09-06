@@ -148,9 +148,14 @@ function VerDudas() {
                         <Duda modalDuda={modalDuda} closeModal={closeModalDoubt}></Duda>
                 </Overlay>
                     )}
-        <Modal isSubmitted={showModal.isSubmitted} isGoodStatus={showModal.isGood} msg={showModal.msg}
-            handleSubmit={closeModal}
-        ></Modal>
+                    {
+                        showModal.isSubmitted && (
+                            <Modal isSubmitted={showModal.isSubmitted} isGoodStatus={showModal.isGood} msg={showModal.msg}
+                            handleSubmit={closeModal}
+                        ></Modal>
+                        )
+                    }
+
         </div>
      );
 }

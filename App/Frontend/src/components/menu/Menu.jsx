@@ -45,7 +45,7 @@ function Menu() {
       if (footerRef.current) {
         observer.observe(footerRef.current);
       }
-    
+      document.body.style.overflow = 'auto';
       return () => {
         if (footerRef.current) {
           observer.unobserve(footerRef.current);
@@ -128,7 +128,7 @@ function Menu() {
       )}
             </div>
             <div ref={footerRef}></div>
-            {isCartClick && (
+            {(isCartClick && !auth.isLogin)  && (
                           <Modal isSubmitted={isCartClick && !auth.isLogin} 
                           position={"top"}
                           handleSubmit={()=>setCartClick(false)} msg={!auth.isLogin ? "Debes estar logueado para usar el carrito" : ""}></Modal>

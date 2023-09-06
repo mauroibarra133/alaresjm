@@ -85,10 +85,13 @@ export function validatePastHour(hour,date){
 }
 
 // Definir la función de validación
-export const greaterThanZero = (value) => {
+export const greaterThanZeroAndNotToBig = (value) => {
   const numericValue = parseFloat(value);
   if (isNaN(numericValue) || numericValue <= 0) {
-    return false
+    return "La cantidad debe ser mayor a cero"
   }
-  return true; // La validación pasó
+
+  if(value >= 100){
+    return "La reserva debe ser mas pequeña"
+  }
 };

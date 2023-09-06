@@ -7,7 +7,7 @@ import {ONLY_LETTERS} from '../../utils/constants'
 import Path from '../Path';
 import { agregarReserva } from '../../services/reservas.services';
 import { useNavigate } from 'react-router-dom';
-import { validateDate, validatePastHour, validateTime, greaterThanZero} from "../../utils/functions";
+import { validateDate, validatePastHour, validateTime, greaterThanZeroAndNotToBig} from "../../utils/functions";
 
 function Reservas() {
     const navigate = useNavigate()
@@ -27,12 +27,17 @@ const [showModal,setShowModal] = useState({
 });
 
 function handleCloseModal(){
+    if(showModal.isGood){
+        setShowModal({
+            isSubmitted: false,
+            isGood: false,
+            msg: ""});   
+        navigate('/mis-reservas')
+    }
     setShowModal({
     isSubmitted: false,
     isGood: false,
     msg: ""});
-    navigate('/')
-
     }
 
 function handleOpenModal(valor,msgBad= 'Tu reserva no se ha podido confirmar.Intente mas tarde'){
@@ -86,10 +91,10 @@ async function onSubmit(data){
                     <div className="reservas__row">
                         <div>
                             <label htmlFor={customersId}>Numero de comensales</label>
-                            <input type="number" id={customersId} {...register("comensales",{required: true, validate: greaterThanZero})} />
+                            <input type="number" id={customersId} {...register("comensales",{required: true, validate: greaterThanZeroAndNotToBig})} />
                         </div>
                         {errors.comensales?.type === 'required' && <><p role="alert" className='form-error'>La cantidad de comensales</p><p role="alert" className='form-error'> es requerida.</p></>}                               
-                        {errors.comensales?.type === 'validate' && <><p role="alert" className='form-error'>La cantidad debe ser mayor a cero</p><p role="alert" className='form-error'></p></>}                               
+                        {errors.comensales?.type === 'validate' && <><p role="alert" className='form-error'>{errors.comensales.message}</p><p role="alert" className='form-error'></p></>}                               
                     </div>
                     <div className="reservas__row">
                         <div>
@@ -116,7 +121,13 @@ async function onSubmit(data){
                     </div>
                 </form>
             </div>
+            {
+                showModal.isSubmitted && (
+
             <Modal isSubmitted={showModal.isSubmitted} isGoodStatus={showModal.isGood} handleSubmit={handleCloseModal} msg={showModal.msg}></Modal>
+                )
+            }
+
         </div>
      );
 }

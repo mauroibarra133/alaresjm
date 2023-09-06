@@ -131,7 +131,12 @@ function Booking({booking, fechaHoy: todayDate}) { // fechaHoy: YYYY-MM-DD
             <img src={pencilImg} alt="Modificar" className={ !validatePastHour(booking.hora, dateBooking) ? 'old' : 'new'} onClick={()=>handleUpdate()}/>
             <img src={cruzImg} alt="Eliminar" className={!validatePastHour(booking.hora, dateBooking)? 'old' : 'new'} onClick={()=>handleDelete()}/>
         </div>
-  <Modal isSubmitted={showModal.isClicked} isGoodStatus={showModal.isGood} handleSubmit={closeModal} msg={showModal.msg} position={'top'}></Modal>
+        {
+          showModal.isSubmitted && (
+            <Modal isSubmitted={showModal.isClicked} isGoodStatus={showModal.isGood} handleSubmit={closeModal} msg={showModal.msg} position={'top'}></Modal>
+
+          )
+        }
   {
     showModalUpdate && (  
     <Overlay comp={'reserva'}>

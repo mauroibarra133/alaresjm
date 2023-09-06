@@ -147,11 +147,14 @@ const onSubmit = (data)=>{
                 </div>
             </div>
             <FormDelivery onSubmit={onSubmit} total={total} preferenceId={preferenceId} isOrderedEft={isOrderedEft} loading={loading}/>
-            <Modal isSubmitted={isOrderedEft.isSubmitted} 
-            handleSubmit={handleCloseModal}
-            isGoodStatus={isOrderedEft.goodStatus}
-            position={"top"}
-             msg={ isOrderedEft.goodStatus ?"Tu pedido ha sido realizado correctamente!": "Tu pedido no pudo ser procesado, intente nuevamente!"}/>
+            {isOrderedEft.isSubmitted && (
+              <Modal isSubmitted={isOrderedEft.isSubmitted} 
+              handleSubmit={handleCloseModal}
+              isGoodStatus={isOrderedEft.goodStatus}
+              position={"top"}
+              msg={ isOrderedEft.goodStatus ?"Tu pedido ha sido realizado correctamente!": "Tu pedido no pudo ser procesado, intente nuevamente!"}/>
+            )}
+          
         </div>
         </>
      );

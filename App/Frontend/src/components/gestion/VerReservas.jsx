@@ -161,9 +161,14 @@ function VerReservas() {
                         <Reserva modalBooking={modalBooking} closeModal={closeModalBooking}></Reserva>
                 </Overlay>
                     )}
-        <Modal isSubmitted={showModal.isSubmitted} isGoodStatus={showModal.isGood} msg={showModal.msg}
-            handleSubmit={closeModal}
-        ></Modal>
+                    {
+                    showModal.isSubmitted && (
+                        <Modal isSubmitted={showModal.isSubmitted} isGoodStatus={showModal.isGood} msg={showModal.msg}
+                        handleSubmit={closeModal}
+                    ></Modal>
+                    )
+                    }
+
         </div>
      ); 
 }
