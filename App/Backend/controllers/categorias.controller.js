@@ -1,8 +1,8 @@
 import {getConnection, queries} from '../database/' //Traigo la conexion de la BD y las queries
 
 export async function getCategories(req, res) {
+    const client = await getConnection()
     try {
-        const client = await getConnection()
         const result = await client.query(queries.Categorias.getAllCategories); // Ejecuta la consulta
 
         res.status(200).json(result.rows);

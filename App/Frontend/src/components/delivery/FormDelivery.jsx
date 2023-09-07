@@ -1,12 +1,12 @@
 /* eslint-disable react/prop-types */
-import { useForm } from "react-hook-form";
+import {  useForm } from "react-hook-form";
 import { useEffect, useId } from "react";
 import '../../styles/delivery/delivery.css'
 import { ONLY_NUMBERS, ADDRESS_REGEX } from "../../utils/constants";
 import { Wallet } from "@mercadopago/sdk-react";
 import LoaderComponent from '../LoaderComponent'
 
-function FormDelivery({onSubmit,total, preferenceId, isOrderedEft, loading}) {
+function FormDelivery({onSubmit,total, preferenceId, isOrderedEft, loading, isTrashed, setTrashStatus}) {
 
     //Constants
     const clientDirectionId = useId();
@@ -18,7 +18,13 @@ function FormDelivery({onSubmit,total, preferenceId, isOrderedEft, loading}) {
     //states
     //Hooks
     const {register, watch, formState, handleSubmit, reset} = useForm({
-        mode: 'onTouched'
+        mode: 'onTouched',
+        defaultValues: {
+            notaPedido: '',
+            direccionCliente: '',
+            montoEft: '',
+            tipoEntrega: '1'
+        }
     });
     const {errors} = formState;
 
@@ -27,6 +33,17 @@ function FormDelivery({onSubmit,total, preferenceId, isOrderedEft, loading}) {
     useEffect(()=>{
         isOrderedEft.isSubmitted ? reset() : null
     },[isOrderedEft.isSubmitted,reset])
+
+    useEffect(()=>{
+        if(isTrashed){
+            reset({
+                notaPedido: '',
+                direccionCliente: '',
+                montoEft: ''
+            })
+            setTrashStatus()
+        }
+    },[isTrashed])
 
     
     return ( 
@@ -78,11 +95,12 @@ function FormDelivery({onSubmit,total, preferenceId, isOrderedEft, loading}) {
                     message: 'Solo se permiten números'
                 },
                 validate: (value) => {
-                    const parsedValue = parseFloat(value);
-                        if(parsedValue >= total && parsedValue <= parsedValue * 2) {
+                    const parsedValue = parseInt(value);
+                        if(parsedValue >= total * 2) {
                         return "El monto no puede ser tan grande"
 
-                        }else return "El monto a pagar debe ser superior al total"
+                        }else if(parsedValue <= total )return "El monto a pagar debe ser superior al total"
+
                 }
             })}
         />

@@ -83,4 +83,50 @@ FOR EACH ROW
 EXECUTE FUNCTION actualizar_puntos();
 
 
+
+CREATE OR REPLACE FUNCTION actualizar_puntos()
+RETURNS TRIGGER AS $$
+DECLARE
+    -- Declarar una variable para el nombre del estado
+    estado_pedido TEXT;
+BEGIN
+    -- Obtener el nombre del estado a partir del id_estado
+    SELECT nombre_estado INTO estado_pedido FROM estados_pedido WHERE id = NEW.id_estado;
+    
+    -- Verificar si el estado es "Entregado"
+    IF estado_pedido = 'Entregado' THEN
+        UPDATE usuarios
+        SET puntos = puntos + NEW.puntos_parciales
+        WHERE usuarios.id = NEW.id_usuario;
+    END IF;
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE OR REPLACE FUNCTION actualizar_ranking()
+RETURNS TRIGGER AS $$
+BEGIN
+    -- Verificar si el nuevo estado del pedido es "Entregado" (para inserciones)
+    IF (TG_OP = 'INSERT' AND NEW.estado = 'Entregado') OR
+       (TG_OP = 'UPDATE' AND NEW.estado = 'Entregado') OR
+       (TG_OP = 'DELETE' AND OLD.estado = 'Entregado') THEN
+
+        DELETE FROM RankingPuntos;
+
+        INSERT INTO RankingPuntos (id_usuario, nombre, apellido, Puntos)
+        SELECT U.id, U.nombre, U.apellido, SUM(P.puntos_parciales) as Puntos
+        FROM usuarios U
+        JOIN pedidos P ON U.id = P.id_usuario
+        WHERE
+            EXTRACT(MONTH FROM P.fecha) = EXTRACT(MONTH FROM NOW()) AND
+            EXTRACT(YEAR FROM P.fecha) = EXTRACT(YEAR FROM NOW()) AND
+            P.estado = 'Entregado'  -- Solo pedidos con estado "Entregado"
+        GROUP BY U.id, U.nombre, U.apellido
+        ORDER BY Puntos DESC;
+
+    END IF;
+    
+    RETURN NULL;
+END;
+$$ LANGUAGE plpgsql;
 */

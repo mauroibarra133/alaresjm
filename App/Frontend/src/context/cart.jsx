@@ -1,25 +1,22 @@
 /* eslint-disable react/prop-types */
 import { createContext, useState } from "react";
-import { updateLocalStorage } from "../utils/functions";
 
 export const CartContext = createContext();
 
 export function CartProvider({children}){
     //States
-    const [cart, setCart] = useState(JSON.parse(window.localStorage.getItem("cart")) || []);
+    const [cart, setCart] = useState([]);
 
-    const addToCart = product =>{
+    const addToCart = (product) =>{
         //Check if the product is already in the cart
         const productInCartIndex = cart.findIndex(item => item.id === product.id)
         if(productInCartIndex >= 0){
             const newCart = structuredClone(cart)
             newCart[productInCartIndex].quantity += 1
             setCart(newCart)
-            updateLocalStorage(newCart)
         }else{
             //Si no está en el carrito
             const newCart = [...cart,{...product,quantity:1,priceSelected: product.preciogrande, id_tamaño: 3}]
-            updateLocalStorage(newCart)
             setCart(newCart)
         }
 
@@ -29,12 +26,10 @@ export function CartProvider({children}){
         const newCart = structuredClone(cart)
             newCart[productInCartIndex].priceSelected = newPriceSelected
             newCart[productInCartIndex].id_tamaño = id_tamaño
-            updateLocalStorage(newCart)
             setCart(newCart)
     }
 
     const clearCart = ()=>{
-        window.localStorage.removeItem("cart")
         setCart([])
     }
     
@@ -46,11 +41,9 @@ export function CartProvider({children}){
         const productInCartIndex = cart.findIndex(item => item.id === product.id)
             const newCart = structuredClone(cart)
             newCart[productInCartIndex].quantity -= 1
-            updateLocalStorage(newCart)
             setCart(newCart)
         }else{
             const newCart = cart.filter(item => item.id !== product.id)
-            updateLocalStorage(newCart)
             setCart(newCart)
         }
     }

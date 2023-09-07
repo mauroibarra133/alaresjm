@@ -76,7 +76,6 @@ export async function addOrder(fecha,id_pago,id_usuario,direccion,nota,total,id_
             res.status(200).json({ msg: "Datos obtenidos correctamente", data: result.rows });
         }
 
-        client.release();
     } catch (error) {
         console.log(error);
         res.status(500).json({ msg: "Error al obtener los datos" });
@@ -91,15 +90,12 @@ export async function getPedidosTransf(date, user_id) {
 
         if (user_id || user_id !== undefined) {
             const result = await client.query(queries.Pedidos.getPedidosByUserId, [parseInt(user_id)]);
-            client.release();
             return result.rows;
         } else if (date || date !== undefined) {
             const result = await client.query(queries.Pedidos.getPedidosByDate, [date]);
-            client.release();
             return result.rows;
         }
 
-        client.release();
         return [];
     } catch (error) {
         console.log(error);
@@ -116,7 +112,6 @@ export async function updatePedidoOnServer(req, res) {
     const client = await getConnection()
     try {
         const result = await client.query(queries.Pedidos.updatePedido, [state, parseInt(id)]);
-        client.release();
         res.status(200).json({ msg: "Estado cambiado correctamente", data: result.rows });
     } catch (error) {
         console.log(error);

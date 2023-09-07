@@ -5,7 +5,6 @@ export async function getProducts(req, res) {
     try {
         const result = await client.query(queries.Products.getAllProducts); 
         res.status(200).json(result.rows); 
-        client.release(); 
     } catch (error) {
         console.error(error);
         res.status(500).json({ msg: 'No se pudieron obtener los productos' });
@@ -54,7 +53,6 @@ export async function getProductById(req, res) {
     const client =  await getConnection();
     try {
         const result = await client.query(queries.Products.getProductById, [id]);
-        client.release(); 
         
         if (result.rows.length > 0) {
             res.status(200).json(result.rows[0]);
@@ -80,7 +78,6 @@ export async function deleteProductById(req, res) {
 
         await client.query('COMMIT');
 
-        client.release();
 
         if (result1.rowCount > 0 || result2.rowCount > 0) {
             res.sendStatus(204); // Producto y registros de precios eliminados

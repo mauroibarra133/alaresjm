@@ -10,7 +10,7 @@ function ItemMenu({isProductInCart,removeProductFromCart,addToCart,product, setC
     async function handleCartClick(){
         if(auth.isLogin){
             setCartClick(false)
-            return isProductInCart ? removeProductFromCart(product) :addToCart(product)
+            return isProductInCart ? removeProductFromCart(product,auth.data.user_id) :addToCart(product,auth.data.user_id)
         }else{
         setCartClick(true)
 

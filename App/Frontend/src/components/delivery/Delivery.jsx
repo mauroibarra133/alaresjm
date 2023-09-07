@@ -23,6 +23,7 @@ function Delivery() {
   //States
   const [total, setTotal] = useState(0);
   const [preferenceId, setPreferenceId] = useState(null);
+  const [isTrashed, setIsTrashed] = useState(null);
   const [isOrderedEft, setIsOrderedEft] = useState({
     isSubmitted : false,
     goodStatus: false
@@ -124,6 +125,14 @@ const onSubmit = (data)=>{
     }
     handleOrder(order);
 }
+
+function clearCartDelivery(){
+  setIsTrashed(true);
+    clearCart();
+}
+function setTrashStatus(){
+  setIsTrashed(false);
+}
     return ( 
         <>
         <div className="delivery__container" >
@@ -141,12 +150,13 @@ const onSubmit = (data)=>{
                     <p className="order__total-price">{`$${total}`}</p>
                 </div>
                 <div className="order__button">
-                <button className='button delete_cart_button' onClick={clearCart}>
+                <button className='button delete_cart_button' onClick={clearCartDelivery}>
                     <img src={trashImg} alt="Trash Button" />
                 </button>
                 </div>
             </div>
-            <FormDelivery onSubmit={onSubmit} total={total} preferenceId={preferenceId} isOrderedEft={isOrderedEft} loading={loading}/>
+            <FormDelivery onSubmit={onSubmit} total={total} preferenceId={preferenceId} isOrderedEft={isOrderedEft} loading={loading}
+            setTrashStatus={setTrashStatus} isTrashed={isTrashed}/>
             {isOrderedEft.isSubmitted && (
               <Modal isSubmitted={isOrderedEft.isSubmitted} 
               handleSubmit={handleCloseModal}

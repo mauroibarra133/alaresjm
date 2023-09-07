@@ -137,6 +137,9 @@ function handlePedidos(){
                     </div>
                 </div>
             </div>
+            {filterOrders().length > 0 && (
+                    <div className='button'>PEDIR</div>
+                )}
             {pages.length > 1 && (
                 <div className="mispedidos__paginacion-wrapper">
                 <div className="mispedidos__paginacion">

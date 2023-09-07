@@ -145,6 +145,9 @@ function MisReservas() {
                     </div>
                 </div>
             </div>
+                {filterBookings().length > 0 && (
+                    <div className='button'>RESERVAR</div>
+                )}
             {pages.length > 1 && (
             <div className="misreservas__paginacion-wrapper">
             <div className="misreservas__paginacion">
