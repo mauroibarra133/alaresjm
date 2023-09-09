@@ -47,7 +47,7 @@ function Pedido({modalPedido, closeModal}) {
             </div>
             <div className="verpedido__estado dashboard__estado-modal">
                 <select name={stateId} id={stateId}  defaultValue={estado} value={estado == pedido.estado__pedido ? estado :  pedido.estado__pedido} onChange={handleState} disabled={auth.data.rol == "Guest" ? true : false}>
-                    <option value="A confirmar">A confirmar</option>
+                    <option value="A Confirmar">A Confirmar</option>
                     <option value="Confirmado">Confirmado</option>
                     <option value="En Preparacion">En Preparacion</option>
                     <option value="Listo">Listo</option>

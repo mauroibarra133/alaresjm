@@ -117,10 +117,11 @@ BEGIN
         SELECT U.id, U.nombre, U.apellido, SUM(P.puntos_parciales) as Puntos
         FROM usuarios U
         JOIN pedidos P ON U.id = P.id_usuario
+		JOIN estados_pedido E ON E.id = P.id_estado
         WHERE
             EXTRACT(MONTH FROM P.fecha) = EXTRACT(MONTH FROM NOW()) AND
             EXTRACT(YEAR FROM P.fecha) = EXTRACT(YEAR FROM NOW()) AND
-            P.estado = 'Entregado'  -- Solo pedidos con estado "Entregado"
+            E.nombre = 'Entregado'  -- Solo pedidos con estado "Entregado"
         GROUP BY U.id, U.nombre, U.apellido
         ORDER BY Puntos DESC;
 

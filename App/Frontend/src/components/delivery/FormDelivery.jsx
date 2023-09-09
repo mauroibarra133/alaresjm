@@ -99,7 +99,7 @@ function FormDelivery({onSubmit,total, preferenceId, isOrderedEft, loading, isTr
                         if(parsedValue >= total * 2) {
                         return "El monto no puede ser tan grande"
 
-                        }else if(parsedValue <= total )return "El monto a pagar debe ser superior al total"
+                        }else if(parsedValue < total )return "El monto a pagar debe ser superior al total"
 
                 }
             })}

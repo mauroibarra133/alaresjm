@@ -13,9 +13,10 @@ export async function addOrder(fecha,id_pago,id_usuario,direccion,nota,total,id_
             parseInt(id_tipo_pago),1,id_tipo_pago === 2 ? 0 : parseFloat(monto_cambio),
         ]
       );
+      console.log('result addOrder',result);
       return result;
     } catch (error) {
-      console.error(error);
+      console.error('Error en addOrder',error);
       throw error; // Lanza el error para manejarlo en un nivel superior
     }finally{
       pool.release()
@@ -77,7 +78,7 @@ export async function addOrder(fecha,id_pago,id_usuario,direccion,nota,total,id_
         }
 
     } catch (error) {
-        console.log(error);
+        console.log('Error en obtener pedidos',error);
         res.status(500).json({ msg: "Error al obtener los datos" });
     }finally{
       client.release()

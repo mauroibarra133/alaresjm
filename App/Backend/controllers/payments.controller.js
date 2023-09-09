@@ -15,19 +15,19 @@ export const receiveWebHook = async (req, res) => {
       const data = await mercadopago.payment.findById(payment['data.id']);
       const fullData = data.body;
       console.log(data);
-      // Pedido
-      fecha = fullData.date_approved;
-      id_pago = fullData.id;
-      id_usuario = fullData.metadata.user_id;
-      direccion =
-        fullData.metadata.tipo_entrega == 1
-          ? fullData.additional_info.payer.address.street_name
-          : ' ';
-      nota = fullData.metadata.nota_pedido || '';
-      total = fullData.transaction_amount;
-      id_tipo_pago = fullData.metadata.tipo_pago;
-      id_tipo_entrega = fullData.metadata.tipo_entrega;
-      id_estado = fullData.status === 'approved' ? 1 : null;
+          // Pedido
+          fecha = fullData.date_approved;
+          id_pago = fullData.id;
+          id_usuario = fullData.metadata.user_id;
+          direccion =
+            fullData.metadata.tipo_entrega == 1
+              ? fullData.additional_info.payer.address.street_name
+              : ' ';
+          nota = fullData.metadata.nota_pedido || '';
+          total = fullData.transaction_amount;
+          id_tipo_pago = fullData.metadata.tipo_pago;
+          id_tipo_entrega = fullData.metadata.tipo_entrega;
+          id_estado = fullData.status === 'approved' ? 1 : null;
 
       if (fullData.status !== 'approved') {
         // Si el estado del pago no es 'aprobado', envía una respuesta de error

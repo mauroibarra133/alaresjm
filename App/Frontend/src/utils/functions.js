@@ -91,3 +91,8 @@ export const greaterThanZeroAndNotToBig = (value) => {
     return "La reserva debe ser mas pequeña"
   }
 };
+
+
+export function capitalizeWords(str) {
+  return str.replace(/\b\w/g, match => match.toUpperCase());
+}

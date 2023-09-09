@@ -74,7 +74,9 @@ function Delivery() {
         try {
           const response = await createPreference(order);
           const id = response.data.response.id
+          console.log('Preference ID traido: ',response);
           if (id) {
+            console.log('ID',id);
             setPreferenceId(id);
           }
         } catch (error) {

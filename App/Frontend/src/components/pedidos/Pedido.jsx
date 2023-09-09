@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import '../../styles/pedidos/mispedidos.css'
 import { useEffect,useState } from 'react'
-import { getStatusImage, transformDate } from '../../utils/functions';
+import { getStatusImage, transformDate, capitalizeWords } from '../../utils/functions';
 
 function Pedido({pedido}) { // fechaHoy: YYYY-MM-DD
     const pedidoReserva = transformDate(pedido.fecha)
@@ -29,9 +29,9 @@ function Pedido({pedido}) { // fechaHoy: YYYY-MM-DD
           {`$${pedido.total}`}
         </div>
         <div className="datos__body-dato pedidos-estado">
-            <img src={getStatusImage(pedido.estado_pedido)} alt={pedido.estado_pedido} className='status-img'/>
+            <img src={getStatusImage(capitalizeWords(pedido.estado_pedido))} alt={pedido.estado_pedido} className='status-img'/>
             {isLargeScreen && (
-                <p>{pedido.estado_pedido}</p>
+                <p>{capitalizeWords(pedido.estado_pedido)}</p>
             )}
         </div>
         <div className="datos__body-dato"></div>

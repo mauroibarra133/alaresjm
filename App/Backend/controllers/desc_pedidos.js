@@ -1,8 +1,8 @@
 import { getConnection,queries } from '../database/'; // Importa la función de conexión
 
 export async function addDescOrderTransf(items, id_pedido) {
+  const client = await getConnection() // Obtén una conexión del pool
   try {
-      const client = await getConnection() // Obtén una conexión del pool
       await client.query('BEGIN'); // Inicia una transacción
 
       for (const item of items) {
