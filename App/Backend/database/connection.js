@@ -6,7 +6,7 @@ import config from '../config';
 const pool = new Pool({
     user: 'alares',
     host: config.dbServer,
-    database: 'alares',
+    database: 'alares_ymmf',
     password: config.dbPassword,
     port: config.dbPort,
     ssl: true,

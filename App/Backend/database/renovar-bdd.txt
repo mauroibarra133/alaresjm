@@ -1,0 +1,6 @@
+1) Crear la base de datos en render 
+2) Ir a pgAdmin y crear la base de datos:
+	- En hostname colocar algo dpg-cmco10021fec73cssoqg-a.oregon-postgres.render.com (está en PSQL command)
+	- Agregar el puerto, password,etc
+3) Crear las tablas y poblarlas
+4) Cambiar las variables del codigo
