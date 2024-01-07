@@ -1,10 +1,11 @@
 
 export const  queries ={
     Products: {
-        getAllProducts: `SELECT p.id,p.nombre,p.descripcion, p.id_categoria,
-        (SELECT precio from precios WHERE id_producto=p.id AND id_tamaño=1) as precioChico,
-        (SELECT precio from precios WHERE id_producto=p.id AND id_tamaño=2) as precioGrande
-        FROM productos p`,
+        getAllProducts: `SELECT p.id, p.nombre, p.descripcion, p.id_categoria,
+        ( SELECT MAX(precio) FROM precios WHERE id_producto = p.id AND id_tamaño = 1 ) AS precioChico,
+        ( SELECT MAX(precio) FROM precios WHERE id_producto = p.id AND id_tamaño = 2 ) AS precioGrande
+    FROM productos p;
+    `,
         getProductsByCategory: `SELECT p.id,p.nombre,p.descripcion,
                                 (SELECT precio from precios WHERE id_producto=p.id AND id_tamaño=1) as precioChico,
                                 (SELECT precio from precios WHERE id_producto=p.id AND id_tamaño=2) as precioGrande
