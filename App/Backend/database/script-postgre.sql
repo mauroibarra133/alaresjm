@@ -1,15 +1,15 @@
 CREATE TABLE usuarios (
     id SERIAL PRIMARY KEY,
     fecha_creacion DATE NOT NULL,
-    usuario VARCHAR(30) NOT NULL,
-    contraseña VARCHAR(30) NOT NULL,
-    nombre VARCHAR(20) NOT NULL,
-    apellido VARCHAR(30) NOT NULL,
+    contraseñaCifrada BYTEA NOT NULL,
+    nombre VARCHAR(50) NOT NULL,
+    apellido VARCHAR(50) NOT NULL,
     puntos INT,
-    email TEXT,
     rol VARCHAR(10),
+    email VARCHAR(100) UNIQUE NOT NULL,
     CONSTRAINT check_puntos CHECK(puntos>=0)
 );
+
 CREATE TABLE estados_reserva (
     id SERIAL PRIMARY KEY,
     nombre VARCHAR(25) NOT NULL
