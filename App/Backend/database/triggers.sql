@@ -1,4 +1,5 @@
-/*CREATE TRIGGER ActualizarPuntos
+/*
+CREATE TRIGGER ActualizarPuntos
 ON pedidos
 AFTER INSERT
 AS

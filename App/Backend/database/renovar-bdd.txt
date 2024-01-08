@@ -4,3 +4,4 @@
 	- Agregar el puerto, password,etc
 3) Crear las tablas y poblarlas
 4) Cambiar las variables del codigo
+5) Crear usuarios admin

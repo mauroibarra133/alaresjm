@@ -25,7 +25,8 @@ export async function addOrder(fecha,id_pago,id_usuario,direccion,nota,total,id_
 
 
   export async function addOrderEft(req, res) {
-    let { fecha, id_usuario, direccion, nota, total, id_tipo_pago, id_tipo_entrega, id_estado, items, monto_cambio } = req.body;
+    let { fecha, id_usuario, direccion, nota, total, id_tipo_pago, id_tipo_entrega, items, monto_cambio } = req.body;
+    let id_estado = 1;
   const pool = await getConnection()
     try {
       const paymentID = generatePaymentID();
@@ -42,7 +43,7 @@ export async function addOrder(fecha,id_pago,id_usuario,direccion,nota,total,id_
           parseFloat(total),
           parseInt(id_tipo_entrega),
           parseInt(id_tipo_pago),
-          1,
+          id_estado,
           id_tipo_pago === 2 ? 0 : parseFloat(monto_cambio),
         ]
       );

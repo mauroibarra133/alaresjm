@@ -41,13 +41,13 @@ export const  queries ={
         addOrder: `
         INSERT INTO pedidos (fecha, id_pago, id_usuario, direccion, nota, total, id_tipo_entrega, id_tipo_pago, id_estado, monto_cambio,puntos_parciales) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, ($6/10)) RETURNING id`,
         searchIdOrder: `SELECT id FROM pedidos WHERE id_pago = $1`,
-        getPedidosByUserId: `SELECT P.id, P.fecha, STRING_AGG(Pr.nombre, ', ') AS nombres_productos, P.total, E.nombre AS estado_pedido
+        getPedidosByUserId: `SELECT P.id, P.fecha, STRING_AGG(Pr.nombre, ', ') AS nombres_productos, P.total, E.nombre_estado AS estado_pedido
                             FROM pedidos P
                             JOIN desc_pedidos D ON P.id = D.id_pedido
                             JOIN productos Pr ON Pr.id = D.id_producto
                             JOIN estados_pedido E ON E.id = P.id_estado
                             WHERE id_usuario = $1
-                            GROUP BY P.id, P.total, E.nombre, P.fecha
+                            GROUP BY P.id, P.total, E.nombre_estado, P.fecha
                             ORDER BY P.fecha DESC
     `,
     getPedidosByDate: `SELECT P.id,
@@ -59,7 +59,7 @@ export const  queries ={
             TE.nombre AS tipoentrega,
             CAST(P.nota AS VARCHAR(100)) AS nota,
             P.total,
-            E.nombre AS estado_pedido,
+            E.nombre_estado AS estado_pedido,
             P.monto_cambio
                 FROM pedidos P
                 JOIN desc_pedidos D ON P.id = D.id_pedido
@@ -70,11 +70,11 @@ export const  queries ={
                 JOIN tipos_entrega TE ON TE.id = P.id_tipo_entrega
         WHERE date_trunc('day', P.fecha) = $1::date
         GROUP BY P.id, P.fecha, CONCAT(U.nombre, ' ', U.apellido), CAST(P.direccion AS VARCHAR(100)),
-            TP.nombre, TE.nombre, CAST(P.nota AS VARCHAR(100)), P.total, E.nombre, P.monto_cambio
+            TP.nombre, TE.nombre, CAST(P.nota AS VARCHAR(100)), P.total, E.nombre_estado, P.monto_cambio
         ORDER BY hora DESC;
 `,
     updatePedido: `UPDATE pedidos
-    SET id_estado = (SELECT id FROM estados_pedido WHERE nombre = $1)
+    SET id_estado = (SELECT id FROM estados_pedido WHERE nombre_estado = $1)
     WHERE id = $2`
     },
     DescPedidos:{
