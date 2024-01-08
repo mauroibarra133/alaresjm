@@ -133,32 +133,8 @@ CREATE EXTENSION IF NOT EXISTS pgcrypto;
 
 
 
-CREATE OR REPLACE FUNCTION actualizar_ranking()
-RETURNS TRIGGER AS $$
-BEGIN
-    -- Actualizar el ranking de puntos en la tabla RankingPuntos
-    DELETE FROM RankingPuntos;
 
-    INSERT INTO RankingPuntos (id_usuario, nombre, apellido, Puntos)
-    SELECT U.id, U.nombre, U.apellido, SUM(P.puntos_parciales) as Puntos
-    FROM usuarios U
-    JOIN pedidos P ON U.id = P.id_usuario
-    WHERE
-        EXTRACT(MONTH FROM P.fecha) = EXTRACT(MONTH FROM NOW()) AND
-        EXTRACT(YEAR FROM P.fecha) = EXTRACT(YEAR FROM NOW())
-    GROUP BY U.id, U.nombre, U.apellido
-    ORDER BY Puntos DESC;  -- Ordenar los resultados por los puntos de forma descendente
 
-    RETURN NULL;  -- No se necesita devolver ningún valor en este caso
-END;
-$$ LANGUAGE plpgsql;
-
--- Crear el trigger que dispara la función después de INSERT, UPDATE y DELETE en la tabla pedidos
-CREATE TRIGGER tr_actualizar_ranking
-AFTER INSERT OR UPDATE OR DELETE
-ON pedidos
-FOR EACH STATEMENT
-EXECUTE FUNCTION actualizar_ranking();
 
 
 
@@ -166,68 +142,56 @@ EXECUTE FUNCTION actualizar_ranking();
 CREATE OR REPLACE FUNCTION actualizar_puntos()
 RETURNS TRIGGER AS $$
 BEGIN
-    -- Actualizar los puntos de los usuarios
-    UPDATE usuarios
-    SET puntos = puntos + NEW.puntos_parciales
-    WHERE usuarios.id = NEW.id_usuario;
+    -- Si el estado cambia a "Entregado", suma los puntos
+    IF NEW.id_estado = 7 AND (TG_OP = 'INSERT' OR (TG_OP = 'UPDATE' AND OLD.id_estado <> 7)) THEN
+        UPDATE usuarios
+        SET puntos = puntos + NEW.puntos_parciales
+        WHERE usuarios.id = NEW.id_usuario;
+    ELSIF NEW.id_estado <> 7 AND TG_OP = 'UPDATE' AND OLD.id_estado = 7 THEN
+        -- Si el estado cambia de "Entregado", resta los puntos
+        UPDATE usuarios
+        SET puntos = puntos - NEW.puntos_parciales
+        WHERE usuarios.id = NEW.id_usuario;
+    END IF;
 
     RETURN NEW;
 END;
 $$ LANGUAGE plpgsql;
 
+
 -- Crear el trigger que dispara la función después de INSERT en la tabla pedidos
 CREATE TRIGGER tr_actualizar_puntos
-AFTER INSERT
+AFTER INSERT OR UPDATE OR DELETE
 ON pedidos
 FOR EACH ROW
 EXECUTE FUNCTION actualizar_puntos();
 
 
-
-CREATE OR REPLACE FUNCTION actualizar_puntos()
+-- Crear la función que se ejecutará en el trigger
+CREATE OR REPLACE FUNCTION actualizar_ranking()
 RETURNS TRIGGER AS $$
-DECLARE
-    -- Declarar una variable para el nombre del estado
-    estado_pedido TEXT;
 BEGIN
-    -- Obtener el nombre del estado a partir del id_estado
-    SELECT nombre_estado INTO estado_pedido FROM estados_pedido WHERE id = NEW.id;
-    
-    -- Verificar si el estado es "Entregado"
-    IF estado_pedido = 'Entregado' THEN
-        UPDATE usuarios
-        SET puntos = puntos + NEW.puntos_parciales
-        WHERE usuarios.id = NEW.id;
-    END IF;
+    -- Actualizar el ranking de puntos en la tabla RankingPuntos
+    DELETE FROM "rankingpuntos";
+
+    INSERT INTO "rankingpuntos" (id_usuario, nombre, apellido, Puntos)
+    SELECT U.id, U.nombre, U.apellido, SUM(P.puntos_parciales) as Puntos
+    FROM usuarios U
+    JOIN pedidos P ON U.id = P.id_usuario
+    WHERE
+        EXTRACT(MONTH FROM P.fecha) = EXTRACT(MONTH FROM CURRENT_DATE) AND
+        EXTRACT(YEAR FROM P.fecha) = EXTRACT(YEAR FROM CURRENT_DATE) AND
+		P.id_estado = 7
+    GROUP BY U.id, U.nombre, U.apellido
+    ORDER BY Puntos DESC;  -- Ordenar los resultados por los puntos de forma descendente
+
     RETURN NEW;
 END;
 $$ LANGUAGE plpgsql;
 
-CREATE OR REPLACE FUNCTION actualizar_ranking()
-RETURNS TRIGGER AS $$
-BEGIN
-    -- Verificar si el nuevo estado del pedido es "Entregado" (para inserciones)
-    IF (TG_OP = 'INSERT' AND NEW.id_estado = 1) OR
-       (TG_OP = 'UPDATE' AND NEW.id_estado = 1) OR
-       (TG_OP = 'DELETE' AND OLD.id_estado = 1) THEN
-
-        DELETE FROM RankingPuntos;
-
-        INSERT INTO RankingPuntos (id_usuario, nombre, apellido, Puntos)
-        SELECT U.id, U.nombre, U.apellido, SUM(P.puntos_parciales) as Puntos
-        FROM usuarios U
-        JOIN pedidos P ON U.id = P.id
-		JOIN estados_pedido E ON E.id = P.id
-        WHERE
-            EXTRACT(MONTH FROM P.fecha) = EXTRACT(MONTH FROM NOW()) AND
-            EXTRACT(YEAR FROM P.fecha) = EXTRACT(YEAR FROM NOW()) AND
-            E.nombre_estado = 'Entregado'  -- Solo pedidos con estado "Entregado"
-        GROUP BY U.id, U.nombre, U.apellido
-        ORDER BY Puntos DESC;
-
-    END IF;
-    
-    RETURN NULL;
-END;
-
-$$ LANGUAGE plpgsql;
+-- Crear el trigger
+CREATE TRIGGER tr_actualizar_ranking
+AFTER INSERT OR UPDATE OR DELETE
+ON public.pedidos
+FOR EACH ROW
+EXECUTE FUNCTION actualizar_ranking();

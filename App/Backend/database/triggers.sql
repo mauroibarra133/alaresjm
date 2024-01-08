@@ -78,7 +78,7 @@ $$ LANGUAGE plpgsql;
 
 -- Crear el trigger que dispara la función después de INSERT en la tabla pedidos
 CREATE TRIGGER tr_actualizar_puntos
-AFTER INSERT
+AFTER INSERT OR UPDATE OR DELETE
 ON pedidos
 FOR EACH ROW
 EXECUTE FUNCTION actualizar_puntos();

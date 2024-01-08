@@ -1,5 +1,5 @@
 INSERT INTO estados_reserva (nombre) VALUES 
-('A confirmar'), ('Reservado'), ('Cancelado');
+('A Confirmar'), ('Reservado'), ('Cancelado');
 
 INSERT INTO tipos_pagos (nombre) VALUES
 ('Efectivo'), ('Transferencia');
@@ -8,7 +8,7 @@ INSERT INTO tipos_entrega (nombre) VALUES
 ('Delivery'), ('Retirar en local');
 
 INSERT INTO estados_pedido (nombre) VALUES
-('A Confirmar'),('Confirmado'),('En Preparacion'),('Listo') ,('En reparto'), ('Enviando'), ('Entregado'), ('Cancelado');
+('A Confirmar'),('Confirmado'),('En Preparacion'),('Listo') ,('En Reparto'), ('Enviando'), ('Entregado'), ('Cancelado');
 
 INSERT INTO categorias_producto (nombre) VALUES
 ('Pizzas'),('Bebidas'),('Hamburguesas'),('Sandwiches'),('Papas'),('Pastas');
