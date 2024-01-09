@@ -98,7 +98,7 @@
 /* Error */
 .hero-contactanos__inputs p{
     text-align: end;
-    color: var(--red-error-2);
+    color: var(--red-error-3);
     font-family: 'Amiri Bold';
     font-size: .8rem;
     z-index: var(--normal-z);
@@ -131,7 +131,6 @@
 .hero-contactanos__button{
     display: flex;
     background-color: var(--orange-2);
-    color: var(--black-1);
   
 }
 .hero-contactanos__button:hover{

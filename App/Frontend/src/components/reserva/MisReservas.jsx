@@ -30,8 +30,9 @@ function MisReservas() {
 
     //Constants
     const LIMIT = 6;
-    const fechaHoy = new Date().toISOString().split('T')[0]
-
+    const options = { timeZone: 'America/Argentina/Buenos_Aires' };
+    const fechaHoy = new Date().toLocaleString('en-US', options).split(' ')[0];
+    
     //Use effects
     useEffect(()=>{
         async function searchBookings() {

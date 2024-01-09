@@ -4,7 +4,6 @@ import {
   convertHourToDate,
   calculateLeftTime,
   validatePastHour,
-  capitalizeWords,
 } from "../../utils/functions";
 import { deleteReserva } from "../../services/reservas.services";
 import userImg from "../../assets/images/header-user.webp";
@@ -49,7 +48,7 @@ function Booking({ booking, fechaHoy: todayDate }) {
   const [showModalUpdate, setShowModalUpdate] = useState(false);
   //Functions
   function getStatusImage(status) {
-    const bookingStatus = statusReservas.find((item) => item.estado === status);
+    const bookingStatus = statusReservas.find((item) => item.status === status);
     if (bookingStatus) {
       return bookingStatus.img;
     }
@@ -136,7 +135,7 @@ function Booking({ booking, fechaHoy: todayDate }) {
       <div className="datos__body-dato">{booking.lugar}</div>
       <div className="datos__body-dato">
         <img
-          src={getStatusImage(capitalizeWords(booking.estado))}
+          src={getStatusImage(booking.estado)}
           alt={booking.estado}
           className="status-img"
         />
