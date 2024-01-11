@@ -57,6 +57,7 @@ export function transformDate(date){
   const formattedDate = `${year}-${month}-${day}`;
   return formattedDate
 }
+
 export function validatePastHour(hour,date){
   const today = new Date()
   const formattedDate = transformDate(today)
