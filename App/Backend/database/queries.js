@@ -50,28 +50,42 @@ export const  queries ={
                             GROUP BY P.id, P.total, E.nombre_estado, P.fecha
                             ORDER BY P.fecha DESC
     `,
-    getPedidosByDate: `SELECT P.id,
-            to_char(P.fecha - interval '3 hours', 'HH24:MI') AS hora,
-            CONCAT(U.nombre, ' ', U.apellido) AS nombre_completo,
-            string_agg(Pr.nombre || '-' || CAST(D.cantidad AS VARCHAR(10)) || '-' || CAST(D.subtotal AS VARCHAR(10)), ', ') AS descr_pedidos,
-            CAST(P.direccion AS VARCHAR(100)) AS direccion,
-            TP.nombre AS tipopago,
-            TE.nombre AS tipoentrega,
-            CAST(P.nota AS VARCHAR(100)) AS nota,
-            P.total,
-            E.nombre_estado AS estado_pedido,
-            P.monto_cambio
-                FROM pedidos P
-                JOIN desc_pedidos D ON P.id = D.id_pedido
-                JOIN productos Pr ON Pr.id = D.id_producto
-                JOIN estados_pedido E ON E.id = P.id_estado
-                JOIN usuarios U ON U.id = P.id_usuario
-                JOIN tipos_pagos TP ON TP.id = P.id_tipo_pago
-                JOIN tipos_entrega TE ON TE.id = P.id_tipo_entrega
-        WHERE date_trunc('day', P.fecha) = $1::date
-        GROUP BY P.id, P.fecha, CONCAT(U.nombre, ' ', U.apellido), CAST(P.direccion AS VARCHAR(100)),
-            TP.nombre, TE.nombre, CAST(P.nota AS VARCHAR(100)), P.total, E.nombre_estado, P.monto_cambio
-        ORDER BY hora DESC;
+    getPedidosByDate: `SELECT 
+    P.id,
+    to_char(P.fecha - interval '3 hours', 'HH24:MI') AS hora,
+    CONCAT(U.nombre, ' ', U.apellido) AS nombre_completo,
+    string_agg(Pr.nombre || '-' || CAST(D.cantidad AS VARCHAR(10)) || '-' || CAST(D.subtotal AS VARCHAR(10)), ', ') AS descr_pedidos,
+    CAST(P.direccion AS VARCHAR(100)) AS direccion,
+    TP.nombre AS tipopago,
+    TE.nombre AS tipoentrega,
+    CAST(P.nota AS VARCHAR(100)) AS nota,
+    P.total,
+    E.nombre_estado AS estado_pedido,
+    P.monto_cambio
+FROM 
+    pedidos P
+    JOIN desc_pedidos D ON P.id = D.id_pedido
+    JOIN productos Pr ON Pr.id = D.id_producto
+    JOIN estados_pedido E ON E.id = P.id_estado
+    JOIN usuarios U ON U.id = P.id_usuario
+    JOIN tipos_pagos TP ON TP.id = P.id_tipo_pago
+    JOIN tipos_entrega TE ON TE.id = P.id_tipo_entrega
+WHERE 
+      date_trunc('day', P.fecha AT TIME ZONE 'UTC' AT TIME ZONE 'America/Argentina/Buenos_Aires') = $1::date
+GROUP BY 
+    P.id, 
+    P.fecha, 
+    CONCAT(U.nombre, ' ', U.apellido), 
+    CAST(P.direccion AS VARCHAR(100)),
+    TP.nombre, 
+    TE.nombre, 
+    CAST(P.nota AS VARCHAR(100)), 
+    P.total, 
+    E.nombre_estado, 
+    P.monto_cambio
+ORDER BY 
+    hora DESC;
+
 `,
     updatePedido: `UPDATE pedidos
     SET id_estado = (SELECT id FROM estados_pedido WHERE nombre_estado = $1)

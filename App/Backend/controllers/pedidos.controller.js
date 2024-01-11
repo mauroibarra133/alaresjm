@@ -64,7 +64,7 @@ export async function addOrder(fecha,id_pago,id_usuario,direccion,nota,total,id_
   export async function getPedidos(req, res) {
     const date = req.query.date;
     const user_id = req.query.user_id;
-    console.log(user_id,date);
+    console.log('UserID:',user_id,'Date:',date);
     res.header('Access-Control-Allow-Origin', config.server_host);
 
     const client = await getConnection()
@@ -125,10 +125,11 @@ export async function updatePedidoOnServer(req, res) {
 
 export async function obtenerPedidoParaAdmin(pedido) {
     const date = pedido.fecha;
-
+    console.log('Fecha:',date);
     const client = await getConnection()
     try {
         const result = await client.query(queries.Pedidos.getPedidosByDate, [date]);
+        console.log('results de pedidos by date:', result.rows);
         return result.rows;
     } catch (error) {
         console.log(error);
