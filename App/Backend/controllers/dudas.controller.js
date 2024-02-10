@@ -27,7 +27,6 @@ export async function addDuda(req, res) {
         await pool.query(queries.Dudas.addDuda, [nombre, apellido, telefono.toString(), mail, descripcion, 1]);
         res.json({ nombre, apellido, telefono, mail, descripcion });
     } catch (error) {
-        console.log(error);
         res.status(500).json({ msg: error.message });
     }finally{
         pool.release()
@@ -75,7 +74,6 @@ export async function updateDudaById(req, res) {
         await pool.query(queries.Dudas.updateDudaById, [nombre, apellido, telefono.toString(), mail, duda, estado, id]);
         res.status(204).json({ msg: 'Duda actualizada correctamente' });
     } catch (error) {
-        console.log(error);
         res.status(500).json({ error: error.message });
     }finally{
         pool.release()

@@ -14,7 +14,6 @@ export const receiveWebHook = async (req, res) => {
     if (payment.type === 'payment') {
       const data = await mercadopago.payment.findById(payment['data.id']);
       const fullData = data.body;
-      console.log(data);
           // Pedido
           fecha = fullData.date_approved;
           id_pago = fullData.id;
@@ -51,7 +50,6 @@ export const receiveWebHook = async (req, res) => {
           0
         ]
       );
-      console.log(orderResult);
       const pedidoID = orderResult.rows[0].id;
 
       // Desc Pedido
@@ -71,7 +69,6 @@ export const receiveWebHook = async (req, res) => {
       const today = new Date();
 
       const newOrder = await getPedidosTransf(today);
-      console.log(newOrder[0]);
       const io = app.get('socketio');
       io.emit('adminOrder', newOrder[0]);
 
@@ -82,7 +79,6 @@ export const receiveWebHook = async (req, res) => {
       res.status(400).json({ message: 'Tipo de pago no válido' });
     }
   } catch (error) {
-    console.error(error);
     // Manejar errores adecuadamente y enviar una respuesta de error
     await pool.query('ROLLBACK'); // En caso de error, revierte la transacción
     res.status(500).json({ error: 'Hubo un error al procesar el pago' });
@@ -119,7 +115,6 @@ export const create_preference =(req, res) => {
         });
       })
       .catch(function (error) {
-        console.log(error);
         res.status(500).json({msg: error})
       });
 }

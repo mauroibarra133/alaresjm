@@ -13,10 +13,8 @@ export async function addOrder(fecha,id_pago,id_usuario,direccion,nota,total,id_
             parseInt(id_tipo_pago),1,id_tipo_pago === 2 ? 0 : parseFloat(monto_cambio),
         ]
       );
-      console.log('result addOrder',result);
       return result;
     } catch (error) {
-      console.error('Error en addOrder',error);
       throw error; // Lanza el error para manejarlo en un nivel superior
     }finally{
       pool.release()
@@ -54,7 +52,6 @@ export async function addOrder(fecha,id_pago,id_usuario,direccion,nota,total,id_
   
       res.sendStatus(200);
     } catch (error) {
-      console.error(error);
       res.status(500).send(error.message);
     }finally{
       pool.release()
@@ -64,7 +61,6 @@ export async function addOrder(fecha,id_pago,id_usuario,direccion,nota,total,id_
   export async function getPedidos(req, res) {
     const date = req.query.date;
     const user_id = req.query.user_id;
-    console.log('UserID:',user_id,'Date:',date);
     res.header('Access-Control-Allow-Origin', config.server_host);
 
     const client = await getConnection()
@@ -79,7 +75,6 @@ export async function addOrder(fecha,id_pago,id_usuario,direccion,nota,total,id_
         }
 
     } catch (error) {
-        console.log('Error en obtener pedidos',error);
         res.status(500).json({ msg: "Error al obtener los datos" });
     }finally{
       client.release()
@@ -125,11 +120,9 @@ export async function updatePedidoOnServer(req, res) {
 
 export async function obtenerPedidoParaAdmin(pedido) {
     const date = pedido.fecha;
-    console.log('Fecha:',date);
     const client = await getConnection()
     try {
         const result = await client.query(queries.Pedidos.getPedidosByDate, [date]);
-        console.log('results de pedidos by date:', result.rows);
         return result.rows;
     } catch (error) {
         console.log(error);

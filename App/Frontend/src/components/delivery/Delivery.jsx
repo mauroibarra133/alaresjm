@@ -37,6 +37,9 @@ function Delivery() {
     useCart();
   //Use Effects
   useEffect(() => {
+    document.title = "Alares | Delivery ";
+  }, []);
+  useEffect(() => {
     const searchParams = new URLSearchParams(window.location.search);
     const status = searchParams.get("collection_status");
     if (status) clearCart();
@@ -89,9 +92,7 @@ function Delivery() {
       try {
         const response = await createPreference(order);
         const id = response.data.response.id;
-        console.log("Preference ID traido: ", response);
         if (id) {
-          console.log("ID", id);
           setPreferenceId(id);
         }
       } catch (error) {
@@ -203,7 +204,6 @@ function Delivery() {
             isSubmitted={isOrderedEft.isSubmitted}
             handleSubmit={handleCloseModal}
             isGoodStatus={isOrderedEft.goodStatus}
-            position={"top"}
             msg={
               isOrderedEft.goodStatus
                 ? "Tu pedido ha sido realizado correctamente!"

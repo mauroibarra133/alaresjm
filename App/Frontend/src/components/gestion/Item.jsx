@@ -35,7 +35,6 @@ function Item({modalCarta,closeModal, categorias,action, handleMsgStatus}) {
                             precioChico : parseInt((data.precioChico).substring(1)),
                             precioGrande : parseInt((data.precioGrande).substring(1)),
                             id_categoria : id_categoria})
-                            console.log(response);
                         handleMsgStatus(response,'Producto modificado correctamente', 'Hubo un error al modificar tu producto')
 
                     } catch (error) {

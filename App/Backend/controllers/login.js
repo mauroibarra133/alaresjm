@@ -27,7 +27,6 @@ export async function login (req,res){
                     user_id: userData.id,
                     rol: userData.rol
                 },config.secret_token, {expiresIn: "60m"})
-                console.log('Generated token:', token);
                 res.cookie('tokenJWT',token,{
                     httpOnly: true,
                     maxAge: 8*60*60*1000, // 8 horas

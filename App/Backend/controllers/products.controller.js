@@ -4,7 +4,6 @@ export async function getProducts(req, res) {
     const client = await getConnection(); 
     try {
         const result = await client.query(queries.Products.getAllProducts); 
-        console.log(result);
         res.status(200).json(result.rows); 
     } catch (error) {
         console.error(error);

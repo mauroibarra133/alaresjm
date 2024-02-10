@@ -19,16 +19,17 @@ function VerPedidos() {
   const filterDeliveredId = useId();
 
   const options = { timeZone: "America/Argentina/Buenos_Aires" };
-  const argentineDate = new Date().toLocaleString("en-US", options).split(" ")[0]
+  const argentineDate = new Date()
+    .toLocaleString("en-US", options)
+    .split(" ")[0];
 
-   // Convertir la fecha actual a un objeto Date
-   const today = new Date(argentineDate);
-    const todayDate = today.toISOString().split("T")[0];
-   // Crear una nueva fecha que representa el día de ayer
-   const yesterday = new Date(today.getTime() - 24 * 60 * 60 * 1000);
-   // Obtener la fecha del día de ayer en formato ISO (yyyy-mm-dd)
-   const yesterdayDate = yesterday.toISOString().split("T")[0];
-  
+  // Convertir la fecha actual a un objeto Date
+  const today = new Date(argentineDate);
+  const todayDate = today.toISOString().split("T")[0];
+  // Crear una nueva fecha que representa el día de ayer
+  const yesterday = new Date(today.getTime() - 24 * 60 * 60 * 1000);
+  // Obtener la fecha del día de ayer en formato ISO (yyyy-mm-dd)
+  const yesterdayDate = yesterday.toISOString().split("T")[0];
 
   //States
   const [orders, setOrders] = useState([]);
@@ -49,6 +50,12 @@ function VerPedidos() {
     isSubmitted: false,
     pedido: {},
   });
+
+  //USe effects
+
+  useEffect(() => {
+    document.title = "Alares | Dashboard ";
+  }, []);
 
   useEffect(() => {
     async function searchOrders() {
@@ -120,7 +127,6 @@ function VerPedidos() {
 
   function handleDate(data) {
     if (DATE_REGEX.test(data.target.value)) {
-      console.log(data.target.value, "aaaaa");
       setFilterDate(data.target.value);
     }
   }

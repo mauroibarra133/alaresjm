@@ -31,6 +31,9 @@ function MisPedidos() {
 
   //UseEffects
   useEffect(() => {
+    document.title = "Alares | Mis Pedidos ";
+  }, []);
+  useEffect(() => {
     const arrPaginas = [];
     for (
       let i = 1;
