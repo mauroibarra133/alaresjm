@@ -1,7 +1,7 @@
-# Alares - Jesús María Bar Project
+# Alares - Jesús María Bar
 Alares is a project that aims to offer a unique experience in the heart of Jesús María as an innovative bar. Committed to providing a cozy atmosphere, excellent drinks, and exceptional service, Alares stands as the ideal place to enjoy special moments with friends and family.
 
-
+![Preview of the website](./App/Frontend/src/assets/images/alares-screen.jpg)
 ### Features
 - User login: Alares provides a secure user login system so that users can access and enjoy personalized features.
 
@@ -20,37 +20,26 @@ Alares is a project that aims to offer a unique experience in the heart of Jesú
 ### Technologies Used
 This project was built using a combination of modern technologies to ensure efficient performance and an exceptional user experience:
 
-HTML, CSS, and JavaScript: The solid foundation of web development for creating interactive and engaging interfaces.
-
-React: A JavaScript library that facilitates the creation of reactive and efficient user interfaces.
-
-Node.js: Used to build the backend of the project, providing an efficient runtime environment for server applications.
-
-PostgreSQL: A relational database for storing data in a structured and efficient manner.
+- HTML, CSS, and JavaScript
+- React
+- Node.js
+- PostgreSQL
 
 ### How to Use
 Access the Alares website: https://alaresjm.onrender.com from your web browser.
-
-Log in with your account to access personalized features.
-
-Explore the menu and add your favorite drinks and meals to the shopping cart.
-
-Place your order and complete the secure payment process.
-
-If you want to reserve a table or have any questions, use the specific available functions.
-
-Check the top customer ranking to discover exclusive offers and promotions.
-
-Administrators can access the dashboard to manage orders, monitor sales, and track inventory.
+Use this credentials to see admin and customer views:
+  - mail: guest@gmail.com
+  - pass: Guest_123
 
 ### Developer
-Alares was developed by [Mauro Ibarra ] as a project dedicated to providing a unique experience in Jesús María.
+Alares was developed by [Mauro Ibarra] as a project dedicated to providing a unique experience in Jesús María.
 
-Follow Us
+### Follow Us
 If you enjoyed your experience at Alares and want to stay updated on future projects, follow us on our social media:
 
 Instagram:  [![Instagram](https://img.shields.io/badge/Instagram-%40mauritoibarra-red?logo=instagram)](https://www.instagram.com/mauritoibarra/)
 
 LinkedIn:   [![LinkedIn](https://img.shields.io/badge/LinkedIn-Mauro%20Ibarra-blue?logo=linkedin)](https://www.linkedin.com/in/mauroibarra133/)
+
 We appreciate your support and feedback; we hope Alares brings you unforgettable moments!
 
