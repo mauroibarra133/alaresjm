@@ -13,7 +13,6 @@ export async function login (req,res){
         const data = await getMail(email)
         if(!data[0]){
             res.status(400).json({type: 'mail'})
-
         }
         else{
             const userData = data[0]

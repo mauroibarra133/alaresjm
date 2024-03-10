@@ -29,8 +29,7 @@ CREATE TABLE productos (
     nombre VARCHAR(50) NOT NULL,
     descripcion TEXT,
     id_categoria INT,
-    FOREIGN KEY (id_categoria) REFERENCES categorias_producto(id),
-    CONSTRAINT check_precio CHECK(precio>=0)
+    FOREIGN KEY (id_categoria) REFERENCES categorias_producto(id)
 );
 
 CREATE TABLE tipos_pagos (
@@ -81,7 +80,6 @@ CREATE TABLE pedidos (
     FOREIGN KEY (id_tipo_pago) REFERENCES tipos_pagos(id),
     FOREIGN KEY (id_estado) REFERENCES estados_pedido(id),
     FOREIGN KEY (id_tipo_entrega) REFERENCES tipos_entrega(id),
-    FOREIGN KEY (id_descrip_pedido) REFERENCES tipos_entrega(id)
 );
 
 CREATE TABLE desc_pedidos (

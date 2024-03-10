@@ -2,9 +2,12 @@ import axios from 'axios'
 import { AuthError, ConnectionError, FillError, LoginMailError, MailError, PasswordError, ServerError } from '../utils/error';
 import { SERVER_HOST } from '../utils/constants';
 
+const urlSource = `${SERVER_HOST}/api`
+
+
 export const isAuth = async () => {
   try {
-    const response = await axios.get(`${SERVER_HOST}/api/token`,{ withCredentials: true
+    const response = await axios.get(`${urlSource}/token`,{ withCredentials: true
     });
     return response;
   } catch (error) {
@@ -21,7 +24,7 @@ export const isAuth = async () => {
 
 export async function existsMail(email) {
   try {
-    const response = await axios.post(`${SERVER_HOST}/api/email`, { email });
+    const response = await axios.post(`${urlSource}/email`, { email });
     return response;
   } catch (error) {
     if (error.response && error.response.status === 400) {
@@ -37,7 +40,7 @@ export async function existsMail(email) {
 
 export async function login(data){
   try {
-    const response = await axios.post(`${SERVER_HOST}/api/login`,data,{withCredentials: true})
+    const response = await axios.post(`${urlSource}/login`,data,{withCredentials: true})
       return response.data
   } catch (error) {
     console.log(error);
@@ -53,7 +56,7 @@ export async function login(data){
 
 export async function signup(data){
   try {
-    const response = await axios.post(`${SERVER_HOST}/api/signup`,data)
+    const response = await axios.post(`${urlSource}/signup`,data)
     return response
   } catch (error) {
     if (error.response && error.response.status === 400) {
@@ -65,7 +68,7 @@ export async function signup(data){
 export async function sendPasswordLink(data){
   const email = data.email
   try {
-        const response = await axios.post(`${SERVER_HOST}/api/send-password-link`,{email});
+        const response = await axios.post(`${urlSource}/send-password-link`,{email});
         return response
       } catch (error) {
         if (error.response && error.response.status === 400) {
@@ -77,7 +80,7 @@ export async function sendPasswordLink(data){
 
     export async function changePassword(id, token, newPassword) {
       try {
-        await axios.put(`${SERVER_HOST}/api/reset-password/${id}`, { token, newPassword });
+        await axios.put(`${urlSource}/reset-password/${id}`, { token, newPassword });
         // Manejar la respuesta según tus necesidades
       } catch (error) {
         console.error(error);
@@ -87,7 +90,7 @@ export async function sendPasswordLink(data){
 
 export async function getData(id){
   try {
-  const response = await axios.get(`${SERVER_HOST}/api/usuarios/:${id}`)
+  const response = await axios.get(`${urlSource}/usuarios/:${id}`)
     return response
   } catch (error) {
     console.log(error);

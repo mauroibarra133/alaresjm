@@ -14,7 +14,7 @@ import mercadopagoRouter from './routes/mercadoPago'
 import cookieParser from "cookie-parser";
 import compression from 'compression'
 import path from 'path';
-
+import config from './config';
 
 const app = express()
 const httpServer = http.createServer(app)
@@ -37,9 +37,17 @@ io.on('connection', (socket) => {
 
 app.set('socketio', io); // aquí asignas el socket global
 
-//Middlewares
-app.use((req, res, next) => {
-    // res.header('Access-Control-Allow-Origin', 'http://localhost:5173');
+
+if(config.front_host == "http://localhost:5173"){
+  app.options('*', (req, res) => {
+    res.header('Access-Control-Allow-Origin', config.front_host);
+    res.header('Access-Control-Allow-Methods', 'GET,HEAD,PUT,PATCH,POST,DELETE');
+    res.header('Access-Control-Allow-Headers', 'Content-Type');
+    res.header('Access-Control-Allow-Credentials', 'true');
+    res.sendStatus(200);
+  });
+}else{
+  app.use((req, res, next) => {
     res.header('Access-Control-Allow-Credentials', 'true');
   
     if (req.method === 'OPTIONS') {
@@ -48,14 +56,17 @@ app.use((req, res, next) => {
       next();
     }
   });
+}
+
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cors({
-    // origin: 'http://localhost:5173',
-    origin: '*',
+    origin: config.front_host,
     credentials: true,
     allowedHeaders: ['Content-Type'],
   }));
+
 app.use(compression());
 app.use(cookieParser())
 app.use(productosRouter)
