@@ -6,14 +6,14 @@ import config from '../config';
 const pool = new Pool({
     user: 'alares',
     host: config.dbServer,
-    database: 'alares_ymmf',
+    database: config.dbDataBase,
     password: config.dbPassword,
     port: config.dbPort,
     ssl: true,
 });
 
 
-async function connectWithRetry() {
+async function connectWithRetry(retryCount = 1) {
     let client;
     try {
         client = await pool.connect();

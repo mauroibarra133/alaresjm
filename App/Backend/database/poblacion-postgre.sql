@@ -7,7 +7,7 @@ INSERT INTO tipos_pagos (nombre) VALUES
 INSERT INTO tipos_entrega (nombre) VALUES
 ('Delivery'), ('Retirar en local');
 
-INSERT INTO estados_pedido (nombre) VALUES
+INSERT INTO estados_pedido (nombre_estado) VALUES
 ('A Confirmar'),('Confirmado'),('En Preparacion'),('Listo') ,('En Reparto'), ('Enviando'), ('Entregado'), ('Cancelado');
 
 INSERT INTO categorias_producto (nombre) VALUES
@@ -166,3 +166,5 @@ INSERT INTO precios (id_producto, id_tamaño, precio) VALUES
 (31,1,0),(32,1,0),(36,2,0),(37,2,0),(38,2,0),(39,1,0),(40,2,0);
 
 
+INSERT INTO public.usuarios(fecha_creacion, "contraseñacifrada", nombre, apellido, puntos, rol, email)
+VALUES ('2024-01-07', pgp_sym_encrypt($2, 'clave_para_cifrar'), 'Mauro', 'Ibarra', 220, 'Admin', 'mauroibarra133@gmail.com');
