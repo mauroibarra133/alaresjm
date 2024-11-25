@@ -79,7 +79,7 @@ CREATE TABLE pedidos (
         ON UPDATE CASCADE,
     FOREIGN KEY (id_tipo_pago) REFERENCES tipos_pagos(id),
     FOREIGN KEY (id_estado) REFERENCES estados_pedido(id),
-    FOREIGN KEY (id_tipo_entrega) REFERENCES tipos_entrega(id),
+    FOREIGN KEY (id_tipo_entrega) REFERENCES tipos_entrega(id)
 );
 
 CREATE TABLE desc_pedidos (
